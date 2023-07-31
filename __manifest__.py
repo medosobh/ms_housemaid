@@ -15,7 +15,8 @@
         'web',
     ],
     'data': [
-        ''
+        'views/menu.xml',
+        'views/maids.xml'
     ],
     'demo': [
         ''
