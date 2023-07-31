@@ -17,6 +17,7 @@ class Maid(models.Model):
     )
     name = fields.Char(
         string = 'Name',
+        default=lambda self: _('New'),
         required = True
     )
     identity = fields.Char(
@@ -56,30 +57,36 @@ class Maid(models.Model):
     )
     description = fields.Text(
         string = 'Description')
+    MaidLog_ids = _ids = fields.One2many(
+        comodel_name = 'Housemaid.MaidLog',
+        inverse_name = 'maid_id',
+        string = "Maid Log",
+        )
 
 
-class MaidActivity(models.Model):
-    _name = 'Housemaid.MaidActivity'
+class MaidLog(models.Model):
+    _name = 'Housemaid.MaidLog'
     _description = 'ModelName'
     _check_company_auto = True
     _sql_constraints = [
-        ('visa_code_uniq', 'unique(visa_code)', "A visa code can only be assigned to one maid !"),
-        ('name_uniq', 'unique(name)', "A name can only be assigned to one maid !"),
-        ('contract_code_uniq', 'unique(contract_code)', "A contract code can only be assigned to one maid !"),
+        ('visa_no_uniq', 'unique(visa_code)', "A visa code can only be assigned to one maid !"),
+        ('contract_no_uniq', 'unique(contract_code)', "A contract code can only be assigned to one maid !"),
     ]
 
-    name = fields.Char(
-        string='Name',
+    date = fields.Char(
+        string='Date',
         required=True,
-        default=lambda self: _('New'),
+        default=lambda self: _('today'),
         copy=False
     )
-    visa_code = fields.Char(
-        string = 'Visa Code',
+    visa_no = fields.Char(
+        string = 'Visa No.',
+        default=lambda self: _('new'),
         required=True
     )
-    contract_code = fields.Char(
-        string = 'Visa Code',
+    contract_no = fields.Char(
+        string = 'Contract No.',
+        default=lambda self: _('new'),
         required=True
     )
     sponser_id = fields.Many2one(
