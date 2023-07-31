@@ -10,6 +10,7 @@ class maid(models.Model):
         ('code_uniq', 'unique(code)', "A code can only be assigned to one equipment !"),
         ('name_uniq', 'unique(name)', "A name can only be assigned to one equipment !"),
     ]
+    _inherit = ['mail.thread', 'mail.activity.mixin']
 
     code = fields(
         string = 'Code',
@@ -57,11 +58,28 @@ class maid(models.Model):
     )
     description = fields.Text(
         string = 'Description')
-    MaidLog_ids = _ids = fields.One2many(
+    company_id = fields.Many2one(
+        comodel_name = 'res.company',
+        string = 'Company',
+        change_default = True,
+        default = lambda self: self.env.company,
+        required = False,
+        readonly = True
+    )
+    currency_id = fields.Many2one(
+        comodel_name = 'res.currency',
+        string = 'Currency',
+        related = 'company_id.currency_id',
+        readonly = True,
+        ondelete = 'set null',
+        help = "Used to display the currency when tracking monetary values"
+    )
+    maidlog_ids = _ids = fields.One2many(
         comodel_name = 'Housemaid.MaidLog',
         inverse_name = 'maid_id',
         string = "Maid Log",
         )
+    
 
 
 class maidlog(models.Model):
