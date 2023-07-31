@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="housemaid_offices_form" model="ir.ui.view">
+        <field name="name">housemaid_offices.form</field>
+        <field name="model">housemaid_offices</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <header>
+                </header>
+                <sheet>
+
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="housemaid_offices_tree" model="ir.ui.view">
+        <field name="name">housemaid_offices.tree</field>
+        <field name="model">housemaid_offices</field>
+        <field name="arch" type="xml">
+            <tree string="">
+
+            </tree>
+        </field>
+    </record>
+
+    <record id="housemaid_offices_search" model="ir.ui.view">
+        <field name="name">housemaid_offices.search</field>
+        <field name="model">housemaid_offices</field>
+        <field name="arch" type="xml">
+            <search string="">
+
+            </search>
+        </field>
+    </record>
+
+    <record id="housemaid_offices_action" model="ir.actions.act_window">
+        <field name="name">housemaid_offices.action</field>
+        <field name="res_model">housemaid_offices</field>
+        <field name="view_type">form</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">Create your first maid!</p>
+        </field>
+    </record>
+
+    <menuitem id="housemaid_offices_menu" name="Maids" action="" parent="" sequence=""/>
+
+</odoo>
