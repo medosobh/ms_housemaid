@@ -39,7 +39,7 @@
             id="housemaid_maids_restricted_company_rule">
             <field name="name">Maids: multi-company</field>
             <field name="model_id"
-                ref="ms_housemaid.model_housemaid_maids"/>
+                ref="housemaid.model_housemaid_maids"/>
             <field name="global"
                 eval="True"/>
             <field name="domain_force">
@@ -55,7 +55,7 @@
             id="housemaid_manage_everything_rule">
             <field name="name">Housemaid Manage Everthing</field>
             <field name="model_id"
-                ref="ms_housemaid.model_housemaid_maids"/>
+                ref="housemaid.model_housemaid_maids"/>
             <field name="groups"
                 eval="[(4, ref('group_housemaid_manager'))]"/>
             <field name="domain_force">
