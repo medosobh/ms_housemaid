@@ -54,7 +54,7 @@ class maids(models.Model):
         tracking=True
     )
     birthday = fields.Date(
-        string='field_name',
+        string='Birthday',
         default=fields.Date.context_today,
         tracking=True
     )
