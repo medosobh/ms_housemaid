@@ -13,7 +13,7 @@ class office(models.Model):
     ]
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
-    code = fields(
+    code = fields.Char(
         string='Short Name',
         default=lambda self: _('New'),
         required=True,

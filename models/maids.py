@@ -12,7 +12,7 @@ class maid(models.Model):
     ]
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
-    code = fields(
+    code = fields.Char(
         string = 'Code',
         required=True
     )
