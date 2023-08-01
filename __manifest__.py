@@ -7,7 +7,7 @@
     'author': 'mohamed sobh',
     'website': '',
     'license': 'LGPL-3',
-    'category': 'Human Resources/Employees',
+    'category': 'Human Resources',
     'depends': [
         'base_setup',
         'mail',
@@ -16,11 +16,11 @@
     ],
     'data': [
         'views/menu.xml',
-        'views/offices.xml'
-        'views/maids.xml'
-        'views/sponsers.xml'
-        'views/tickets.xml'
-        
+        'views/offices.xml',
+        # 'views/maids.xml'
+        # 'views/sponsers.xml'
+        # 'views/tickets.xml'
+
     ],
     'demo': [
         ''
@@ -29,6 +29,6 @@
     'auto_install': False,
     'application': True,
     'assets': {
-        
+
     }
 }

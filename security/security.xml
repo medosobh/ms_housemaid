@@ -27,93 +27,23 @@
     </data>
     <!-- Company-restricted Records -->
     <data noupdate="1">
-        <record model="ir.rule" id="farm_projects_restricted_company_rule">
-            <field name="name">Farm Projects: multi-company</field>
-            <field name="model_id" ref="ms_farm.model_farm_projects"/>
+        <record model="ir.rule" id="housemaid_maids_restricted_company_rule">
+            <field name="name">Maids: multi-company</field>
+            <field name="model_id" ref="ms_housemaid.model_housemaid_maids"/>
             <field name="global" eval="True"/>
             <field name="domain_force">
                 [('company_id', 'in', company_ids)]
             </field>
         </record>
-        <record model="ir.rule" id="farm_operations_restricted_company_rule">
-            <field name="name">Farm Operations: multi-company</field>
-            <field name="model_id" ref="ms_farm.model_farm_operations"/>
-            <field name="global" eval="True"/>
-            <field name="domain_force">
-                [('company_id', 'in', company_ids)]
-            </field>
-        </record>
-        <record model="ir.rule" id="farm_materials_restricted_company_rule">
-            <field name="name">Farm Materials: multi-company</field>
-            <field name="model_id" ref="ms_farm.model_farm_materials"/>
-            <field name="global" eval="True"/>
-            <field name="domain_force">
-                [('company_id', 'in', company_ids)]
-            </field>
-        </record>
-        <record model="ir.rule" id="farm_expenses_restricted_company_rule">
-            <field name="name">Farm Expenses: multi-company</field>
-            <field name="model_id" ref="ms_farm.model_farm_expenses"/>
-            <field name="global" eval="True"/>
-            <field name="domain_force">
-                [('company_id', 'in', company_ids)]
-            </field>
-        </record>
-        <record model="ir.rule" id="farm_produce_restricted_company_rule">
-            <field name="name">Farm Produce: multi-company</field>
-            <field name="model_id" ref="ms_farm.model_farm_produce"/>
-            <field name="global" eval="True"/>
-            <field name="domain_force">
-                [('company_id', 'in', company_ids)]
-            </field>
-        </record>
-        <record model="ir.rule" id="farm_sales_restricted_company_rule">
-            <field name="name">Farm Sales: multi-company</field>
-            <field name="model_id" ref="ms_farm.model_farm_sales"/>
-            <field name="global" eval="True"/>
-            <field name="domain_force">
-                [('company_id', 'in', company_ids)]
-            </field>
-        </record>
-        <record model="ir.rule" id="farm_control_restricted_company_rule">
-            <field name="name">Farm Control: multi-company</field>
-            <field name="model_id" ref="ms_farm.model_farm_control"/>
-            <field name="global" eval="True"/>
-            <field name="domain_force">
-                [('company_id', 'in', company_ids)]
-            </field>
-        </record>
-        <record model="ir.rule" id="farm_equipments_restricted_company_rule">
-            <field name="name">Farm Equipments: multi-company</field>
-            <field name="model_id" ref="ms_farm.model_farm_equipments"/>
-            <field name="global" eval="True"/>
-            <field name="domain_force">
-                [('company_id', 'in', company_ids)]
-            </field>
-        </record>
-        <record model="ir.rule" id="farm_locations_restricted_company_rule">
-            <field name="name">Farm Locations: multi-company</field>
-            <field name="model_id" ref="ms_farm.model_farm_locations"/>
-            <field name="global" eval="True"/>
-            <field name="domain_force">
-                [('company_id', 'in', company_ids)]
-            </field>
-        </record>
-        <record model="ir.rule" id="farm_pioasset_restricted_company_rule">
-            <field name="name">Farm Pio-Asset: multi-company</field>
-            <field name="model_id" ref="ms_farm.model_farm_pioasset"/>
-            <field name="global" eval="True"/>
-            <field name="domain_force">
-                [('company_id', 'in', company_ids)]
-            </field>
-        </record>
+        
+        
     </data>
     <!-- Company-restricted Records -->
     <data noupdate="1">
-        <record model="ir.rule" id="farm_manage_everything_rule">
-            <field name="name">Farm Manage Everthing</field>
-            <field name="model_id" ref="ms_farm.model_farm_projects"/>
-            <field name="groups" eval="[(4, ref('group_farm_manager'))]"/>
+        <record model="ir.rule" id="housemaid_manage_everything_rule">
+            <field name="name">Housemaid Manage Everthing</field>
+            <field name="model_id" ref="ms_housemaid.model_housemaid_maids"/>
+            <field name="groups" eval="[(4, ref('group_housemaid_manager'))]"/>
             <field name="domain_force">
                 [(1, '=', 1)]
             </field>
