@@ -6,16 +6,21 @@ class offices(models.Model):
 
     _name = 'housemaid.offices'
     _description = 'Records of External offices.'
+    _rec_name = 'name'
     _check_company_auto = True
     _sql_constraints = [
-        ('code_uniq', 'unique(code)', "A code can only be assigned to one equipment !"),
-        ('name_uniq', 'unique(name)', "A name can only be assigned to one equipment !"),
+        ('code_uniq', 'unique(code)', "A code can only be assigned to one office!"),
+        ('name_uniq', 'unique(name)', "A name can only be assigned to one office!"),
     ]
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
     code = fields.Char(
-        string='Short Name',
-        default=lambda self: _('New'),
+        string='Code',
+        required=True,
+        tracking=True
+    )
+    phone = fields.Char(
+        string='Phone',
         required=True,
         tracking=True
     )
@@ -23,6 +28,12 @@ class offices(models.Model):
         string='Name',
         default=lambda self: _('New'),
         required=True,
+        tracking=True
+    )
+    email = fields.Char(
+        string='email',
+        required=True,
+        default=lambda self: _('name@mail.com'),
         tracking=True
     )
     country_id = fields.Many2one(
@@ -69,4 +80,3 @@ class offices(models.Model):
         help="Used to select the currency when billing.",
         tracking=True
     )
-    

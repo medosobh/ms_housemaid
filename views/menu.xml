@@ -6,8 +6,8 @@
             name="Housemaid"
             web_icon="static/description/icon.png"
             sequence="145" />
-        <menuitem id="housemaid_menu_master"
-            name="Master Data"
+        <menuitem id="housemaid_menu_data"
+            name="Data"
             parent="housemaid_root"
             sequence="10" />
         <!-- This Menu Item Must have a parent -->
@@ -15,8 +15,6 @@
             name="Tickets"
             parent="housemaid_root"
             sequence="20" />
-
-
 
 
     </data>

@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <record id="housemaid_offices_form"
+    <record id="housemaid_sponsers_form"
         model="ir.ui.view">
-        <field name="name">housemaid.offices.form</field>
-        <field name="model">housemaid.offices</field>
+        <field name="name">housemaid.sponsers.form</field>
+        <field name="model">housemaid.sponsers</field>
         <field name="arch"
             type="xml">
-            <form string="Housemaid External Offices">
+            <form string="Sponsers">
                 <sheet>
-                    <group name="office_main"
-                        string="Office">
+                    <group name="sponser_main"
+                        string="Sponser">
                         <group name="basic"
                             string="Basic">
                             <field name="code"/>
+                            <field name="phone"/>
                             <field name="name"/>
+                            <field name="email"/>
                             <field name="country_id"/>
                             <field name="partner_id"/>
                             <field name="description"/>
@@ -41,13 +43,13 @@
         </field>
     </record>
 
-    <record id="housemaid_offices_tree"
+    <record id="housemaid_sponsers_tree"
         model="ir.ui.view">
-        <field name="name">housemaid.offices.tree</field>
-        <field name="model">housemaid.offices</field>
+        <field name="name">housemaid.sponser.tree</field>
+        <field name="model">housemaid.sponsers</field>
         <field name="arch"
             type="xml">
-            <tree string="Housemaid External Offices"
+            <tree string="Sponsers"
                 sample="1">
                 <field name="code"/>
                 <field name="name"/>
@@ -66,13 +68,13 @@
         </field>
     </record>
 
-    <record id="housemaid_offices_search"
+    <record id="housemaid_sponsers_search"
         model="ir.ui.view">
-        <field name="name">housemaid.offices.search</field>
-        <field name="model">housemaid.offices</field>
+        <field name="name">housemaid.sponsers.search</field>
+        <field name="model">housemaid.sponsers</field>
         <field name="arch"
             type="xml">
-            <search string="Housemaid External Offices">
+            <search string="Sponsers">
                 <field name="company_id"
                     widget="selection"/>
                 <field name="country_id"
@@ -108,22 +110,22 @@
         </field>
     </record>
 
-    <record id="housemaid_offices_action"
+    <record id="housemaid_sponsers_action"
         model="ir.actions.act_window">
-        <field name="name">Housemaid External Offices</field>
+        <field name="name">Sponsers</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="res_model">housemaid.offices</field>
+        <field name="res_model">housemaid.sponsers</field>
         <field name="view_mode">tree,form</field>
         <field name="help"
             type="html">
-            <p class="o_view_nocontent_smiling_face">Create your first External Office!</p>
+            <p class="o_view_nocontent_smiling_face">Create your first Sponser!</p>
         </field>
     </record>
 
-    <menuitem id="housemaid_offices_menu"
-        name="External Offices"
-        action="housemaid_offices_action"
-        parent="housemaid_menu_master"
+    <menuitem id="housemaid_sponsers_menu"
+        name="Sponsers"
+        action="housemaid_sponsers_action"
+        parent="housemaid_menu_data"
         sequence="11"/>
 
 </odoo>

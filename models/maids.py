@@ -6,6 +6,7 @@ class maids(models.Model):
 
     _name = 'housemaid.maids'
     _description = 'Records of maids.'
+    _rec_name = 'passport_no'
     _check_company_auto = True
     _sql_constraints = [
         ('code_uniq', 'unique(code)', "A code can only be assigned to one equipment !"),
@@ -19,10 +20,21 @@ class maids(models.Model):
         required=True,
         tracking=True
     )
+    phone = fields.Char(
+        string='Phone',
+        required=True,
+        tracking=True
+    )
     name = fields.Char(
         string='Name',
         default=lambda self: _('New'),
         required=True,
+        tracking=True
+    )
+    email =  fields.Char(
+        string='email',
+        required=True,
+        default=lambda self: _('name@mail.com'),
         tracking=True
     )
     identity = fields.Char(
