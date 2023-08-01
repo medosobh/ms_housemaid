@@ -5,7 +5,7 @@ from odoo.exceptions import UserError
 class maids(models.Model):
 
     _name = 'housemaid.maids'
-    _description = 'Records of maids.'
+    _description = 'Records of Maids.'
     _rec_name = 'passport_no'
     _check_company_auto = True
     _sql_constraints = [
