@@ -7,7 +7,7 @@
 		<field name="model">housemaid.offices</field>
 		<field name="arch"
 			type="xml">
-			<form string="Housemaid External Offices">
+			<form string="External Offices">
 				<sheet>
 					<group name="office_main"
 						string="Office">
@@ -47,7 +47,7 @@
 		<field name="model">housemaid.offices</field>
 		<field name="arch"
 			type="xml">
-			<tree string="Housemaid External Offices"
+			<tree string="External Offices List"
 				sample="1">
 				<field name="code"/>
 				<field name="name"/>
@@ -110,13 +110,13 @@
 
 	<record id="housemaid_offices_action"
 		model="ir.actions.act_window">
-		<field name="name">Housemaid External Offices</field>
+		<field name="name">External Offices</field>
 		<field name="type">ir.actions.act_window</field>
 		<field name="res_model">housemaid.offices</field>
 		<field name="view_mode">tree,form</field>
 		<field name="help"
 			type="html">
-			<p class="o_view_nocontent_smiling_face">Create your first maid!</p>
+			<p class="o_view_nocontent_smiling_face">Create your first External Office!</p>
 		</field>
 	</record>
 

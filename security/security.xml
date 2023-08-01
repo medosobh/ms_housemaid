@@ -33,44 +33,4 @@
 
 
     </data>
-    <!-- Company-restricted Records -->
-    <data noupdate="1">
-        <record model="ir.rule"
-            id="housemaid_maids_restricted_company_rule">
-            <field name="name">Maids: multi-company</field>
-            <field name="model_id"
-                ref="housemaid.model_housemaid_maids"/>
-            <field name="global"
-                eval="True"/>
-            <field name="domain_force">
-                [('company_id', 'in', company_ids)]
-            </field>
-        </record>
-
-
-    </data>
-    <!-- Company-restricted Records -->
-    <data noupdate="1">
-        <record model="ir.rule"
-            id="housemaid_manage_everything_rule">
-            <field name="name">Housemaid Manage Everthing</field>
-            <field name="model_id"
-                ref="housemaid.model_housemaid_maids"/>
-            <field name="groups"
-                eval="[(4, ref('group_housemaid_manager'))]"/>
-            <field name="domain_force">
-                [(1, '=', 1)]
-            </field>
-            <field name="perm_read"
-                eval="1"/>
-            <field name="perm_create"
-                eval="1"/>
-            <field name="perm_write"
-                eval="1"/>
-            <field name="perm_unlink"
-                eval="1"/>
-        </record>
-
-
-    </data>
 </odoo>

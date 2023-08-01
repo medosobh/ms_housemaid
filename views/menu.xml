@@ -15,38 +15,9 @@
             name="Tickets"
             parent="housemaid_root"
             sequence="20" />
-        <!-- This Menu Item Must have a parent -->
 
-        <menuitem id="housemaid_menu_documents"
-            name="Documents"
-            parent="housemaid_root"
-            sequence="30" />
 
-        <!-- This Menu Item Must have a parent -->
-        <menuitem id="housemaid_menu_configuration"
-            name="Configuration"
-            parent="housemaid_root"
-            sequence="50" />
 
-        <!-- Inherit account Move (vendor bill) Form View to Modify it -->
-        <!-- This Menu Item must have a parent and an action -->
-        <menuitem id="housemaid_menu_vendor_bill"
-            name="Vendor Bill"
-            parent="housemaid_menu_documents"
-            action=""
-            sequence="31"/>
-
-        <menuitem id="housemaid_menu_hr_expense"
-            name="Expense Tickets"
-            parent="housemaid_menu_documents"
-            action=""
-            sequence="33"/>
-
-        <menuitem id="housemaid_menu_customer_invoice"
-            name="Customer Invoice"
-            parent="housemaid_menu_documents"
-            action=""
-            sequence="35"/>
 
     </data>
 </odoo>

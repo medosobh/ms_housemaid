@@ -1,14 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="housemaid_sponsers_form" model="ir.ui.view">
-        <field name="name">housemaid_sponsers.form</field>
-        <field name="model">housemaid_sponsers</field>
-        <field name="arch" type="xml">
-            <form string="">
-                <header>
-                </header>
-                <sheet>
 
+    <record id="housemaid_offices_form"
+        model="ir.ui.view">
+        <field name="name">housemaid.offices.form</field>
+        <field name="model">housemaid.offices</field>
+        <field name="arch"
+            type="xml">
+            <form string="Housemaid External Offices">
+                <sheet>
+                    <group name="office_main"
+                        string="Office">
+                        <group name="basic"
+                            string="Basic">
+                            <field name="code"/>
+                            <field name="name"/>
+                            <field name="country_id"/>
+                            <field name="partner_id"/>
+                            <field name="description"/>
+                            <field name="active"
+                                invisible="1"/>
+                        </group>
+                        <group name="operation"
+                            string="Operation">
+                            <field name="user_id"
+                                widget="selection"/>
+                            <field name="company_id"
+                                groups="base.group_multi_company"/>
+                            <field name="currency_id"
+                                groups="base.group_multi_currency"/>
+                        </group>
+                    </group>
                 </sheet>
                 <div class="oe_chatter">
                     <field name="message_follower_ids"/>
@@ -19,36 +41,89 @@
         </field>
     </record>
 
-    <record id="housemaid_sponsers_tree" model="ir.ui.view">
-        <field name="name">housemaid_sponsers.tree</field>
-        <field name="model">housemaid_sponsers</field>
-        <field name="arch" type="xml">
-            <tree string="">
-
+    <record id="housemaid_offices_tree"
+        model="ir.ui.view">
+        <field name="name">housemaid.offices.tree</field>
+        <field name="model">housemaid.offices</field>
+        <field name="arch"
+            type="xml">
+            <tree string="Housemaid External Offices"
+                sample="1">
+                <field name="code"/>
+                <field name="name"/>
+                <field name="country_id"/>
+                <field name="partner_id"/>
+                <field name="description"/>
+                <field name="active"
+                    invisible="1"/>
+                <field name="user_id"
+                    widget="selection"/>
+                <field name="company_id"
+                    groups="base.group_multi_company"/>
+                <field name="currency_id"
+                    groups="base.group_multi_currency"/>
             </tree>
         </field>
     </record>
 
-    <record id="housemaid_sponsers_search" model="ir.ui.view">
-        <field name="name">housemaid_sponsers.search</field>
-        <field name="model">housemaid_sponsers</field>
-        <field name="arch" type="xml">
-            <search string="">
-
+    <record id="housemaid_offices_search"
+        model="ir.ui.view">
+        <field name="name">housemaid.offices.search</field>
+        <field name="model">housemaid.offices</field>
+        <field name="arch"
+            type="xml">
+            <search string="Housemaid External Offices">
+                <field name="company_id"
+                    widget="selection"/>
+                <field name="country_id"
+                    widget="selection"/>
+                <field name="user_id"
+                    widget="selection"/>
+                <filter name="filter_archived"
+                    string="Archived"
+                    domain="[('active', '=', False)]"/>
+                <group expand="0"
+                    string="Group by">
+                    <filter string="Company"
+                        name="group_by_company_id"
+                        context="{'group_by':'company_id'}"/>
+                    <filter string="Country"
+                        name="group_by_country_id"
+                        context="{'group_by':'country_id'}"/>
+                    <filter string="Operation Man"
+                        name="group_by_user"
+                        context="{'group_by':'user_id'}"/>
+                </group>
+                <searchpanel>
+                    <field name="company_id"
+                        select="multi"
+                        string="Relative Company"
+                        enable_counters="1"/>
+                    <field name="country_id"
+                        select="multi"
+                        string="Relative Country"
+                        enable_counters="1"/>
+                </searchpanel>
             </search>
         </field>
     </record>
 
-    <record id="housemaid_sponsers_action" model="ir.actions.act_window">
-        <field name="name">housemaid_sponsers.action</field>
-        <field name="res_model">housemaid_sponsers</field>
-        <field name="view_type">form</field>
+    <record id="housemaid_offices_action"
+        model="ir.actions.act_window">
+        <field name="name">Housemaid External Offices</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">housemaid.offices</field>
         <field name="view_mode">tree,form</field>
-        <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">Create your first maid!</p>
+        <field name="help"
+            type="html">
+            <p class="o_view_nocontent_smiling_face">Create your first External Office!</p>
         </field>
     </record>
 
-    <menuitem id="housemaid_sponsers_menu" name="Maids" action="" parent="" sequence=""/>
+    <menuitem id="housemaid_offices_menu"
+        name="External Offices"
+        action="housemaid_offices_action"
+        parent="housemaid_menu_master"
+        sequence="11"/>
 
 </odoo>

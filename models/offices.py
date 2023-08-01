@@ -40,6 +40,11 @@ class offices(models.Model):
         string='Description',
         tracking=True,
     )
+    active = fields.Boolean(
+        string="Active",
+        default=True,
+        tracking=True
+    )
     company_id = fields.Many2one(
         comodel_name='res.company',
         string='Company',
@@ -64,8 +69,4 @@ class offices(models.Model):
         help="Used to select the currency when billing.",
         tracking=True
     )
-    active = fields.Boolean(
-        string="Active",
-        default=True,
-        tracking=True
-    )
+    

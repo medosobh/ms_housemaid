@@ -1,5 +1,5 @@
 {
-    'name': 'Housemaids Sales and Operation System',
+    'name': 'Housemaid Sales and Operation System',
     'version': '1.0',
     'description': 'A system that help to maintain maids data and manage match \
          and hiring maid ',
@@ -15,9 +15,11 @@
         'web',
     ],
     'data': [
+        'security/security.xml',
+        'security/ir.model.access.csv',
         'views/menu.xml',
         'views/offices.xml',
-        # 'views/maids.xml'
+        'views/maids.xml'
         # 'views/sponsers.xml'
         # 'views/tickets.xml'
 

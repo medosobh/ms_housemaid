@@ -1,15 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <record id="housemaid_maids_form" model="ir.ui.view">
-        <field name="name">housemaid_maids.form</field>
-        <field name="model">housemaid_maids</field>
-        <field name="arch" type="xml">
-            <form string="">
-                <header>
-                </header>
+    <record id="housemaid_maids_form"
+        model="ir.ui.view">
+        <field name="name">housemaid.maids.form</field>
+        <field name="model">housemaid.maids</field>
+        <field name="arch"
+            type="xml">
+            <form string="Maids">
                 <sheet>
-
+                    <group name="maid_main"
+                        string="Maids">
+                        <group name="basic"
+                            string="Basic">
+                            <field name="code"/>
+                            <field name="name"/>
+                            <field name="identity"/>
+                            <field name="passport_no"/>
+                            <field name="place_of_birth"/>
+                            <field name="birthday"/>
+                            <field name="gender"/>
+                            <field name="marital_status"/>
+                            <field name="country_id"/>
+                            <field name="partner_id"/>
+                            <field name="description"/>
+                            <field name="active"
+                                invisible="1"/>
+                        </group>
+                        <group name="operation"
+                            string="Operation">
+                            <field name="user_id"
+                                widget="selection"/>
+                            <field name="company_id"
+                                groups="base.group_multi_company"/>
+                            <field name="currency_id"
+                                groups="base.group_multi_currency"/>
+                        </group>
+                    </group>
                 </sheet>
                 <div class="oe_chatter">
                     <field name="message_follower_ids"/>
@@ -20,36 +47,93 @@
         </field>
     </record>
 
-    <record id="housemaid_maids_tree" model="ir.ui.view">
-        <field name="name">housemaid_maids.tree</field>
-        <field name="model">housemaid_maids</field>
-        <field name="arch" type="xml">
-            <tree string="">
+    <record id="housemaid_maid_tree"
+        model="ir.ui.view">
+        <field name="name">housemaid.maids.tree</field>
+        <field name="model">housemaid.maids</field>
+        <field name="arch"
+            type="xml">
+            <tree string="Maids List"
+                sample="1">
+                <field name="code"/>
+                <field name="name"/>
+                <field name="identity"/>
+                <field name="passport_no"/>
+                <field name="place_of_birth"/>
+                <field name="birthday"/>
+                <field name="gender"/>
+                <field name="marital_status"/>
+                <field name="country_id"/>
+                <field name="partner_id"/>
+                <field name="description"/>
+                <field name="active"
+                    invisible="1"/>
+                <field name="message_follower_ids"/>
+                <field name="activity_ids"/>
+                <field name="message_ids"/>
 
             </tree>
         </field>
     </record>
 
-    <record id="housemaid_maids_search" model="ir.ui.view">
-        <field name="name">housemaid_maids.search</field>
-        <field name="model">housemaid_maids</field>
-        <field name="arch" type="xml">
-            <search string="">
-
+    <record id="housemaid_maids_search"
+        model="ir.ui.view">
+        <field name="name">housemaid.maids.search</field>
+        <field name="model">housemaid.maids</field>
+        <field name="arch"
+            type="xml">
+            <search string="Maids">
+                <field name="company_id"
+                    widget="selection"/>
+                <field name="country_id"
+                    widget="selection"/>
+                <field name="user_id"
+                    widget="selection"/>
+                <filter name="filter_archived"
+                    string="Archived"
+                    domain="[('active', '=', False)]"/>
+                <group expand="0"
+                    string="Group by">
+                    <filter string="Company"
+                        name="group_by_company_id"
+                        context="{'group_by':'company_id'}"/>
+                    <filter string="Country"
+                        name="group_by_country_id"
+                        context="{'group_by':'country_id'}"/>
+                    <filter string="Operation Man"
+                        name="group_by_user"
+                        context="{'group_by':'user_id'}"/>
+                </group>
+                <searchpanel>
+                    <field name="company_id"
+                        select="multi"
+                        string="Relative Company"
+                        enable_counters="1"/>
+                    <field name="country_id"
+                        select="multi"
+                        string="Relative Country"
+                        enable_counters="1"/>
+                </searchpanel>
             </search>
         </field>
     </record>
 
-    <record id="housemaid_maids_action" model="ir.actions.act_window">
-        <field name="name">housemaid_maids.action</field>
-        <field name="res_model">housemaid_maids</field>
-        <field name="view_type">form</field>
+    <record id="housemaid_maids_action"
+        model="ir.actions.act_window">
+        <field name="name">Maids</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">housemaid.maids</field>
         <field name="view_mode">tree,form</field>
-        <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">Create your first maid!</p>
+        <field name="help"
+            type="html">
+            <p class="o_view_nocontent_smiling_face">Create your first Maid!</p>
         </field>
     </record>
 
-    <menuitem id="housemaid_maids_menu" name="Maids" action="" parent="" sequence=""/>
+    <menuitem id="housemaid_maids_menu"
+        name="Maids"
+        action="housemaid_maids_action"
+        parent="housemaid_menu_master"
+        sequence="12"/>
 
 </odoo>
