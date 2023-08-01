@@ -23,6 +23,7 @@ class maids(models.Model):
     phone = fields.Char(
         string='Phone',
         required=True,
+        index=True,
         tracking=True
     )
     name = fields.Char(
@@ -31,7 +32,7 @@ class maids(models.Model):
         required=True,
         tracking=True
     )
-    email =  fields.Char(
+    email = fields.Char(
         string='email',
         required=True,
         default=lambda self: _('name@mail.com'),
@@ -146,9 +147,9 @@ class maidlogs(models.Model):
         default=lambda self: _('new'),
         required=True
     )
-    sponser_id = fields.Many2one(
-        string='Sponser',
-        comodel_name='housmaid.Sponser',
+    sponsers_id = fields.Many2one(
+        string='Sponsers',
+        comodel_name='housmaid.sponsers',
     )
     start_contract = fields.Date(
         string='field_name',

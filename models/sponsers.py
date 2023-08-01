@@ -6,7 +6,7 @@ class sponsers(models.AbstractModel):
 
     _name = 'housemaid.sponsers'
     _description = 'Records of Sponsers.'
-    _rec_name = 'phone'
+    _rec_name = 'name'
     _check_company_auto = True
     _sql_constraints = [
         ('code_uniq', 'unique(code)', "A code can only be assigned to one Sponser!"),
@@ -22,6 +22,7 @@ class sponsers(models.AbstractModel):
     phone = fields.Char(
         string='Phone',
         required=True,
+        index=True,
         tracking=True
     )
     name = fields.Char(
