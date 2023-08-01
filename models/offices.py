@@ -17,28 +17,28 @@ class office(models.Model):
         string='Short Name',
         default=lambda self: _('New'),
         required=True,
-        tracking = True
+        tracking=True
     )
     name = fields.Char(
         string='Name',
         default=lambda self: _('New'),
         required=True,
-        tracking = True
+        tracking=True
     )
     country_id = fields.Many2one(
         string="Country",
         comodel_name='res.country',
         help="Country of Office.",
-        tracking = True
+        tracking=True
     )
     partner_id = fields.Many2one(
         comodel_name='res.partner',
         string='Partner',
-        tracking = True
+        tracking=True
     )
     description = fields.Text(
         string='Description',
-        tracking = True,
+        tracking=True,
     )
     company_id = fields.Many2one(
         comodel_name='res.company',
@@ -47,13 +47,13 @@ class office(models.Model):
         default=lambda self: self.env.company,
         required=False,
         readonly=True,
-        tracking = True
+        tracking=True
     )
     user_id = fields.Many2one(
         comodel_name='res.users',
         string="Operation Man",
         required=True,
-        tracking = True,
+        tracking=True,
     )
     currency_id = fields.Many2one(
         comodel_name='res.currency',
@@ -62,7 +62,7 @@ class office(models.Model):
         readonly=True,
         ondelete='set null',
         help="Used to select the currency when billing.",
-        tracking = True
+        tracking=True
     )
     active = fields.Boolean(
         string="Active",

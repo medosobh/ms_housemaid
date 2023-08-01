@@ -1,89 +1,130 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <record id="housemaid_offices_form" model="ir.ui.view">
-        <field name="name">housemaid_offices.form</field>
-        <field name="model">housemaid_offices</field>
-        <field name="arch" type="xml">
-            <form string="">
-                <header>
-                </header>
-                <sheet>
-                    <group name="master" string="Office">
-                        <group name="basic" string="Basic">
-                            <field name="code"/>
-                            <field name="name"/>
-                            <field name="country_id"/>
-                            <field name="partner_id"/>
-                            <field name="description"/>
-                            <field name="active" invisible="1"/>
-                        </group>
-                        <group name="operation" string="Operation">
-                            <field name="user_id" widget="selection"/>
-                            <field name="company_id" groups="base.group_multi_company"/>
-                            <field name="currency_id" groups="base.group_multi_currency"/>
-                        </group>
-                    </group>
-                </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids"/>
-                    <field name="activity_ids"/>
-                    <field name="message_ids"/>
-                </div>
-            </form>
-        </field>
-    </record>
+	<record id="housemaid_offices_form"
+		model="ir.ui.view">
+		<field name="name">housemaid_offices.form</field>
+		<field name="model">housemaid_offices</field>
+		<field name="arch"
+			type="xml">
+			<form string="">
+				<header></header>
+				<sheet>
+					<group name="master"
+						string="Office">
+						<group name="basic"
+							string="Basic">
+							<field name="code"/>
+							<field name="name"/>
+							<field name="country_id"/>
+							<field name="partner_id"/>
+							<field name="description"/>
+							<field name="active"
+								invisible="1"/>
+						</group>
+						<group name="operation"
+							string="Operation">
+							<field name="user_id"
+								widget="selection"/>
+							<field name="company_id"
+								groups="base.group_multi_company"/>
+							<field name="currency_id"
+								groups="base.group_multi_currency"/>
+						</group>
+					</group>
+				</sheet>
+				<div class="oe_chatter">
+					<field name="message_follower_ids"/>
+					<field name="activity_ids"/>
+					<field name="message_ids"/>
+				</div>
+			</form>
+		</field>
+	</record>
 
-    <record id="housemaid_offices_tree" model="ir.ui.view">
-        <field name="name">housemaid_offices.tree</field>
-        <field name="model">housemaid_offices</field>
-        <field name="arch" type="xml">
-            <tree string="master" sample="1">
-                <field name="code"/>
-                <field name="name"/>
-                <field name="country_id"/>
-                <field name="partner_id"/>
-                <field name="description"/>
-                <field name="active" invisible="1"/>
-                <field name="user_id" widget="selection"/>
-                <field name="company_id" groups="base.group_multi_company"/>
-                <field name="currency_id" groups="base.group_multi_currency"/>
-            </tree>
-        </field>
-    </record>
+	<record id="housemaid_offices_tree"
+		model="ir.ui.view">
+		<field name="name">housemaid_offices.tree</field>
+		<field name="model">housemaid_offices</field>
+		<field name="arch"
+			type="xml">
+			<tree string="master"
+				sample="1">
+				<field name="code"/>
+				<field name="name"/>
+				<field name="country_id"/>
+				<field name="partner_id"/>
+				<field name="description"/>
+				<field name="active"
+					invisible="1"/>
+				<field name="user_id"
+					widget="selection"/>
+				<field name="company_id"
+					groups="base.group_multi_company"/>
+				<field name="currency_id"
+					groups="base.group_multi_currency"/>
+			</tree>
+		</field>
+	</record>
 
-    <record id="housemaid_offices_search" model="ir.ui.view">
-        <field name="name">housemaid_offices.search</field>
-        <field name="model">housemaid_offices</field>
-        <field name="arch" type="xml">
-            <search string="office">
-                <field name="company_id" widget="selection"/>
-                <field name="country_id" widget="selection"/>
-                <field name="user_id" widget="selection"/>
-                <filter name="filter_archived" string="Archived" domain="[('active', '=', False)]"/>
-                <group expand="0" string="Group by">
-                    <filter string="Company" name="group_by_company_id" context="{'group_by':'company_id'}"/>
-                    <filter string="Country" name="group_by_country_id" context="{'group_by':'country_id'}"/>
-                    <filter string="Operation Man" name="group_by_user" context="{'group_by':'user_id'}"/>
-                </group>
-                <searchpanel>
-                    <field name="company_id" select="multi" string="Relative Company" enable_counters="1"/>
-                    <field name="country_id" select="multi" string="Relative Country" enable_counters="1"/>
-                </searchpanel>
-            </search>
-        </field>
-    </record>
+	<record id="housemaid_offices_search"
+		model="ir.ui.view">
+		<field name="name">housemaid_offices.search</field>
+		<field name="model">housemaid_offices</field>
+		<field name="arch"
+			type="xml">
+			<search string="office">
+				<field name="company_id"
+					widget="selection"/>
+				<field name="country_id"
+					widget="selection"/>
+				<field name="user_id"
+					widget="selection"/>
+				<filter name="filter_archived"
+					string="Archived"
+					domain="[('active', '=', False)]"/>
+				<group expand="0"
+					string="Group by">
+					<filter string="Company"
+						name="group_by_company_id"
+						context="{'group_by':'company_id'}"/>
+					<filter string="Country"
+						name="group_by_country_id"
+						context="{'group_by':'country_id'}"/>
+					<filter string="Operation Man"
+						name="group_by_user"
+						context="{'group_by':'user_id'}"/>
+				</group>
+				<searchpanel>
+					<field name="company_id"
+						select="multi"
+						string="Relative Company"
+						enable_counters="1"/>
+					<field name="country_id"
+						select="multi"
+						string="Relative Country"
+						enable_counters="1"/>
+				</searchpanel>
+			</search>
+		</field>
+	</record>
 
-    <record id="housemaid_offices_action" model="ir.actions.act_window">
-        <field name="name">housemaid_offices.action</field>
-        <field name="res_model">housemaid_offices</field>
-        <field name="view_type">form</field>
-        <field name="view_mode">tree,form</field>
-        <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">Create your first maid!</p>
-        </field>
-    </record>
+	<record id="housemaid_offices_action"
+		model="ir.actions.act_window">
+		<field name="name">housemaid_offices.action</field>
+		<field name="res_model">housemaid_offices</field>
+		<field name="view_type">form</field>
+		<field name="view_mode">tree,form</field>
+		<field name="help"
+			type="html">
+			<p class="o_view_nocontent_smiling_face">Create your first maid!</p>
+		</field>
+	</record>
 
-    <menuitem id="housemaid_offices_menu" name="Maids" action="housemaid_offices_action" parent="Housemaid_menu_master" sequence="11"/>
+	<menuitem id="housemaid_offices_menu"
+		name="Maids"
+		action="housemaid_offices_action"
+		parent="housemaid_menu_master"
+		sequence="11"/>
 
 </odoo>
