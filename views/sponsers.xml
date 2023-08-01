@@ -17,6 +17,7 @@
                             <field name="phone"/>
                             <field name="name"/>
                             <field name="email"/>
+                            <field name="address"/>
                             <field name="country_id"/>
                             <field name="partner_id"/>
                             <field name="description"/>
@@ -52,16 +53,19 @@
             <tree string="Sponsers"
                 sample="1">
                 <field name="code"/>
+                <field name="phone"/>
                 <field name="name"/>
+                <field name="email"/>
+                <field name="address"/>
                 <field name="country_id"/>
                 <field name="partner_id"/>
                 <field name="description"/>
                 <field name="active"
                     invisible="1"/>
-                <field name="user_id"
-                    widget="selection"/>
                 <field name="company_id"
                     groups="base.group_multi_company"/>
+                <field name="user_id"
+                    widget="selection"/>
                 <field name="currency_id"
                     groups="base.group_multi_currency"/>
             </tree>
@@ -77,9 +81,9 @@
             <search string="Sponsers">
                 <field name="company_id"
                     widget="selection"/>
-                <field name="country_id"
-                    widget="selection"/>
                 <field name="user_id"
+                    widget="selection"/>
+                <field name="country_id"
                     widget="selection"/>
                 <filter name="filter_archived"
                     string="Archived"

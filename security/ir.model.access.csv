@@ -1,4 +1,4 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access.housemaid_offices,access_housemaids_offices,ms_housemaid.model_housemaid_offices,base.group_user,1,1,1,1
-access.housemaid_maids,access_housemaids_maids,ms_housemaid.model_housemaid_maids,base.group_user,1,1,1,1
-access.housemaid_sponsers,access_housemaids_sponsers,ms_housemaid.model_housemaid_sponsers,base.group_user,1,1,1,1
+access.housemaid_offices,access_housemaid_offices,ms_housemaid.model_housemaid_offices,base.group_user,1,1,1,1
+access.housemaid_maids,access_housemaid_maids,ms_housemaid.model_housemaid_maids,base.group_user,1,1,1,1
+access.housemaid_sponsers,access_housemaid_sponsers,ms_housemaid.model_housemaid_sponsers,base.group_user,1,1,1,1

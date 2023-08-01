@@ -25,10 +25,10 @@
 						</group>
 						<group name="operation"
 							string="Operation">
-							<field name="user_id"
-								widget="selection"/>
 							<field name="company_id"
 								groups="base.group_multi_company"/>
+							<field name="user_id"
+								widget="selection"/>
 							<field name="currency_id"
 								groups="base.group_multi_currency"/>
 						</group>
@@ -60,10 +60,10 @@
 				<field name="description"/>
 				<field name="active"
 					invisible="1"/>
-				<field name="user_id"
-					widget="selection"/>
 				<field name="company_id"
 					groups="base.group_multi_company"/>
+				<field name="user_id"
+					widget="selection"/>
 				<field name="currency_id"
 					groups="base.group_multi_currency"/>
 			</tree>
@@ -79,9 +79,9 @@
 			<search string="External Offices">
 				<field name="company_id"
 					widget="selection"/>
-				<field name="country_id"
-					widget="selection"/>
 				<field name="user_id"
+					widget="selection"/>
+				<field name="country_id"
 					widget="selection"/>
 				<filter name="filter_archived"
 					string="Archived"

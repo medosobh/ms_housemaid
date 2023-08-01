@@ -19,8 +19,8 @@
         'security/ir.model.access.csv',
         'views/menu.xml',
         'views/offices.xml',
-        'views/maids.xml'
-        'views/sponsers.xml'
+        'views/maids.xml',
+        'views/sponsers.xml',
         # 'views/tickets.xml'
 
     ],
