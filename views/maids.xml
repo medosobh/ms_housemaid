@@ -52,6 +52,11 @@
                                 groups="base.group_multi_currency"/>
                         </group>
                     </group>
+                    <notebook>
+                        <page name="maidslogs" string="History">
+                            
+                        </page>
+                    </notebook>
                 </sheet>
                 <div class="oe_chatter">
                     <field name="message_follower_ids"/>

@@ -11,8 +11,8 @@ class maids(models.Model):
     _rec_name = 'passport_no'
     _check_company_auto = True
     _sql_constraints = [
-        ('code_uniq', 'unique(code)', "A code can only be assigned to one equipment !"),
-        ('name_uniq', 'unique(name)', "A name can only be assigned to one equipment !"),
+        ('code_uniq', 'unique(code)', "A code can only be assigned to one Maid!"),
+        ('name_uniq', 'unique(name)', "A name can only be assigned to one Maid !"),
     ]
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
@@ -21,6 +21,34 @@ class maids(models.Model):
         image_path = get_module_resource(
             'ms_housemaid', 'static/img', 'maid.png')
         return base64.b64encode(open(image_path, 'rb').read())
+
+    state = fields.Selection(
+        string='State',
+        selection=[
+            ('draft', 'Draft'),
+            ('confirmed', 'Confirmed'),
+            ('close', 'Close'),
+            ('cancel', 'Cancel')
+        ],
+        default='draft',
+        readonly=True,
+    )
+
+    @api.multi
+    def action_confirm(self):
+        self.write({'state': 'confirmed'})
+
+    @api.multi
+    def action_draft(self):
+        self.write({'state': 'draft'})
+
+    @api.multi
+    def action_cancel(self):
+        self.write({'state': 'cancel'})
+
+    @api.multi
+    def action_close(self):
+        self.write({'state': 'close'})
 
     code = fields.Char(
         string='Code',
