@@ -1,5 +1,5 @@
 {
-    'name': 'HouseMaid Sales and Operation System',
+    'name': 'Housemaids Sales and Operation System',
     'version': '1.0',
     'description': 'A system that help to maintain maids data and manage match \
          and hiring maid ',
