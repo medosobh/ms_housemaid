@@ -4,7 +4,7 @@ from odoo.exceptions import UserError
 class sponsers(models.AbstractModel):
 
     _name = 'housemaid.sponsers'
-    _description = 'sponser table and related maids hired'
+    _description = 'Records of Sponsers.'
     _check_company_auto = True
     _sql_constraints = [
         ('code_uniq', 'unique(code)', "A code can only be assigned to one equipment !"),

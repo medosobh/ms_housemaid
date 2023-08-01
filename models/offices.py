@@ -5,7 +5,7 @@ from odoo.exceptions import UserError
 class offices(models.Model):
 
     _name = 'housemaid.offices'
-    _description = 'a table of offices linked to office parnter'
+    _description = 'Records of External offices.'
     _check_company_auto = True
     _sql_constraints = [
         ('code_uniq', 'unique(code)', "A code can only be assigned to one equipment !"),

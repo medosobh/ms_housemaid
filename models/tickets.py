@@ -3,7 +3,7 @@ from odoo.exceptions import UserError
 
 class tickets(models.Model):
     _name = 'housemaid.tickets'
-    _description = 'Ticket request for sales team and the operation tickets also for both search or hiring'
+    _description = 'Records of Ticket.'
     _rec_name = 'code'
     _order = 'name ASC'
     _sql_constraints = [
