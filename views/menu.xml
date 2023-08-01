@@ -3,7 +3,7 @@
     <data noupdate="0">
         <!-- This Menu Item will appear in the Upper bar, That's why It needs NO parent or action -->
         <menuitem id="housemaid_root"
-            name="HouseMaid"
+            name="Housemaid"
             web_icon="static/description/icon.png"
             sequence="145" />
         <menuitem id="housemaid_menu_master"

@@ -3,8 +3,8 @@
 
 	<record id="housemaid_offices_form"
 		model="ir.ui.view">
-		<field name="name">housemaid_offices.form</field>
-		<field name="model">housemaid_offices</field>
+		<field name="name">housemaid.offices.form</field>
+		<field name="model">housemaid.offices</field>
 		<field name="arch"
 			type="xml">
 			<form string="Housemaid External Offices">
@@ -43,8 +43,8 @@
 
 	<record id="housemaid_offices_tree"
 		model="ir.ui.view">
-		<field name="name">housemaid_offices.tree</field>
-		<field name="model">housemaid_offices</field>
+		<field name="name">housemaid.offices.tree</field>
+		<field name="model">housemaid.offices</field>
 		<field name="arch"
 			type="xml">
 			<tree string="Housemaid External Offices"
@@ -68,8 +68,8 @@
 
 	<record id="housemaid_offices_search"
 		model="ir.ui.view">
-		<field name="name">housemaid_offices.search</field>
-		<field name="model">housemaid_offices</field>
+		<field name="name">housemaid.offices.search</field>
+		<field name="model">housemaid.offices</field>
 		<field name="arch"
 			type="xml">
 			<search string="Housemaid External Offices">
@@ -110,9 +110,9 @@
 
 	<record id="housemaid_offices_action"
 		model="ir.actions.act_window">
-		<field name="name">housemaid_offices.action</field>
-		<field name="res_model">housemaid_offices</field>
-		<field name="view_type">form</field>
+		<field name="name">Housemaid External Offices</field>
+		<field name="type">ir.actions.act_window</field>
+		<field name="res_model">housemaid.offices</field>
 		<field name="view_mode">tree,form</field>
 		<field name="help"
 			type="html">
