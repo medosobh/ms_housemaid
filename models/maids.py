@@ -75,7 +75,7 @@ class maid(models.Model):
         help = "Used to display the currency when tracking monetary values"
     )
     maidlog_ids = _ids = fields.One2many(
-        comodel_name = 'Housemaid.MaidLog',
+        comodel_name = 'housemaid.maidlog',
         inverse_name = 'maid_id',
         string = "Maid Log",
         )
