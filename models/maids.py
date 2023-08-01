@@ -148,10 +148,10 @@ class maidslogs(models.Model):
         required=True
     )
     start_contract = fields.Date(
-        string='field_name',
+        string='Start Date',
         default=fields.Date.context_today,
     )
     end_contract = fields.Date(
-        string='field_name',
+        string='End Date',
         default=fields.Date.context_today,
     )

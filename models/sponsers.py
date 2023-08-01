@@ -2,15 +2,15 @@ from odoo import fields, models, _
 from odoo.exceptions import UserError
 
 
-class sponsers(models.AbstractModel):
+class sponsers(models.Model):
 
     _name = 'housemaid.sponsers'
     _description = 'Records of Sponsers.'
-    _rec_name = 'name'
+    _rec_name = 'phone'
     _check_company_auto = True
     _sql_constraints = [
         ('code_uniq', 'unique(code)', "A code can only be assigned to one Sponser!"),
-        ('name_uniq', 'unique(name)', "A name can only be assigned to one Sponser !"),
+        ('name_uniq', 'unique(name)', "A name can only be assigned to one Sponser!"),
     ]
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
@@ -45,7 +45,7 @@ class sponsers(models.AbstractModel):
     country_id = fields.Many2one(
         string="Country",
         comodel_name='res.country',
-        help="Country of Office.",
+        help="Country of Sponser.",
         tracking=True
     )
     partner_id = fields.Many2one(
@@ -83,6 +83,6 @@ class sponsers(models.AbstractModel):
         related='company_id.currency_id',
         readonly=True,
         ondelete='set null',
-        help="Used to select the currency when invoicing.",
+        help="Used to display the currency when tracking monetary values",
         tracking=True
     )
