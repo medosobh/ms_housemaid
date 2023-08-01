@@ -1,5 +1,7 @@
-from odoo import fields, models, _
+from odoo import api, fields, models, _
 from odoo.exceptions import UserError
+from odoo.modules.module import get_module_resource
+import base64
 
 
 class sponsers(models.Model):
@@ -13,6 +15,12 @@ class sponsers(models.Model):
         ('name_uniq', 'unique(name)', "A name can only be assigned to one Sponser!"),
     ]
     _inherit = ['mail.thread', 'mail.activity.mixin']
+
+    @api.model
+    def _default_image(self):
+        image_path = get_module_resource(
+            'ms_housemaid', 'static/img', 'sponser.png')
+        return base64.b64encode(open(image_path, 'rb').read())
 
     code = fields.Char(
         string='Code',
@@ -36,6 +44,9 @@ class sponsers(models.Model):
         required=True,
         default=lambda self: _('name@mail.com'),
         tracking=True
+    )
+    image_1920 = fields.Image(
+        default=_default_image
     )
     address = fields.Text(
         string='Address',

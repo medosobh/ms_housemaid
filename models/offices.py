@@ -1,5 +1,7 @@
-from odoo import fields, models, _
+from odoo import api, fields, models, _
 from odoo.exceptions import UserError
+from odoo.modules.module import get_module_resource
+import base64
 
 
 class offices(models.Model):
@@ -11,11 +13,19 @@ class offices(models.Model):
     _sql_constraints = [
         ('code_uniq', 'unique(code)', "A code can only be assigned to one office!"),
         ('name_uniq', 'unique(name)', "A name can only be assigned to one office!"),
+        ('partner_id_uniq', 'unique(partner_id)',
+         "A parnter can only be assigned to one office!"),
     ]
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
+    @api.model
+    def _default_image(self):
+        image_path = get_module_resource(
+            'ms_housemaid', 'static/img', 'office.png')
+        return base64.b64encode(open(image_path, 'rb').read())
+
     code = fields.Char(
-        string='Code',
+        string='Short Name',
         required=True,
         tracking=True
     )
@@ -31,10 +41,13 @@ class offices(models.Model):
         tracking=True
     )
     email = fields.Char(
-        string='email',
+        string='Email',
         required=True,
         default=lambda self: _('name@mail.com'),
         tracking=True
+    )
+    image_1920 = fields.Image(
+        default=_default_image
     )
     country_id = fields.Many2one(
         string="Country",

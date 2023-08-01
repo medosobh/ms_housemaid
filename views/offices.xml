@@ -9,14 +9,26 @@
 			type="xml">
 			<form string="External Offices">
 				<sheet>
+					<div>
+						<field name="image_1920"
+							widget="image"
+							class="oe_avatar"
+							options="{&quot;preview_image&quot;: &quot;avatar_128&quot;}"/>
+					</div>
+					<div class="oe_title">
+						<h3>
+							<group>
+								<field name="code"/>
+								<field name="name"/>
+								<field name="phone"/>
+								<field name="email"/>
+							</group>
+						</h3>
+					</div>
 					<group name="offices_main"
 						string="Office">
 						<group name="basic"
 							string="Basic">
-							<field name="code"/>
-							<field name="phone"/>
-							<field name="name"/>
-							<field name="email"/>
 							<field name="country_id"/>
 							<field name="partner_id"/>
 							<field name="description"/>
@@ -33,6 +45,14 @@
 								groups="base.group_multi_currency"/>
 						</group>
 					</group>
+					<notebook>
+						<page string="Free Maids">
+
+						</page>
+						<page string="Statistic">
+
+						</page>
+					</notebook>
 				</sheet>
 				<div class="oe_chatter">
 					<field name="message_follower_ids"/>
@@ -89,14 +109,14 @@
 				<group expand="0"
 					string="Group by">
 					<filter string="Company"
-                        name="group_by_company_id"
-                        context="{'group_by':'company_id'}"/>
-                    <filter string="Sales Man"
-                        name="group_by_user"
-                        context="{'group_by':'user_id'}"/>
-                    <filter string="Country"
-                        name="group_by_country_id"
-                        context="{'group_by':'country_id'}"/>
+						name="group_by_company_id"
+						context="{'group_by':'company_id'}"/>
+					<filter string="Sales Man"
+						name="group_by_user"
+						context="{'group_by':'user_id'}"/>
+					<filter string="Country"
+						name="group_by_country_id"
+						context="{'group_by':'country_id'}"/>
 				</group>
 				<searchpanel>
 					<field name="company_id"

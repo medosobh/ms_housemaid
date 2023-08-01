@@ -1,5 +1,7 @@
-from odoo import fields, models, _
+from odoo import api, fields, models, _
 from odoo.exceptions import UserError
+from odoo.modules.module import get_module_resource
+import base64
 
 
 class maids(models.Model):
@@ -13,6 +15,12 @@ class maids(models.Model):
         ('name_uniq', 'unique(name)', "A name can only be assigned to one equipment !"),
     ]
     _inherit = ['mail.thread', 'mail.activity.mixin']
+
+    @api.model
+    def _default_image(self):
+        image_path = get_module_resource(
+            'ms_housemaid', 'static/img', 'maid.png')
+        return base64.b64encode(open(image_path, 'rb').read())
 
     code = fields.Char(
         string='Code',
@@ -37,6 +45,9 @@ class maids(models.Model):
         required=True,
         default=lambda self: _('name@mail.com'),
         tracking=True
+    )
+    image_1920 = fields.Image(
+        default=_default_image
     )
     identity = fields.Char(
         string='National Identity',
@@ -64,6 +75,22 @@ class maids(models.Model):
             ('female', 'Female'),
         ],
         tracking=True
+    )
+    religion = fields.Selection(
+        [
+            ('Baha i', 'Baha i'),
+            ('Buddhism', 'Buddhism'),
+            ('Christianity', 'Christianity'),
+            ('Confucianism', 'Confucianism'),
+            ('Hinduism', 'Hinduism'),
+            ('Islam', 'Islam'),
+            ('Jainism', 'Jainism'),
+            ('Judaism', 'Judaism'),
+            ('Shinto', 'Shinto'),
+            ('Sikhism', 'Sikhism'),
+            ('Taoism', 'Taoism'),
+            ('Zoroastrianism', 'Zoroastrianism'),
+        ]
     )
     marital_status = fields.Selection(
         [
@@ -140,11 +167,13 @@ class maidslogs(models.Model):
     visa_no = fields.Char(
         string='Visa No.',
         default=lambda self: _('new'),
+        index=True,
         required=True
     )
     contract_no = fields.Char(
         string='Contract No.',
         default=lambda self: _('new'),
+        index=True,
         required=True
     )
     start_contract = fields.Date(

@@ -9,19 +9,32 @@
             type="xml">
             <form string="Maids">
                 <sheet>
+                    <div>
+                        <field name="image_1920"
+                            widget="image"
+                            class="oe_avatar"
+                            options="{&quot;preview_image&quot;: &quot;avatar_128&quot;}"/>
+                    </div>
+                    <div class="oe_title">
+						<h3>
+							<group>
+								<field name="code"/>
+								<field name="name"/>
+								<field name="phone"/>
+								<field name="email"/>
+							</group>
+						</h3>
+					</div>
                     <group name="maids_main"
                         string="Maids">
                         <group name="basic"
                             string="Basic">
-                            <field name="code"/>
-                            <field name="phone"/>
-                            <field name="name"/>
-                            <field name="email"/>
                             <field name="identity"/>
                             <field name="passport_no"/>
                             <field name="place_of_birth"/>
                             <field name="birthday"/>
                             <field name="gender"/>
+                            <field name="religion"/>
                             <field name="marital_status"/>
                             <field name="country_id"/>
                             <field name="partner_id"/>
