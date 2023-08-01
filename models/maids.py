@@ -76,7 +76,7 @@ class maid(models.Model):
     )
     maidlog_ids = _ids = fields.One2many(
         comodel_name = 'housemaid.maidlog',
-        inverse_name = 'maid_id',
+        inverse_name = 'maids_id',
         string = "Maid Log",
         )
     
