@@ -12,7 +12,7 @@ class sponsers(models.AbstractModel):
     ]
     _inherit = ['mail.thread', 'mail.activity.mixin']
     
-    code = fields(
+    code = fields.Char(
         string = 'Short Name',
         required=True)
     name = fields.Char(
