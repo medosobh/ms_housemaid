@@ -1,8 +1,8 @@
 from odoo import fields, models, _
 from odoo.exceptions import UserError
 
-class ticket(models.Model):
-    _name = 'housemaid.ticket'
+class tickets(models.Model):
+    _name = 'housemaid.tickets'
     _description = 'Ticket request for sales team and the operation tickets also for both search or hiring'
     _rec_name = 'code'
     _order = 'name ASC'

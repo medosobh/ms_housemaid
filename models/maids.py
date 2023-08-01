@@ -1,9 +1,9 @@
 from odoo import fields, models, _
 from odoo.exceptions import UserError
 
-class maid(models.Model):
+class maids(models.Model):
 
-    _name = 'housemaid.maid'
+    _name = 'housemaid.maids'
     _description = 'a table of maids data '
     _check_company_auto = True
     _sql_constraints = [
@@ -74,16 +74,11 @@ class maid(models.Model):
         ondelete = 'set null',
         help = "Used to display the currency when tracking monetary values"
     )
-    maidlog_ids = _ids = fields.One2many(
-        comodel_name = 'housemaid.maidlog',
-        inverse_name = 'maids_id',
-        string = "Maid Log",
-        )
     
 
 
-class maidlog(models.Model):
-    _name = 'housemaid.maidlog'
+class maidlogs(models.Model):
+    _name = 'housemaid.maidlogs'
     _description = 'ModelName'
     _check_company_auto = True
     _sql_constraints = [

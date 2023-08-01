@@ -7,10 +7,9 @@
 		<field name="model">housemaid_offices</field>
 		<field name="arch"
 			type="xml">
-			<form string="">
-				<header></header>
+			<form string="Housemaid External Offices">
 				<sheet>
-					<group name="master"
+					<group name="office_main"
 						string="Office">
 						<group name="basic"
 							string="Basic">
@@ -48,7 +47,7 @@
 		<field name="model">housemaid_offices</field>
 		<field name="arch"
 			type="xml">
-			<tree string="master"
+			<tree string="Housemaid External Offices"
 				sample="1">
 				<field name="code"/>
 				<field name="name"/>
@@ -73,7 +72,7 @@
 		<field name="model">housemaid_offices</field>
 		<field name="arch"
 			type="xml">
-			<search string="office">
+			<search string="Housemaid External Offices">
 				<field name="company_id"
 					widget="selection"/>
 				<field name="country_id"

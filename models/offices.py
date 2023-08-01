@@ -2,9 +2,9 @@ from odoo import fields, models, _
 from odoo.exceptions import UserError
 
 
-class office(models.Model):
+class offices(models.Model):
 
-    _name = 'housemaid.office'
+    _name = 'housemaid.offices'
     _description = 'a table of offices linked to office parnter'
     _check_company_auto = True
     _sql_constraints = [
