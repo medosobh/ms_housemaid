@@ -10,8 +10,6 @@ class sponsers(models.AbstractModel):
     _check_company_auto = True
     _sql_constraints = [
         ('code_uniq', 'unique(code)', "A code can only be assigned to one Sponser!"),
-        ('phone_uniq', 'unique(phone)',
-         "A phone can only be assigned to one Sponser !"),
         ('name_uniq', 'unique(name)', "A name can only be assigned to one Sponser !"),
     ]
     _inherit = ['mail.thread', 'mail.activity.mixin']
@@ -63,7 +61,6 @@ class sponsers(models.AbstractModel):
         default=True,
         tracking=True
     )
-
     company_id = fields.Many2one(
         comodel_name='res.company',
         string='Company',
@@ -85,6 +82,6 @@ class sponsers(models.AbstractModel):
         related='company_id.currency_id',
         readonly=True,
         ondelete='set null',
-        help="Used to select the currency when billing.",
+        help="Used to select the currency when invoicing.",
         tracking=True
     )

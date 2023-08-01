@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <record id="housemaid_sponsers_form"
+    <record id="housemaid_sponser_form"
         model="ir.ui.view">
-        <field name="name">housemaid.sponsers.form</field>
-        <field name="model">housemaid.sponsers</field>
+        <field name="name">housemaid.sponser.form</field>
+        <field name="model">housemaid.sponser</field>
         <field name="arch"
             type="xml">
-            <form string="Sponsers">
+            <form string="Sponser">
                 <sheet>
-                    <group name="sponser_main"
+                    <group name="sponsers_main"
                         string="Sponser">
                         <group name="basic"
                             string="Basic">
@@ -24,12 +24,12 @@
                             <field name="active"
                                 invisible="1"/>
                         </group>
-                        <group name="operation"
-                            string="Operation">
-                            <field name="user_id"
-                                widget="selection"/>
+                        <group name="sales"
+                            string="Sales">
                             <field name="company_id"
                                 groups="base.group_multi_company"/>
+                            <field name="user_id"
+                                widget="selection"/>
                             <field name="currency_id"
                                 groups="base.group_multi_currency"/>
                         </group>
@@ -47,10 +47,10 @@
     <record id="housemaid_sponsers_tree"
         model="ir.ui.view">
         <field name="name">housemaid.sponser.tree</field>
-        <field name="model">housemaid.sponsers</field>
+        <field name="model">housemaid.sponser</field>
         <field name="arch"
             type="xml">
-            <tree string="Sponsers"
+            <tree string="Sponser List"
                 sample="1">
                 <field name="code"/>
                 <field name="phone"/>
@@ -68,17 +68,18 @@
                     widget="selection"/>
                 <field name="currency_id"
                     groups="base.group_multi_currency"/>
+
             </tree>
         </field>
     </record>
 
-    <record id="housemaid_sponsers_search"
+    <record id="housemaid_sponser_search"
         model="ir.ui.view">
-        <field name="name">housemaid.sponsers.search</field>
-        <field name="model">housemaid.sponsers</field>
+        <field name="name">housemaid.sponser.search</field>
+        <field name="model">housemaid.sponser</field>
         <field name="arch"
             type="xml">
-            <search string="Sponsers">
+            <search string="Sponser">
                 <field name="company_id"
                     widget="selection"/>
                 <field name="user_id"
@@ -93,12 +94,12 @@
                     <filter string="Company"
                         name="group_by_company_id"
                         context="{'group_by':'company_id'}"/>
+                    <filter string="Sales Man"
+                        name="group_by_user"
+                        context="{'group_by':'user_id'}"/>
                     <filter string="Country"
                         name="group_by_country_id"
                         context="{'group_by':'country_id'}"/>
-                    <filter string="Operation Man"
-                        name="group_by_user"
-                        context="{'group_by':'user_id'}"/>
                 </group>
                 <searchpanel>
                     <field name="company_id"
@@ -114,22 +115,22 @@
         </field>
     </record>
 
-    <record id="housemaid_sponsers_action"
+    <record id="housemaid_sponser_action"
         model="ir.actions.act_window">
-        <field name="name">Sponsers</field>
+        <field name="name">sponser</field>
         <field name="type">ir.actions.act_window</field>
-        <field name="res_model">housemaid.sponsers</field>
+        <field name="res_model">housemaid.sponser</field>
         <field name="view_mode">tree,form</field>
         <field name="help"
             type="html">
-            <p class="o_view_nocontent_smiling_face">Create your first Sponser!</p>
+            <p class="o_view_nocontent_smiling_face">Create your first Maid!</p>
         </field>
     </record>
 
-    <menuitem id="housemaid_sponsers_menu"
-        name="Sponsers"
-        action="housemaid_sponsers_action"
+    <menuitem id="housemaid_sponser_menu"
+        name="sponser"
+        action="housemaid_sponser_action"
         parent="housemaid_menu_data"
-        sequence="11"/>
+        sequence="13"/>
 
 </odoo>
