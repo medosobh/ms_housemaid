@@ -7,12 +7,12 @@
             web_icon="static/description/icon.png"
             sequence="145" />
         <menuitem id="housemaid_menu_master"
-            name="Masterdata"
+            name="Master Data"
             parent="housemaid_root"
             sequence="10" />
         <!-- This Menu Item Must have a parent -->
         <menuitem id="housemaid_menu_tickets"
-            name="Orders"
+            name="Tickets"
             parent="housemaid_root"
             sequence="20" />
         <!-- This Menu Item Must have a parent -->
