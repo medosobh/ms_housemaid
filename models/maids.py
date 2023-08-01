@@ -120,9 +120,9 @@ class maids(models.Model):
     )
 
 
-class maidlogs(models.Model):
-    _name = 'housemaid.maidlogs'
-    _description = 'ModelName'
+class maidslogs(models.Model):
+    _name = 'housemaid.maidslogs'
+    _description = 'Maids Logs Records.'
     _check_company_auto = True
     _sql_constraints = [
         ('visa_no_uniq', 'unique(visa_code)',
@@ -146,10 +146,6 @@ class maidlogs(models.Model):
         string='Contract No.',
         default=lambda self: _('new'),
         required=True
-    )
-    sponsers_id = fields.Many2one(
-        string='Sponsers',
-        comodel_name='housmaid.sponsers',
     )
     start_contract = fields.Date(
         string='field_name',
