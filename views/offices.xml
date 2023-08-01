@@ -121,7 +121,7 @@
 	</record>
 
 	<menuitem id="housemaid_offices_menu"
-		name="Maids"
+		name="External Offices"
 		action="housemaid_offices_action"
 		parent="housemaid_menu_master"
 		sequence="11"/>
