@@ -2,6 +2,7 @@ from odoo import api, fields, models, _
 from odoo.exceptions import UserError
 from odoo.modules.module import get_module_resource
 import base64
+from datetime import date, datetime, timedelta
 
 
 class maids(models.Model):
@@ -33,23 +34,15 @@ class maids(models.Model):
         default='draft',
         readonly=True,
     )
-
-    @api.multi
-    def action_confirm(self):
-        self.write({'state': 'confirmed'})
-
-    @api.multi
-    def action_draft(self):
-        self.write({'state': 'draft'})
-
-    @api.multi
-    def action_cancel(self):
-        self.write({'state': 'cancel'})
-
-    @api.multi
-    def action_close(self):
-        self.write({'state': 'close'})
-
+    skills = fields.Selection(
+        selection = [
+            ('0', 'Normal'),
+            ('1', 'Low'),
+            ('2', 'High'),
+            ('3', 'Very High')
+        ],
+        string = "Skills",
+        help = 'Set the overall skills level.')
     code = fields.Char(
         string='Code',
         default=lambda self: _('New'),
@@ -173,6 +166,10 @@ class maids(models.Model):
         help="Used to display the currency when tracking monetary values",
         tracking=True
     )
+    maidslogs_ids = fields.One2many(
+        comodel_name='housemaid.maidslogs',
+        inverse_name='maids_id',
+        string="History")
 
 
 class maidslogs(models.Model):
@@ -189,8 +186,20 @@ class maidslogs(models.Model):
     date = fields.Char(
         string='Date',
         required=True,
-        default=lambda self: _('today'),
+        default= datetime.today(),
         copy=False
+    )
+    state = fields.Selection(
+        string='State',
+        selection=[
+            ('open', 'Open to Work'),
+            ('work', 'Working'),
+            ('valuated', '90 Days Valuation'),
+            ('backout', 'Backout')
+            ('reserve', 'Reserved')
+        ],
+        default='draft',
+        readonly=True,
     )
     visa_no = fields.Char(
         string='Visa No.',
@@ -212,3 +221,6 @@ class maidslogs(models.Model):
         string='End Date',
         default=fields.Date.context_today,
     )
+    maids_id = fields.Many2one(
+        comodel_name='housemaid.maids',
+        string='Maids')

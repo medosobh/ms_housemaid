@@ -16,15 +16,15 @@
                             options="{&quot;preview_image&quot;: &quot;avatar_128&quot;}"/>
                     </div>
                     <div class="oe_title">
-						<h3>
-							<group>
-								<field name="code"/>
-								<field name="name"/>
-								<field name="phone"/>
-								<field name="email"/>
-							</group>
-						</h3>
-					</div>
+                        <h3>
+                            <group>
+                                <field name="code"/>
+                                <field name="name"/>
+                                <field name="phone"/>
+                                <field name="email"/>
+                            </group>
+                        </h3>
+                    </div>
                     <group name="maids_main"
                         string="Maids">
                         <group name="basic"
@@ -50,11 +50,23 @@
                                 widget="selection"/>
                             <field name="currency_id"
                                 groups="base.group_multi_currency"/>
+                            <field name="state"/>
+                            <field name="skills"/>
                         </group>
                     </group>
                     <notebook>
-                        <page name="maidslogs" string="History">
-                            
+                        <page name="housemaid_maids_maidslogs"
+                            string="History">
+                            <field name="maidslogs_ids">
+                                <tree>
+                                    <field name="date"/>
+                                    <field name="state"/>
+                                    <field name="visa_no"/>
+                                    <field name="contract_no"/>
+                                    <field name="start_contract"/>
+                                    <field name="end_contract"/>
+                                </tree>
+                            </field>
                         </page>
                     </notebook>
                 </sheet>
