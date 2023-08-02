@@ -35,14 +35,14 @@ class maids(models.Model):
         readonly=True,
     )
     skills = fields.Selection(
-        selection = [
+        selection=[
             ('0', 'Normal'),
             ('1', 'Low'),
             ('2', 'High'),
             ('3', 'Very High')
         ],
-        string = "Skills",
-        help = 'Set the overall skills level.')
+        string="Skills",
+        help='Set the overall skills level.')
     code = fields.Char(
         string='Code',
         default=lambda self: _('New'),
@@ -169,25 +169,21 @@ class maids(models.Model):
     maidslogs_ids = fields.One2many(
         comodel_name='housemaid.maidslogs',
         inverse_name='maids_id',
-        string="History")
+        string="History",
+        tracking=True
+    )
 
 
 class maidslogs(models.Model):
     _name = 'housemaid.maidslogs'
     _description = 'Maids Logs Records.'
-    _check_company_auto = True
-    _sql_constraints = [
-        ('visa_no_uniq', 'unique(visa_code)',
-         "A visa code can only be assigned to one maid !"),
-        ('contract_no_uniq', 'unique(contract_code)',
-         "A contract code can only be assigned to one maid !"),
-    ]
 
     date = fields.Char(
         string='Date',
         required=True,
-        default= datetime.today(),
-        copy=False
+        default=datetime.today(),
+        copy=False,
+        tracking=True
     )
     state = fields.Selection(
         string='State',
@@ -195,32 +191,38 @@ class maidslogs(models.Model):
             ('open', 'Open to Work'),
             ('work', 'Working'),
             ('valuated', '90 Days Valuation'),
-            ('backout', 'Backout')
-            ('reserve', 'Reserved')
+            ('backout', 'Backout'),
+            ('reserve', 'Reserved'),
         ],
         default='draft',
-        readonly=True,
+        tracking=True
     )
     visa_no = fields.Char(
         string='Visa No.',
         default=lambda self: _('new'),
         index=True,
-        required=True
+        required=True,
+        tracking=True
     )
     contract_no = fields.Char(
         string='Contract No.',
         default=lambda self: _('new'),
         index=True,
-        required=True
+        required=True,
+        tracking=True
     )
     start_contract = fields.Date(
         string='Start Date',
         default=fields.Date.context_today,
+        tracking=True
     )
     end_contract = fields.Date(
         string='End Date',
         default=fields.Date.context_today,
+        tracking=True
     )
     maids_id = fields.Many2one(
         comodel_name='housemaid.maids',
-        string='Maids')
+        string='Maids',
+        tracking=True
+    )
