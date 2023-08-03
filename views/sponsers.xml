@@ -16,13 +16,14 @@
                             options="{&quot;preview_image&quot;: &quot;avatar_128&quot;}"/>
                     </div>
                     <div class="oe_title">
-							<group>
-								<field name="code"/>
-								<field name="name"/>
-								<field name="phone"/>
-								<field name="email"/>
-							</group>
-					</div>
+                        <group name="sponsers_title"
+                            string="Title">
+                            <field name="code"/>
+                            <field name="name"/>
+                            <field name="phone"/>
+                            <field name="email"/>
+                        </group>
+                    </div>
                     <group name="sponsers_main"
                         string="Sponsers">
                         <group name="basic"
