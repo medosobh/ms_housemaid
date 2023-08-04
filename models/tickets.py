@@ -18,18 +18,23 @@ class tickets(models.Model):
         default=lambda self: _('New'),
         copy=False
     )
+    # path of state mixed between sales & operation based on ticket type
     state = fields.Selection(
         string='Status',
         selection=[
             ('draft', 'Draft Request'),
-            ('reserve', 'Maid Reserved'),
-            ('search', 'Operation Search for Maid'),
-            ('insure', 'Operation insure Maid avaliable'),
             ('available', 'Operation Confirm Maid avaliable'),
-            ('confirm', 'Sponser confirm the Maid'),
-            ('hiring', 'Operation hiring the Maid'),
-            ('90days', 'Maid in 90days Garanty'),
             ('runout', 'Maid is Not avaliable'),
+            ('reserve', 'Maid Reserved'),
+            ('confirm', 'Sponser confirm the Maid'),
+            ('90days', 'Maid in 90days Garanty'),
+            # sales ask for 1 of 3 tiket type
+            ('search', 'Search for Maid'),
+            ('insure', 'Insure Maid avaliable'),
+            ('hiring', 'Hiring the Maid'),
+            # once operation close its ticket it will change sales ticket State
+            ('closed', 'Ticket Closed'),
+
         ],
 
         default='draft',
@@ -37,9 +42,10 @@ class tickets(models.Model):
     ticket_type = fields.Selection(
         string='field_name',
         selection=[
-            ('new', 'New Ticket'),
-
-            ('done', 'done')
+            ('sales', 'Sales'),
+            ('search', 'Operation Search!'),
+            ('toconfirm', 'Operation Confirming!'),
+            ('tohire', 'Operation Hiring!'),
         ]
     )
 
