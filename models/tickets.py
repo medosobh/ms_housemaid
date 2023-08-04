@@ -1,4 +1,4 @@
-from odoo import fields, models, _
+from odoo import api, fields, models, _
 from odoo.exceptions import UserError
 
 
@@ -61,7 +61,7 @@ class tickets(models.Model):
         'housemaid.sponsers',
         string='Sponsers',
         tracking=True,
-        )
+    )
     # maid search data
     country_id = fields.Many2one(
         string="Maid Country",
@@ -133,3 +133,15 @@ class tickets(models.Model):
         default=True,
         tracking=True,
     )
+
+    @api.model
+    def create(self, vals):
+        if not vals.get('code') or vals['code'] == _('New'):
+            if vals.get('ticket_type') == _('sales'):
+                vals['code'] = self.env['ir.sequence'].next_by_code(
+                    'housemaid.sales.tickets') or _('New')
+            else:
+                vals['code'] = self.env['ir.sequence'].next_by_code(
+                    'housemaid.operation.tickets') or _('New')
+
+        return super(tickets, self).create(vals)

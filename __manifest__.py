@@ -17,6 +17,7 @@
     'data': [
         'security/security.xml',
         'security/ir.model.access.csv',
+        'data/sequence_views.xml',
         'views/menu.xml',
         'views/offices.xml',
         'views/maids.xml',
