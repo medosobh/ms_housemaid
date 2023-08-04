@@ -72,6 +72,7 @@ class maids(models.Model):
     )
     image_1920 = fields.Image(
         default=_default_image,
+        tracking=True,
     )
     identity = fields.Char(
         string='National Identity',
@@ -94,6 +95,7 @@ class maids(models.Model):
         tracking=True,
     )
     gender = fields.Selection(
+        string='Gender',
         selection=[
             ('male', 'Male'),
             ('female', 'Female'),
@@ -101,6 +103,7 @@ class maids(models.Model):
         tracking=True,
     )
     religion = fields.Selection(
+        string='Religion',
         selection=[
             ('Baha i', 'Baha i'),
             ('Buddhism', 'Buddhism'),
@@ -118,6 +121,7 @@ class maids(models.Model):
         tracking=True,
     )
     marital_status = fields.Selection(
+        string='Marital Status',
         selection=[
             ('single', 'Single'),
             ('married', 'Married'),
@@ -133,8 +137,8 @@ class maids(models.Model):
         tracking=True,
     )
     partner_id = fields.Many2one(
-        comodel_name='res.partner',
         string='Partner',
+        comodel_name='res.partner',
         tracking=True,
     )
     description = fields.Text(
@@ -147,33 +151,31 @@ class maids(models.Model):
         tracking=True,
     )
     company_id = fields.Many2one(
-        comodel_name='res.company',
         string='Company',
+        comodel_name='res.company',
         change_default=True,
         default=lambda self: self.env.company,
         required=False,
-        readonly=True,
         tracking=True,
     )
     user_id = fields.Many2one(
-        comodel_name='res.users',
         string="Operation Man",
+        comodel_name='res.users',
         required=True,
         tracking=True,
     )
     currency_id = fields.Many2one(
-        comodel_name='res.currency',
         string='Currency',
+        comodel_name='res.currency',
         related='company_id.currency_id',
-        readonly=True,
         ondelete='set null',
         help="Used to display the currency when tracking monetary values",
         tracking=True,
     )
     maidslogs_ids = fields.One2many(
+        string="History",
         comodel_name='housemaid.maidslogs',
         inverse_name='maids_id',
-        string="History",
         tracking=True,
     )
 
@@ -226,7 +228,7 @@ class maidslogs(models.Model):
         tracking=True
     )
     maids_id = fields.Many2one(
-        comodel_name='housemaid.maids',
         string='Maids',
+        comodel_name='housemaid.maids',
         tracking=True
     )

@@ -21,7 +21,7 @@ class tickets(models.Model):
     )
     # path of state mixed between sales & operation based on ticket type
     state = fields.Selection(
-        string='Status',
+        string='State',
         selection=[
             ('draft', 'Draft Request'),
             ('available', 'Operation Confirm Maid avaliable'),
@@ -41,24 +41,25 @@ class tickets(models.Model):
         tracking=True,
     )
     ticket_type = fields.Selection(
-        string='field_name',
+        string='Ticket Type',
         selection=[
             ('sales', 'Sales'),
             ('search', 'Operation Search!'),
             ('toconfirm', 'Operation Confirming!'),
             ('tohire', 'Operation Hiring!'),
-        ],  
+        ],
         tracking=True,
     )
     sponser_name = fields.Char(
-        string='Name',
+        string='Sponser Name',
         tracking=True,
     )
     sponser_phone = fields.Char(
-        string='Name',
+        string='Sponser Phone',
         tracking=True,
     )
     sponesers_id = fields.Many2one(
+        string='Linked to',
         comodel_name='sponesers',
     )
     maid_country_id = fields.Many2one(
@@ -68,6 +69,7 @@ class tickets(models.Model):
         tracking=True,
     )
     maid_marital_status = fields.Selection(
+        string='Marital Status',
         selection=[
             ('single', 'Single'),
             ('married', 'Married'),
@@ -77,6 +79,7 @@ class tickets(models.Model):
         tracking=True,
     )
     maid_religion = fields.Selection(
+        string='Religion',
         selection=[
             ('Baha i', 'Baha i'),
             ('Buddhism', 'Buddhism'),
@@ -94,29 +97,29 @@ class tickets(models.Model):
         tracking=True,
     )
     maid_gender = fields.Selection(
-        [
+        string='Gender',
+        selection=[
             ('male', 'Male'),
             ('female', 'Female'),
         ],
         tracking=True,
     )
     company_id = fields.Many2one(
-        comodel_name='res.company',
         string='Company',
+        comodel_name='res.company',
         change_default=True,
         default=lambda self: self.env.company,
         required=False,
-        readonly=True,
     )
     user_id = fields.Many2one(
-        comodel_name='res.users',
         string="Sales/Operation Man",
+        comodel_name='res.users',
         required=True,
         tracking=True,
     )
     currency_id = fields.Many2one(
-        comodel_name='res.currency',
         string='Currency',
+        comodel_name='res.currency',
         related='company_id.currency_id',
         readonly=True,
         ondelete='set null',
