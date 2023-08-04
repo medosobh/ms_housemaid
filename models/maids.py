@@ -206,29 +206,32 @@ class maidslogs(models.Model):
     visa_no = fields.Char(
         string='Visa No.',
         default=lambda self: _('new'),
-        index=True,
         required=True,
         tracking=True
     )
     contract_no = fields.Char(
         string='Contract No.',
         default=lambda self: _('new'),
-        index=True,
         required=True,
-        tracking=True
+        tracking=True,
     )
     start_contract = fields.Date(
         string='Start Date',
         default=fields.Date.context_today,
-        tracking=True
+        tracking=True,
     )
     end_contract = fields.Date(
         string='End Date',
         default=fields.Date.context_today,
-        tracking=True
+        tracking=True,
     )
     maids_id = fields.Many2one(
         string='Maids',
         comodel_name='housemaid.maids',
-        tracking=True
+        tracking=True,
+    )
+    active = fields.Boolean(
+        string="Active",
+        default=True,
+        tracking=True,
     )

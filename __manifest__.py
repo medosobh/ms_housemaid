@@ -21,6 +21,7 @@
         'views/offices.xml',
         'views/maids.xml',
         'views/sponsers.xml',
+        'views/tickets.xml',
     ],
     'demo': [
         ''

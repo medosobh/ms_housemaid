@@ -1,14 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="housemaid_maids_form" model="ir.ui.view">
-        <field name="name">housemaid_maids.form</field>
-        <field name="model">housemaid_maids</field>
-        <field name="arch" type="xml">
-            <form string="">
-                <header>
-                </header>
+    <record id="housemaid_tickets_form"
+        model="ir.ui.view">
+        <field name="name">housemaid.tickets.form</field>
+        <field name="model">housemaid.tickets</field>
+        <field name="arch"
+            type="xml">
+            <form string="Ticket">
                 <sheet>
-
+                    <div>
+                        <group name="tickets_ticket"
+                            string="Ticket">
+                            <field name="code" class="oe_inline"/>
+                            <field name="state" class="oe_inline"/>
+                            <field name="ticket_type" class="oe_inline"/>
+                        </group>
+                    </div>
+                    <div>
+                        <group name="tickets_sponser"
+                            string="Sponser info">
+                            <field name="sponser_name" class="oe_inline"/>
+                            <field name="sponser_phone" class="oe_inline"/>
+                            <field name="sponsers_id" class="oe_inline"/>
+                        </group>
+                    </div>
+                    <div>
+                        <group name="tickets_maid"
+                            string="Maid Requirements">
+                            <field name="country_id" class="oe_inline"/>
+                            <field name="maid_marital_status" class="oe_inline"/>
+                            <field name="maid_religion" class="oe_inline"/>
+                            <field name="maid_gender" class="oe_inline"/>
+                        </group>
+                    </div>
                 </sheet>
                 <div class="oe_chatter">
                     <field name="message_follower_ids"/>
@@ -19,35 +43,81 @@
         </field>
     </record>
 
-    <record id="housemaid_maids_tree" model="ir.ui.view">
-        <field name="name">housemaid_maids.tree</field>
-        <field name="model">housemaid_maids</field>
-        <field name="arch" type="xml">
-            <tree string="">
-
+    <record id="housemaid_tickets_tree"
+        model="ir.ui.view">
+        <field name="name">housemaid.tickets.tree</field>
+        <field name="model">housemaid.tickets</field>
+        <field name="arch"
+            type="xml">
+            <tree string="Tickets List">
+                <field name="sponser_name"/>
+                <field name="sponser_phone"/>
+                <field name="sponsers_id"/>
+                <field name="country_id"/>
+                <field name="maid_marital_status"/>
+                <field name="maid_religion"/>
+                <field name="maid_gender"/>
             </tree>
         </field>
     </record>
 
-    <record id="housemaid_maids_search" model="ir.ui.view">
-        <field name="name">housemaid_maids.search</field>
-        <field name="model">housemaid_maids</field>
-        <field name="arch" type="xml">
-            <search string="">
-
+    <record id="housemaid_tickets_search"
+        model="ir.ui.view">
+        <field name="name">housemaid.tickets.search</field>
+        <field name="model">housemaid.tickets</field>
+        <field name="arch"
+            type="xml">
+            <search string="Tickets List">
+                <field name="company_id"
+                    widget="selection"/>
+                <field name="user_id"
+                    widget="selection"/>
+                <field name="country_id"
+                    widget="selection"/>
+                <filter name="filter_archived"
+                    string="Archived"
+                    domain="[('active', '=', False)]"/>
+                <group expand="0"
+                    string="Group by">
+                    <filter string="Company"
+                        name="group_by_company_id"
+                        context="{'group_by':'company_id'}"/>
+                    <filter string="Sales Man"
+                        name="group_by_user"
+                        context="{'group_by':'user_id'}"/>
+                    <filter string="Country"
+                        name="group_by_country_id"
+                        context="{'group_by':'country_id'}"/>
+                </group>
+                <searchpanel>
+                    <field name="company_id"
+                        select="multi"
+                        string="Relative Company"
+                        enable_counters="1"/>
+                    <field name="country_id"
+                        select="multi"
+                        string="Relative Country"
+                        enable_counters="1"/>
+                </searchpanel>
             </search>
         </field>
     </record>
 
-    <record id="housemaid_maids_action" model="ir.actions.act_window">
-        <field name="name">housemaid_maids.action</field>
-        <field name="res_model">housemaid_maids</field>
-        <field name="view_type">form</field>
+    <record id="housemaid_tickets_action"
+        model="ir.actions.act_window">
+        <field name="name">Tickets</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">housemaid.tickets</field>
         <field name="view_mode">tree,form</field>
-        <field name="help" type="html">
-            <p class="o_view_nocontent_smiling_face">Create your first maid!</p>
+        <field name="help"
+            type="html">
+            <p class="o_view_nocontent_smiling_face">Create your first ticket!</p>
         </field>
     </record>
 
-    <menuitem id="housemaid_maids_menu" name="Maids" action="" parent="" sequence=""/>
+    <menuitem id="housemaid_tickets_menu"
+        name="Tickets"
+        action="housemaid_tickets_action"
+        parent="housemaid_menu_tickets"
+        sequence="21"/>
 </odoo>
