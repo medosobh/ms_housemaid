@@ -33,6 +33,7 @@ class maids(models.Model):
         ],
         default='draft',
         readonly=True,
+        tracking=True,
     )
     skills = fields.Selection(
         selection=[
@@ -42,63 +43,65 @@ class maids(models.Model):
             ('3', 'Very High')
         ],
         string="Skills",
-        help='Set the overall skills level.')
+        help='Set the overall skills level.',
+        tracking=True,
+    )
     code = fields.Char(
         string='Code',
         default=lambda self: _('New'),
         required=True,
-        tracking=True
+        tracking=True,
     )
     phone = fields.Char(
         string='Phone',
         required=True,
         index=True,
-        tracking=True
+        tracking=True,
     )
     name = fields.Char(
         string='Name',
         default=lambda self: _('New'),
         required=True,
-        tracking=True
+        tracking=True,
     )
     email = fields.Char(
         string='email',
         required=True,
         default=lambda self: _('name@mail.com'),
-        tracking=True
+        tracking=True,
     )
     image_1920 = fields.Image(
-        default=_default_image
+        default=_default_image,
     )
     identity = fields.Char(
         string='National Identity',
         required=True,
-        tracking=True
+        tracking=True,
     )
     passport_no = fields.Char(
         string='Passport No.',
         required=True,
-        tracking=True
+        tracking=True,
     )
     place_of_birth = fields.Char(
         string='Place of birth',
         required=True,
-        tracking=True
+        tracking=True,
     )
     birthday = fields.Date(
         string='Birthday',
         default=fields.Date.context_today,
-        tracking=True
+        tracking=True,
     )
     gender = fields.Selection(
-        [
+        selection=[
             ('male', 'Male'),
             ('female', 'Female'),
         ],
-        tracking=True
+        tracking=True,
     )
     religion = fields.Selection(
-        [
+        selection=[
             ('Baha i', 'Baha i'),
             ('Buddhism', 'Buddhism'),
             ('Christianity', 'Christianity'),
@@ -111,36 +114,37 @@ class maids(models.Model):
             ('Sikhism', 'Sikhism'),
             ('Taoism', 'Taoism'),
             ('Zoroastrianism', 'Zoroastrianism'),
-        ]
+        ],
+        tracking=True,
     )
     marital_status = fields.Selection(
-        [
+        selection=[
             ('single', 'Single'),
             ('married', 'Married'),
             ('widowed', 'Widowed'),
             ('divorced', 'Divorced'),
         ],
-        tracking=True
+        tracking=True,
     )
     country_id = fields.Many2one(
         string="Country",
         comodel_name='res.country',
         help="Country of Office.",
-        tracking=True
+        tracking=True,
     )
     partner_id = fields.Many2one(
         comodel_name='res.partner',
         string='Partner',
-        tracking=True
+        tracking=True,
     )
     description = fields.Text(
         string='Description',
-        tracking=True
+        tracking=True,
     )
     active = fields.Boolean(
         string="Active",
         default=True,
-        tracking=True
+        tracking=True,
     )
     company_id = fields.Many2one(
         comodel_name='res.company',
@@ -149,7 +153,7 @@ class maids(models.Model):
         default=lambda self: self.env.company,
         required=False,
         readonly=True,
-        tracking=True
+        tracking=True,
     )
     user_id = fields.Many2one(
         comodel_name='res.users',
@@ -164,13 +168,13 @@ class maids(models.Model):
         readonly=True,
         ondelete='set null',
         help="Used to display the currency when tracking monetary values",
-        tracking=True
+        tracking=True,
     )
     maidslogs_ids = fields.One2many(
         comodel_name='housemaid.maidslogs',
         inverse_name='maids_id',
         string="History",
-        tracking=True
+        tracking=True,
     )
 
 

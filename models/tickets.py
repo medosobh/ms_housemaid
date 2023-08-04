@@ -16,7 +16,8 @@ class tickets(models.Model):
         string='Name',
         required=True,
         default=lambda self: _('New'),
-        copy=False
+        copy=False,
+        tracking=True,
     )
     # path of state mixed between sales & operation based on ticket type
     state = fields.Selection(
@@ -36,8 +37,8 @@ class tickets(models.Model):
             ('closed', 'Ticket Closed'),
 
         ],
-
         default='draft',
+        tracking=True,
     )
     ticket_type = fields.Selection(
         string='field_name',
@@ -46,16 +47,66 @@ class tickets(models.Model):
             ('search', 'Operation Search!'),
             ('toconfirm', 'Operation Confirming!'),
             ('tohire', 'Operation Hiring!'),
-        ]
+        ],  
+        tracking=True,
     )
-
+    sponser_name = fields.Char(
+        string='Name',
+        tracking=True,
+    )
+    sponser_phone = fields.Char(
+        string='Name',
+        tracking=True,
+    )
+    sponesers_id = fields.Many2one(
+        comodel_name='sponesers',
+    )
+    maid_country_id = fields.Many2one(
+        string="Country",
+        comodel_name='res.country',
+        help="Country of Office.",
+        tracking=True,
+    )
+    maid_marital_status = fields.Selection(
+        selection=[
+            ('single', 'Single'),
+            ('married', 'Married'),
+            ('widowed', 'Widowed'),
+            ('divorced', 'Divorced'),
+        ],
+        tracking=True,
+    )
+    maid_religion = fields.Selection(
+        selection=[
+            ('Baha i', 'Baha i'),
+            ('Buddhism', 'Buddhism'),
+            ('Christianity', 'Christianity'),
+            ('Confucianism', 'Confucianism'),
+            ('Hinduism', 'Hinduism'),
+            ('Islam', 'Islam'),
+            ('Jainism', 'Jainism'),
+            ('Judaism', 'Judaism'),
+            ('Shinto', 'Shinto'),
+            ('Sikhism', 'Sikhism'),
+            ('Taoism', 'Taoism'),
+            ('Zoroastrianism', 'Zoroastrianism'),
+        ],
+        tracking=True,
+    )
+    maid_gender = fields.Selection(
+        [
+            ('male', 'Male'),
+            ('female', 'Female'),
+        ],
+        tracking=True,
+    )
     company_id = fields.Many2one(
         comodel_name='res.company',
         string='Company',
         change_default=True,
         default=lambda self: self.env.company,
         required=False,
-        readonly=True
+        readonly=True,
     )
     user_id = fields.Many2one(
         comodel_name='res.users',
@@ -69,5 +120,5 @@ class tickets(models.Model):
         related='company_id.currency_id',
         readonly=True,
         ondelete='set null',
-        help="Used to display the currency when tracking monetary values"
+        help="Used to display the currency when tracking monetary values",
     )
