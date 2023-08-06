@@ -23,8 +23,8 @@
                             options="{&quot;preview_image&quot;: &quot;avatar_128&quot;}"/>
                     </div>
                     <div class="oe_title">
-                        <group name="maids_title"
-                            string="Title">
+                        <group name="maids_main"
+                            string="Main Information">
                             <field name="offices_id"/>
                             <field name="code"/>
                             <field name="name"/>

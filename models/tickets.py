@@ -182,7 +182,7 @@ class tickets(models.Model):
     )
     age = fields.Integer(
         string='Age in Years',
-        compute='_get_age',
+        required=False,
         tracking=True,
     )
     hight = fields.Float(
@@ -300,6 +300,7 @@ class tickets(models.Model):
         maids_dict = self.env['housmaid.maids'].search([
             ('state', '!=', 'backout'),
             ('ticket_id', '!=', True),
+            ('active', '=', True),
         ])
         # maids_dict = maids_dict.search([
         #     ('monthly_salary', '=', self.monthly_salary),

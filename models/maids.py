@@ -345,12 +345,12 @@ class maids(models.Model):
 class maidslogs(models.Model):
     _name = 'housemaid.maidslogs'
     _description = 'Maids Logs Records.'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
 
     date = fields.Char(
         string='Date',
         required=True,
         default=datetime.today(),
-        copy=False,
         tracking=True
     )
     state = fields.Selection(
