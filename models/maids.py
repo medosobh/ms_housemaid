@@ -22,7 +22,19 @@ class maids(models.Model):
         image_path = get_module_resource(
             'ms_housemaid', 'static/img', 'maid.png')
         return base64.b64encode(open(image_path, 'rb').read())
+
     
+    @api.depends('name', 'code')
+    def name_get(self):
+        result = []
+        for record in self:
+            if record.code:
+                name = '[' + record.code + '] ' + record.name
+            else:
+                name = record.name
+            result.append((record.id, name))
+        return result
+
     @api.depends('birthday')
     def _get_age(self):
         self.ensure_one()
@@ -32,9 +44,13 @@ class maids(models.Model):
             raise UserError('Please define birthday for current maid')
         else:
             self.age = (date.today().year - self.birthday.year)
-                
+
         return self.age
 
+    ticket_id = fields.Many2one(
+        comodel_name='housemaid.tickets',
+        string='Ticket no.',
+    )
     state = fields.Selection(
         string='State',
         selection=[
@@ -219,7 +235,7 @@ class maids(models.Model):
     )
     hight = fields.Float(
         string='Hight in feet,inch',
-        digits=(2,1),
+        digits=(2, 1),
         required=False,
         tracking=True,
     )

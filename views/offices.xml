@@ -16,13 +16,15 @@
 							options="{&quot;preview_image&quot;: &quot;avatar_128&quot;}"/>
 					</div>
 					<div class="oe_title">
-							<group name="offices_title"
-                            string="Title">
-								<field name="code"/>
-								<field name="name"/>
-								<field name="phone"/>
-								<field name="email" widget="email"/>
-							</group>
+						<group name="offices_title"
+							string="Title">
+							<field name="code"/>
+							<field name="name"/>
+							<field name="phone"
+								widget="phone"/>
+							<field name="email"
+								widget="email"/>
+						</group>
 					</div>
 					<group name="offices_main"
 						string="Office">

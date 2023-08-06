@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="maids_search_result_list"
+        model="ir.ui.view">
+        <field name="name">maids.search.result.list</field>
+        <field name="model">housemaid.maids</field>
+        <field name="arch"
+            type="xml">
+            <field name="search_result_list"
+                widget="list"
+                string="Search Results">
+
+                <field name="state"/>
+
+                <field name="monthly_salary" />
+                <field name="currency_id"
+                    groups="base.group_multi_currency" />
+                <field name="contract_period" />
+
+                <field name="arabic_lang" />
+                <field name="english_lang" />
+                <field name="education"/>
+
+                <field name="country_id"/>
+                <field name="religion"/>
+                <field name="gender"/>
+                <field name="children_no"/>
+                <field name="marital_status"/>
+
+                <field name="skin_color"/>
+                <field name="age"/>
+                <field name="hight"/>
+                <field name="weight"/>
+
+                <field name="skills_cleaning" />
+                <field name="skills_arabic_cooking" />
+                <field name="skills_baby_sitting" />
+                <field name="skills_washing" />
+                <field name="skills_ironing" />
+            </field>
+        </field>
+    </record>
+</odoo>

@@ -22,6 +22,17 @@ class sponsers(models.Model):
             'ms_housemaid', 'static/img', 'sponser.png')
         return base64.b64encode(open(image_path, 'rb').read())
 
+    @api.depends('name', 'code')
+    def name_get(self):
+        result = []
+        for record in self:
+            if record.code:
+                name = '[' + record.code + '] ' + record.name
+            else:
+                name = record.name
+            result.append((record.id, name))
+        return result
+
     code = fields.Char(
         string='Code',
         required=True,
