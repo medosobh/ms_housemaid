@@ -12,6 +12,13 @@ class tickets(models.Model):
     ]
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
+    @api.model
+    def create(self, vals):
+        if not vals.get('code') or vals['code'] == _('New'):
+            vals['code'] = self.env['ir.sequence'].next_by_code(
+                'housemaid.sales.tickets') or _('New')
+        return super(tickets, self).create(vals)
+
     @api.depends('name', 'code')
     def name_get(self):
         result = []
@@ -27,7 +34,7 @@ class tickets(models.Model):
         string='Code',
         required=True,
         default=lambda self: _('New'),
-        copy=False,
+        index=True,
         tracking=True,
     )
     # path of state mixed between sales & operation based on ticket type
@@ -253,7 +260,7 @@ class tickets(models.Model):
         tracking=True,
     )
     country_id = fields.Many2one(
-        string="Maid Country",
+        string="Country",
         comodel_name='res.country',
         help="Country of Office.",
         tracking=True,
@@ -280,30 +287,26 @@ class tickets(models.Model):
     maids_ids = fields.Many2many(
         comodel_name='housemaid.maids',
         compute='_search_maids',
+        store=True,
         string='Maids Search Result',
     )
 
-    @api.model
-    def create(self, vals):
-        if not vals.get('code') or vals['code'] == _('New'):
-            if vals.get('ticket_type') == _('sales'):
-                vals['code'] = self.env['ir.sequence'].next_by_code(
-                    'housemaid.sales.tickets') or _('New')
-            else:
-                vals['code'] = self.env['ir.sequence'].next_by_code(
-                    'housemaid.operation.tickets') or _('New')
-
-        return super(tickets, self).create(vals)
-
-    @api.model
-    def _search_maids(self, vals):
-        maids_dict = self.env['housmaid.maids'].search([
-            ('state', '!=', 'backout'),
-            ('ticket_id', '!=', True),
-            ('active', '=', True),
-        ])
-        # maids_dict = maids_dict.search([
-        #     ('monthly_salary', '=', self.monthly_salary),
-        # ], limit=5)
-        self.maids_ids = maids_dict
-        return self.maids_ids
+    @api.onchange('country_id','monthly_salary')
+    def _search_maids(self):
+        maids_ids = self.env['housemaid.maids'].search(
+            [
+                ('state', '!=', 'backout'),
+                ('ticket_id', '=', False),
+                ('active', '=', True),
+            ])
+        if self.country_id != '':
+            maids_ids.filtered(lambda maids: maids.country_id == self.country_id)
+        else:
+            maids_ids
+            
+        if self.monthly_salary == 0:
+            maids_ids.filtered(lambda maids: maids.monthly_salary == self.monthly_salary)
+        else:
+            maids_ids
+        
+        self.maids_ids = [(6, 0, maids_ids.ids)]
