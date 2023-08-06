@@ -12,6 +12,17 @@ class tickets(models.Model):
     ]
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
+    @api.depends('name', 'code')
+    def name_get(self):
+        result = []
+        for record in self:
+            if record.code:
+                name = '[' + record.code + '] ' + record.name
+            else:
+                name = record.name
+            result.append((record.id, name))
+        return result
+
     code = fields.Char(
         string='Code',
         required=True,
@@ -176,7 +187,7 @@ class tickets(models.Model):
     )
     hight = fields.Float(
         string='Hight in feet,inch',
-        digits=(2,1),
+        digits=(2, 1),
         required=False,
         tracking=True,
     )
@@ -266,6 +277,11 @@ class tickets(models.Model):
         default=True,
         tracking=True,
     )
+    maids_ids = fields.Many2many(
+        comodel_name='housemaid.maids',
+        compute='_search_maids',
+        string='Maids Search Result',
+    )
 
     @api.model
     def create(self, vals):
@@ -278,3 +294,15 @@ class tickets(models.Model):
                     'housemaid.operation.tickets') or _('New')
 
         return super(tickets, self).create(vals)
+
+    @api.model
+    def _search_maids(self, vals):
+        maids_dict = self.env['housmaid.maids'].search([
+            ('state', '!=', 'backout'),
+            ('ticket_id', '!=', True),
+        ])
+        # maids_dict = maids_dict.search([
+        #     ('monthly_salary', '=', self.monthly_salary),
+        # ], limit=5)
+        self.maids_ids = maids_dict
+        return self.maids_ids

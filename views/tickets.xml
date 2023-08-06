@@ -30,8 +30,10 @@
                             <field name="name"
                                 class="oe_inline"/>
                             <field name="sponser_phone"
+                                widget="phone"
                                 class="oe_inline"/>
                             <field name="sponser_email"
+                                widget="email"
                                 class="oe_inline"/>
                             <field name="sponsers_id"
                                 class="oe_inline"/>
@@ -104,6 +106,16 @@
                             </group>
                         </group>
                     </div>
+                    <notebook>
+                        <page name="search"
+                            string="Search Result">
+                            <field name="maids_ids" />
+                        </page>
+                        <page name="maid_hired"
+                            string="Maid Hired">
+
+                        </page>
+                    </notebook>
                 </sheet>
                 <div class="oe_chatter">
                     <field name="message_follower_ids"/>
@@ -128,6 +140,8 @@
                 <field name="sponser_phone"/>
                 <field name="sponser_email"/>
                 <field name="sponsers_id"/>
+                <field name="activity_ids"
+                    widget="list_activity"/>
                 <field name="monthly_salary"/>
                 <field name="currency_id"
                     groups="base.group_multi_currency"/>

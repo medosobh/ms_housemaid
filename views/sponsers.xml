@@ -20,8 +20,10 @@
                             string="Title">
                             <field name="code"/>
                             <field name="name"/>
-                            <field name="phone"/>
-                            <field name="email"/>
+                            <field name="phone"
+                                widget="phone"/>
+                            <field name="email"
+                                widget="email"/>
                         </group>
                     </div>
                     <group name="sponsers_main"
