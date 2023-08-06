@@ -106,6 +106,16 @@
                             </group>
                         </group>
                     </div>
+                    <notebook>
+                        <page name="search"
+                            string="Search Result">
+                            <field name="maids_ids"/>
+                        </page>
+                        <page name="maid_hired"
+                            string="Maid Hired">
+
+                        </page>
+                    </notebook>
                 </sheet>
                 <div class="oe_chatter">
                     <field name="message_follower_ids"/>
