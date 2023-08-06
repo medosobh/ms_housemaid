@@ -51,36 +51,78 @@ class tickets(models.Model):
         tracking=True,
     )
     name = fields.Char(
-        string='Sponser Name',
+        string='Name',
         tracking=True,
     )
     sponser_phone = fields.Char(
-        string='Sponser Phone',
+        string='Phone',
+        tracking=True,
+    )
+    sponser_email = fields.Char(
+        string='Email',
         tracking=True,
     )
     sponsers_id = fields.Many2one(
         'housemaid.sponsers',
-        string='Sponsers',
+        string='Link to Sponser',
         tracking=True,
     )
     # maid search data
-    country_id = fields.Many2one(
-        string="Maid Country",
-        comodel_name='res.country',
-        help="Country of Office.",
+    monthly_salary = fields.Monetary(
+        string='Monthly Salary',
+        currency_field='currency_id',
+        required=False,
+        tracking=True
+    )
+    currency_id = fields.Many2one(
+        string='Currency',
+        comodel_name='res.currency',
+        related='company_id.currency_id',
+        readonly=True,
+        ondelete='set null',
+        help="Used to display the currency when tracking monetary values",
         tracking=True,
     )
-    maid_marital_status = fields.Selection(
-        string='Marital Status',
+    contract_period = fields.Integer(
+        string='Contract Period in Years',
+        required=False,
+        tracking=True
+    )
+    # ---------------------------
+    arabic_lang = fields.Selection(
         selection=[
-            ('single', 'Single'),
-            ('married', 'Married'),
-            ('widowed', 'Widowed'),
-            ('divorced', 'Divorced'),
+            ('0', 'Normal'),
+            ('1', 'Low'),
+            ('2', 'High'),
+            ('3', 'Very High'),
         ],
-        tracking=True,
+        string="Arabic Language",
+        help='Set the level language'
     )
-    maid_religion = fields.Selection(
+    english_lang = fields.Selection(
+        selection=[
+            ('0', 'Normal'),
+            ('1', 'Low'),
+            ('2', 'High'),
+            ('3', 'Very High'),
+        ],
+        string="English Language",
+        help='Set the level language'
+    )
+    education = fields.Selection(
+        selection=[
+            ('no', 'No'),
+            ('basic', 'Read and Write'),
+            ('low', 'less then high school'),
+            ('mid', 'high school diploma'),
+            ('mid2', 'collage no dgree'),
+            ('mid3', 'collage dgree'),
+        ],
+        string="Education level",
+        help='Set the Education level',
+    )
+    # ----------------------------------------------
+    religion = fields.Selection(
         string='Religion',
         selection=[
             ('Baha i', 'Baha i'),
@@ -98,12 +140,111 @@ class tickets(models.Model):
         ],
         tracking=True,
     )
-    maid_gender = fields.Selection(
+    gender = fields.Selection(
         string='Gender',
         selection=[
             ('male', 'Male'),
             ('female', 'Female'),
         ],
+        tracking=True,
+    )
+    children_no = fields.Integer(
+        string='children No',
+        required=False,
+        tracking=True,
+    )
+    marital_status = fields.Selection(
+        string='Marital Status',
+        selection=[
+            ('single', 'Single'),
+            ('married', 'Married'),
+            ('widowed', 'Widowed'),
+            ('divorced', 'Divorced'),
+        ],
+        tracking=True,
+    )
+    # ----------------------------
+    skin_color = fields.Char(
+        string='Skin Color',
+        required=False,
+        tracking=True,
+    )
+    age = fields.Integer(
+        string='Age in Years',
+        compute='_get_age',
+        tracking=True,
+    )
+    hight = fields.Float(
+        string='Hight in feet,inch',
+        digits=(2,1),
+        required=False,
+        tracking=True,
+    )
+    weight = fields.Char(
+        string='Weight in kg',
+        required=False,
+        tracking=True,
+    )
+    # -----------------------------
+    skills_cleaning = fields.Selection(
+        selection=[
+            ('0', 'Normal'),
+            ('1', 'Low'),
+            ('2', 'High'),
+            ('3', 'Very High')
+        ],
+        string="Cleaning",
+        help='Set the overall skills level.',
+        tracking=True,
+    )
+    skills_arabic_cooking = fields.Selection(
+        selection=[
+            ('0', 'Normal'),
+            ('1', 'Low'),
+            ('2', 'High'),
+            ('3', 'Very High')
+        ],
+        string="Arabic Cooking",
+        help='Set the overall skills level.',
+        tracking=True,
+    )
+    skills_baby_sitting = fields.Selection(
+        selection=[
+            ('0', 'Normal'),
+            ('1', 'Low'),
+            ('2', 'High'),
+            ('3', 'Very High')
+        ],
+        string="Baby Sitting",
+        help='Set the overall skills level.',
+        tracking=True,
+    )
+    skills_washing = fields.Selection(
+        selection=[
+            ('0', 'Normal'),
+            ('1', 'Low'),
+            ('2', 'High'),
+            ('3', 'Very High')
+        ],
+        string="Washing",
+        help='Set the overall skills level.',
+        tracking=True,
+    )
+    skills_ironing = fields.Selection(
+        selection=[
+            ('0', 'Normal'),
+            ('1', 'Low'),
+            ('2', 'High'),
+            ('3', 'Very High')
+        ],
+        string="Ironing",
+        help='Set the overall skills level.',
+        tracking=True,
+    )
+    country_id = fields.Many2one(
+        string="Maid Country",
+        comodel_name='res.country',
+        help="Country of Office.",
         tracking=True,
     )
     company_id = fields.Many2one(
@@ -118,15 +259,6 @@ class tickets(models.Model):
         string="Sales/Operation Man",
         comodel_name='res.users',
         required=True,
-        tracking=True,
-    )
-    currency_id = fields.Many2one(
-        string='Currency',
-        comodel_name='res.currency',
-        related='company_id.currency_id',
-        readonly=True,
-        ondelete='set null',
-        help="Used to display the currency when tracking monetary values",
         tracking=True,
     )
     active = fields.Boolean(

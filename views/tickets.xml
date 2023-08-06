@@ -7,7 +7,7 @@
         <field name="arch"
             type="xml">
             <form string="Ticket">
-            <header>
+                <header>
                     <field name="state"
                         widget="statusbar"
                         options="{'clickable': '1'}"
@@ -15,36 +15,93 @@
                         type="object"/>
                 </header>
                 <sheet>
-                    <div class="oe_title oe_inline">
+                    <div class="oe_title">
                         <group name="tickets_ticket"
                             string="Ticket">
                             <field name="code"
                                 class="oe_inline"/>
-                            <field name="ticket_type"/>
+                            <field name="ticket_type"
+                                class="oe_inline"/>
                         </group>
                     </div>
-                    <div class="oe_title oe_inline">
+                    <div>
                         <group name="tickets_sponser"
-                            string="Sponser info">
+                            string="Sponser information">
                             <field name="name"
                                 class="oe_inline"/>
                             <field name="sponser_phone"
+                                class="oe_inline"/>
+                            <field name="sponser_email"
                                 class="oe_inline"/>
                             <field name="sponsers_id"
                                 class="oe_inline"/>
                         </group>
                     </div>
-                    <div class="oe_title oe_inline">
+                    <div>
                         <group name="tickets_maid"
                             string="Maid Requirements">
-                            <field name="country_id"
-                                class="oe_inline"/>
-                            <field name="maid_marital_status"
-                                class="oe_inline"/>
-                            <field name="maid_religion"
-                                class="oe_inline"/>
-                            <field name="maid_gender"
-                                class="oe_inline"/>
+                            <group name="maids_basic"
+                                string="Salary and Contract">
+                                <field name="monthly_salary"
+                                    class="oe_inline"/>
+                                <field name="currency_id"
+                                    groups="base.group_multi_currency"
+                                    class="oe_inline"/>
+                                <field name="contract_period"
+                                    class="oe_inline"/>
+                            </group>
+                            <group name="education"
+                                string="Language and Education">
+                                <field name="arabic_lang"
+                                    widget="radio"
+                                    options="{'horizontal': True}"/>
+                                <field name="english_lang"
+                                    widget="radio"
+                                    options="{'horizontal': True}"/>
+                                <field name="education"/>
+                            </group>
+                            <group name="personal"
+                                string="Information">
+                                <field name="country_id"/>
+                                <field name="religion"/>
+                                <field name="gender"/>
+                                <field name="children_no"/>
+                                <field name="marital_status"/>
+                            </group>
+                            <group name="attribute"
+                                string="Attribute">
+                                <field name="skin_color"/>
+                                <field name="age"/>
+                                <field name="hight"/>
+                                <field name="weight"/>
+                            </group>
+                            <group name="skills"
+                                string="Skills">
+                                <field name="skills_cleaning"
+                                    widget="radio"
+                                    options="{'horizontal': True}"/>
+                                <field name="skills_arabic_cooking"
+                                    widget="radio"
+                                    options="{'horizontal': True}"/>
+                                <field name="skills_baby_sitting"
+                                    widget="radio"
+                                    options="{'horizontal': True}"/>
+                                <field name="skills_washing"
+                                    widget="radio"
+                                    options="{'horizontal': True}"/>
+                                <field name="skills_ironing"
+                                    widget="radio"
+                                    options="{'horizontal': True}"/>
+                            </group>
+                            <group name="operation"
+                                string="Operation">
+                                <field name="company_id"
+                                    groups="base.group_multi_company"/>
+                                <field name="user_id"
+                                    widget="selection"/>
+                                <field name="active"
+                                    invisible="1"/>
+                            </group>
                         </group>
                     </div>
                 </sheet>
@@ -65,13 +122,21 @@
             type="xml">
             <tree string="Tickets List"
                 sample="1">
+                <field name="code"/>
+                <field name="state"/>
                 <field name="name"/>
                 <field name="sponser_phone"/>
+                <field name="sponser_email"/>
                 <field name="sponsers_id"/>
+                <field name="monthly_salary"/>
+                <field name="currency_id"
+                    groups="base.group_multi_currency"/>
+                <field name="contract_period"/>
                 <field name="country_id"/>
-                <field name="maid_marital_status"/>
-                <field name="maid_religion"/>
-                <field name="maid_gender"/>
+                <field name="religion"/>
+                <field name="gender"/>
+                <field name="children_no"/>
+                <field name="marital_status"/>
             </tree>
         </field>
     </record>
@@ -94,6 +159,9 @@
                     domain="[('active', '=', False)]"/>
                 <group expand="0"
                     string="Group by">
+                    <filter string="State"
+                        name="group_by_state"
+                        context="{'group_by':'state'}"/>
                     <filter string="Company"
                         name="group_by_company_id"
                         context="{'group_by':'company_id'}"/>

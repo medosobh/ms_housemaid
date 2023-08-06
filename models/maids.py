@@ -86,6 +86,14 @@ class maids(models.Model):
         required=False,
         tracking=True
     )
+    currency_id = fields.Many2one(
+        string='Currency',
+        comodel_name='res.currency',
+        related='company_id.currency_id',
+        ondelete='set null',
+        help="Used to display the currency when tracking monetary values",
+        tracking=True,
+    )
     contract_period = fields.Integer(
         string='Contract Period in Years',
         required=False,
@@ -209,8 +217,9 @@ class maids(models.Model):
         compute='_get_age',
         tracking=True,
     )
-    hight = fields.Char(
-        string='Hight in cm',
+    hight = fields.Float(
+        string='Hight in feet,inch',
+        digits=(2,1),
         required=False,
         tracking=True,
     )
@@ -220,23 +229,12 @@ class maids(models.Model):
         tracking=True,
     )
     # -----------------------------
-    country_id = fields.Many2one(
-        string="Country",
-        comodel_name='res.country',
-        help="Country of Office.",
-        tracking=True,
-    )
-    partner_id = fields.Many2one(
-        string='Partner',
-        comodel_name='res.partner',
-        tracking=True,
-    )
     skills_cleaning = fields.Selection(
         selection=[
             ('0', 'Normal'),
             ('1', 'Low'),
             ('2', 'High'),
-            ('3', 'Very High')
+            ('3', 'Very High'),
         ],
         string="Cleaning",
         help='Set the overall skills level.',
@@ -286,13 +284,19 @@ class maids(models.Model):
         help='Set the overall skills level.',
         tracking=True,
     )
-    description = fields.Text(
-        string='Description',
+    country_id = fields.Many2one(
+        string="Country",
+        comodel_name='res.country',
+        help="Country of Office.",
         tracking=True,
     )
-    active = fields.Boolean(
-        string="Active",
-        default=True,
+    partner_id = fields.Many2one(
+        string='Partner',
+        comodel_name='res.partner',
+        tracking=True,
+    )
+    description = fields.Text(
+        string='Description',
         tracking=True,
     )
     company_id = fields.Many2one(
@@ -309,18 +313,15 @@ class maids(models.Model):
         required=True,
         tracking=True,
     )
-    currency_id = fields.Many2one(
-        string='Currency',
-        comodel_name='res.currency',
-        related='company_id.currency_id',
-        ondelete='set null',
-        help="Used to display the currency when tracking monetary values",
-        tracking=True,
-    )
     maidslogs_ids = fields.One2many(
         string="History",
         comodel_name='housemaid.maidslogs',
         inverse_name='maids_id',
+        tracking=True,
+    )
+    active = fields.Boolean(
+        string="Active",
+        default=True,
         tracking=True,
     )
 
