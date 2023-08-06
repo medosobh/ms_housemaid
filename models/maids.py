@@ -22,40 +22,44 @@ class maids(models.Model):
         image_path = get_module_resource(
             'ms_housemaid', 'static/img', 'maid.png')
         return base64.b64encode(open(image_path, 'rb').read())
+    
+    @api.depends('birthday')
+    def _get_age(self):
+        self.ensure_one()
+        if not self.birthday:
+            self.age = 0
+        elif not self.birthday:
+            raise UserError('Please define birthday for current maid')
+        else:
+            self.age = (date.today().year - self.birthday.year)
+                
+        return self.age
 
     state = fields.Selection(
         string='State',
         selection=[
             ('draft', 'Draft'),
-            ('confirmed', 'Confirmed'),
-            ('close', 'Close'),
-            ('cancel', 'Cancel')
+            ('open', 'Open to Work'),
+            ('backout', 'Backout'),
         ],
         default='draft',
         readonly=True,
         tracking=True,
     )
-    skills = fields.Selection(
-        selection=[
-            ('0', 'Normal'),
-            ('1', 'Low'),
-            ('2', 'High'),
-            ('3', 'Very High')
-        ],
-        string="Skills",
-        help='Set the overall skills level.',
+    offices_id = fields.Many2one(
+        'housemaid.offices',
+        string='Offices',
+        required=True,
+        tracking=True,
+    )
+    image_1920 = fields.Image(
+        default=_default_image,
         tracking=True,
     )
     code = fields.Char(
-        string='Code',
+        string='Office Code',
         default=lambda self: _('New'),
         required=True,
-        tracking=True,
-    )
-    phone = fields.Char(
-        string='Phone',
-        required=True,
-        index=True,
         tracking=True,
     )
     name = fields.Char(
@@ -64,44 +68,85 @@ class maids(models.Model):
         required=True,
         tracking=True,
     )
+    phone = fields.Char(
+        string='Phone',
+        required=False,
+        index=True,
+        tracking=True,
+    )
     email = fields.Char(
         string='email',
-        required=True,
+        required=False,
         default=lambda self: _('name@mail.com'),
         tracking=True,
     )
-    image_1920 = fields.Image(
-        default=_default_image,
-        tracking=True,
+    monthly_salary = fields.Monetary(
+        string='Monthly Salary',
+        currency_field='currency_id',
+        required=False,
+        tracking=True
     )
-    identity = fields.Char(
-        string='National Identity',
-        required=True,
-        tracking=True,
+    contract_period = fields.Integer(
+        string='Contract Period in Years',
+        required=False,
+        tracking=True
     )
+    # ---------------------------
+    arabic_lang = fields.Selection(
+        selection=[
+            ('0', 'Normal'),
+            ('1', 'Low'),
+            ('2', 'High'),
+            ('3', 'Very High'),
+        ],
+        string="Arabic Language",
+        help='Set the level language'
+    )
+    english_lang = fields.Selection(
+        selection=[
+            ('0', 'Normal'),
+            ('1', 'Low'),
+            ('2', 'High'),
+            ('3', 'Very High'),
+        ],
+        string="English Language",
+        help='Set the level language'
+    )
+    education = fields.Selection(
+        selection=[
+            ('no', 'No'),
+            ('basic', 'Read and Write'),
+            ('low', 'less then high school'),
+            ('mid', 'high school diploma'),
+            ('mid2', 'collage no dgree'),
+            ('mid3', 'collage dgree'),
+        ],
+        string="Education level",
+        help='Set the Education level',
+    )
+    # --------------------------------
     passport_no = fields.Char(
         string='Passport No.',
         required=True,
         tracking=True,
     )
-    place_of_birth = fields.Char(
-        string='Place of birth',
+    passport_place = fields.Char(
+        string='Issue Place',
         required=True,
         tracking=True,
     )
-    birthday = fields.Date(
-        string='Birthday',
-        default=fields.Date.context_today,
+    passport_issue_date = fields.Date(
+        string='Issue Date',
+        required=True,
+        default=datetime.today(),
         tracking=True,
     )
-    gender = fields.Selection(
-        string='Gender',
-        selection=[
-            ('male', 'Male'),
-            ('female', 'Female'),
-        ],
+    passport_expire_date = fields.Date(
+        string='Expire Date',
+        required=True,
         tracking=True,
     )
+    # ----------------------------------------------
     religion = fields.Selection(
         string='Religion',
         selection=[
@@ -120,6 +165,29 @@ class maids(models.Model):
         ],
         tracking=True,
     )
+    gender = fields.Selection(
+        string='Gender',
+        selection=[
+            ('male', 'Male'),
+            ('female', 'Female'),
+        ],
+        tracking=True,
+    )
+    children_no = fields.Integer(
+        string='children No',
+        required=False,
+        tracking=True,
+    )
+    birthday = fields.Date(
+        string='Birthday',
+        default=fields.Date.context_today,
+        tracking=True,
+    )
+    place_of_birth = fields.Char(
+        string='Place of Birth',
+        required=True,
+        tracking=True,
+    )
     marital_status = fields.Selection(
         string='Marital Status',
         selection=[
@@ -130,6 +198,29 @@ class maids(models.Model):
         ],
         tracking=True,
     )
+    # ----------------------------
+    skin_color = fields.Char(
+        string='Skin Color',
+        required=False,
+        tracking=True,
+    )
+    age = fields.Integer(
+        string='Age in Years',
+        compute='_get_age',
+        tracking=True,
+    )
+    hight = fields.Char(
+        string='Hight',
+        required=False,
+        tracking=True,
+    )
+    weight = fields.Char(
+        string='Weight',
+        required=False,
+        tracking=True,
+    )
+
+    # -----------------------------
     country_id = fields.Many2one(
         string="Country",
         comodel_name='res.country',
@@ -139,6 +230,61 @@ class maids(models.Model):
     partner_id = fields.Many2one(
         string='Partner',
         comodel_name='res.partner',
+        tracking=True,
+    )
+    skills_cleaning = fields.Selection(
+        selection=[
+            ('0', 'Normal'),
+            ('1', 'Low'),
+            ('2', 'High'),
+            ('3', 'Very High')
+        ],
+        string="Cleaning",
+        help='Set the overall skills level.',
+        tracking=True,
+    )
+    skills_arabic_cooking = fields.Selection(
+        selection=[
+            ('0', 'Normal'),
+            ('1', 'Low'),
+            ('2', 'High'),
+            ('3', 'Very High')
+        ],
+        string="Arabic Cooking",
+        help='Set the overall skills level.',
+        tracking=True,
+    )
+    skills_baby_sitting = fields.Selection(
+        selection=[
+            ('0', 'Normal'),
+            ('1', 'Low'),
+            ('2', 'High'),
+            ('3', 'Very High')
+        ],
+        string="Baby Sitting",
+        help='Set the overall skills level.',
+        tracking=True,
+    )
+    skills_washing = fields.Selection(
+        selection=[
+            ('0', 'Normal'),
+            ('1', 'Low'),
+            ('2', 'High'),
+            ('3', 'Very High')
+        ],
+        string="Washing",
+        help='Set the overall skills level.',
+        tracking=True,
+    )
+    skills_ironing = fields.Selection(
+        selection=[
+            ('0', 'Normal'),
+            ('1', 'Low'),
+            ('2', 'High'),
+            ('3', 'Very High')
+        ],
+        string="Ironing",
+        help='Set the overall skills level.',
         tracking=True,
     )
     description = fields.Text(

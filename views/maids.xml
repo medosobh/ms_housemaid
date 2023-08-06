@@ -8,6 +8,13 @@
         <field name="arch"
             type="xml">
             <form string="Maids">
+                <header>
+                    <field name="state"
+                        widget="statusbar"
+                        options="{'clickable': '0'}"
+                        clickable="True"
+                        type="object"/>
+                </header>
                 <sheet>
                     <div>
                         <field name="image_1920"
@@ -16,25 +23,58 @@
                             options="{&quot;preview_image&quot;: &quot;avatar_128&quot;}"/>
                     </div>
                     <div class="oe_title">
-                            <group name="maids_title"
+                        <group name="maids_title"
                             string="Title">
-                                <field name="code"/>
-                                <field name="name"/>
-                                <field name="phone"/>
-                                <field name="email"/>
-                            </group>
+                            <field name="offices_id"/>
+                            <field name="code"/>
+                            <field name="name"/>
+                            <field name="phone"/>
+                            <field name="email"/>
+                            <field name="monthly_salary"/>
+                            <field name="contract_period"/>
+                        </group>
+                        <group name="education"
+                            string="Language and Education">
+                            <field name="arabic_lang"/>
+                            <field name="english_lang"/>
+                            <field name="education"/>
+                        </group>
                     </div>
                     <group name="maids_main"
                         string="Maids">
                         <group name="basic"
-                            string="Basic">
-                            <field name="identity"/>
+                            string="Passport">
                             <field name="passport_no"/>
-                            <field name="place_of_birth"/>
-                            <field name="birthday"/>
-                            <field name="gender"/>
+                            <field name="passport_place"/>
+                            <field name="passport_issue_date"/>
+                            <field name="passport_expire_date"/>
+                        </group>
+                        <group name="personal"
+                            string="Personal information">
                             <field name="religion"/>
+                            <field name="gender"/>
+                            <field name="children_no"/>
+                            <field name="birthday"/>
+                            <field name="place_of_birth"/>
                             <field name="marital_status"/>
+                        </group>
+                        <group name="attribute"
+                            string="Personal Attribute">
+                            <field name="skin_color"/>
+                            <field name="age"/>
+                            <field name="hight"/>
+                            <field name="weight"/>
+                        </group>
+                        <group name="skills"
+                            string="Personal Skills">
+                            <field name="skills_cleaning"/>
+                            <field name="skills_arabic_cooking"/>
+                            <field name="skills_baby_sitting"/>
+                            <field name="skills_washing"/>
+                            <field name="skills_ironing"/>
+                        </group>
+                        <group name="more"
+                            string="Addtional Information">
                             <field name="country_id"/>
                             <field name="partner_id"/>
                             <field name="description"/>
@@ -49,8 +89,6 @@
                                 widget="selection"/>
                             <field name="currency_id"
                                 groups="base.group_multi_currency"/>
-                            <field name="state"/>
-                            <field name="skills"/>
                         </group>
                     </group>
                     <notebook>
@@ -90,7 +128,6 @@
                 <field name="phone"/>
                 <field name="name"/>
                 <field name="email"/>
-                <field name="identity"/>
                 <field name="passport_no"/>
                 <field name="place_of_birth"/>
                 <field name="birthday"/>
