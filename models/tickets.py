@@ -12,6 +12,10 @@ class tickets(models.Model):
     ]
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 2cd72bfae645970250b3b10808c10d703722c2db
     @api.depends('name', 'code')
     def name_get(self):
         result = []
@@ -22,7 +26,13 @@ class tickets(models.Model):
                 name = record.name
             result.append((record.id, name))
         return result
+<<<<<<< HEAD
 
+=======
+    
+    
+    
+>>>>>>> 2cd72bfae645970250b3b10808c10d703722c2db
     code = fields.Char(
         string='Code',
         required=True,
