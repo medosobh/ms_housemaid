@@ -11,7 +11,7 @@
                 <header>
                     <field name="state"
                         widget="statusbar"
-                        options="{'clickable': '0'}"
+                        options="{'clickable': '1'}"
                         clickable="True"
                         type="object"/>
                 </header>
@@ -29,7 +29,7 @@
                             <field name="code"/>
                             <field name="name"/>
                             <field name="phone"/>
-                            <field name="email"/>
+                            <field name="email" widget="email"/>
                             <field name="monthly_salary"/>
                             <field name="contract_period"/>
                         </group>

@@ -21,7 +21,7 @@
 								<field name="code"/>
 								<field name="name"/>
 								<field name="phone"/>
-								<field name="email"/>
+								<field name="email" widget="email"/>
 							</group>
 					</div>
 					<group name="offices_main"

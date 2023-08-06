@@ -9,7 +9,7 @@ class maids(models.Model):
 
     _name = 'housemaid.maids'
     _description = 'Records of Maids.'
-    _rec_name = 'passport_no'
+    _rec_name = 'name'
     _check_company_auto = True
     _sql_constraints = [
         ('code_uniq', 'unique(code)', "A code can only be assigned to one Maid!"),
@@ -43,7 +43,7 @@ class maids(models.Model):
             ('backout', 'Backout'),
         ],
         default='draft',
-        readonly=True,
+        readonly=False,
         tracking=True,
     )
     offices_id = fields.Many2one(
@@ -210,16 +210,15 @@ class maids(models.Model):
         tracking=True,
     )
     hight = fields.Char(
-        string='Hight',
+        string='Hight in cm',
         required=False,
         tracking=True,
     )
     weight = fields.Char(
-        string='Weight',
+        string='Weight in kg',
         required=False,
         tracking=True,
     )
-
     # -----------------------------
     country_id = fields.Many2one(
         string="Country",

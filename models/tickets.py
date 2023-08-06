@@ -37,6 +37,7 @@ class tickets(models.Model):
             ('closed', 'Ticket Closed'),
         ],
         default='draft',
+        readonly=False,
         tracking=True,
     )
     ticket_type = fields.Selection(
@@ -49,7 +50,7 @@ class tickets(models.Model):
         ],
         tracking=True,
     )
-    sponser_name = fields.Char(
+    name = fields.Char(
         string='Sponser Name',
         tracking=True,
     )
