@@ -3,3 +3,4 @@ from . import offices
 from . import maids
 from . import sponsers
 from . import tickets
+from . import jobs

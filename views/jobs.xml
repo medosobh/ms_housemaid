@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+<record id="housemaid_jobs_form"
+        model="ir.ui.view">
+        <field name="name">housemaid.jobs.form</field>
+        <field name="model">housemaid.jobs</field>
+        <field name="arch"
+            type="xml">
+            <form string="Jobs"
+               >
+                <field name="name"/>
+                <field name="company_id"
+                    groups="base.group_multi_company"/>
+            </form>
+        </field>
+    </record>
     <record id="housemaid_jobs_tree"
         model="ir.ui.view">
         <field name="name">housemaid.jobs.tree</field>
@@ -19,7 +33,7 @@
         model="ir.actions.act_window">
         <field name="name">Jobs</field>
         <field name="res_model">housemaid.jobs</field>
-        <field name="view_mode">tree</field>
+        <field name="view_mode">tree,form</field>
         <field name="help"
             type="html">
             <p class="o_view_nocontent_smiling_face">Create your first Job!</p>

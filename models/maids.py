@@ -353,24 +353,4 @@ class maidslogs(models.Model):
     )
 
 
-class jobs(models.Model):
-    _name = 'housemaid.jobs'
-    _description = 'Maids Jobs Records.'
-    _inherit = ['mail.thread', 'mail.activity.mixin']
-    _sql_constraints = [
-        ('name_uniq', 'unique(name)', "A name can only be assigned to one Job!"),
-    ]
-    
-    name = fields.Char(
-        string='Name',
-        required=True,
-        tracking=True,
-    )
-    company_id = fields.Many2one(
-        string='Company',
-        comodel_name='res.company',
-        change_default=True,
-        default=lambda self: self.env.company,
-        required=False,
-        tracking=True,
-    )
+
