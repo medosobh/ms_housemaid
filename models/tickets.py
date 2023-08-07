@@ -252,7 +252,7 @@ class tickets(models.Model):
         string='Maids Search Result',
     )
 
-    @api.depends('country_id', 'monthly_salary')
+    @api.depends('jobs_id', 'country_id', 'monthly_salary')
     def _search_maids(self):
         self.ensure_one()
         maids_ids = self.env['housemaid.maids'].search(
@@ -261,12 +261,22 @@ class tickets(models.Model):
                 ('ticket_id', '=', False),
                 ('active', '=', True),
             ])
+        
+        if self.jobs_id != False:
+            maids_ids1 = maids_ids.filtered(
+                lambda maids: maids.jobs_id == self.jobs_id)
+            print(self.country_id)
+        else:
+            maids_ids1 = maids_ids
+
+        print(maids_ids1)
+        
         if self.country_id != False:
-            maids_ids2 = maids_ids.filtered(
+            maids_ids2 = maids_ids1.filtered(
                 lambda maids: maids.country_id == self.country_id)
             print(self.country_id)
         else:
-            maids_ids2 = maids_ids
+            maids_ids2 = maids_ids1
 
         print(maids_ids2)
 
