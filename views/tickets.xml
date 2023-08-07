@@ -55,11 +55,9 @@
                             <group name="education"
                                 string="Language and Education">
                                 <field name="arabic_lang"
-                                    widget="radio"
-                                    options="{'horizontal': True}"/>
+                                    widget="boolean_toggle"/>
                                 <field name="english_lang"
-                                    widget="radio"
-                                    options="{'horizontal': True}"/>
+                                    widget="boolean_toggle"/>
                                 <field name="education"/>
                             </group>
                             <group name="personal"
@@ -80,20 +78,15 @@
                             <group name="skills"
                                 string="Skills">
                                 <field name="skills_cleaning"
-                                    widget="radio"
-                                    options="{'horizontal': True}"/>
+                                    widget="boolean_toggle"/>
                                 <field name="skills_arabic_cooking"
-                                    widget="radio"
-                                    options="{'horizontal': True}"/>
+                                    widget="boolean_toggle"/>
                                 <field name="skills_baby_sitting"
-                                    widget="radio"
-                                    options="{'horizontal': True}"/>
+                                    widget="boolean_toggle"/>
                                 <field name="skills_washing"
-                                    widget="radio"
-                                    options="{'horizontal': True}"/>
+                                    widget="boolean_toggle"/>
                                 <field name="skills_ironing"
-                                    widget="radio"
-                                    options="{'horizontal': True}"/>
+                                    widget="boolean_toggle"/>
                             </group>
                             <group name="operation"
                                 string="Operation">

@@ -107,25 +107,15 @@ class tickets(models.Model):
         tracking=True
     )
     # ---------------------------
-    arabic_lang = fields.Selection(
-        selection=[
-            ('0', 'Normal'),
-            ('1', 'Low'),
-            ('2', 'High'),
-            ('3', 'Very High'),
-        ],
+    arabic_lang = fields.Boolean(
         string="Arabic Language",
-        help='Set the level language'
+        tracking=True,
+
     )
-    english_lang = fields.Selection(
-        selection=[
-            ('0', 'Normal'),
-            ('1', 'Low'),
-            ('2', 'High'),
-            ('3', 'Very High'),
-        ],
+    english_lang = fields.Boolean(
         string="English Language",
-        help='Set the level language'
+        tracking=True,
+
     )
     education = fields.Selection(
         selection=[
@@ -204,59 +194,24 @@ class tickets(models.Model):
         tracking=True,
     )
     # -----------------------------
-    skills_cleaning = fields.Selection(
-        selection=[
-            ('0', 'Normal'),
-            ('1', 'Low'),
-            ('2', 'High'),
-            ('3', 'Very High')
-        ],
+    skills_cleaning = fields.Boolean(
         string="Cleaning",
-        help='Set the overall skills level.',
         tracking=True,
     )
-    skills_arabic_cooking = fields.Selection(
-        selection=[
-            ('0', 'Normal'),
-            ('1', 'Low'),
-            ('2', 'High'),
-            ('3', 'Very High')
-        ],
+    skills_arabic_cooking = fields.Boolean(
         string="Arabic Cooking",
-        help='Set the overall skills level.',
         tracking=True,
     )
-    skills_baby_sitting = fields.Selection(
-        selection=[
-            ('0', 'Normal'),
-            ('1', 'Low'),
-            ('2', 'High'),
-            ('3', 'Very High')
-        ],
+    skills_baby_sitting = fields.Boolean(
         string="Baby Sitting",
-        help='Set the overall skills level.',
         tracking=True,
     )
-    skills_washing = fields.Selection(
-        selection=[
-            ('0', 'Normal'),
-            ('1', 'Low'),
-            ('2', 'High'),
-            ('3', 'Very High')
-        ],
+    skills_washing = fields.Boolean(
         string="Washing",
-        help='Set the overall skills level.',
         tracking=True,
     )
-    skills_ironing = fields.Selection(
-        selection=[
-            ('0', 'Normal'),
-            ('1', 'Low'),
-            ('2', 'High'),
-            ('3', 'Very High')
-        ],
+    skills_ironing = fields.Boolean(
         string="Ironing",
-        help='Set the overall skills level.',
         tracking=True,
     )
     country_id = fields.Many2one(
@@ -290,7 +245,7 @@ class tickets(models.Model):
         string='Maids Search Result',
     )
 
-    @api.depends('country_id','monthly_salary')
+    @api.depends('country_id', 'monthly_salary')
     def _search_maids(self):
         self.ensure_one()
         maids_ids = self.env['housemaid.maids'].search(
@@ -300,19 +255,21 @@ class tickets(models.Model):
                 ('active', '=', True),
             ])
         if self.country_id != False:
-            maids_ids2 = maids_ids.filtered(lambda maids: maids.country_id == self.country_id)
+            maids_ids2 = maids_ids.filtered(
+                lambda maids: maids.country_id == self.country_id)
             print(self.country_id)
         else:
             maids_ids2 = maids_ids
-        
+
         print(maids_ids2)
-        
+
         if self.monthly_salary != 0:
-            maids_ids3 = maids_ids2.filtered(lambda maids: maids.monthly_salary == self.monthly_salary)
+            maids_ids3 = maids_ids2.filtered(
+                lambda maids: maids.monthly_salary == self.monthly_salary)
             print(self.monthly_salary)
         else:
             maids_ids3 = maids_ids2
 
         print(maids_ids3)
-        
+
         self.maids_ids = [(6, 0, maids_ids3.ids)]

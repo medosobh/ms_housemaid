@@ -23,7 +23,6 @@ class maids(models.Model):
             'ms_housemaid', 'static/img', 'maid.png')
         return base64.b64encode(open(image_path, 'rb').read())
 
-    
     @api.depends('name', 'code')
     def name_get(self):
         result = []
@@ -56,6 +55,7 @@ class maids(models.Model):
         selection=[
             ('draft', 'Draft'),
             ('open', 'Open to Work'),
+            ('ready', 'Ready at Guesthouse'),
             ('backout', 'Backout'),
         ],
         default='draft',
@@ -96,6 +96,7 @@ class maids(models.Model):
         default=lambda self: _('name@mail.com'),
         tracking=True,
     )
+
     monthly_salary = fields.Monetary(
         string='Monthly Salary',
         currency_field='currency_id',
@@ -116,25 +117,15 @@ class maids(models.Model):
         tracking=True
     )
     # ---------------------------
-    arabic_lang = fields.Selection(
-        selection=[
-            ('0', 'Normal'),
-            ('1', 'Low'),
-            ('2', 'High'),
-            ('3', 'Very High'),
-        ],
+    arabic_lang = fields.Boolean(
         string="Arabic Language",
-        help='Set the level language'
+        tracking=True,
+
     )
-    english_lang = fields.Selection(
-        selection=[
-            ('0', 'Normal'),
-            ('1', 'Low'),
-            ('2', 'High'),
-            ('3', 'Very High'),
-        ],
+    english_lang = fields.Boolean(
         string="English Language",
-        help='Set the level language'
+        tracking=True,
+
     )
     education = fields.Selection(
         selection=[
@@ -245,59 +236,24 @@ class maids(models.Model):
         tracking=True,
     )
     # -----------------------------
-    skills_cleaning = fields.Selection(
-        selection=[
-            ('0', 'Normal'),
-            ('1', 'Low'),
-            ('2', 'High'),
-            ('3', 'Very High'),
-        ],
+    skills_cleaning = fields.Boolean(
         string="Cleaning",
-        help='Set the overall skills level.',
         tracking=True,
     )
-    skills_arabic_cooking = fields.Selection(
-        selection=[
-            ('0', 'Normal'),
-            ('1', 'Low'),
-            ('2', 'High'),
-            ('3', 'Very High')
-        ],
+    skills_arabic_cooking = fields.Boolean(
         string="Arabic Cooking",
-        help='Set the overall skills level.',
         tracking=True,
     )
-    skills_baby_sitting = fields.Selection(
-        selection=[
-            ('0', 'Normal'),
-            ('1', 'Low'),
-            ('2', 'High'),
-            ('3', 'Very High')
-        ],
+    skills_baby_sitting = fields.Boolean(
         string="Baby Sitting",
-        help='Set the overall skills level.',
         tracking=True,
     )
-    skills_washing = fields.Selection(
-        selection=[
-            ('0', 'Normal'),
-            ('1', 'Low'),
-            ('2', 'High'),
-            ('3', 'Very High')
-        ],
+    skills_washing = fields.Boolean(
         string="Washing",
-        help='Set the overall skills level.',
         tracking=True,
     )
-    skills_ironing = fields.Selection(
-        selection=[
-            ('0', 'Normal'),
-            ('1', 'Low'),
-            ('2', 'High'),
-            ('3', 'Very High')
-        ],
+    skills_ironing = fields.Boolean(
         string="Ironing",
-        help='Set the overall skills level.',
         tracking=True,
     )
     country_id = fields.Many2one(
@@ -397,3 +353,9 @@ class maidslogs(models.Model):
         default=True,
         tracking=True,
     )
+
+
+class maidsjobs(models.Model):
+    _name = 'housemaid.maidsjobs'
+    _description = 'Maids Jobs Records.'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
