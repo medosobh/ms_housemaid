@@ -40,15 +40,25 @@ class offices(models.Model):
         required=True,
         tracking=True
     )
+    name = fields.Char(
+        string='Name',
+        default=lambda self: _('New'),
+        required=True,
+        tracking=True
+    )
     phone = fields.Char(
         string='Phone',
         required=True,
         tracking=True
     )
-    name = fields.Char(
-        string='Name',
-        default=lambda self: _('New'),
-        required=True,
+    phone2 = fields.Char(
+        string='Phone 2',
+        required=False,
+        tracking=True
+    )
+    phone3 = fields.Char(
+        string='Phone 3',
+        required=False,
         tracking=True
     )
     email = fields.Char(
@@ -56,6 +66,15 @@ class offices(models.Model):
         required=True,
         default=lambda self: _('name@mail.com'),
         tracking=True
+    )
+    contact_person = fields.Char(
+        string='Contact Person',
+        required=True,
+        tracking=True
+    )
+    address = fields.Text(
+        string='Address',
+        tracking=True,
     )
     image_1920 = fields.Image(
         default=_default_image
@@ -94,13 +113,4 @@ class offices(models.Model):
         string="Operation Man",
         required=True,
         tracking=True,
-    )
-    currency_id = fields.Many2one(
-        comodel_name='res.currency',
-        string='Currency',
-        related='company_id.currency_id',
-        readonly=True,
-        ondelete='set null',
-        help="Used to select the currency when billing.",
-        tracking=True
     )

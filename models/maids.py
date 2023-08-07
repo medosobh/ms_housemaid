@@ -56,6 +56,7 @@ class maids(models.Model):
             ('draft', 'Draft'),
             ('open', 'Open to Work'),
             ('ready', 'Ready at Guesthouse'),
+            ('booked', 'Booked by ticket'),
             ('backout', 'Backout'),
         ],
         default='draft',
@@ -111,7 +112,6 @@ class maids(models.Model):
     currency_id = fields.Many2one(
         string='Currency',
         comodel_name='res.currency',
-        related='company_id.currency_id',
         ondelete='set null',
         help="Used to display the currency when tracking monetary values",
         tracking=True,

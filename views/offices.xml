@@ -17,7 +17,7 @@
 					</div>
 					<div class="oe_title">
 						<group name="offices_title"
-							string="Title">
+							string="Office Information">
 							<field name="code"
 								class="oe_inline"/>
 							<field name="name"
@@ -25,31 +25,38 @@
 							<field name="phone"
 								widget="phone"
 								class="oe_inline"/>
+							<field name="phone2"
+								widget="phone"
+								class="oe_inline"/>
+							<field name="phone3"
+								widget="phone"
+								class="oe_inline"/>
 							<field name="email"
 								widget="email"
 								class="oe_inline"/>
+							<field name="contact_person"
+								class="oe_inline"/>
+							<field name="address"/>
+							<field name="country_id"
+								class="oe_inline"/>
 						</group>
 					</div>
-					<group name="offices_main"
-						string="Office">
-						<group name="basic"
-							string="Basic">
-							<field name="country_id"/>
-							<field name="partner_id"/>
+					<div>
+						<group name="operation"
+							string="Operation">
+							<field name="partner_id"
+								class="oe_inline"/>
 							<field name="description"/>
+							<field name="company_id"
+								groups="base.group_multi_company"
+								class="oe_inline"/>
+							<field name="user_id"
+								widget="selection"
+								class="oe_inline"/>
 							<field name="active"
 								invisible="1"/>
 						</group>
-						<group name="operation"
-							string="Operation">
-							<field name="company_id"
-								groups="base.group_multi_company"/>
-							<field name="user_id"
-								widget="selection"/>
-							<field name="currency_id"
-								groups="base.group_multi_currency"/>
-						</group>
-					</group>
+					</div>
 					<notebook>
 						<page string="Free Maids">
 
@@ -77,20 +84,27 @@
 			<tree string="External Offices List"
 				sample="1">
 				<field name="code"/>
-				<field name="phone"/>
 				<field name="name"/>
-				<field name="email"/>
+				<field name="phone"
+					widget="phone"/>
+				<field name="phone2"
+					widget="phone"/>
+				<field name="phone3"
+					widget="phone"/>
+				<field name="email"
+					widget="email" />
+				<field name="contact_person" />
+				<field name="address"/>
 				<field name="country_id"/>
 				<field name="partner_id"/>
 				<field name="description"/>
+				<field name="activity_ids"/>
 				<field name="active"
 					invisible="1"/>
 				<field name="company_id"
 					groups="base.group_multi_company"/>
 				<field name="user_id"
 					widget="selection"/>
-				<field name="currency_id"
-					groups="base.group_multi_currency"/>
 			</tree>
 		</field>
 	</record>

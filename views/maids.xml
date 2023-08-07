@@ -41,6 +41,8 @@
                                 class="oe_inline"/>
                             <field name="monthly_salary"
                                 class="oe_inline"/>
+                            <field name="currency_id"
+                                groups="base.group_multi_currency"/>
                             <field name="contract_period"
                                 class="oe_inline"/>
                         </group>
@@ -109,8 +111,6 @@
                                     groups="base.group_multi_company"/>
                                 <field name="user_id"
                                     widget="selection"/>
-                                <field name="currency_id"
-                                    groups="base.group_multi_currency"/>
                             </group>
                         </group>
                     </div>
@@ -148,27 +148,31 @@
             <tree string="Maids List"
                 sample="1">
                 <field name="code"/>
-                <field name="phone"/>
+                <field name="phone"
+                    widget="phone"/>
                 <field name="name"/>
-                <field name="email"/>
+                <field name="email"
+                    widget="email"/>
                 <field name="jobs_id"/>
-                <field name="monthly_salary"/>
+                <field name="monthly_salary"
+                    widget="monetary"/>
+                <field name="currency_id"
+                    invisible="1"/>
                 <field name="contract_period"/>
                 <field name="passport_no"/>
                 <field name="religion"/>
                 <field name="gender"/>
                 <field name="marital_status"/>
                 <field name="country_id"/>
-                <field name="partner_id"/>
                 <field name="description"/>
+                <field name="activity_ids"
+                    widget="list_activity"/>
                 <field name="active"
                     invisible="1"/>
                 <field name="company_id"
                     groups="base.group_multi_company"/>
                 <field name="user_id"
                     widget="selection"/>
-                <field name="currency_id"
-                    groups="base.group_multi_currency"/>
             </tree>
         </field>
     </record>
@@ -194,7 +198,7 @@
                     <filter string="Company"
                         name="group_by_company_id"
                         context="{'group_by':'company_id'}"/>
-                    <filter string="Sales Man"
+                    <filter string="Operation Man"
                         name="group_by_user"
                         context="{'group_by':'user_id'}"/>
                     <filter string="Country"

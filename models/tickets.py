@@ -52,9 +52,6 @@ class tickets(models.Model):
         selection=[
             ('sales', 'Sales'),
             ('transfer', 'Sponser Transfer'),
-            ('search', 'Operation Search!'),
-            ('toconfirm', 'Operation Confirming!'),
-            ('tohire', 'Operation Hiring!'),
         ],
         tracking=True,
     )
@@ -92,7 +89,7 @@ class tickets(models.Model):
         string='Currency',
         comodel_name='res.currency',
         related='company_id.currency_id',
-        readonly=True,
+        readonly=False,
         ondelete='set null',
         help="Used to display the currency when tracking monetary values",
         tracking=True,
@@ -124,6 +121,7 @@ class tickets(models.Model):
         ],
         string="Education level",
         help='Set the Education level',
+        tracking=True,
     )
     # ----------------------------------------------
     religion = fields.Selection(
@@ -241,6 +239,11 @@ class tickets(models.Model):
     active = fields.Boolean(
         string="Active",
         default=True,
+        tracking=True,
+    )
+    maid_id = fields.Many2one(
+        comodel_name='housemaid.maids',
+        string='Maids Hired',
         tracking=True,
     )
     maids_ids = fields.Many2many(
