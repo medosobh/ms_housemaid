@@ -23,6 +23,7 @@
         'views/maids.xml',
         'views/sponsers.xml',
         'views/tickets.xml',
+        'views/jobs.xml',
     ],
     'demo': [
         ''

@@ -353,8 +353,8 @@ class maidslogs(models.Model):
     )
 
 
-class maidsjobs(models.Model):
-    _name = 'housemaid.maidsjobs'
+class jobs(models.Model):
+    _name = 'housemaid.jobs'
     _description = 'Maids Jobs Records.'
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _sql_constraints = [

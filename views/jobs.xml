@@ -7,14 +7,15 @@
         <field name="arch"
             type="xml">
             <tree string="Jobs List"
-                sample="1">
+                sample="1"
+                editable="bottom">
                 <field name="name"/>
                 <field name="company_id"
                     groups="base.group_multi_company"/>
             </tree>
         </field>
     </record>
-    <record id="housemaid_jobss_action"
+    <record id="housemaid_jobs_action"
         model="ir.actions.act_window">
         <field name="name">Jobs</field>
         <field name="res_model">housemaid.jobs</field>
@@ -24,8 +25,9 @@
             <p class="o_view_nocontent_smiling_face">Create your first Job!</p>
         </field>
     </record>
-    <menuitem id="housemaid_jobss_menu"
-        name="Maids"
+
+    <menuitem id="housemaid_jobs_menu"
+        name="Jobs"
         action="housemaid_jobs_action"
         parent="housemaid_menu_configuration"
         sequence="51"/>
