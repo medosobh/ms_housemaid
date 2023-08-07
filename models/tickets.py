@@ -62,6 +62,7 @@ class tickets(models.Model):
         string='Ticket Type',
         selection=[
             ('sales', 'Sales'),
+            ('transfer', 'Sponser Transfer'),
             ('search', 'Operation Search!'),
             ('toconfirm', 'Operation Confirming!'),
             ('tohire', 'Operation Hiring!'),

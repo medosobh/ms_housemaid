@@ -147,9 +147,11 @@
                 <field name="phone"/>
                 <field name="name"/>
                 <field name="email"/>
+                <field name="jobs_id"/>
+                <field name="monthly_salary"/>
+                <field name="contract_period"/>
                 <field name="passport_no"/>
-                <field name="place_of_birth"/>
-                <field name="birthday"/>
+                <field name="religion"/>
                 <field name="gender"/>
                 <field name="marital_status"/>
                 <field name="country_id"/>
@@ -163,7 +165,6 @@
                     widget="selection"/>
                 <field name="currency_id"
                     groups="base.group_multi_currency"/>
-
             </tree>
         </field>
     </record>

@@ -104,7 +104,32 @@
                     <notebook>
                         <page name="search"
                             string="Search Result">
-                            <field name="maids_ids"/>
+                            <field name="maids_ids">
+                                <tree>
+                                    <field name="code"/>
+                                    <field name="phone"/>
+                                    <field name="name"/>
+                                    <field name="email"/>
+                                    <field name="jobs_id"/>
+                                    <field name="monthly_salary"/>
+                                    <field name="contract_period"/>
+                                    <field name="passport_no"/>
+                                    <field name="religion"/>
+                                    <field name="gender"/>
+                                    <field name="marital_status"/>
+                                    <field name="country_id"/>
+                                    <field name="partner_id"/>
+                                    <field name="description"/>
+                                    <field name="active"
+                                        invisible="1"/>
+                                    <field name="company_id"
+                                        groups="base.group_multi_company"/>
+                                    <field name="user_id"
+                                        widget="selection"/>
+                                    <field name="currency_id"
+                                        groups="base.group_multi_currency"/>
+                                </tree>
+                            </field>
                         </page>
                         <page name="maid_hired"
                             string="Maid Hired">

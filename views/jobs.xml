@@ -22,7 +22,7 @@
             type="xml">
             <tree string="Jobs List"
                 sample="1"
-                editable="bottom">
+                editable="none">
                 <field name="name"/>
                 <field name="company_id"
                     groups="base.group_multi_company"/>
