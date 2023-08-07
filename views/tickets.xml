@@ -90,8 +90,8 @@
                                 <field name="skills_ironing"
                                     widget="boolean_toggle"/>
                             </group>
-                            <group name="operation"
-                                string="Operation">
+                            <group name="responsable"
+                                string="Ticket Responsable">
                                 <field name="company_id"
                                     groups="base.group_multi_company"/>
                                 <field name="user_id"
