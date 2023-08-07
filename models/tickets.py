@@ -239,6 +239,7 @@ class tickets(models.Model):
         comodel_name='housemaid.maids',
         compute='_search_maids',
         string='Maids Search Result',
+        store=True,
     )
 
     @api.depends('jobs_id', 'country_id', 'monthly_salary')
@@ -250,31 +251,25 @@ class tickets(models.Model):
                 ('ticket_id', '=', False),
                 ('active', '=', True),
             ])
-        print(self.jobs_id)
         if self.jobs_id != False:
             maids_ids1 = maids_ids.filtered(
                 lambda maids: maids.jobs_id.id == self.jobs_id.id)
-            print(maids_ids1)
         else:
             maids_ids1 = maids_ids
-            print(maids_ids1)
         
-        print(self.country_id)
-        if self.country_id != False:
+        if len(self.country_id) == 1:
             maids_ids2 = maids_ids1.filtered(
-                lambda maids: maids.country_id == self.country_id)
-            print(maids_ids2)
+                lambda maids: maids.country_id.id == self.country_id.id)
         else:
             maids_ids2 = maids_ids1
-            print(maids_ids2)
 
-        if self.monthly_salary != 0:
-            print(self.monthly_salary)
+        print(self.monthly_salary)
+        if self.monthly_salary != 0:    
             maids_ids3 = maids_ids2.filtered(
                 lambda maids: maids.monthly_salary == self.monthly_salary)
             print(maids_ids3)
         else:
             maids_ids3 = maids_ids2
             print(maids_ids3)
-
+            
         self.maids_ids = [(6, 0, maids_ids3.ids)]
