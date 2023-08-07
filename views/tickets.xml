@@ -27,7 +27,7 @@
                     <div>
                         <group name="tickets_sponser"
                             string="Sponser information">
-                            <field name="name"
+                            <field name="sponser_name"
                                 class="oe_inline"/>
                             <field name="sponser_phone"
                                 widget="phone"
@@ -156,7 +156,7 @@
                 sample="1">
                 <field name="code"/>
                 <field name="state"/>
-                <field name="name"/>
+                <field name="sponser_name"/>
                 <field name="sponser_phone"/>
                 <field name="sponser_email"/>
                 <field name="sponsers_id"/>

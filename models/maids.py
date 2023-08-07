@@ -9,7 +9,7 @@ class maids(models.Model):
 
     _name = 'housemaid.maids'
     _description = 'Records of Maids.'
-    _rec_name = 'name'
+    _rec_name = 'code'
     _check_company_auto = True
     _sql_constraints = [
         ('code_uniq', 'unique(code)', "A code can only be assigned to one Maid!"),
@@ -73,7 +73,7 @@ class maids(models.Model):
         tracking=True,
     )
     code = fields.Char(
-        string='Office Code',
+        string='Code',
         default=lambda self: _('New'),
         required=True,
         tracking=True,

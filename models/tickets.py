@@ -19,17 +19,6 @@ class tickets(models.Model):
                 'housemaid.sales.tickets') or _('New')
         return super(tickets, self).create(vals)
 
-    @api.depends('name', 'code')
-    def name_get(self):
-        result = []
-        for record in self:
-            if record.code:
-                name = '[' + record.code + '] ' + record.name
-            else:
-                name = record.name
-            result.append((record.id, name))
-        return result
-
     code = fields.Char(
         string='Code',
         required=True,
@@ -69,7 +58,7 @@ class tickets(models.Model):
         ],
         tracking=True,
     )
-    name = fields.Char(
+    sponser_name = fields.Char(
         string='Name',
         tracking=True,
     )
@@ -261,32 +250,31 @@ class tickets(models.Model):
                 ('ticket_id', '=', False),
                 ('active', '=', True),
             ])
-        
+        print(self.jobs_id)
         if self.jobs_id != False:
             maids_ids1 = maids_ids.filtered(
-                lambda maids: maids.jobs_id == self.jobs_id)
-            print(self.country_id)
+                lambda maids: maids.jobs_id.id == self.jobs_id.id)
+            print(maids_ids1)
         else:
             maids_ids1 = maids_ids
-
-        print(maids_ids1)
+            print(maids_ids1)
         
+        print(self.country_id)
         if self.country_id != False:
             maids_ids2 = maids_ids1.filtered(
                 lambda maids: maids.country_id == self.country_id)
-            print(self.country_id)
+            print(maids_ids2)
         else:
             maids_ids2 = maids_ids1
-
-        print(maids_ids2)
+            print(maids_ids2)
 
         if self.monthly_salary != 0:
+            print(self.monthly_salary)
             maids_ids3 = maids_ids2.filtered(
                 lambda maids: maids.monthly_salary == self.monthly_salary)
-            print(self.monthly_salary)
+            print(maids_ids3)
         else:
             maids_ids3 = maids_ids2
-
-        print(maids_ids3)
+            print(maids_ids3)
 
         self.maids_ids = [(6, 0, maids_ids3.ids)]

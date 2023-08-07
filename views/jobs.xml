@@ -1,16 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-<record id="housemaid_jobs_form"
+    <record id="housemaid_jobs_form"
         model="ir.ui.view">
         <field name="name">housemaid.jobs.form</field>
         <field name="model">housemaid.jobs</field>
         <field name="arch"
             type="xml">
-            <form string="Jobs"
-               >
-                <field name="name"/>
-                <field name="company_id"
-                    groups="base.group_multi_company"/>
+            <form string="Jobs">
+                <group name="information"
+                    string="Jobs">
+                    <field name="name"
+                        class="oe_inline"/>
+                </group>
+
             </form>
         </field>
     </record>
@@ -21,11 +23,8 @@
         <field name="arch"
             type="xml">
             <tree string="Jobs List"
-                sample="1"
-                editable="none">
+                sample="1">
                 <field name="name"/>
-                <field name="company_id"
-                    groups="base.group_multi_company"/>
             </tree>
         </field>
     </record>

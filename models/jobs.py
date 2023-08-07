@@ -18,11 +18,3 @@ class jobs(models.Model):
         required=True,
         tracking=True,
     )
-    company_id = fields.Many2one(
-        string='Company',
-        comodel_name='res.company',
-        change_default=True,
-        default=lambda self: self.env.company,
-        required=False,
-        tracking=True,
-    )
