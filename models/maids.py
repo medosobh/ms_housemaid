@@ -13,7 +13,7 @@ class maids(models.Model):
     _check_company_auto = True
     _sql_constraints = [
         ('code_uniq', 'unique(code)', "A code can only be assigned to one Maid!"),
-        ('name_uniq', 'unique(name)', "A name can only be assigned to one Maid !"),
+        ('name_uniq', 'unique(name)', "A name can only be assigned to one Maid!"),
     ]
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
@@ -96,7 +96,6 @@ class maids(models.Model):
         default=lambda self: _('name@mail.com'),
         tracking=True,
     )
-
     monthly_salary = fields.Monetary(
         string='Monthly Salary',
         currency_field='currency_id',
@@ -125,7 +124,6 @@ class maids(models.Model):
     english_lang = fields.Boolean(
         string="English Language",
         tracking=True,
-
     )
     education = fields.Selection(
         selection=[
@@ -359,3 +357,20 @@ class maidsjobs(models.Model):
     _name = 'housemaid.maidsjobs'
     _description = 'Maids Jobs Records.'
     _inherit = ['mail.thread', 'mail.activity.mixin']
+    _sql_constraints = [
+        ('name_uniq', 'unique(name)', "A name can only be assigned to one Job!"),
+    ]
+    
+    name = fields.Char(
+        string='Name',
+        required=True,
+        tracking=True,
+    )
+    company_id = fields.Many2one(
+        string='Company',
+        comodel_name='res.company',
+        change_default=True,
+        default=lambda self: self.env.company,
+        required=False,
+        tracking=True,
+    )

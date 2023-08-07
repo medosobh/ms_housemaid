@@ -18,12 +18,16 @@
                     <div class="oe_title">
                         <group name="sponsers_title"
                             string="Title">
-                            <field name="code"/>
-                            <field name="name"/>
+                            <field name="code"
+                                class="oe_inline"/>
+                            <field name="name"
+                                class="oe_inline"/>
                             <field name="phone"
-                                widget="phone"/>
+                                widget="phone"
+                                class="oe_inline"/>
                             <field name="email"
-                                widget="email"/>
+                                widget="email"
+                                class="oe_inline"/>
                         </group>
                     </div>
                     <group name="sponsers_main"

@@ -17,5 +17,12 @@
             sequence="20" />
 
 
+        <!-- This Menu Item Must have a parent -->
+        <menuitem id="housemaid_menu_configuration"
+            name="Configuration"
+            parent="housemaid_root"
+            sequence="50" />
+
+
     </data>
 </odoo>

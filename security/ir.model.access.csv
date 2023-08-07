@@ -4,3 +4,4 @@ ms_housemaid.access_housemaid_maids,access_housemaid_maids,ms_housemaid.model_ho
 ms_housemaid.access_housemaid_sponsers,access_housemaid_sponsers,ms_housemaid.model_housemaid_sponsers,base.group_user,1,1,1,1
 ms_housemaid.access_housemaid_maidslogs,access_housemaid_maidslogs,ms_housemaid.model_housemaid_maidslogs,base.group_user,1,1,1,1
 ms_housemaid.access_housemaid_tickets,access_housemaid_tickets,ms_housemaid.model_housemaid_tickets,base.group_user,1,1,1,1
+ms_housemaid.access_housemaid_maidsjobs,access_housemaid_maidsjobs,ms_housemaid.model_housemaid_maidsjobs,base.group_user,1,1,1,1

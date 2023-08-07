@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="housemaid_jobs_tree"
+        model="ir.ui.view">
+        <field name="name">housemaid.jobs.tree</field>
+        <field name="model">housemaid.jobs</field>
+        <field name="arch"
+            type="xml">
+            <tree string="Jobs List"
+                sample="1">
+                <field name="name"/>
+                <field name="company_id"
+                    groups="base.group_multi_company"/>
+            </tree>
+        </field>
+    </record>
+    <record id="housemaid_jobss_action"
+        model="ir.actions.act_window">
+        <field name="name">Jobs</field>
+        <field name="res_model">housemaid.jobs</field>
+        <field name="view_mode">tree</field>
+        <field name="help"
+            type="html">
+            <p class="o_view_nocontent_smiling_face">Create your first Job!</p>
+        </field>
+    </record>
+    <menuitem id="housemaid_jobss_menu"
+        name="Maids"
+        action="housemaid_jobs_action"
+        parent="housemaid_menu_configuration"
+        sequence="51"/>
+</odoo>
