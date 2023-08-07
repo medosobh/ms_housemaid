@@ -260,6 +260,14 @@ class maids(models.Model):
         string="Ironing",
         tracking=True,
     )
+    skills_googlelocation = fields.Boolean(
+        string="Google Location",
+        tracking=True,
+    )
+    skills_driving = fields.Boolean(
+        string="Drive License",
+        tracking=True,
+    )
     country_id = fields.Many2one(
         string="Country",
         comodel_name='res.country',

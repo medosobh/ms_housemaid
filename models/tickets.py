@@ -210,6 +210,14 @@ class tickets(models.Model):
         string="Ironing",
         tracking=True,
     )
+    skills_googlelocation = fields.Boolean(
+        string="Google Location",
+        tracking=True,
+    )
+    skills_driving = fields.Boolean(
+        string="Drive License",
+        tracking=True,
+    )
     country_id = fields.Many2one(
         string="Country",
         comodel_name='res.country',
@@ -225,7 +233,7 @@ class tickets(models.Model):
         tracking=True,
     )
     user_id = fields.Many2one(
-        string="Sales/Operation Man",
+        string="Responsable",
         comodel_name='res.users',
         required=True,
         tracking=True,

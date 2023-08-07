@@ -91,6 +91,10 @@
                                     widget="boolean_toggle"/>
                                 <field name="skills_ironing"
                                     widget="boolean_toggle"/>
+                                <field name="skills_googlelocation"
+                                    widget="boolean_toggle"/>
+                                <field name="skills_driving"
+                                    widget="boolean_toggle"/>
                             </group>
                             <group name="more"
                                 string="Addtional Information">
