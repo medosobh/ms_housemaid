@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <!-- add more accounts -->
-    <data noupdate="0">
+    <data noupdate="1">
         <record model="housemaid.jobs"
             id="housemaid_jobs_1">
             <field name="name">housemaid</field>
@@ -11,5 +10,4 @@
             <field name="name">housedriver</field>
         </record>
     </data>
-
 </odoo>
