@@ -44,6 +44,8 @@
                             string="Maid Requirements">
                             <group name="maids_basic"
                                 string="Salary and Contract">
+                                <field name="jobs_id"
+                                    class="oe_inline"/>
                                 <field name="monthly_salary"
                                     class="oe_inline"/>
                                 <field name="currency_id"

@@ -96,6 +96,12 @@ class maids(models.Model):
         default=lambda self: _('name@mail.com'),
         tracking=True,
     )
+    jobs_id = fields.Many2one(
+        comodel_name='housemaid.jobs',
+        string='Applied Jobs',
+        required=True,
+        tracking=True,
+    )
     monthly_salary = fields.Monetary(
         string='Monthly Salary',
         currency_field='currency_id',

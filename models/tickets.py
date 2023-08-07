@@ -86,6 +86,12 @@ class tickets(models.Model):
         tracking=True,
     )
     # maid search data
+    jobs_id = fields.Many2one(
+        comodel_name='housemaid.jobs',
+        string='Applied Jobs',
+        required=True,
+        tracking=True,
+    )
     monthly_salary = fields.Monetary(
         string='Monthly Salary',
         currency_field='currency_id',

@@ -37,6 +37,8 @@
                             <field name="email"
                                 widget="email"
                                 class="oe_inline"/>
+                            <field name="jobs_id"
+                                class="oe_inline"/>
                             <field name="monthly_salary"
                                 class="oe_inline"/>
                             <field name="contract_period"
