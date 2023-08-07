@@ -287,26 +287,32 @@ class tickets(models.Model):
     maids_ids = fields.Many2many(
         comodel_name='housemaid.maids',
         compute='_search_maids',
-        store=True,
         string='Maids Search Result',
     )
 
-    @api.onchange('country_id','monthly_salary')
+    @api.depends('country_id','monthly_salary')
     def _search_maids(self):
+        self.ensure_one()
         maids_ids = self.env['housemaid.maids'].search(
             [
                 ('state', '!=', 'backout'),
                 ('ticket_id', '=', False),
                 ('active', '=', True),
             ])
-        if self.country_id != '':
-            maids_ids.filtered(lambda maids: maids.country_id == self.country_id)
+        if self.country_id != False:
+            maids_ids2 = maids_ids.filtered(lambda maids: maids.country_id == self.country_id)
+            print(self.country_id)
         else:
-            maids_ids
-            
-        if self.monthly_salary == 0:
-            maids_ids.filtered(lambda maids: maids.monthly_salary == self.monthly_salary)
-        else:
-            maids_ids
+            maids_ids2 = maids_ids
         
-        self.maids_ids = [(6, 0, maids_ids.ids)]
+        print(maids_ids2)
+        
+        if self.monthly_salary != 0:
+            maids_ids3 = maids_ids2.filtered(lambda maids: maids.monthly_salary == self.monthly_salary)
+            print(self.monthly_salary)
+        else:
+            maids_ids3 = maids_ids2
+
+        print(maids_ids3)
+        
+        self.maids_ids = [(6, 0, maids_ids3.ids)]

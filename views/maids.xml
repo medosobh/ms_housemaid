@@ -57,6 +57,7 @@
                             </group>
                             <group name="personal"
                                 string="Personal information">
+                                <field name="country_id"/>
                                 <field name="religion"/>
                                 <field name="gender"/>
                                 <field name="children_no"/>
@@ -91,7 +92,6 @@
                             </group>
                             <group name="more"
                                 string="Addtional Information">
-                                <field name="country_id"/>
                                 <field name="partner_id"/>
                                 <field name="description"/>
                                 <field name="active"

@@ -64,7 +64,7 @@
                             </group>
                             <group name="personal"
                                 string="Information">
-                                <field name="country_id" widget="selection"/>
+                                <field name="country_id"/>
                                 <field name="religion"/>
                                 <field name="gender"/>
                                 <field name="children_no"/>
