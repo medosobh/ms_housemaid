@@ -16,6 +16,12 @@ class maids(models.Model):
         ('name_uniq', 'unique(name)', "A name can only be assigned to one Maid!"),
     ]
     _inherit = ['mail.thread', 'mail.activity.mixin']
+    
+    @api.model
+    def _default_image(self):
+        image_path = get_module_resource(
+            'ms_housemaid', 'static/img', 'maid.png')
+        return base64.b64encode(open(image_path, 'rb').read())
 
     @api.depends('name', 'code')
     def name_get(self):
@@ -64,6 +70,7 @@ class maids(models.Model):
         tracking=True,
     )
     image = fields.Image(
+        default=_default_image,
         tracking=True,
     )
     code = fields.Char(

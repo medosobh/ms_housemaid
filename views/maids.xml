@@ -204,6 +204,7 @@
                 <field name="age"/>
                 <field name="hight"/>
                 <field name="weight"/>
+                <field name="activity_ids"/>
                 <templates>
                     <t t-name="kanban-box">
                         <div t-attf-class="oe_kanban_global_click o_kanban_record_has_image_fill">
@@ -233,7 +234,7 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div class="oe_kanban_content position-absolute fixed-bottom mr-2 o_hr_employee_kanban_bottom">
+                            <div class="oe_kanban_content position-absolute fixed-bottom mr-2">
                                 <div class="o_kanban_record_bottom">
                                     <div class="oe_kanban_bottom_left"/>
                                     <div class="oe_kanban_bottom_right float-right">

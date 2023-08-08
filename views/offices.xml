@@ -10,10 +10,9 @@
 			<form string="External Offices">
 				<sheet>
 					<div>
-						<field name="image_1920"
+						<field name="image"
 							widget="image"
-							class="oe_avatar"
-							options="{&quot;preview_image&quot;: &quot;avatar_128&quot;}"/>
+							class="oe_avatar" />
 					</div>
 					<div class="oe_title">
 						<group name="offices_title"
@@ -109,6 +108,61 @@
 		</field>
 	</record>
 
+	<record id="housemaid_offices_kanban"
+		model="ir.ui.view">
+		<field name="name">housemaid.offices.kanban</field>
+		<field name="model">housemaid.offices</field>
+		<field name="arch"
+			type="xml">
+			<kanban default_group_by="country_id"
+				class="o_kanban_mobile">
+				<field name="id"/>
+				<field name="code"/>
+				<field name="name"/>
+				<field name="image"/>
+				<field name="country_id"/>
+				<field name="activity_ids"/>
+				<templates>
+					<t t-name="kanban-box">
+						<div t-attf-class="oe_kanban_global_click o_kanban_record_has_image_fill">
+							<t t-if="record.image.raw_value">
+								<div class="o_kanban_image_fill_left d-none d-md-block"
+									t-attf-style="background-image:url('#{kanban_image('housemaid.offices', 'image', record.id.raw_value)}')"/>
+							</t>
+							<t t-else="">
+								<img class="o_kanban_image"
+									alt="Avatar"
+									t-att-src='_s + "/ms_housemaid/static/img/office.png"'/>
+							</t>
+							<div class="oe_kanban_details">
+								<strong class="o_kanban_record_title">
+									<field name="code"/>
+								</strong>
+								<div class="o_kanban_tags_section"/>
+								<ul>
+									<li>Name:
+										<field name="name"/>
+									</li>
+								</ul>
+							</div>
+							<div class="oe_kanban_content position-absolute fixed-bottom mr-2">
+								<div class="o_kanban_record_bottom">
+									<div class="oe_kanban_bottom_left"/>
+									<div class="oe_kanban_bottom_right float-right">
+										<div class="hr_activity_container">
+											<field name="activity_ids"
+												widget="kanban_activity"/>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</t>
+				</templates>
+			</kanban>
+		</field>
+	</record>
+
 	<record id="housemaid_offices_search"
 		model="ir.ui.view">
 		<field name="name">housemaid.offices.search</field>
@@ -156,7 +210,7 @@
 		<field name="name">External Offices</field>
 		<field name="type">ir.actions.act_window</field>
 		<field name="res_model">housemaid.offices</field>
-		<field name="view_mode">tree,form</field>
+		<field name="view_mode">tree,form,kanban</field>
 		<field name="help"
 			type="html">
 			<p class="o_view_nocontent_smiling_face">Create your first External Office!</p>

@@ -56,8 +56,9 @@ class sponsers(models.Model):
         default=lambda self: _('name@mail.com'),
         tracking=True
     )
-    image_1920 = fields.Image(
-        default=_default_image
+    image = fields.Image(
+        default=_default_image,
+        tracking=True,
     )
     address = fields.Text(
         string='Address',

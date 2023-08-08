@@ -76,13 +76,15 @@ class offices(models.Model):
         string='Address',
         tracking=True,
     )
-    image_1920 = fields.Image(
-        default=_default_image
+    image = fields.Image(
+        default=_default_image,
+        tracking=True,
     )
     country_id = fields.Many2one(
         string="Country",
         comodel_name='res.country',
         help="Country of Office.",
+        required=True,
         tracking=True
     )
     partner_id = fields.Many2one(
