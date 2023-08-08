@@ -9,10 +9,12 @@
     'license': 'LGPL-3',
     'category': 'Human Resources',
     'depends': [
+        'base',
         'base_setup',
         'mail',
         'resource',
         'web',
+        'web_kanban_gauge',
     ],
     'data': [
         'security/security.xml',

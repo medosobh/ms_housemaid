@@ -17,12 +17,6 @@ class maids(models.Model):
     ]
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
-    @api.model
-    def _default_image(self):
-        image_path = get_module_resource(
-            'ms_housemaid', 'static/img', 'maid.png')
-        return base64.b64encode(open(image_path, 'rb').read())
-
     @api.depends('name', 'code')
     def name_get(self):
         result = []
@@ -69,8 +63,7 @@ class maids(models.Model):
         required=True,
         tracking=True,
     )
-    image_1920 = fields.Image(
-        default=_default_image,
+    image = fields.Image(
         tracking=True,
     )
     code = fields.Char(
@@ -271,7 +264,8 @@ class maids(models.Model):
     country_id = fields.Many2one(
         string="Country",
         comodel_name='res.country',
-        help="Country of Office.",
+        help="Country of Maid.",
+        required=True,
         tracking=True,
     )
     partner_id = fields.Many2one(
@@ -365,6 +359,3 @@ class maidslogs(models.Model):
         default=True,
         tracking=True,
     )
-
-
-
