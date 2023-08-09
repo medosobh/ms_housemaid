@@ -5,7 +5,6 @@ import base64
 
 
 class sponsers(models.Model):
-
     _name = 'housemaid.sponsers'
     _description = 'Records of Sponsers.'
     _rec_name = 'phone'

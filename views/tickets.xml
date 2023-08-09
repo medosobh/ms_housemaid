@@ -13,50 +13,41 @@
                         options="{'clickable': '1'}"
                         clickable="True"
                         type="object"/>
-
                     <button string="Search for a maid"
                         name="action_search_ticket"
                         type="object"
                         class="oe_highlight"
-                        attrs="{'invisible': [('state', 'in', ('check','search','available','reserve','confirm','garanty','hiring','closed'))]}" />
-
+                        attrs="{'invisible': [('state', 'in', ('check','search','found','reserve','confirm','garanty','hiring','closed'))]}" />
                     <button string="Draft"
                         name="action_draft_ticket"
                         type="object"
                         class="oe_highlight"
                         attrs="{'invisible': [('state', 'in', ('draft'))]}" />
-
-                    <button string="Avaliable"
-                        name="action_avaliable_ticket"
+                    <button string="Found"
+                        name="action_found_ticket"
                         type="object"
                         class="oe_highlight"
-                        attrs="{'invisible': [('state', 'in', ('available','confirm','garanty','hiring','closed'))]}" />
-
+                        attrs="{'invisible': [('state', 'in', ('found','runout','reserve','confirm','garanty','hiring','closed'))]}" />
                     <button string="Not avaliable"
                         name="action_runout_ticket"
                         type="object"
                         class="oe_highlight"
-                        attrs="{'invisible': [('state', 'in', ('draft','runout'))]}" />
-
+                        attrs="{'invisible': [('state', 'in', ('draft','runout','reserve'))]}" />
                     <button string="Sponser confirm"
                         name="action_confirm_ticket"
                         type="object"
                         class="oe_highlight"
-                        attrs="{'invisible': [('state', 'in', ('draft','check','search','confirm'))]}" />
-
+                        attrs="{'invisible': [('state', 'in', ('draft','check','search','found','runout','confirm'))]}" />
                     <button string="Start 90days Garanty"
                         name="action_garanty_ticket"
                         type="object"
                         class="oe_highlight"
-                        attrs="{'invisible': [('state', 'in', ('draft','check','search','garanty'))]}" />
-
+                        attrs="{'invisible': [('state', 'in', ('draft','check','search','found','runout','reserve','garanty'))]}" />
                     <button string="Closed"
                         name="action_closed_ticket"
                         type="object"
                         class="oe_highlight"
-                        attrs="{'invisible': [('state', 'in', ('draft','check','search','closed'))]}" />
-
-
+                        attrs="{'invisible': [('state', 'in', ('draft','check','search','found','reserve','closed'))]}" />
                 </header>
                 <sheet>
                     <div class="oe_title">
@@ -199,12 +190,19 @@
                             string="Actions">
                             <field name="action_maids_ids">
                                 <tree>
+                                    <button name="action_reserve_maid"
+                                        class="oe_inline oe_stat_button"
+                                        icon="fa-bookmark"
+                                        type="object"
+                                        help="Move Maid to Action page!"
+                                        attrs="{'invisible': [('state', 'in', ('hiring',))]}"/>
                                     <button name="action_hiring_maid"
                                         class="oe_inline oe_stat_button"
                                         icon="fa-question-circle"
                                         type="object"
                                         help="Ask Operation to Proceed Recrutement!"
                                         attrs="{'invisible': [('state', 'in', ('hiring'))]}"/>
+
                                     <field name="state"/>
                                     <field name="code"/>
                                     <field name="phone"/>
@@ -361,11 +359,15 @@
                 <searchpanel>
                     <field name="company_id"
                         select="multi"
-                        string="Relative Company"
+                        string="Company"
                         enable_counters="1"/>
                     <field name="country_id"
                         select="multi"
-                        string="Relative Country"
+                        string="Country"
+                        enable_counters="1"/>
+                    <field name="jobs_id"
+                        select="multi"
+                        string="Job"
                         enable_counters="1"/>
                 </searchpanel>
             </search>

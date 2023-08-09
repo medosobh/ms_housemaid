@@ -5,7 +5,6 @@ import base64
 
 
 class offices(models.Model):
-
     _name = 'housemaid.offices'
     _description = 'Records of External Offices.'
     _rec_name = 'name'
@@ -95,7 +94,7 @@ class offices(models.Model):
     description = fields.Text(
         string='Description',
         tracking=True,
-    )  
+    )
     company_id = fields.Many2one(
         comodel_name='res.company',
         string='Company',

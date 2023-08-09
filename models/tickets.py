@@ -18,43 +18,41 @@ class tickets(models.Model):
             vals['code'] = self.env['ir.sequence'].next_by_code(
                 'housemaid.sales.tickets') or _('New')
         return super(tickets, self).create(vals)
-    
+
     def action_search_ticket(self):
         self.ensure_one()
         self.state = 'search'
         print('action_search_ticket')
-    
+
     def action_draft_ticket(self):
         self.ensure_one()
         self.state = 'draft'
         print('action_draft_ticket')
-        
-    def action_avaliable_ticket(self):
+
+    def action_found_ticket(self):
         self.ensure_one()
-        self.state = 'avaliable'
+        self.state = 'found'
         print('action_avaliable_ticket')
-        
+
     def action_runout_ticket(self):
         self.ensure_one()
         self.state = 'runout'
         print('action_runout_ticket')
-        
+
     def action_confirm_ticket(self):
         self.ensure_one()
         self.state = 'confirm'
         print('action_confirm_ticket')
-        
+
     def action_garanty_ticket(self):
         self.ensure_one()
         self.state = 'garanty'
         print('action_garanty_ticket')
-        
+
     def action_closed_ticket(self):
         self.ensure_one()
         self.state = 'closed'
         print('action_closed_ticket')
-
-    
 
     code = fields.Char(
         string='Code',
@@ -70,15 +68,12 @@ class tickets(models.Model):
             ('draft', 'Draft'),  # 1 > #2 button
             ('check', 'Checking'),  # 2 sales request
             ('search', 'Searching'),  # 2 sales request
-            
-            ('available', 'Avaliable'),  # 3 > #4 feedback
+            ('found', 'Found'),  # 3 > #4 feedback
             ('runout', 'Not avaliable'),  # 3 > loop #2 ask for reason feedback
-            
             ('reserve', 'Reserve a Maid'),  # 4 > #5 request
             ('confirm', 'Sponser confirm'),  # 5 >#6 button
             ('hiring', 'Hiring'),  # 7 > #8 sales request
-            ('garanty', 'Start 90days Garanty'),  # 8 > # 9 button            
-            
+            ('garanty', 'Start 90days Garanty'),  # 8 > # 9 button
             # once operation close its ticket it will change sales ticket State
             ('closed', 'Closed'),  # 9
         ],
@@ -303,7 +298,7 @@ class tickets(models.Model):
         self.ensure_one()
         maids_ids = self.env['housemaid.maids'].search(
             [
-                ('state', 'not in', ('backout','reserve')),
+                ('state', 'not in', ('backout', 'reserve')),
                 ('active', '=', True),
                 ('tickets_id', '=', False),
             ]
