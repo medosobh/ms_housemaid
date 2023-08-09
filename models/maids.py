@@ -26,28 +26,37 @@ class maids(models.Model):
     # object in search page
     def action_check_maid(self):
         self.ensure_one()
-        # maid state to check
-        for rec in self:
-            rec.state='check'
-        # create activity to user to check on maid
         # update maid field ticket id
+        context = dict(self.env.context or {})
+        self.tickets_id = context.get('tickets_id',False)    
+        # maid state to check
+        self.state = 'check'    
+        # create activity to user to check on maid
+        user_id = context.get('user_id',False) 
+        
+        
+        print(self.tickets_id)
         print('Check Avaliability!')
+        return {
+            'type': 'ir.actions.client',
+            'tag': 'reload',
+        }
 
     def action_reserve_maid(self):
         self.ensure_one()
         # maid state to reserve
         for rec in self:
-            rec.state='reserve'
+            rec.state = 'reserve'
         # create activity to user to confirm on maid
         # update maid field ticket id
         print('Reserve Maid!')
-        
+
     # object in Maid form
     def action_draft_maid(self):
         self.ensure_one()
         # maid state to draft
         for rec in self:
-            rec.state='draft'
+            rec.state = 'draft'
         # update maid field ticket id to empty
         print('Maid set to Draft!')
 
@@ -55,7 +64,7 @@ class maids(models.Model):
         self.ensure_one()
         # maid state to open
         for rec in self:
-            rec.state='open'
+            rec.state = 'open'
         # create activity to user to check on maid
         # update maid field ticket id
         print('Maid open to work!')
@@ -64,17 +73,26 @@ class maids(models.Model):
         self.ensure_one()
         # maid state to ready
         for rec in self:
-            rec.state='ready'
+            rec.state = 'ready'
         # create activity to user to check on maid
         # update maid field ticket id
         print('Maid Ready to Work!')
 
+    def action_backout_maid(self):
+        self.ensure_one()
+        # maid state to backout
+        for rec in self:
+            rec.state = 'backout'
+        # create activity to operation user to proceed on maid
+        # update maid field ticket id once more!!
+        print('Recruitment Procedures!')
+
     # object in action page
-    def action_hire_maid(self):
+    def action_hiring_maid(self):
         self.ensure_one()
         # maid state to hiring
         for rec in self:
-            rec.state='hiring'
+            rec.state = 'hiring'
         # create activity to operation user to proceed on maid
         # update maid field ticket id once more!!
         print('Recruitment Procedures!')
@@ -105,16 +123,15 @@ class maids(models.Model):
     state = fields.Selection(
         string='State',
         selection=[
-            # show in search page
-            ('draft', 'Draft'),  # 1 > #2   fa-unlink
-            ('open', 'Open to Work'),  # 3 > #4 fa-hourglass
-            ('ready', 'Ready at Guesthouse'),  # 3 > #4 fa-hourglass
-            # show in action page
-            ('check', 'Check Avaliability'),  # 2 > #3 fa-question-circle
-            ('reserve', 'Reserved the Maid'),  # 4 > #5   fa-link
-            ('hiring', 'Hiring the Maid'),  # 5 fa-link
-            # show in Maid Form only
-            ('backout', 'Backout'),  # 3  stop here fa-ban
+            ('draft', 'Draft'),  # 1 > #2   fa-unlink # show in search page
+            # 2 > #3 fa-question-circle # show in action page
+            ('check', 'Checking'),
+            ('open', 'Open to Work'),  # 3 > #4 fa-hourglass # show in search page
+            # 3 > #4 fa-hourglass # show in search page
+            ('ready', 'Ready at Guesthouse'),
+            ('reserve', 'Reserved'),  # 4 > #5   fa-link # show in action page
+            ('hiring', 'Hiring'),  # 5 fa-link # show in action page
+            ('backout', 'Backout'),  # 3  stop here fa-ban # show in Maid Form only
             # no search state!
         ],
         default='draft',

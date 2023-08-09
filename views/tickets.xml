@@ -15,7 +15,6 @@
                         statusbar_visible="draft,check,search,available"
                         type="object"/>
 
-
                 </header>
                 <sheet>
                     <div class="oe_title">
@@ -120,7 +119,8 @@
                                         icon="fa-question-circle"
                                         type="object"
                                         help="Ask Operation to Check Avaliability!"
-                                        attrs="{'invisible': [('state', 'in', ('open', 'ready'))]}"/>
+                                        attrs="{'invisible': [('state', 'in', ('open', 'ready'))]}"
+                                        context="{'tickets_id': id, 'user_id': user_id}" />
                                     <button name="action_reserve_maid"
                                         class="oe_inline oe_stat_button"
                                         icon="fa-bookmark"
