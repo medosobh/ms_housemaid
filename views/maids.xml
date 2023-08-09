@@ -109,6 +109,8 @@
                                     groups="base.group_multi_company"/>
                                 <field name="user_id"
                                     widget="selection"/>
+                                <field name="tickets_id"
+                                    widget="selection"/>
                             </group>
                         </group>
                     </div>
@@ -171,6 +173,8 @@
                     groups="base.group_multi_company"/>
                 <field name="user_id"
                     widget="selection"/>
+                <field name="tickets_id"
+                    widget="selection"/>
             </tree>
         </field>
     </record>
@@ -231,6 +235,9 @@
                                     </li>
                                     <li>Office:
                                         <field name="offices_id"/>
+                                    </li>
+                                    <li>Ticket:
+                                        <field name="tickets_id"/>
                                     </li>
                                 </ul>
                             </div>

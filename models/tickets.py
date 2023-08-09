@@ -19,6 +19,8 @@ class tickets(models.Model):
                 'housemaid.sales.tickets') or _('New')
         return super(tickets, self).create(vals)
 
+    
+
     code = fields.Char(
         string='Code',
         required=True,
@@ -30,18 +32,18 @@ class tickets(models.Model):
     state = fields.Selection(
         string='State',
         selection=[
-            ('draft', 'Draft Request'),
-            ('available', 'Operation Confirm Maid avaliable'),
-            ('runout', 'Maid is Not avaliable'),
-            ('reserve', 'Maid Reserved'),
-            ('confirm', 'Sponser confirm the Maid'),
-            ('90days', 'Maid in 90days Garanty'),
+            ('draft', 'Draft Request'), #1 > #2
+            ('available', 'Maid avaliable'),#3 > #4
+            ('runout', 'Maid is Not avaliable'),#3 > loop #2
+            ('reserve', 'Maid Reserved'),#4 > #5
+            ('confirm', 'Sponser confirm the Maid'),#5 >#6
+            ('90days', 'Maid in 90days Garanty'),#8 > # 9
             # sales ask for 1 of 3 tiket type
-            ('search', 'Search for Maid'),
-            ('insure', 'Insure Maid avaliable'),
-            ('hiring', 'Hiring the Maid'),
+            ('check', 'Check Availability'),#2
+            ('search', 'Search for Maid'), #2
+            ('hiring', 'Hiring the Maid'),#7 > #8
             # once operation close its ticket it will change sales ticket State
-            ('closed', 'Ticket Closed'),
+            ('closed', 'Ticket Closed'),#9
         ],
         default='draft',
         readonly=False,
@@ -53,6 +55,7 @@ class tickets(models.Model):
             ('sales', 'Sales'),
             ('transfer', 'Sponser Transfer'),
         ],
+        required=True,
         tracking=True,
     )
     sponser_name = fields.Char(
@@ -219,7 +222,7 @@ class tickets(models.Model):
     country_id = fields.Many2one(
         string="Country",
         comodel_name='res.country',
-        help="Country of Office.",
+        help="Country of Maid.",
         tracking=True,
     )
     company_id = fields.Many2one(
@@ -241,16 +244,16 @@ class tickets(models.Model):
         default=True,
         tracking=True,
     )
-    maid_id = fields.Many2one(
+    maids_id = fields.Many2one(
         comodel_name='housemaid.maids',
-        string='Maids Hired',
+        string='Maids Check or Hired',
         tracking=True,
     )
     maids_ids = fields.Many2many(
         comodel_name='housemaid.maids',
         compute='_search_maids',
         string='Maids Search Result',
-        store=True,
+        # store=True,
     )
 
     @api.depends('jobs_id', 'country_id', 'monthly_salary')
@@ -259,7 +262,7 @@ class tickets(models.Model):
         maids_ids = self.env['housemaid.maids'].search(
             [
                 ('state', '!=', 'backout'),
-                ('ticket_id', '=', False),
+                ('tickets_id', '=', False),
                 ('active', '=', True),
             ])
         if self.jobs_id != False:
@@ -267,7 +270,7 @@ class tickets(models.Model):
                 lambda maids: maids.jobs_id.id == self.jobs_id.id)
         else:
             maids_ids1 = maids_ids
-        
+
         if len(self.country_id) == 1:
             maids_ids2 = maids_ids1.filtered(
                 lambda maids: maids.country_id.id == self.country_id.id)
@@ -275,12 +278,12 @@ class tickets(models.Model):
             maids_ids2 = maids_ids1
 
         print(self.monthly_salary)
-        if self.monthly_salary != 0:    
+        if self.monthly_salary != 0:
             maids_ids3 = maids_ids2.filtered(
                 lambda maids: maids.monthly_salary == self.monthly_salary)
             print(maids_ids3)
         else:
             maids_ids3 = maids_ids2
             print(maids_ids3)
-            
+
         self.maids_ids = [(6, 0, maids_ids3.ids)]

@@ -23,6 +23,12 @@ class maids(models.Model):
             'ms_housemaid', 'static/img', 'maid.png')
         return base64.b64encode(open(image_path, 'rb').read())
 
+    def action_check_maid(self):
+        print('Check Avaliability!')
+        
+    def action_hire_maid(self):
+        print('Recruitment Procedures!')
+        
     @api.depends('name', 'code')
     def name_get(self):
         result = []
@@ -46,10 +52,7 @@ class maids(models.Model):
 
         return self.age
 
-    ticket_id = fields.Many2one(
-        comodel_name='housemaid.tickets',
-        string='Ticket no.',
-    )
+    
     state = fields.Selection(
         string='State',
         selection=[
@@ -297,6 +300,10 @@ class maids(models.Model):
         comodel_name='res.users',
         required=True,
         tracking=True,
+    )
+    tickets_id = fields.Many2one(
+        comodel_name='housemaid.tickets',
+        string='Ticket no.',
     )
     maidslogs_ids = fields.One2many(
         string="History",
