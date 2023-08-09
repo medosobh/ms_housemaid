@@ -13,6 +13,31 @@
                         options="{'clickable': '1'}"
                         clickable="True"
                         type="object"/>
+                    <button string="Set to Draft"
+                        name="action_draft_maid"
+                        type="object"
+                        class="oe_highlight"
+                        attrs="{'invisible': [('state', 'not in', ('check', 'open','ready','reserve','backout','hiring'))]}" />
+                    <button string="Open to Work"
+                        name="action_open_maid"
+                        type="object"
+                        class="oe_highlight"
+                        attrs="{'invisible': [('state', 'not in', ('draft', 'open','ready'))]}" />
+                    <button string="Ready to Work"
+                        name="action_ready_maid"
+                        type="object"
+                        class="oe_highlight"
+                        attrs="{'invisible': [('state', 'not in', ('draft', 'open','ready'))]}" />
+                    <button string="Checking"
+                        name="action_check_maid"
+                        type="object"
+                        class="oe_highlight"
+                        attrs="{'invisible': [('state', 'not in', ('draft', 'open','ready'))]}" />
+                    <button string="Reserve"
+                        name="action_reserve_maid"
+                        type="object"
+                        class="oe_highlight"
+                        attrs="{'invisible': [('state', 'not in', ('draft', 'open','ready'))]}" />
                 </header>
                 <sheet>
                     <div>

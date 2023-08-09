@@ -25,19 +25,58 @@ class maids(models.Model):
 
     # object in search page
     def action_check_maid(self):
-        #maid state to check
-        #create activity to user to check on maid
-        #update maid field ticket id
+        self.ensure_one()
+        # maid state to check
+        for rec in self:
+            rec.state='check'
+        # create activity to user to check on maid
+        # update maid field ticket id
         print('Check Avaliability!')
 
     def action_reserve_maid(self):
-        #maid state to reserve
-        #create activity to user to confirm on maid
-        #update maid field ticket id
+        self.ensure_one()
+        # maid state to reserve
+        for rec in self:
+            rec.state='reserve'
+        # create activity to user to confirm on maid
+        # update maid field ticket id
         print('Reserve Maid!')
+        
+    # object in Maid form
+    def action_draft_maid(self):
+        self.ensure_one()
+        # maid state to draft
+        for rec in self:
+            rec.state='draft'
+        # update maid field ticket id to empty
+        print('Maid set to Draft!')
+
+    def action_open_maid(self):
+        self.ensure_one()
+        # maid state to open
+        for rec in self:
+            rec.state='open'
+        # create activity to user to check on maid
+        # update maid field ticket id
+        print('Maid open to work!')
+
+    def action_ready_maid(self):
+        self.ensure_one()
+        # maid state to ready
+        for rec in self:
+            rec.state='ready'
+        # create activity to user to check on maid
+        # update maid field ticket id
+        print('Maid Ready to Work!')
 
     # object in action page
     def action_hire_maid(self):
+        self.ensure_one()
+        # maid state to hiring
+        for rec in self:
+            rec.state='hiring'
+        # create activity to operation user to proceed on maid
+        # update maid field ticket id once more!!
         print('Recruitment Procedures!')
 
     @api.depends('name', 'code')
@@ -72,9 +111,9 @@ class maids(models.Model):
             ('ready', 'Ready at Guesthouse'),  # 3 > #4 fa-hourglass
             # show in action page
             ('check', 'Check Avaliability'),  # 2 > #3 fa-question-circle
-            ('reserve', 'Reserved by ticket'),  # 4 > #5   fa-link
-            ('hired', 'Hired by ticket'),  # 5 fa-link
-
+            ('reserve', 'Reserved the Maid'),  # 4 > #5   fa-link
+            ('hiring', 'Hiring the Maid'),  # 5 fa-link
+            # show in Maid Form only
             ('backout', 'Backout'),  # 3  stop here fa-ban
             # no search state!
         ],

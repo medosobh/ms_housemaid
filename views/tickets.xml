@@ -125,7 +125,7 @@
                                         class="oe_inline oe_stat_button"
                                         icon="fa-bookmark"
                                         type="object"
-                                        help="Ask Operation to Recruitment Procedures!"
+                                        help="Move Maid to Action page!"
                                         attrs="{'invisible': [('state', 'in', ('draft'))]}"/>
                                     <field name="state"/>
                                     <field name="code"/>
@@ -157,7 +157,12 @@
                             string="Actions">
                             <field name="action_maids_ids">
                                 <tree>
-
+                                    <button name="action_hiring_maid"
+                                        class="oe_inline oe_stat_button"
+                                        icon="fa-question-circle"
+                                        type="object"
+                                        help="Ask Operation to Proceed Recrutement!"
+                                        attrs="{'invisible': [('state', 'in', ('hiring'))]}"/>
                                     <field name="state"/>
                                     <field name="code"/>
                                     <field name="phone"/>
