@@ -16,7 +16,7 @@
         <record id="mail_act_checking"
             model="mail.activity.type">
             <field name="name">Checking Maid</field>
-            <field name="icon"> fa-feed</field>
+            <field name="icon">fa-feed</field>
             <field name="res_model">housemaid.maids</field>
         </record>
 

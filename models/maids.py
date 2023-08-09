@@ -26,27 +26,26 @@ class maids(models.Model):
     # object in search page
     def action_check_maid(self):
         self.ensure_one()
-        # update maid field ticket id
+        # test maid ticket id exist or update?
         context = dict(self.env.context or {})
         tickets_id = context.get('tickets_id', False)
-        self.tickets_id = tickets_id
-        # maid state to check
-        self.state = 'check'
-        # create activity to user to check on maid
-        user_id = context.get('user_id', False)
-        # create an activity
-        # users = self.env.ref('ms_housemaid.group_housemaid_operator').users
-        # for user in users:
-        self.activity_schedule('ms_housemaid.mail_act_checking', user_id=user_id,
+        if self.tickets_id == False:
+            # maid state to check
+            self.state = 'check'
+            self.tickets_id = tickets_id
+            # create activity to user to check on maid
+            user_id = context.get('user_id', False)
+            # create an activity
+            # users = self.env.ref('ms_housemaid.group_housemaid_operator').users
+            # for user in users:
+            self.activity_schedule('ms_housemaid.mail_act_checking', user_id=user_id,
                                note=f'Please Check Maid {self.name} of the ticket {self.tickets_id.code}')
-        # change ticket state
-        record = self.env['housemaid.tickets'].browse(tickets_id)
-        print(record)
-        print(record.state)
-        record.state = 'check'
-        print(record.state)
-        print(self.tickets_id)
-        print('Check Avaliability!')
+            # change ticket state
+            record = self.env['housemaid.tickets'].browse(tickets_id)
+            record.state = 'check'
+        else:
+            raise UserError("Maid already linked to another Ticket!")
+        #refresh page
         return {
             'type': 'ir.actions.client',
             'tag': 'reload',
@@ -55,8 +54,12 @@ class maids(models.Model):
     def action_reserve_maid(self):
         self.ensure_one()
         # maid state to reserve
-        for rec in self:
-            rec.state = 'reserve'
+        self.state = 'reserve'
+        # update maid field ticket id
+        context = dict(self.env.context or {})
+        tickets_id = context.get('tickets_id', False)
+        self.tickets_id = tickets_id
+            
         # create activity to user to confirm on maid
         # update maid field ticket id
         print('Reserve Maid!')
