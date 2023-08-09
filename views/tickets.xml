@@ -12,8 +12,50 @@
                         widget="statusbar"
                         options="{'clickable': '1'}"
                         clickable="True"
-                        statusbar_visible="draft,check,search,available"
                         type="object"/>
+
+                    <button string="Search for a maid"
+                        name="action_search_ticket"
+                        type="object"
+                        class="oe_highlight"
+                        attrs="{'invisible': [('state', 'in', ('check','search','available','reserve','confirm','garanty','hiring','closed'))]}" />
+
+                    <button string="Draft"
+                        name="action_draft_ticket"
+                        type="object"
+                        class="oe_highlight"
+                        attrs="{'invisible': [('state', 'in', ('draft'))]}" />
+
+                    <button string="Avaliable"
+                        name="action_avaliable_ticket"
+                        type="object"
+                        class="oe_highlight"
+                        attrs="{'invisible': [('state', 'in', ('available','confirm','garanty','hiring','closed'))]}" />
+
+                    <button string="Not avaliable"
+                        name="action_runout_ticket"
+                        type="object"
+                        class="oe_highlight"
+                        attrs="{'invisible': [('state', 'in', ('draft','runout'))]}" />
+
+                    <button string="Sponser confirm"
+                        name="action_confirm_ticket"
+                        type="object"
+                        class="oe_highlight"
+                        attrs="{'invisible': [('state', 'in', ('draft','check','search','confirm'))]}" />
+
+                    <button string="Start 90days Garanty"
+                        name="action_garanty_ticket"
+                        type="object"
+                        class="oe_highlight"
+                        attrs="{'invisible': [('state', 'in', ('draft','check','search','garanty'))]}" />
+
+                    <button string="Closed"
+                        name="action_closed_ticket"
+                        type="object"
+                        class="oe_highlight"
+                        attrs="{'invisible': [('state', 'in', ('draft','check','search','closed'))]}" />
+
 
                 </header>
                 <sheet>

@@ -28,16 +28,23 @@ class maids(models.Model):
         self.ensure_one()
         # update maid field ticket id
         context = dict(self.env.context or {})
-        self.tickets_id = context.get('tickets_id',False)    
+        tickets_id = context.get('tickets_id', False)
+        self.tickets_id = tickets_id
         # maid state to check
-        self.state = 'check'    
+        self.state = 'check'
         # create activity to user to check on maid
-        user_id = context.get('user_id',False) 
-        
+        user_id = context.get('user_id', False)
+        # create an activity
         # users = self.env.ref('ms_housemaid.group_housemaid_operator').users
         # for user in users:
-        self.activity_schedule('ms_housemaid.mail_act_checking', user_id=user_id, note=f'Please Check Maid {self.name} of the ticket {self.tickets_id}')
-        
+        self.activity_schedule('ms_housemaid.mail_act_checking', user_id=user_id,
+                               note=f'Please Check Maid {self.name} of the ticket {self.tickets_id.code}')
+        # change ticket state
+        # self.env['housemaid.tickets'].search(
+        #     [('tickets_id', '=', tickets_id)]
+        # ).write({'state': 'check'})
+
+        # self.env[''housemaid.tickets'']._search_maids()tickets_id
         print(self.tickets_id)
         print('Check Avaliability!')
         return {
