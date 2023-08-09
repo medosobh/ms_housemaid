@@ -44,7 +44,7 @@ class tickets(models.Model):
         self.state = 'confirm'
         print('action_confirm_ticket')
 
-    @api.depends('garanty_day')
+    @api.onchange('garanty_day')
     def action_garanty_ticket(self):
         self.ensure_one()
         self.state = 'garanty'
