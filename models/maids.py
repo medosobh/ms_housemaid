@@ -39,13 +39,13 @@ class maids(models.Model):
             # users = self.env.ref('ms_housemaid.group_housemaid_operator').users
             # for user in users:
             self.activity_schedule('ms_housemaid.mail_act_checking', user_id=user_id,
-                               note=f'Please Check Maid {self.name} of the ticket {self.tickets_id.code}')
+                                   note=f'Please Check Maid {self.name} of the ticket {self.tickets_id.code}')
             # change ticket state
             record = self.env['housemaid.tickets'].browse(tickets_id)
             record.state = 'check'
         else:
             raise UserError("Maid already linked to another Ticket!")
-        #refresh page
+        # refresh page
         return {
             'type': 'ir.actions.client',
             'tag': 'reload',
@@ -53,25 +53,44 @@ class maids(models.Model):
 
     def action_reserve_maid(self):
         self.ensure_one()
-        # maid state to reserve
-        self.state = 'reserve'
-        # update maid field ticket id
+        # test maid ticket id exist or update?
         context = dict(self.env.context or {})
         tickets_id = context.get('tickets_id', False)
-        self.tickets_id = tickets_id
-            
-        # create activity to user to confirm on maid
-        # update maid field ticket id
-        print('Reserve Maid!')
+        if self.tickets_id == False:
+            # maid state to check
+            self.state = 'reserve'
+            self.tickets_id = tickets_id
+            # create activity to user to check on maid
+            user_id = context.get('user_id', False)
+            # create an activity
+            # users = self.env.ref('ms_housemaid.group_housemaid_operator').users
+            # for user in users:
+            self.activity_schedule('ms_housemaid.mail_act_checking', user_id=user_id,
+                                   note=f'Please Check Maid {self.name} of the ticket {self.tickets_id.code}')
+            # change ticket state
+            record = self.env['housemaid.tickets'].browse(tickets_id)
+            record.state = 'reserve'
+        else:
+            raise UserError("Maid already linked to another Ticket!")
+        # refresh page
+        return {
+            'type': 'ir.actions.client',
+            'tag': 'reload',
+        }
 
     # object in Maid form
     def action_draft_maid(self):
         self.ensure_one()
         # maid state to draft
-        for rec in self:
-            rec.state = 'draft'
-        # update maid field ticket id to empty
-        print('Maid set to Draft!')
+        self.state = 'draft'
+        self.tickets_id = []
+        # create activity to user to check on maid
+        user_id = self.user_id
+        # create an activity
+        # users = self.env.ref('ms_housemaid.group_housemaid_operator').users
+        # for user in users:
+        self.activity_schedule('ms_housemaid.mail_act_checking', user_id=user_id,
+                               note=f'Maid: {self.name} set to Draft!')
 
     def action_open_maid(self):
         self.ensure_one()
@@ -382,12 +401,12 @@ class maids(models.Model):
     partner_id = fields.Many2one(
         string='Partner',
         comodel_name='res.partner',
-        required=True,
+        required=False,
         tracking=True,
     )
     description = fields.Text(
         string='Description',
-        required=True,
+        required=False,
         tracking=True,
     )
     company_id = fields.Many2one(
@@ -409,6 +428,11 @@ class maids(models.Model):
         comodel_name='housemaid.tickets',
         required=False,
         string='Ticket no.',
+    )
+    garanty_day = fields.Date(
+        string='Start Garanty Date',
+        required=False,
+        tracking=True,
     )
     maidslogs_ids = fields.One2many(
         string="History",

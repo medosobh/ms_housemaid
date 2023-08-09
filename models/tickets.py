@@ -44,6 +44,7 @@ class tickets(models.Model):
         self.state = 'confirm'
         print('action_confirm_ticket')
 
+    @api.depends('garanty_day')
     def action_garanty_ticket(self):
         self.ensure_one()
         self.state = 'garanty'
@@ -279,6 +280,11 @@ class tickets(models.Model):
     maids_id = fields.Many2one(
         comodel_name='housemaid.maids',
         string='Maids Check or Hired',
+        tracking=True,
+    )
+    garanty_day = fields.Date(
+        string='Start Garanty Date',
+        required=False,
         tracking=True,
     )
     action_maids_ids = fields.One2many(

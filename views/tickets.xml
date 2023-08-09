@@ -137,6 +137,7 @@
                                     widget="selection"/>
                                 <field name="maids_id"
                                     widget="selection"/>
+                                <field name="garanty_day" />
                                 <field name="active"
                                     invisible="1"/>
                             </group>

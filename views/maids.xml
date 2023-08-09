@@ -135,8 +135,7 @@
                                 string="Addtional Information">
                                 <field name="partner_id"/>
                                 <field name="description"/>
-                                <field name="active"
-                                    invisible="1"/>
+
                             </group>
                             <group name="operation"
                                 string="Operation">
@@ -146,6 +145,9 @@
                                     widget="selection"/>
                                 <field name="tickets_id"
                                     widget="selection"/>
+                                <field name="garanty_day" />
+                                <field name="active"
+                                    invisible="1"/>
                             </group>
                         </group>
                     </div>
