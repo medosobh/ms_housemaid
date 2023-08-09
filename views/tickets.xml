@@ -112,7 +112,7 @@
                     </div>
                     <notebook>
                         <page name="search"
-                            string="Search Result">
+                            string="Search">
                             <field name="search_maids_ids">
                                 <tree>
                                     <button name="action_check_maid"
@@ -157,165 +157,189 @@
                             string="Actions">
                             <field name="action_maids_ids">
                                 <tree>
+
+                                    <field name="state"/>
+                                    <field name="code"/>
+                                    <field name="phone"/>
+                                    <field name="name"/>
+                                    <field name="email"/>
+                                    <field name="jobs_id"/>
+                                    <field name="monthly_salary"/>
+                                    <field name="contract_period"/>
+                                    <field name="passport_no"/>
+                                    <field name="religion"/>
+                                    <field name="gender"/>
+                                    <field name="marital_status"/>
+                                    <field name="country_id"/>
+                                    <field name="partner_id"/>
+                                    <field name="description"/>
+                                    <field name="active"
+                                        invisible="1"/>
+                                    <field name="company_id"
+                                        groups="base.group_multi_company"/>
+                                    <field name="user_id"
+                                        widget="selection"/>
+                                    <field name="currency_id"
+                                        groups="base.group_multi_currency"/>
                                 </tree>
-
-                            </page>
-                        </notebook>
-                    </sheet>
-                    <div class="oe_chatter">
-                        <field name="message_follower_ids"/>
-                        <field name="activity_ids"/>
-                        <field name="message_ids"/>
-                    </div>
-                </form>
-            </field>
-        </record>
-
-        <record id="housemaid_tickets_tree"
-            model="ir.ui.view">
-            <field name="name">housemaid.tickets.tree</field>
-            <field name="model">housemaid.tickets</field>
-            <field name="arch"
-                type="xml">
-                <tree string="Tickets List"
-                    sample="1">
-                    <field name="code"/>
-                    <field name="state"/>
-                    <field name="sponser_name"/>
-                    <field name="sponser_phone"/>
-                    <field name="sponser_email"/>
-                    <field name="sponsers_id"/>
-                    <field name="activity_ids"
-                        widget="list_activity"/>
-                    <field name="monthly_salary"/>
-                    <field name="currency_id"
-                        groups="base.group_multi_currency"/>
-                    <field name="contract_period"/>
-                    <field name="country_id"/>
-                    <field name="religion"/>
-                    <field name="gender"/>
-                    <field name="children_no"/>
-                    <field name="marital_status"/>
-                    <field name="maids_id"/>
-                </tree>
-            </field>
-        </record>
-
-        <record id="housemaid_offices_kanban"
-            model="ir.ui.view">
-            <field name="name">housemaid.tickets.kanban</field>
-            <field name="model">housemaid.tickets</field>
-            <field name="arch"
-                type="xml">
-                <kanban default_group_by="state"
-                    class="o_kanban_mobile">
-                    <field name="id"/>
-                    <field name="code"/>
-                    <field name="ticket_type"/>
-                    <field name="jobs_id"/>
-                    <field name="country_id"/>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
                     <field name="activity_ids"/>
-                    <templates>
-                        <t t-name="kanban-box">
-                            <div t-attf-class="oe_kanban_global_click o_kanban_record_has_image_fill">
-                                <div class="oe_kanban_details">
-                                    <strong class="o_kanban_record_title">
-                                        <field name="code"/>
-                                    </strong>
-                                    <div class="o_kanban_tags_section"/>
-                                    <ul>
-                                        <li>Type:
-                                            <field name="ticket_type"/>
-                                        </li>
-                                        <li>Applied Job:
-                                            <field name="jobs_id"/>
-                                        </li>
-                                        <li>From Country:
-                                            <field name="country_id" />
-                                        </li>
-                                        <li>Applied Maid:
-                                            <field name="maids_id" />
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="oe_kanban_content position-absolute fixed-bottom mr-2">
-                                    <div class="o_kanban_record_bottom">
-                                        <div class="oe_kanban_bottom_left"/>
-                                        <div class="oe_kanban_bottom_right float-right">
-                                            <div class="hr_activity_container">
-                                                <field name="activity_ids"
-                                                    widget="kanban_activity"/>
-                                            </div>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="housemaid_tickets_tree"
+        model="ir.ui.view">
+        <field name="name">housemaid.tickets.tree</field>
+        <field name="model">housemaid.tickets</field>
+        <field name="arch"
+            type="xml">
+            <tree string="Tickets List"
+                sample="1">
+                <field name="code"/>
+                <field name="state"/>
+                <field name="sponser_name"/>
+                <field name="sponser_phone"/>
+                <field name="sponser_email"/>
+                <field name="sponsers_id"/>
+                <field name="activity_ids"
+                    widget="list_activity"/>
+                <field name="monthly_salary"/>
+                <field name="currency_id"
+                    groups="base.group_multi_currency"/>
+                <field name="contract_period"/>
+                <field name="country_id"/>
+                <field name="religion"/>
+                <field name="gender"/>
+                <field name="children_no"/>
+                <field name="marital_status"/>
+                <field name="maids_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="housemaid_offices_kanban"
+        model="ir.ui.view">
+        <field name="name">housemaid.tickets.kanban</field>
+        <field name="model">housemaid.tickets</field>
+        <field name="arch"
+            type="xml">
+            <kanban default_group_by="state"
+                class="o_kanban_mobile">
+                <field name="id"/>
+                <field name="code"/>
+                <field name="ticket_type"/>
+                <field name="jobs_id"/>
+                <field name="country_id"/>
+                <field name="activity_ids"/>
+                <templates>
+                    <t t-name="kanban-box">
+                        <div t-attf-class="oe_kanban_global_click o_kanban_record_has_image_fill">
+                            <div class="oe_kanban_details">
+                                <strong class="o_kanban_record_title">
+                                    <field name="code"/>
+                                </strong>
+                                <div class="o_kanban_tags_section"/>
+                                <ul>
+                                    <li>Type:
+                                        <field name="ticket_type"/>
+                                    </li>
+                                    <li>Applied Job:
+                                        <field name="jobs_id"/>
+                                    </li>
+                                    <li>From Country:
+                                        <field name="country_id" />
+                                    </li>
+                                    <li>Applied Maid:
+                                        <field name="maids_id" />
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="oe_kanban_content position-absolute fixed-bottom mr-2">
+                                <div class="o_kanban_record_bottom">
+                                    <div class="oe_kanban_bottom_left"/>
+                                    <div class="oe_kanban_bottom_right float-right">
+                                        <div class="hr_activity_container">
+                                            <field name="activity_ids"
+                                                widget="kanban_activity"/>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                        </t>
-                    </templates>
-                </kanban>
-            </field>
-        </record>
+                        </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
 
-        <record id="housemaid_tickets_search"
-            model="ir.ui.view">
-            <field name="name">housemaid.tickets.search</field>
-            <field name="model">housemaid.tickets</field>
-            <field name="arch"
-                type="xml">
-                <search string="Tickets List">
+    <record id="housemaid_tickets_search"
+        model="ir.ui.view">
+        <field name="name">housemaid.tickets.search</field>
+        <field name="model">housemaid.tickets</field>
+        <field name="arch"
+            type="xml">
+            <search string="Tickets List">
+                <field name="company_id"
+                    widget="selection"/>
+                <field name="user_id"
+                    widget="selection"/>
+                <field name="country_id"
+                    widget="selection"/>
+                <filter name="filter_archived"
+                    string="Archived"
+                    domain="[('active', '=', False)]"/>
+                <group expand="0"
+                    string="Group by">
+                    <filter string="State"
+                        name="group_by_state"
+                        context="{'group_by':'state'}"/>
+                    <filter string="Company"
+                        name="group_by_company_id"
+                        context="{'group_by':'company_id'}"/>
+                    <filter string="Sales Man"
+                        name="group_by_user"
+                        context="{'group_by':'user_id'}"/>
+                    <filter string="Country"
+                        name="group_by_country_id"
+                        context="{'group_by':'country_id'}"/>
+                </group>
+                <searchpanel>
                     <field name="company_id"
-                        widget="selection"/>
-                    <field name="user_id"
-                        widget="selection"/>
+                        select="multi"
+                        string="Relative Company"
+                        enable_counters="1"/>
                     <field name="country_id"
-                        widget="selection"/>
-                    <filter name="filter_archived"
-                        string="Archived"
-                        domain="[('active', '=', False)]"/>
-                    <group expand="0"
-                        string="Group by">
-                        <filter string="State"
-                            name="group_by_state"
-                            context="{'group_by':'state'}"/>
-                        <filter string="Company"
-                            name="group_by_company_id"
-                            context="{'group_by':'company_id'}"/>
-                        <filter string="Sales Man"
-                            name="group_by_user"
-                            context="{'group_by':'user_id'}"/>
-                        <filter string="Country"
-                            name="group_by_country_id"
-                            context="{'group_by':'country_id'}"/>
-                    </group>
-                    <searchpanel>
-                        <field name="company_id"
-                            select="multi"
-                            string="Relative Company"
-                            enable_counters="1"/>
-                        <field name="country_id"
-                            select="multi"
-                            string="Relative Country"
-                            enable_counters="1"/>
-                    </searchpanel>
-                </search>
-            </field>
-        </record>
+                        select="multi"
+                        string="Relative Country"
+                        enable_counters="1"/>
+                </searchpanel>
+            </search>
+        </field>
+    </record>
 
-        <record id="housemaid_tickets_action"
-            model="ir.actions.act_window">
-            <field name="name">Tickets</field>
-            <field name="type">ir.actions.act_window</field>
-            <field name="res_model">housemaid.tickets</field>
-            <field name="view_mode">tree,form,kanban</field>
-            <field name="help"
-                type="html">
-                <p class="o_view_nocontent_smiling_face">Create your first ticket!</p>
-            </field>
-        </record>
+    <record id="housemaid_tickets_action"
+        model="ir.actions.act_window">
+        <field name="name">Tickets</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">housemaid.tickets</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="help"
+            type="html">
+            <p class="o_view_nocontent_smiling_face">Create your first ticket!</p>
+        </field>
+    </record>
 
-        <menuitem id="housemaid_tickets_menu"
-            name="Tickets"
-            action="housemaid_tickets_action"
-            parent="housemaid_menu_tickets"
-            sequence="21"/>
-    </odoo>
+    <menuitem id="housemaid_tickets_menu"
+        name="Tickets"
+        action="housemaid_tickets_action"
+        parent="housemaid_menu_tickets"
+        sequence="21"/>
+</odoo>

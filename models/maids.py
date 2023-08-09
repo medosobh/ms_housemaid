@@ -23,12 +23,20 @@ class maids(models.Model):
             'ms_housemaid', 'static/img', 'maid.png')
         return base64.b64encode(open(image_path, 'rb').read())
 
+    # object in search page
     def action_check_maid(self):
+        #maid state to check
+        #create activity to user to check on maid
+        #update maid field ticket id
         print('Check Avaliability!')
 
     def action_reserve_maid(self):
+        #maid state to reserve
+        #create activity to user to confirm on maid
+        #update maid field ticket id
         print('Reserve Maid!')
 
+    # object in action page
     def action_hire_maid(self):
         print('Recruitment Procedures!')
 

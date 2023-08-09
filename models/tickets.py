@@ -255,7 +255,7 @@ class tickets(models.Model):
     search_maids_ids = fields.Many2many(
         comodel_name='housemaid.maids',
         compute='_search_maids',
-        string='Maids Search Result',
+        string='Maids Search',
         # store=True,
     )
 
