@@ -10,4 +10,19 @@
             <field name="name">housedriver</field>
         </record>
     </data>
+    <data noupdate="0">
+        <record id="mail_act_checking"
+            model="mail.activity.type">
+            <field name="name">Checking Maid</field>
+            <field name="res_model_id"
+                ref="ms_housemaid.model_housemaid_maids"/>
+        </record>
+        <record id="mail_act_hiring"
+            model="mail.activity.type">
+            <field name="name">Hiring Maid</field>
+            <field name="res_model_id"
+                ref="ms_housemaid.model_housemaid_maids"/>
+        </record>
+    </data>
+
 </odoo>

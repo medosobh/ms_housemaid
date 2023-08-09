@@ -34,6 +34,9 @@ class maids(models.Model):
         # create activity to user to check on maid
         user_id = context.get('user_id',False) 
         
+        # users = self.env.ref('ms_housemaid.group_housemaid_operator').users
+        # for user in users:
+        self.activity_schedule('ms_housemaid.mail_act_checking', user_id=user_id, note=f'Please Check Maid {self.name} of the ticket {self.tickets_id}')
         
         print(self.tickets_id)
         print('Check Avaliability!')
