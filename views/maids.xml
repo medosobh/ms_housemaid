@@ -183,6 +183,7 @@
             <tree string="Maids List"
                 sample="1">
                 <field name="state"/>
+                <field name="offices_id"/>
                 <field name="code"/>
                 <field name="phone"
                     widget="phone"/>
@@ -317,7 +318,7 @@
                     <filter string="Company"
                         name="group_by_company_id"
                         context="{'group_by':'company_id'}"/>
-                    <filter string="Operation Man"
+                    <filter string="Operator"
                         name="group_by_user"
                         context="{'group_by':'user_id'}"/>
                     <filter string="Country"
@@ -325,13 +326,13 @@
                         context="{'group_by':'country_id'}"/>
                 </group>
                 <searchpanel>
-                    <field name="company_id"
+                    <field name="offices_id"
                         select="multi"
-                        string="Relative Company"
+                        string="Office"
                         enable_counters="1"/>
                     <field name="country_id"
                         select="multi"
-                        string="Relative Country"
+                        string="Country"
                         enable_counters="1"/>
                 </searchpanel>
             </search>

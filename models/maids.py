@@ -40,11 +40,11 @@ class maids(models.Model):
         self.activity_schedule('ms_housemaid.mail_act_checking', user_id=user_id,
                                note=f'Please Check Maid {self.name} of the ticket {self.tickets_id.code}')
         # change ticket state
-        # self.env['housemaid.tickets'].search(
-        #     [('tickets_id', '=', tickets_id)]
-        # ).write({'state': 'check'})
-
-        # self.env[''housemaid.tickets'']._search_maids()tickets_id
+        record = self.env['housemaid.tickets'].browse(tickets_id)
+        print(record)
+        print(record.state)
+        record.state = 'check'
+        print(record.state)
         print(self.tickets_id)
         print('Check Avaliability!')
         return {
@@ -203,17 +203,19 @@ class maids(models.Model):
     )
     contract_period = fields.Integer(
         string='Contract Period in Years',
-        required=False,
+        required=True,
         tracking=True
     )
     # ---------------------------
     arabic_lang = fields.Boolean(
         string="Arabic Language",
+        required=False,
         tracking=True,
 
     )
     english_lang = fields.Boolean(
         string="English Language",
+        required=False,
         tracking=True,
     )
     education = fields.Selection(
@@ -225,6 +227,7 @@ class maids(models.Model):
             ('mid2', 'collage no dgree'),
             ('mid3', 'collage dgree'),
         ],
+        required=False,
         string="Education level",
         help='Set the Education level',
     )
@@ -236,18 +239,18 @@ class maids(models.Model):
     )
     passport_place = fields.Char(
         string='Issue Place',
-        required=True,
+        required=False,
         tracking=True,
     )
     passport_issue_date = fields.Date(
         string='Issue Date',
-        required=True,
+        required=False,
         default=datetime.today(),
         tracking=True,
     )
     passport_expire_date = fields.Date(
         string='Expire Date',
-        required=True,
+        required=False,
         tracking=True,
     )
     # ----------------------------------------------
@@ -267,6 +270,7 @@ class maids(models.Model):
             ('Taoism', 'Taoism'),
             ('Zoroastrianism', 'Zoroastrianism'),
         ],
+        required=False,
         tracking=True,
     )
     gender = fields.Selection(
@@ -275,6 +279,7 @@ class maids(models.Model):
             ('male', 'Male'),
             ('female', 'Female'),
         ],
+        required=False,
         tracking=True,
     )
     children_no = fields.Integer(
@@ -285,6 +290,7 @@ class maids(models.Model):
     birthday = fields.Date(
         string='Birthday',
         default=fields.Date.context_today,
+        required=False,
         tracking=True,
     )
     place_of_birth = fields.Char(
@@ -300,6 +306,7 @@ class maids(models.Model):
             ('widowed', 'Widowed'),
             ('divorced', 'Divorced'),
         ],
+        required=False,
         tracking=True,
     )
     # ----------------------------
@@ -311,6 +318,7 @@ class maids(models.Model):
     age = fields.Integer(
         string='Age in Years',
         compute='_get_age',
+        required=False,
         tracking=True,
     )
     hight = fields.Float(
@@ -327,46 +335,56 @@ class maids(models.Model):
     # -----------------------------
     skills_cleaning = fields.Boolean(
         string="Cleaning",
+        required=False,
         tracking=True,
     )
     skills_arabic_cooking = fields.Boolean(
         string="Arabic Cooking",
+        required=False,
         tracking=True,
     )
     skills_baby_sitting = fields.Boolean(
         string="Baby Sitting",
+        required=False,
         tracking=True,
     )
     skills_washing = fields.Boolean(
         string="Washing",
+        required=False,
         tracking=True,
     )
     skills_ironing = fields.Boolean(
         string="Ironing",
+        required=False,
         tracking=True,
     )
     skills_googlelocation = fields.Boolean(
         string="Google Location",
+        required=False,
         tracking=True,
     )
     skills_driving = fields.Boolean(
         string="Drive License",
+        required=False,
         tracking=True,
     )
     country_id = fields.Many2one(
         string="Country",
         comodel_name='res.country',
         help="Country of Maid.",
+        default=lambda self: self.offices_id.country_id,
         required=True,
         tracking=True,
     )
     partner_id = fields.Many2one(
         string='Partner',
         comodel_name='res.partner',
+        required=True,
         tracking=True,
     )
     description = fields.Text(
         string='Description',
+        required=True,
         tracking=True,
     )
     company_id = fields.Many2one(
@@ -386,17 +404,20 @@ class maids(models.Model):
     )
     tickets_id = fields.Many2one(
         comodel_name='housemaid.tickets',
+        required=False,
         string='Ticket no.',
     )
     maidslogs_ids = fields.One2many(
         string="History",
         comodel_name='housemaid.maidslogs',
         inverse_name='maids_id',
+        required=False,
         tracking=True,
     )
     active = fields.Boolean(
         string="Active",
         default=True,
+        required=True,
         tracking=True,
     )
 
