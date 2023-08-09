@@ -19,8 +19,6 @@ class tickets(models.Model):
                 'housemaid.sales.tickets') or _('New')
         return super(tickets, self).create(vals)
 
-    
-
     code = fields.Char(
         string='Code',
         required=True,
@@ -32,18 +30,18 @@ class tickets(models.Model):
     state = fields.Selection(
         string='State',
         selection=[
-            ('draft', 'Draft Request'), #1 > #2
-            ('available', 'Maid avaliable'),#3 > #4
-            ('runout', 'Maid is Not avaliable'),#3 > loop #2
-            ('reserve', 'Maid Reserved'),#4 > #5
-            ('confirm', 'Sponser confirm the Maid'),#5 >#6
-            ('90days', 'Maid in 90days Garanty'),#8 > # 9
+            ('draft', 'Draft Request'),  # 1 > #2
+            ('available', 'Maid avaliable'),  # 3 > #4
+            ('runout', 'Maid is Not avaliable'),  # 3 > loop #2
+            ('reserve', 'Maid Reserved'),  # 4 > #5
+            ('confirm', 'Sponser confirm the Maid'),  # 5 >#6
+            ('90days', 'Maid in 90days Garanty'),  # 8 > # 9
             # sales ask for 1 of 3 tiket type
-            ('check', 'Check Availability'),#2
-            ('search', 'Search for Maid'), #2
-            ('hiring', 'Hiring the Maid'),#7 > #8
+            ('check', 'Check Availability'),  # 2
+            ('search', 'Search for Maid'),  # 2
+            ('hiring', 'Hiring the Maid'),  # 7 > #8
             # once operation close its ticket it will change sales ticket State
-            ('closed', 'Ticket Closed'),#9
+            ('closed', 'Ticket Closed'),  # 9
         ],
         default='draft',
         readonly=False,
@@ -249,7 +247,12 @@ class tickets(models.Model):
         string='Maids Check or Hired',
         tracking=True,
     )
-    maids_ids = fields.Many2many(
+    action_maids_ids = fields.One2many(
+        comodel_name='housemaid.maids',
+        inverse_name='tickets_id',
+        string='Maids Actions',
+    )
+    search_maids_ids = fields.Many2many(
         comodel_name='housemaid.maids',
         compute='_search_maids',
         string='Maids Search Result',
@@ -262,9 +265,10 @@ class tickets(models.Model):
         maids_ids = self.env['housemaid.maids'].search(
             [
                 ('state', '!=', 'backout'),
-                ('tickets_id', '=', False),
                 ('active', '=', True),
-            ])
+                ('tickets_id', '=', False),
+            ]
+        )
         if self.jobs_id != False:
             maids_ids1 = maids_ids.filtered(
                 lambda maids: maids.jobs_id.id == self.jobs_id.id)
@@ -286,4 +290,4 @@ class tickets(models.Model):
             maids_ids3 = maids_ids2
             print(maids_ids3)
 
-        self.maids_ids = [(6, 0, maids_ids3.ids)]
+        self.search_maids_ids = [(6, 0, maids_ids3.ids)]

@@ -16,7 +16,7 @@ class maids(models.Model):
         ('name_uniq', 'unique(name)', "A name can only be assigned to one Maid!"),
     ]
     _inherit = ['mail.thread', 'mail.activity.mixin']
-    
+
     @api.model
     def _default_image(self):
         image_path = get_module_resource(
@@ -25,10 +25,13 @@ class maids(models.Model):
 
     def action_check_maid(self):
         print('Check Avaliability!')
-        
+
+    def action_reserve_maid(self):
+        print('Reserve Maid!')
+
     def action_hire_maid(self):
         print('Recruitment Procedures!')
-        
+
     @api.depends('name', 'code')
     def name_get(self):
         result = []
@@ -52,15 +55,20 @@ class maids(models.Model):
 
         return self.age
 
-    
     state = fields.Selection(
         string='State',
         selection=[
-            ('draft', 'Draft'),
-            ('open', 'Open to Work'),
-            ('ready', 'Ready at Guesthouse'),
-            ('booked', 'Booked by ticket'),
-            ('backout', 'Backout'),
+            # show in search page
+            ('draft', 'Draft'),  # 1 > #2   fa-unlink
+            ('open', 'Open to Work'),  # 3 > #4 fa-hourglass
+            ('ready', 'Ready at Guesthouse'),  # 3 > #4 fa-hourglass
+            # show in action page
+            ('check', 'Check Avaliability'),  # 2 > #3 fa-question-circle
+            ('reserve', 'Reserved by ticket'),  # 4 > #5   fa-link
+            ('hired', 'Hired by ticket'),  # 5 fa-link
+
+            ('backout', 'Backout'),  # 3  stop here fa-ban
+            # no search state!
         ],
         default='draft',
         readonly=False,
@@ -298,6 +306,7 @@ class maids(models.Model):
     user_id = fields.Many2one(
         string="Operation Man",
         comodel_name='res.users',
+        default=lambda self: self.offices_id.user_id,
         required=True,
         tracking=True,
     )
