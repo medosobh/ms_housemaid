@@ -12,7 +12,10 @@
                         widget="statusbar"
                         options="{'clickable': '1'}"
                         clickable="True"
+                        statusbar_visible="draft,check,search,available"
                         type="object"/>
+
+
                 </header>
                 <sheet>
                     <div class="oe_title">
