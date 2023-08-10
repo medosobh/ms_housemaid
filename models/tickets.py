@@ -291,7 +291,8 @@ class tickets(models.Model):
     )
     maids_id = fields.Many2one(
         comodel_name='housemaid.maids',
-        string='Maids Check or Hired',
+        string='Maid',
+        help='Maids Check, Reserved or Hired',
         tracking=True,
     )
     garanty_day = fields.Date(
