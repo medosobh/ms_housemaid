@@ -22,11 +22,8 @@ class tickets(models.Model):
     def action_search_ticket(self):
         self.ensure_one()
         self.state = 'search'
-        tickets_id = self.id
-        user_id = self.user_id
         self.activity_schedule(
             'ms_housemaid.mail_act_searching',
-            user_id=user_id,
             note=f'Please Search for a new Maid of the ticket {self.code}'
         )
 
@@ -99,14 +96,18 @@ class tickets(models.Model):
     )
     sponser_name = fields.Char(
         string='Name',
+        required=True,
         tracking=True,
     )
     sponser_phone = fields.Char(
         string='Phone',
+        required=True,
         tracking=True,
     )
     sponser_email = fields.Char(
         string='Email',
+        required=True,
+        default=lambda self: _('name@mail.com'),
         tracking=True,
     )
     sponsers_id = fields.Many2one(
@@ -145,12 +146,10 @@ class tickets(models.Model):
     arabic_lang = fields.Boolean(
         string="Arabic Language",
         tracking=True,
-
     )
     english_lang = fields.Boolean(
         string="English Language",
         tracking=True,
-
     )
     education = fields.Selection(
         selection=[
@@ -334,13 +333,10 @@ class tickets(models.Model):
         else:
             maids_ids2 = maids_ids1
 
-        print(self.monthly_salary)
         if self.monthly_salary != 0:
             maids_ids3 = maids_ids2.filtered(
                 lambda maids: maids.monthly_salary == self.monthly_salary)
-            print(maids_ids3)
         else:
             maids_ids3 = maids_ids2
-            print(maids_ids3)
 
         self.search_maids_ids = [(6, 0, maids_ids3.ids)]

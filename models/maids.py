@@ -424,7 +424,6 @@ class maids(models.Model):
     user_id = fields.Many2one(
         string="Operation Man",
         comodel_name='res.users',
-        default=lambda self: self.offices_id.user_id,
         required=True,
         tracking=True,
     )
