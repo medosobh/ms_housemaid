@@ -128,8 +128,15 @@ class maids(models.Model):
         self.ensure_one()
         # maid state to backout
         self.state = 'backout'
-        self.tickets_id = []
-        self.garanty_day = []
+        tickets_id = self.tickets_id
+        if tickets_id == True:
+            # change ticket state
+            record = self.env['housemaid.tickets'].browse(tickets_id)
+            record.state = 'runout'
+            self.tickets_id = []
+            self.garanty_day = []
+        else:
+            self.garanty_day = []
 
     # object in action page
     def action_hiring_maid(self):
