@@ -120,10 +120,8 @@ class maids(models.Model):
             # maid state to backout
             self.state = 'backout'
             # change ticket state
-            rec = self.env['housemaid.tickets'].browse(tickets_id)
-            print(rec.state)
-            rec.state = 'runout'
-            self.tickets_id.clear
+            self.tickets_id.state = 'runout'
+            self.tickets_id = False
             self.garanty_day = False
 
     def action_hiring_maid(self):
