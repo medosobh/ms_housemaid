@@ -28,11 +28,11 @@ class maids(models.Model):
         self.ensure_one()
         # test maid ticket id exist or update?
         context = dict(self.env.context or {})
-        tickets_id = context.get('tickets_id', False)
-        if self.tickets_id == tickets_id:
+        tickets = context.get('tickets_id', False)
+        if self.tickets_id.id == False:
             # maid state to check
             self.state = 'check'
-            #self.tickets_id = tickets_id
+            self.tickets_id = tickets
             # create activity to user to check on maid
             user_id = context.get('user_id', False)
             # create an activity
@@ -44,24 +44,7 @@ class maids(models.Model):
                 note=f'Please Check Maid {self.name} of the ticket {self.tickets_id.code}'
             )
             # change ticket state
-            record = self.env['housemaid.tickets'].browse(tickets_id)
-            record.state = 'check'
-        elif self.tickets_id == False:
-             # maid state to check
-            self.state = 'check'
-            self.tickets_id = tickets_id
-            # create activity to user to check on maid
-            user_id = context.get('user_id', False)
-            # create an activity
-            # users = self.env.ref('ms_housemaid.group_housemaid_operator').users
-            # for user in users:
-            self.activity_schedule(
-                'ms_housemaid.mail_act_checking',
-                user_id=user_id,
-                note=f'Please Check Maid {self.name} of the ticket {self.tickets_id.code}'
-            )
-            # change ticket state
-            record = self.env['housemaid.tickets'].browse(tickets_id)
+            record = self.env['housemaid.tickets'].browse(tickets)
             record.state = 'check'
         else:
             raise UserError("Maid already linked to another Ticket!")
@@ -76,7 +59,7 @@ class maids(models.Model):
         # test maid ticket id exist or update?
         context = dict(self.env.context or {})
         tickets_id = context.get('tickets_id', False)
-        if self.tickets_id == tickets_id:
+        if self.tickets_id.id == False:
             # maid state to check
             self.state = 'reserve'
             self.tickets_id = tickets_id
@@ -111,26 +94,27 @@ class maids(models.Model):
     def action_open_maid(self):
         self.ensure_one()
         # maid state to open
-        for rec in self:
-            rec.state = 'open'
+        self.state = 'open'
+        # update ticket state
+        self.tickets_id.state = 'found'
+        self.tickets_id.garanty_day = False
+        self.garanty_day = False
         # create activity to user to check on maid
-        # update maid field ticket id
-        print('Maid open to work!')
 
     def action_ready_maid(self):
         self.ensure_one()
         # maid state to ready
-        for rec in self:
-            rec.state = 'ready'
+        self.state = 'ready'
+        # update ticket state
+        self.tickets_id.state = 'found'
+        self.tickets_id.garanty_day = False
+        self.garanty_day = False
         # create activity to user to check on maid
-        # update maid field ticket id
-        print('Maid Ready to Work!')
 
     def action_backout_maid(self):
         self.ensure_one()
-        tickets_id = self.tickets_id
-        print(tickets_id)
-        if tickets_id == False:
+        # check maid if linked break link
+        if self.tickets_id.id == False:
             self.state = 'backout'
             self.garanty_day = False
         else:
