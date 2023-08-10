@@ -193,9 +193,12 @@ class maids(models.Model):
             ('check', 'Checking'),
             ('open', 'Open to Work'),  # 3 > #4 fa-hourglass # show in search page
             # 3 > #4 fa-hourglass # show in search page
-            ('ready', 'Ready at Guesthouse'),
+            ('ready', 'Ready at Guesthouse'), # fa-home
+            ('transfer', 'Sponser Treansfer'),# fa-retweet #  fa-exchange 
             ('reserve', 'Reserved'),  # 4 > #5   fa-link # show in action page
             ('hiring', 'Hiring'),  # 5 fa-link # show in action page
+            ('garanty','90Days Garanty'),# fa-warning
+            ('work','Work at Sponser'), #  fa-user-plus
             ('backout', 'Backout'),  # 3  stop here fa-ban # show in Maid Form only
             # no search state!
         ],
@@ -496,10 +499,12 @@ class maidslogs(models.Model):
         string='State',
         selection=[
             ('open', 'Open to Work'),
-            ('work', 'Working'),
+            ('ready', 'Ready Inhouse'),
             ('valuated', '90 Days Valuation'),
-            ('backout', 'Backout'),
+            ('transfer', 'Sponser Trabsfer'),
             ('reserve', 'Reserved'),
+            ('work', 'Working'),
+            ('backout', 'Backout'),
         ],
         default='draft',
         tracking=True

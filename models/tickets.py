@@ -320,29 +320,38 @@ class tickets(models.Model):
     @api.depends('jobs_id', 'country_id', 'monthly_salary')
     def _search_maids(self):
         self.ensure_one()
-        maids_ids = self.env['housemaid.maids'].search(
-            [
-                ('state', 'not in', ('backout', 'reserve')),
-                ('active', '=', True),
-                ('tickets_id', '=', False),
-            ]
-        )
-        if self.jobs_id != False:
-            maids_ids1 = maids_ids.filtered(
-                lambda maids: maids.jobs_id.id == self.jobs_id.id)
-        else:
-            maids_ids1 = maids_ids
+        if self.ticket_type == 'sales':
+            maids_ids = self.env['housemaid.maids'].search(
+                [
+                    ('state', 'not in', ('backout', 'reserve')),
+                    ('active', '=', True),
+                    ('tickets_id', '=', False),
+                ]
+            )
+            if self.jobs_id != False:
+                maids_ids1 = maids_ids.filtered(
+                    lambda maids: maids.jobs_id.id == self.jobs_id.id)
+            else:
+                maids_ids1 = maids_ids
 
-        if len(self.country_id) == 1:
-            maids_ids2 = maids_ids1.filtered(
-                lambda maids: maids.country_id.id == self.country_id.id)
-        else:
-            maids_ids2 = maids_ids1
+            if len(self.country_id) == 1:
+                maids_ids2 = maids_ids1.filtered(
+                    lambda maids: maids.country_id.id == self.country_id.id)
+            else:
+                maids_ids2 = maids_ids1
 
-        if self.monthly_salary != 0:
-            maids_ids3 = maids_ids2.filtered(
-                lambda maids: maids.monthly_salary == self.monthly_salary)
-        else:
-            maids_ids3 = maids_ids2
+            if self.monthly_salary != 0:
+                maids_ids3 = maids_ids2.filtered(
+                    lambda maids: maids.monthly_salary == self.monthly_salary)
+            else:
+                maids_ids3 = maids_ids2
 
-        self.search_maids_ids = [(6, 0, maids_ids3.ids)]
+            self.search_maids_ids = [(6, 0, maids_ids3.ids)]
+        elif self.ticket_type == 'transfer':
+            maids_ids = self.env['housemaid.maids'].search(
+                [
+                    ('state', 'not in', ('backout', 'reserve')),
+                    ('state', 'in', ('ready')),
+                    ('active', '=', True),
+                ]
+            )
