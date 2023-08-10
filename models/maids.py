@@ -483,7 +483,7 @@ class maids(models.Model):
 
 class maidslogs(models.Model):
     _name = 'housemaid.maidslogs'
-    _description = 'Maids Logs Records.'
+    _description = 'Maid Logs'
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
     date = fields.Char(
