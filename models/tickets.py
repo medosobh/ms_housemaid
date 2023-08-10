@@ -22,8 +22,13 @@ class tickets(models.Model):
     def action_search_ticket(self):
         self.ensure_one()
         self.state = 'search'
+        context = dict(self.env.context or {})
+        # create activity to user to check on maid
+        user_id = context.get('user_id', False)
+        # create an activity
         self.activity_schedule(
             'ms_housemaid.mail_act_searching',
+            user_id=user_id,
             note=f'Please Search for a new Maid of the ticket {self.code}'
         )
 

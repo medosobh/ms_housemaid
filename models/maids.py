@@ -29,8 +29,25 @@ class maids(models.Model):
         # test maid ticket id exist or update?
         context = dict(self.env.context or {})
         tickets_id = context.get('tickets_id', False)
-        if self.tickets_id == False:
+        if self.tickets_id == tickets_id:
             # maid state to check
+            self.state = 'check'
+            #self.tickets_id = tickets_id
+            # create activity to user to check on maid
+            user_id = context.get('user_id', False)
+            # create an activity
+            # users = self.env.ref('ms_housemaid.group_housemaid_operator').users
+            # for user in users:
+            self.activity_schedule(
+                'ms_housemaid.mail_act_checking',
+                user_id=user_id,
+                note=f'Please Check Maid {self.name} of the ticket {self.tickets_id.code}'
+            )
+            # change ticket state
+            record = self.env['housemaid.tickets'].browse(tickets_id)
+            record.state = 'check'
+        elif self.tickets_id == False:
+             # maid state to check
             self.state = 'check'
             self.tickets_id = tickets_id
             # create activity to user to check on maid
@@ -59,7 +76,7 @@ class maids(models.Model):
         # test maid ticket id exist or update?
         context = dict(self.env.context or {})
         tickets_id = context.get('tickets_id', False)
-        if self.tickets_id == False:
+        if self.tickets_id == tickets_id:
             # maid state to check
             self.state = 'reserve'
             self.tickets_id = tickets_id
@@ -89,7 +106,7 @@ class maids(models.Model):
         self.ensure_one()
         # maid state to draft
         self.state = 'draft'
-        self.tickets_id = ''
+        self.tickets_id = False
 
     def action_open_maid(self):
         self.ensure_one()
@@ -126,6 +143,34 @@ class maids(models.Model):
 
     def action_hiring_maid(self):
         self.ensure_one()
+        # test maid ticket id exist or update?
+        context = dict(self.env.context or {})
+        tickets_id = context.get('tickets_id', False)
+        if self.tickets_id == tickets_id:
+            # maid state to check
+            self.state = 'hiring'
+            self.tickets_id = tickets_id
+            # create activity to user to check on maid
+            user_id = context.get('user_id', False)
+            # create an activity
+            # users = self.env.ref('ms_housemaid.group_housemaid_operator').users
+            # for user in users:
+            self.activity_schedule(
+                'ms_housemaid.mail_act_hiring',
+                user_id=user_id,
+                note=f'Please proceed hiring for {self.name} of the ticket {self.tickets_id.code}'
+            )
+            # change ticket state
+            record = self.env['housemaid.tickets'].browse(tickets_id)
+            record.state = 'hiring'
+        else:
+            raise UserError("Maid already linked to another Ticket!")
+        # refresh page
+        return {
+            'type': 'ir.actions.client',
+            'tag': 'reload',
+        }
+
         # maid state to hiring
         for rec in self:
             rec.state = 'hiring'

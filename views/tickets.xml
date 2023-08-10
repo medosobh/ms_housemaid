@@ -17,7 +17,8 @@
                         name="action_search_ticket"
                         type="object"
                         class="oe_highlight"
-                        attrs="{'invisible': [('state', 'in', ('check','search','found','reserve','confirm','garanty','hiring','closed'))]}" />
+                        attrs="{'invisible': [('state', 'in', ('check','search','found','reserve','confirm','garanty','hiring','closed'))]}" 
+                        context="{'tickets_id': id, 'user_id': user_id}"/>
                     <button string="Draft"
                         name="action_draft_ticket"
                         type="object"
@@ -160,7 +161,8 @@
                                         icon="fa-bookmark"
                                         type="object"
                                         help="Move Maid to Action page!"
-                                        attrs="{'invisible': [('state', 'in', ('draft'))]}"/>
+                                        attrs="{'invisible': [('state', 'in', ('draft'))]}"
+                                        context="{'tickets_id': id, 'user_id': user_id}"/>
                                     <field name="state"/>
                                     <field name="code"/>
                                     <field name="phone"/>
@@ -196,14 +198,15 @@
                                         icon="fa-bookmark"
                                         type="object"
                                         help="Move Maid to Action page!"
-                                        attrs="{'invisible': [('state', 'in', ('check','hiring','backout'))]}"/>
+                                        attrs="{'invisible': [('state', 'in', ('check','hiring','backout'))]}"
+                                        context="{'tickets_id': id, 'user_id': user_id}"/>
                                     <button name="action_hiring_maid"
                                         class="oe_inline oe_stat_button"
                                         icon="fa-link"
                                         type="object"
                                         help="Ask Operation to Proceed Recrutement!"
-                                        attrs="{'invisible': [('state', 'in', ('check','hiring','backout'))]}"/>
-
+                                        attrs="{'invisible': [('state', 'in', ('check','hiring','backout'))]}"
+                                        context="{'tickets_id': id, 'user_id': user_id}"/>
                                     <field name="state"/>
                                     <field name="code"/>
                                     <field name="phone"/>
