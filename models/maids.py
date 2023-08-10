@@ -8,7 +8,7 @@ from datetime import date, datetime, timedelta
 class maids(models.Model):
 
     _name = 'housemaid.maids'
-    _description = 'Records of Maids.'
+    _description = 'Maids'
     _rec_name = 'code'
     _check_company_auto = True
     _sql_constraints = [
@@ -38,8 +38,11 @@ class maids(models.Model):
             # create an activity
             # users = self.env.ref('ms_housemaid.group_housemaid_operator').users
             # for user in users:
-            self.activity_schedule('ms_housemaid.mail_act_checking', user_id=user_id,
-                                   note=f'Please Check Maid {self.name} of the ticket {self.tickets_id.code}')
+            self.activity_schedule(
+                'ms_housemaid.mail_act_checking',
+                user_id=user_id,
+                note=f'Please Check Maid {self.name} of the ticket {self.tickets_id.code}'
+            )
             # change ticket state
             record = self.env['housemaid.tickets'].browse(tickets_id)
             record.state = 'check'
@@ -65,8 +68,11 @@ class maids(models.Model):
             # create an activity
             # users = self.env.ref('ms_housemaid.group_housemaid_operator').users
             # for user in users:
-            self.activity_schedule('ms_housemaid.mail_act_checking', user_id=user_id,
-                                   note=f'Please Check Maid {self.name} of the ticket {self.tickets_id.code}')
+            self.activity_schedule(
+                'ms_housemaid.mail_act_checking',
+                user_id=user_id,
+                note=f'Please Check Maid {self.name} of the ticket {self.tickets_id.code}'
+            )
             # change ticket state
             record = self.env['housemaid.tickets'].browse(tickets_id)
             record.state = 'reserve'
@@ -89,8 +95,11 @@ class maids(models.Model):
         # create an activity
         # users = self.env.ref('ms_housemaid.group_housemaid_operator').users
         # for user in users:
-        self.activity_schedule('ms_housemaid.mail_act_checking', user_id=user_id,
-                               note=f'Maid: {self.name} set to Draft!')
+        self.activity_schedule(
+            'ms_housemaid.mail_act_checking',
+            user_id=user_id,
+            note=f'Maid: {self.name} set to Draft!'
+            )
 
     def action_open_maid(self):
         self.ensure_one()

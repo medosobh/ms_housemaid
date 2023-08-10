@@ -6,7 +6,7 @@ import base64
 
 class offices(models.Model):
     _name = 'housemaid.offices'
-    _description = 'Records of External Offices.'
+    _description = 'External Offices'
     _rec_name = 'name'
     _check_company_auto = True
     _sql_constraints = [

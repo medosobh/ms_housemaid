@@ -4,7 +4,7 @@ from odoo.exceptions import UserError
 
 class tickets(models.Model):
     _name = 'housemaid.tickets'
-    _description = 'Records of Ticket.'
+    _description = 'Tickets'
     _rec_name = 'code'
     _check_company_auto = True
     _sql_constraints = [
@@ -22,7 +22,13 @@ class tickets(models.Model):
     def action_search_ticket(self):
         self.ensure_one()
         self.state = 'search'
-        print('action_search_ticket')
+        tickets_id = self.id
+        user_id = self.user_id
+        self.activity_schedule(
+            'ms_housemaid.mail_act_searching',
+            user_id=user_id,
+            note=f'Please Search for a new Maid of the ticket {self.code}'
+        )
 
     def action_draft_ticket(self):
         self.ensure_one()
