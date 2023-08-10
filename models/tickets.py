@@ -193,7 +193,7 @@ class tickets(models.Model):
         tracking=True,
     )
     children_no = fields.Integer(
-        string='children No',
+        string='Children No',
         required=False,
         tracking=True,
     )

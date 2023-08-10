@@ -90,16 +90,7 @@ class maids(models.Model):
         # maid state to draft
         self.state = 'draft'
         self.tickets_id = []
-        # create activity to user to check on maid
-        user_id = self.user_id
-        # create an activity
-        # users = self.env.ref('ms_housemaid.group_housemaid_operator').users
-        # for user in users:
-        self.activity_schedule(
-            'ms_housemaid.mail_act_checking',
-            user_id=user_id,
-            note=f'Maid: {self.name} set to Draft!'
-            )
+      
 
     def action_open_maid(self):
         self.ensure_one()
@@ -119,14 +110,26 @@ class maids(models.Model):
         # update maid field ticket id
         print('Maid Ready to Work!')
 
+    def action_runout_maid(self):
+        self.ensure_one()
+        # maid state to runout
+        self.state = 'runout'
+        tickets_id = self.tickets_id
+        if tickets_id == True:
+            # change ticket state
+            record = self.env['housemaid.tickets'].browse(tickets_id)
+            record.state = 'runout'
+            self.tickets_id = []
+            self.garanty_day = []
+        else:
+            self.garanty_day = []
+    
     def action_backout_maid(self):
         self.ensure_one()
         # maid state to backout
-        for rec in self:
-            rec.state = 'backout'
-        # create activity to operation user to proceed on maid
-        # update maid field ticket id once more!!
-        print('Recruitment Procedures!')
+        self.state = 'backout'
+        self.tickets_id = []
+        self.garanty_day = []
 
     # object in action page
     def action_hiring_maid(self):
@@ -314,7 +317,7 @@ class maids(models.Model):
         tracking=True,
     )
     children_no = fields.Integer(
-        string='children No',
+        string='Children No',
         required=False,
         tracking=True,
     )
