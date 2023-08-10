@@ -89,8 +89,7 @@ class maids(models.Model):
         self.ensure_one()
         # maid state to draft
         self.state = 'draft'
-        self.tickets_id = []
-      
+        self.tickets_id = ''
 
     def action_open_maid(self):
         self.ensure_one()
@@ -110,35 +109,23 @@ class maids(models.Model):
         # update maid field ticket id
         print('Maid Ready to Work!')
 
-    def action_runout_maid(self):
-        self.ensure_one()
-        # maid state to runout
-        self.state = 'runout'
-        tickets_id = self.tickets_id
-        if tickets_id == True:
-            # change ticket state
-            record = self.env['housemaid.tickets'].browse(tickets_id)
-            record.state = 'runout'
-            self.tickets_id = []
-            self.garanty_day = []
-        else:
-            self.garanty_day = []
-    
     def action_backout_maid(self):
         self.ensure_one()
-        # maid state to backout
-        self.state = 'backout'
         tickets_id = self.tickets_id
-        if tickets_id == True:
-            # change ticket state
-            record = self.env['housemaid.tickets'].browse(tickets_id)
-            record.state = 'runout'
-            self.tickets_id = []
-            self.garanty_day = []
+        print(tickets_id)
+        if tickets_id == False:
+            self.state = 'backout'
+            self.garanty_day = False
         else:
-            self.garanty_day = []
+            # maid state to backout
+            self.state = 'backout'
+            # change ticket state
+            rec = self.env['housemaid.tickets'].browse(tickets_id)
+            print(rec.state)
+            rec.state = 'runout'
+            self.tickets_id.clear
+            self.garanty_day = False
 
-    # object in action page
     def action_hiring_maid(self):
         self.ensure_one()
         # maid state to hiring

@@ -196,13 +196,13 @@
                                         icon="fa-bookmark"
                                         type="object"
                                         help="Move Maid to Action page!"
-                                        attrs="{'invisible': [('state', 'in', ('check','hiring',))]}"/>
+                                        attrs="{'invisible': [('state', 'in', ('check','hiring','backout'))]}"/>
                                     <button name="action_hiring_maid"
                                         class="oe_inline oe_stat_button"
                                         icon="fa-link"
                                         type="object"
                                         help="Ask Operation to Proceed Recrutement!"
-                                        attrs="{'invisible': [('state', 'in', ('check','hiring'))]}"/>
+                                        attrs="{'invisible': [('state', 'in', ('check','hiring','backout'))]}"/>
 
                                     <field name="state"/>
                                     <field name="code"/>

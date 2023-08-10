@@ -232,30 +232,37 @@ class tickets(models.Model):
     # -----------------------------
     skills_cleaning = fields.Boolean(
         string="Cleaning",
+        required=False,
         tracking=True,
     )
     skills_arabic_cooking = fields.Boolean(
         string="Arabic Cooking",
+        required=False,
         tracking=True,
     )
     skills_baby_sitting = fields.Boolean(
         string="Baby Sitting",
+        required=False,
         tracking=True,
     )
     skills_washing = fields.Boolean(
         string="Washing",
+        required=False,
         tracking=True,
     )
     skills_ironing = fields.Boolean(
         string="Ironing",
+        required=False,
         tracking=True,
     )
     skills_googlelocation = fields.Boolean(
         string="Google Location",
+        required=False,
         tracking=True,
     )
     skills_driving = fields.Boolean(
         string="Drive License",
+        required=False,
         tracking=True,
     )
     country_id = fields.Many2one(
