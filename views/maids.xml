@@ -33,6 +33,11 @@
                         type="object"
                         class="oe_highlight"
                         attrs="{'invisible': [('state', 'in', ('draft','ready','open','reserve','hiring','backout'))]}" />
+                    <button string="Not avaliable"
+                        name="action_runout_maid"
+                        type="object"
+                        class="oe_highlight"
+                        attrs="{'invisible': [('state', 'in', ('backout'))]}" />
                     <button string="Reserve"
                         name="action_reserve_maid"
                         type="object"
