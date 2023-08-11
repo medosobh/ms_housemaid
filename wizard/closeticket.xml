@@ -3,8 +3,8 @@
     <data>
         <record id="housemaid_closeticket_wizard_form"
             model="ir.ui.view">
-            <field name="name">closeticket.wizard.form</field>
-            <field name="model">closeticket.wizard</field>
+            <field name="name">housemaid.closeticket.form</field>
+            <field name="model">housemaid.closeticket</field>
             <field name="arch"
                 type="xml">
                 <form>
