@@ -8,10 +8,20 @@
             <field name="arch"
                 type="xml">
                 <form>
-                    <field name="tickets_id" />
+                    <group name="closeticket"
+                        string="Close Ticket">
+                        <field name="closereason_id"
+                            class="oe_inline"/>
+                        <field name="tickets_id"
+                            class="oe_inline"/>
+                        <field name="user_id"
+                            class="oe_inline"/>
+                    </group>
+
                     <footer>
                         <button string="Close Ticket"
                             name="action_closed_ticket"
+                            context="{'tickets_id': id, 'user_id': user_id}"
                             type="object"
                             class="oe_highlight"
                             data-hotkey="q"/>
@@ -27,7 +37,7 @@
         <record id="housemaid_tickets_action_wizard"
             model="ir.actions.act_window">
             <field name="name">Close Ticket</field>
-            <field name="res_model">housemaid.closeticket.wizard</field>
+            <field name="res_model">housemaid.closeticket</field>
             <field name="view_mode">form</field>
             <field name="target">new</field>
         </record>

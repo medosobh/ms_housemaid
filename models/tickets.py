@@ -62,10 +62,7 @@ class tickets(models.Model):
             self.state = 'garanty'
             print('action_garanty_ticket')
 
-    def action_closed_ticket(self):
-        self.ensure_one()
-        self.state = 'closed'
-        print('action_closed_ticket')
+    
 
     code = fields.Char(
         string='Code',

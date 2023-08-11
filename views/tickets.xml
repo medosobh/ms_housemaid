@@ -45,8 +45,8 @@
                         class="oe_highlight"
                         attrs="{'invisible': [('state', 'in', ('draft','check','search','found','runout','confirm','hiring','garanty'))]}" />
                     <button string="Closed"
-                        name="action_closed_ticket"
-                        type="object"
+                        name="%(housemaid_tickets_action_wizard)d"
+                        type="action"
                         class="oe_highlight"
                         attrs="{'invisible': [('state', 'in', ('draft','check','search','closed'))]}" />
                 </header>

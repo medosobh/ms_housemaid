@@ -40,8 +40,8 @@
         </field>
     </record>
 
-    <menuitem id="housemaid_jobs_menu"
-        name="Jobs"
+    <menuitem id="housemaid_closereason_menu"
+        name="Close Reason"
         action="housemaid_closereason_action"
         parent="housemaid_menu_configuration"
         sequence="52"/>

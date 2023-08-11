@@ -23,7 +23,7 @@
         </record>
          <record model="housemaid.closereason"
             id="housemaid_closereason_3">
-            <field name="name">office could not</field>
+            <field name="name">Office could not find</field>
         </record>
         <record model="housemaid.closereason"
             id="housemaid_closereason_4">
@@ -57,6 +57,12 @@
             <field name="name">Hiring Maid</field>
             <field name="icon">fa-link</field>
             <field name="res_model">housemaid.maids</field>
+        </record>
+        <record id="mail_act_close"
+            model="mail.activity.type">
+            <field name="name">Close Ticket</field>
+            <field name="icon">fa-flag-checkered</field>
+            <field name="res_model">housemaid.tickets</field>
         </record>
     </data>
 
