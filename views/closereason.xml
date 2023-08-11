@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="housemaid_jobs_form"
+    <record id="housemaid_closereason_form"
         model="ir.ui.view">
-        <field name="name">housemaid.jobs.form</field>
-        <field name="model">housemaid.jobs</field>
+        <field name="name">housemaid.closereason.form</field>
+        <field name="model">housemaid.closereason</field>
         <field name="arch"
             type="xml">
-            <form string="Jobs">
+            <form string="Close Reason">
                 <group name="information"
-                    string="Jobs">
+                    string="Reason">
                     <field name="name"
                         class="oe_inline"/>
                 </group>
@@ -16,33 +16,33 @@
         </field>
     </record>
 
-    <record id="housemaid_jobs_tree"
+    <record id="housemaid_closereason_tree"
         model="ir.ui.view">
-        <field name="name">housemaid.jobs.tree</field>
-        <field name="model">housemaid.jobs</field>
+        <field name="name">housemaid.closereason.tree</field>
+        <field name="model">housemaid.closereason</field>
         <field name="arch"
             type="xml">
-            <tree string="Jobs List"
+            <tree string="Close Rreason List"
                 sample="1">
                 <field name="name"/>
             </tree>
         </field>
     </record>
-    
-    <record id="housemaid_jobs_action"
+
+    <record id="housemaid_closereason_action"
         model="ir.actions.act_window">
-        <field name="name">Jobs</field>
-        <field name="res_model">housemaid.jobs</field>
+        <field name="name">Close Reason</field>
+        <field name="res_model">housemaid.closereason</field>
         <field name="view_mode">tree,form</field>
         <field name="help"
             type="html">
-            <p class="o_view_nocontent_smiling_face">Create your first Job!</p>
+            <p class="o_view_nocontent_smiling_face">Create your first Close Reason!</p>
         </field>
     </record>
 
     <menuitem id="housemaid_jobs_menu"
         name="Jobs"
-        action="housemaid_jobs_action"
+        action="housemaid_closereason_action"
         parent="housemaid_menu_configuration"
-        sequence="51"/>
+        sequence="52"/>
 </odoo>

@@ -13,6 +13,33 @@
     </data>
 
     <data noupdate="0">
+        <record model="housemaid.cloasereason"
+            id="housemaid_cloasereason_1">
+            <field name="name">Successfully</field>
+        </record>
+        <record model="housemaid.cloasereason"
+            id="housemaid_cloasereason_2">
+            <field name="name">Sponser Cansel</field>
+        </record>
+         <record model="housemaid.cloasereason"
+            id="housemaid_cloasereason_3">
+            <field name="name">office could not</field>
+        </record>
+        <record model="housemaid.cloasereason"
+            id="housemaid_cloasereason_4">
+            <field name="name">Maid Backout</field>
+        </record>
+        <record model="housemaid.cloasereason"
+            id="housemaid_cloasereason_5">
+            <field name="name">Maid Failer in 90days</field>
+        </record>
+        <record model="housemaid.cloasereason"
+            id="housemaid_cloasereason_6">
+            <field name="name">Ticket duplicated</field>
+        </record>
+    </data>
+
+    <data noupdate="0">
         <record id="mail_act_searching"
             model="mail.activity.type">
             <field name="name">Searching for a new Maid</field>

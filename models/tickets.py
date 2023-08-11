@@ -97,7 +97,8 @@ class tickets(models.Model):
         string='Ticket Type',
         selection=[
             ('sales', 'Sales'),
-            ('transfer', 'Sponser Transfer'),
+            ('transfer', 'Transfer'),
+            ('temp', 'Temporary'),
         ],
         required=True,
         tracking=True,
