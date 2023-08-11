@@ -13,20 +13,18 @@
     </data>
 
     <data noupdate="0">
-        <record id="mail_act_checking"
-            model="mail.activity.type">
-            <field name="name">Checking Maid</field>
-            <field name="icon">fa-feed</field>
-            <field name="res_model">housemaid.maids</field>
-        </record>
-
         <record id="mail_act_searching"
             model="mail.activity.type">
             <field name="name">Searching for a new Maid</field>
             <field name="icon">fa-search</field>
             <field name="res_model">housemaid.maids</field>
         </record>
-
+        <record id="mail_act_checking"
+            model="mail.activity.type">
+            <field name="name">Checking Maid</field>
+            <field name="icon">fa-feed</field>
+            <field name="res_model">housemaid.maids</field>
+        </record>
         <record id="mail_act_hiring"
             model="mail.activity.type">
             <field name="name">Hiring Maid</field>

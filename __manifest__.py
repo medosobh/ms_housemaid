@@ -21,12 +21,14 @@
         'security/ir.model.access.csv',
         'data/sequence_views.xml',
         'data/data_views.xml',
+        'wizard/closeticket.xml',
         'views/menu.xml',
         'views/offices.xml',
         'views/maids.xml',
         'views/sponsers.xml',
         'views/tickets.xml',
         'views/jobs.xml',
+        
     ],
     'demo': [
         ''

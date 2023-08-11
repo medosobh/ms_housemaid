@@ -55,8 +55,12 @@ class tickets(models.Model):
     @api.onchange('garanty_day')
     def action_garanty_ticket(self):
         self.ensure_one()
-        self.state = 'garanty'
-        print('action_garanty_ticket')
+        if self.garanty_day == False:
+            # do nothing
+            print('keep in draft mode')
+        else:
+            self.state = 'garanty'
+            print('action_garanty_ticket')
 
     def action_closed_ticket(self):
         self.ensure_one()
@@ -75,11 +79,10 @@ class tickets(models.Model):
         string='State',
         selection=[
             ('draft', 'Draft'),  # 1 > #2 button
-            ('check', 'Checking'),  # 2 sales request
             ('search', 'Searching'),  # 2 sales request
-            ('found', 'Found'),  # 3 > #4 feedback
-            ('runout', 'Not avaliable'),  # 3 > loop #2 ask for reason feedback
-            ('reserve', 'Reserve a Maid'),  # 4 > #5 request
+            ('check', 'Checking'),  # 2 sales request
+            ('found', 'Found or available'),  # 3 > #4 feedback
+            ('runout', 'Not avaliable'),  # 3 > loop #2 ask for reason feedback            
             ('confirm', 'Sponser confirm'),  # 5 >#6 button
             ('hiring', 'Hiring'),  # 7 > #8 sales request
             ('garanty', 'Start 90days Garanty'),  # 8 > # 9 button
@@ -302,6 +305,7 @@ class tickets(models.Model):
     )
     garanty_day = fields.Date(
         string='Start Garanty Date',
+        default=False,
         required=False,
         tracking=True,
     )
@@ -320,10 +324,11 @@ class tickets(models.Model):
     @api.depends('jobs_id', 'country_id', 'monthly_salary')
     def _search_maids(self):
         self.ensure_one()
+        self.search_maids_ids = []
         if self.ticket_type == 'sales':
             maids_ids = self.env['housemaid.maids'].search(
                 [
-                    ('state', 'not in', ('backout', 'reserve')),
+                    ('state', 'in', ('draft', 'open', 'ready')),
                     ('active', '=', True),
                     ('tickets_id', '=', False),
                 ]

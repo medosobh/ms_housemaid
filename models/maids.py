@@ -32,7 +32,7 @@ class maids(models.Model):
         if self.tickets_id.id == False:
             # maid state to check
             self.state = 'check'
-            self.tickets_id = tickets
+            #self.tickets_id = tickets
             # create activity to user to check on maid
             user_id = context.get('user_id', False)
             # create an activity
@@ -46,36 +46,6 @@ class maids(models.Model):
             # change ticket state
             record = self.env['housemaid.tickets'].browse(tickets)
             record.state = 'check'
-        else:
-            raise UserError("Maid already linked to another Ticket!")
-        # refresh page
-        return {
-            'type': 'ir.actions.client',
-            'tag': 'reload',
-        }
-
-    def action_reserve_maid(self):
-        self.ensure_one()
-        # test maid ticket id exist or update?
-        context = dict(self.env.context or {})
-        tickets_id = context.get('tickets_id', False)
-        if self.tickets_id.id == False:
-            # maid state to check
-            self.state = 'reserve'
-            self.tickets_id = tickets_id
-            # create activity to user to check on maid
-            user_id = context.get('user_id', False)
-            # create an activity
-            # users = self.env.ref('ms_housemaid.group_housemaid_operator').users
-            # for user in users:
-            self.activity_schedule(
-                'ms_housemaid.mail_act_checking',
-                user_id=user_id,
-                note=f'Please Check Maid {self.name} of the ticket {self.tickets_id.code}'
-            )
-            # change ticket state
-            record = self.env['housemaid.tickets'].browse(tickets_id)
-            record.state = 'reserve'
         else:
             raise UserError("Maid already linked to another Ticket!")
         # refresh page
@@ -195,7 +165,6 @@ class maids(models.Model):
             # 3 > #4 fa-hourglass # show in search page
             ('ready', 'Ready at Guesthouse'), # fa-home
             ('transfer', 'Sponser Treansfer'),# fa-retweet #  fa-exchange 
-            ('reserve', 'Reserved'),  # 4 > #5   fa-link # show in action page
             ('hiring', 'Hiring'),  # 5 fa-link # show in action page
             ('garanty','90Days Garanty'),# fa-warning
             ('work','Work at Sponser'), #  fa-user-plus
@@ -249,7 +218,7 @@ class maids(models.Model):
     monthly_salary = fields.Monetary(
         string='Monthly Salary',
         currency_field='currency_id',
-        required=False,
+        required=True,
         tracking=True
     )
     currency_id = fields.Many2one(
@@ -261,7 +230,7 @@ class maids(models.Model):
     )
     contract_period = fields.Integer(
         string='Contract Period in Years',
-        required=True,
+        required=False,
         tracking=True
     )
     # ---------------------------
