@@ -13,28 +13,28 @@
     </data>
 
     <data noupdate="0">
-        <record model="housemaid.cloasereason"
-            id="housemaid_cloasereason_1">
+        <record model="housemaid.closereason"
+            id="housemaid_closereason_1">
             <field name="name">Successfully</field>
         </record>
-        <record model="housemaid.cloasereason"
-            id="housemaid_cloasereason_2">
+        <record model="housemaid.closereason"
+            id="housemaid_closereason_2">
             <field name="name">Sponser Cansel</field>
         </record>
-         <record model="housemaid.cloasereason"
-            id="housemaid_cloasereason_3">
+         <record model="housemaid.closereason"
+            id="housemaid_closereason_3">
             <field name="name">office could not</field>
         </record>
-        <record model="housemaid.cloasereason"
-            id="housemaid_cloasereason_4">
+        <record model="housemaid.closereason"
+            id="housemaid_closereason_4">
             <field name="name">Maid Backout</field>
         </record>
-        <record model="housemaid.cloasereason"
-            id="housemaid_cloasereason_5">
+        <record model="housemaid.closereason"
+            id="housemaid_closereason_5">
             <field name="name">Maid Failer in 90days</field>
         </record>
-        <record model="housemaid.cloasereason"
-            id="housemaid_cloasereason_6">
+        <record model="housemaid.closereason"
+            id="housemaid_closereason_6">
             <field name="name">Ticket duplicated</field>
         </record>
     </data>

@@ -28,7 +28,7 @@
         'views/sponsers.xml',
         'views/tickets.xml',
         'views/jobs.xml',
-        
+        'views/closereason.xml',
     ],
     'demo': [
         ''
