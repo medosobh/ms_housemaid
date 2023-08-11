@@ -15,8 +15,18 @@ class tickets(models.Model):
     @api.model
     def create(self, vals):
         if not vals.get('code') or vals['code'] == _('New'):
-            vals['code'] = self.env['ir.sequence'].next_by_code(
-                'housemaid.sales.tickets') or _('New')
+            if self.type == 'sales':
+                vals['code'] = self.env['ir.sequence'].next_by_code(
+                    'housemaid.sales.tickets') or _('New')
+            elif self.type == 'transfer':
+                vals['code'] = self.env['ir.sequence'].next_by_code(
+                    'housemaid.transfer.tickets') or _('New')
+            elif self.type == 'temp':
+                vals['code'] = self.env['ir.sequence'].next_by_code(
+                    'housemaid.temporary.tickets') or _('New')
+            else:
+                raise UserError("Please select Ticket Type!")
+
         return super(tickets, self).create(vals)
 
     def action_search_ticket(self):
@@ -62,8 +72,6 @@ class tickets(models.Model):
             self.state = 'garanty'
             print('action_garanty_ticket')
 
-    
-
     code = fields.Char(
         string='Code',
         required=True,
@@ -79,7 +87,7 @@ class tickets(models.Model):
             ('search', 'Searching'),  # 2 sales request
             ('check', 'Checking'),  # 2 sales request
             ('found', 'Found or available'),  # 3 > #4 feedback
-            ('runout', 'Not avaliable'),  # 3 > loop #2 ask for reason feedback            
+            ('runout', 'Not avaliable'),  # 3 > loop #2 ask for reason feedback
             ('confirm', 'Sponser confirm'),  # 5 >#6 button
             ('hiring', 'Hiring'),  # 7 > #8 sales request
             ('garanty', 'Start 90days Garanty'),  # 8 > # 9 button
@@ -90,8 +98,8 @@ class tickets(models.Model):
         readonly=False,
         tracking=True,
     )
-    ticket_type = fields.Selection(
-        string='Ticket Type',
+    type = fields.Selection(
+        string='Type',
         selection=[
             ('sales', 'Sales'),
             ('transfer', 'Transfer'),
@@ -323,7 +331,7 @@ class tickets(models.Model):
     def _search_maids(self):
         self.ensure_one()
         self.search_maids_ids = []
-        if self.ticket_type == 'sales':
+        if self.type == 'sales':
             maids_ids = self.env['housemaid.maids'].search(
                 [
                     ('state', 'in', ('draft', 'open', 'ready')),
@@ -350,7 +358,7 @@ class tickets(models.Model):
                 maids_ids3 = maids_ids2
 
             self.search_maids_ids = [(6, 0, maids_ids3.ids)]
-        elif self.ticket_type == 'transfer':
+        elif self.type == 'transfer':
             maids_ids = self.env['housemaid.maids'].search(
                 [
                     ('state', 'not in', ('backout', 'reserve')),

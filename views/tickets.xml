@@ -57,7 +57,7 @@
                                 string="Ticket">
                                 <field name="code"
                                     class="oe_inline"/>
-                                <field name="ticket_type"
+                                <field name="type"
                                     class="oe_inline"/>
                             </group>
                             <group name="tickets_sponser"
@@ -287,7 +287,7 @@
                 class="o_kanban_mobile">
                 <field name="id"/>
                 <field name="code"/>
-                <field name="ticket_type"/>
+                <field name="type"/>
                 <field name="jobs_id"/>
                 <field name="country_id"/>
                 <field name="activity_ids"/>
@@ -301,7 +301,7 @@
                                 <div class="o_kanban_tags_section"/>
                                 <ul>
                                     <li>Type:
-                                        <field name="ticket_type"/>
+                                        <field name="type"/>
                                     </li>
                                     <li>Applied Job:
                                         <field name="jobs_id"/>

@@ -23,7 +23,12 @@ class closeticket(models.TransientModel):
         required=True,
         tracking=True,
     )
-    
+    description = fields.Text(
+        string='Description',
+        required=True,
+        tracking=True,
+    )
+
     def action_closed_ticket(self):
         self.ensure_one()
         context = dict(self.env.context or {})
@@ -33,8 +38,8 @@ class closeticket(models.TransientModel):
         record = self.env['housemaid.tickets'].browse(tickets_id)
         record.state = 'closed'
         record.activity_schedule(
-                'ms_housemaid.mail_act_close',
-                user_id=user_id,
-                note=f'Please proceed hiring for {self.name} of the ticket {self.tickets_id.code}'
-            )
+            'ms_housemaid.mail_act_close',
+            user_id=user_id,
+            note=f'Please proceed hiring for {self.name} of the ticket {self.tickets_id.code}'
+        )
         print('action_closed_ticket')

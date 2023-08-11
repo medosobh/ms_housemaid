@@ -16,6 +16,8 @@
                             class="oe_inline"/>
                         <field name="user_id"
                             class="oe_inline"/>
+                        <field name="description"
+                            class="oe_inline"/>
                     </group>
 
                     <footer>

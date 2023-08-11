@@ -32,7 +32,7 @@ class maids(models.Model):
         if self.tickets_id.id == False:
             # maid state to check
             self.state = 'check'
-            #self.tickets_id = tickets
+            # self.tickets_id = tickets
             # create activity to user to check on maid
             user_id = context.get('user_id', False)
             # create an activity
@@ -163,11 +163,11 @@ class maids(models.Model):
             ('check', 'Checking'),
             ('open', 'Open to Work'),  # 3 > #4 fa-hourglass # show in search page
             # 3 > #4 fa-hourglass # show in search page
-            ('ready', 'Ready at Guesthouse'), # fa-home
-            ('transfer', 'Sponser Treansfer'),# fa-retweet #  fa-exchange 
+            ('ready', 'Ready at Guesthouse'),  # fa-home
+            ('transfer', 'Sponser Treansfer'),  # fa-retweet #  fa-exchange
             ('hiring', 'Hiring'),  # 5 fa-link # show in action page
-            ('garanty','90Days Garanty'),# fa-warning
-            ('work','Work at Sponser'), #  fa-user-plus
+            ('garanty', '90Days Garanty'),  # fa-warning
+            ('work', 'Work at Sponser'),  # fa-user-plus
             ('backout', 'Backout'),  # 3  stop here fa-ban # show in Maid Form only
             # no search state!
         ],
