@@ -19,7 +19,7 @@
         </record>
         <record model="housemaid.closereason"
             id="housemaid_closereason_2">
-            <field name="name">Sponser Cansel</field>
+            <field name="name">Sponser Cancel</field>
         </record>
          <record model="housemaid.closereason"
             id="housemaid_closereason_3">
@@ -31,10 +31,14 @@
         </record>
         <record model="housemaid.closereason"
             id="housemaid_closereason_5">
-            <field name="name">Maid Failer in 90days</field>
+            <field name="name">Maid Sick</field>
         </record>
         <record model="housemaid.closereason"
             id="housemaid_closereason_6">
+            <field name="name">Maid Failer in 90days</field>
+        </record>
+        <record model="housemaid.closereason"
+            id="housemaid_closereason_7">
             <field name="name">Ticket duplicated</field>
         </record>
     </data>

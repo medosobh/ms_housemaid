@@ -334,7 +334,7 @@ class tickets(models.Model):
         if self.type == 'sales':
             maids_ids = self.env['housemaid.maids'].search(
                 [
-                    ('state', 'in', ('draft', 'open', 'ready')),
+                    ('state', 'in', ('draft', 'open', 'ready','transfer')),
                     ('active', '=', True),
                     ('tickets_id', '=', False),
                 ]

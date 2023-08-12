@@ -48,7 +48,8 @@
                         name="%(housemaid_tickets_action_wizard)d"
                         type="action"
                         class="oe_highlight"
-                        attrs="{'invisible': [('state', 'in', ('draft','check','search','closed'))]}" />
+                        attrs="{'invisible': [('state', 'in', ('draft','check','search','closed'))]}" 
+                        context="{'tickets_id': id, 'user_id': user_id}"/>
                 </header>
                 <sheet>
                     <div class="oe_title">

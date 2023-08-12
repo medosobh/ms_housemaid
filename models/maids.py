@@ -169,6 +169,7 @@ class maids(models.Model):
             ('garanty', '90Days Garanty'),  # fa-warning
             ('work', 'Work at Sponser'),  # fa-user-plus
             ('backout', 'Backout'),  # 3  stop here fa-ban # show in Maid Form only
+            ('runaway','runaway')
             # no search state!
         ],
         default='draft',
@@ -278,6 +279,11 @@ class maids(models.Model):
     passport_expire_date = fields.Date(
         string='Expire Date',
         required=False,
+        tracking=True,
+    )
+    indentation = fields.Char(
+        string='Indentation No.',
+        required=True,
         tracking=True,
     )
     # ----------------------------------------------
@@ -445,68 +451,31 @@ class maids(models.Model):
         required=False,
         tracking=True,
     )
-    active = fields.Boolean(
-        string="Active",
-        default=True,
-        required=True,
+    sponsers_id = fields.Many2one(
+        'housemaid.sponsers',
+        string='Current Sponser',
         tracking=True,
-    )
-
-
-class maidslogs(models.Model):
-    _name = 'housemaid.maidslogs'
-    _description = 'Maid Logs'
-    _inherit = ['mail.thread', 'mail.activity.mixin']
-
-    date = fields.Char(
-        string='Date',
-        required=True,
-        default=datetime.today(),
-        tracking=True
-    )
-    state = fields.Selection(
-        string='State',
-        selection=[
-            ('open', 'Open to Work'),
-            ('ready', 'Ready Inhouse'),
-            ('valuated', '90 Days Valuation'),
-            ('transfer', 'Sponser Trabsfer'),
-            ('reserve', 'Reserved'),
-            ('work', 'Working'),
-            ('backout', 'Backout'),
-        ],
-        default='draft',
-        tracking=True
     )
     visa_no = fields.Char(
         string='Visa No.',
-        default=lambda self: _('new'),
-        required=True,
+        required=False,
         tracking=True
     )
-    contract_no = fields.Char(
-        string='Contract No.',
-        default=lambda self: _('new'),
-        required=True,
-        tracking=True,
+    arrival_date = fields.Date(
+        string='Date',
+        required=False,
+        tracking=True
     )
-    start_contract = fields.Date(
-        string='Start Date',
-        default=fields.Date.context_today,
-        tracking=True,
-    )
-    end_contract = fields.Date(
-        string='End Date',
-        default=fields.Date.context_today,
-        tracking=True,
-    )
-    maids_id = fields.Many2one(
-        string='Maids',
-        comodel_name='housemaid.maids',
-        tracking=True,
+    receive_date = fields.Date(
+        string='Date',
+        required=False,
+        tracking=True
     )
     active = fields.Boolean(
         string="Active",
         default=True,
+        required=True,
         tracking=True,
     )
+
+
