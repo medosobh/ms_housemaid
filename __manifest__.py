@@ -26,6 +26,7 @@
         'views/menu.xml',
         'views/offices.xml',
         'views/maids.xml',
+        'views/maidslogs.xml',
         'views/sponsers.xml',
         'views/tickets.xml',
         'views/jobs.xml',
