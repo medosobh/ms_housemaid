@@ -8,38 +8,39 @@
         <field name="arch"
             type="xml">
             <form>
-            <sheet>
-                <group name="contract"
-                    string="Contract">
-                    <group>
-                        <field name="tickets_id"
-                            class="oe_inline"/>
-                        <field name="sponsers_id"
-                            class="oe_inline"/>
-                        <field name="maids_id"
-                            class="oe_inline"/>
-                        <field name="user_id"
-                            class="oe_inline"/>
+                <sheet>
+                    <group name="contract"
+                        string="Contract">
+                        <group>
+                            <field name="tickets_id"
+                                class="oe_inline"/>
+                            <field name="sponsers_id"
+                                class="oe_inline"/>
+                            <field name="maids_id"
+                                class="oe_inline"/>
+                            <field name="offices_id"
+                                class="oe_inline"/>
+                            <field name="user_id"
+                                class="oe_inline"/>
+                        </group>
+                        <group>
+                            <field name="contract_no"
+                                class="oe_inline"/>
+                            <field name="start_contract"
+                                class="oe_inline"/>
+                            <field name="end_contract"
+                                class="oe_inline"/>
+                            <field name="visa_no"
+                                class="oe_inline"/>
+                        </group>
+                        <group>
+                            <field name="country_id"
+                                class="oe_inline"/>
+                            <field name="company_id"
+                                class="oe_inline"/>
+                            <field name="description" />
+                        </group>
                     </group>
-                    <group>
-                        <field name="contract_no"
-                            class="oe_inline"/>
-                        <field name="start_contract"
-                            class="oe_inline"/>
-                        <field name="end_contract"
-                            class="oe_inline"/>
-                        <field name="visa_no"
-                            class="oe_inline"/>
-                    </group>
-                    <group>
-                        <field name="country_id"
-                            class="oe_inline"/>
-                        <field name="company_id"
-                            class="oe_inline"/>
-                        <field name="description"
-                            class="oe_inline"/>
-                    </group>
-                </group>
                 </sheet>
                 <div class="oe_chatter">
                     <field name="message_follower_ids"/>
@@ -61,6 +62,7 @@
                 <field name="tickets_id" />
                 <field name="sponsers_id" />
                 <field name="maids_id" />
+                <field name="offices_id" />
                 <field name="sponsers_id" />
                 <field name="contract_no" />
                 <field name="start_contract" />

@@ -13,7 +13,7 @@ class contract(models.TransientModel):
         active_id = self._context.get('active_id')
         if active_id:
             ticket_rec = self.env['housemaid.tickets'].browse(int(active_id))
-            res['tickets_id'] = ticket_rec.tickets_id
+            res['tickets_id'] = ticket_rec.id
             res['sponsers_id'] = ticket_rec.sponsers_id
             res['maids_id'] = ticket_rec.maids_id
             res['offices_id'] = ticket_rec.offices_id
@@ -26,10 +26,26 @@ class contract(models.TransientModel):
         required=True,
         string='Ticket no.',
     )
+    type = fields.Selection(
+        string='Type',
+        selection=[
+            ('sales', 'Sales'),
+            ('transfer', 'Transfer'),
+            ('temp', 'Temporary'),
+        ],
+        required=False,
+        tracking=True,
+    )
     sponsers_id = fields.Many2one(
         'housemaid.sponsers',
         string='Current Sponser',
         required=True,
+        tracking=True,
+    )
+    new_sponsers_id = fields.Many2one(
+        'housemaid.sponsers',
+        string='Current Sponser',
+        required=False,
         tracking=True,
     )
     maids_id = fields.Many2one(
@@ -45,7 +61,6 @@ class contract(models.TransientModel):
         required=True,
         tracking=True,
     )
-
     contract_no = fields.Char(
         string='Contract No.',
         required=True,

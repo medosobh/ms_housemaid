@@ -18,12 +18,29 @@ class maidslogs(models.Model):
     )
     tickets_id = fields.Many2one(
         comodel_name='housemaid.tickets',
-        required=False,
+        required=True,
         string='Ticket no.',
+    )
+    type = fields.Selection(
+        string='Type',
+        selection=[
+            ('sales', 'Sales'),
+            ('transfer', 'Transfer'),
+            ('temp', 'Temporary'),
+        ],
+        required=False,
+        tracking=True,
     )
     sponsers_id = fields.Many2one(
         'housemaid.sponsers',
         string='Current Sponser',
+        required=True,
+        tracking=True,
+    )
+    new_sponsers_id = fields.Many2one(
+        'housemaid.sponsers',
+        string='New Sponser',
+        required=False,
         tracking=True,
     )
     maids_id = fields.Many2one(
@@ -55,7 +72,7 @@ class maidslogs(models.Model):
     )
     visa_no = fields.Char(
         string='Visa No.',
-        required=False,
+        required=True,
         tracking=True
     )
     user_id = fields.Many2one(

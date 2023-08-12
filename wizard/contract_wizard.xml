@@ -17,10 +17,15 @@
                                 class="oe_inline"/>
                             <field name="maids_id"
                                 class="oe_inline"/>
+                            <field name="offices_id"
+                                class="oe_inline"/>
                             <field name="user_id"
                                 class="oe_inline"/>
                         </group>
                         <group>
+                            <field name="new_sponsers_id"
+                                class="oe_inline"
+                                invisible="1"/>
                             <field name="contract_no"
                                 class="oe_inline"/>
                             <field name="start_contract"
@@ -35,8 +40,7 @@
                                 class="oe_inline"/>
                             <field name="company_id"
                                 class="oe_inline"/>
-                            <field name="description"
-                                class="oe_inline"/>
+                            <field name="description"/>
                         </group>
                     </group>
 

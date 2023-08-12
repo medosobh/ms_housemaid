@@ -313,6 +313,13 @@ class tickets(models.Model):
         help='Maids Check, Reserved or Hired',
         tracking=True,
     )
+    offices_id = fields.Many2one(
+        'housemaid.offices',
+        string='Offices',
+        related='maids_id.offices_id',
+        required=True,
+        tracking=True,
+    )
     garanty_day = fields.Date(
         string='Start Garanty Date',
         default=False,
