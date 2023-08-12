@@ -36,7 +36,7 @@
             </field>
         </record>
 
-        <record id="housemaid_tickets_action_wizard"
+        <record id="housemaid_closeticket_action_wizard"
             model="ir.actions.act_window">
             <field name="name">Close Ticket</field>
             <field name="res_model">housemaid.closeticket</field>

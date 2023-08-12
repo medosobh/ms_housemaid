@@ -138,6 +138,7 @@
                             </group>
                             <group name="operation"
                                 string="Operation">
+                                <field name="sponsers_id"/>
                                 <field name="visa_no"/>
                                 <field name="contract_no"/>
                                 <field name="arrival_date"/>
@@ -158,14 +159,14 @@
                         <page name="housemaid_maids_maidslogs"
                             string="History">
                             <field name="maidslogs_ids">
-                                <tree>
+                                <!-- <tree>
                                     <field name="date"/>
                                     <field name="state"/>
                                     <field name="visa_no"/>
                                     <field name="contract_no"/>
                                     <field name="start_contract"/>
                                     <field name="end_contract"/>
-                                </tree>
+                                </tree> -->
                             </field>
                         </page>
                     </notebook>

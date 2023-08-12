@@ -39,16 +39,21 @@
                         type="object"
                         class="oe_highlight"
                         attrs="{'invisible': [('state', 'in', ('draft','check','search','runout','confirm','hiring'))]}" />
+                    <button string="Contract"
+                        name="%(housemaid_contract_action_wizard)d"
+                        type="action"
+                        class="oe_highlight"
+                        attrs="{'invisible': [('state', 'in', ('draft','check','search','runout','confirm'))]}" />
                     <button string="Start 90days Garanty"
                         name="action_garanty_ticket"
                         type="object"
                         class="oe_highlight"
                         attrs="{'invisible': [('state', 'in', ('draft','check','search','found','runout','confirm','hiring','garanty'))]}" />
                     <button string="Closed"
-                        name="%(housemaid_tickets_action_wizard)d"
+                        name="%(housemaid_closeticket_action_wizard)d"
                         type="action"
                         class="oe_highlight"
-                        attrs="{'invisible': [('state', 'in', ('draft','check','search','closed'))]}" 
+                        attrs="{'invisible': [('state', 'in', ('draft','check','search','closed'))]}"
                         context="{'tickets_id': id, 'user_id': user_id}"/>
                 </header>
                 <sheet>
@@ -151,7 +156,7 @@
                             <field name="search_maids_ids">
                                 <tree editable="none">
                                     <button name="action_check_maid"
-                                    string="Check"
+                                        string="Check"
                                         class="oe_inline oe_stat_button"
                                         icon="fa-question-circle"
                                         type="object"

@@ -163,13 +163,14 @@ class maids(models.Model):
             ('check', 'Checking'),
             ('open', 'Open to Work'),  # 3 > #4 fa-hourglass # show in search page
             # 3 > #4 fa-hourglass # show in search page
-            ('ready', 'Ready at Guesthouse'),  # fa-home
+            ('ready', 'Ready Inhouse'),  # fa-home
             ('transfer', 'Sponser Treansfer'),  # fa-retweet #  fa-exchange
             ('hiring', 'Hiring'),  # 5 fa-link # show in action page
             ('garanty', '90Days Garanty'),  # fa-warning
             ('work', 'Work at Sponser'),  # fa-user-plus
             ('backout', 'Backout'),  # 3  stop here fa-ban # show in Maid Form only
-            ('runaway','runaway')
+            ('runaway','runaway'),
+            ('contract_end','Contract End'),
             # no search state!
         ],
         default='draft',
@@ -456,18 +457,23 @@ class maids(models.Model):
         string='Current Sponser',
         tracking=True,
     )
+    contract_no = fields.Char(
+        string='Contract No.',
+        required=False,
+        tracking=True,
+    )
     visa_no = fields.Char(
         string='Visa No.',
         required=False,
         tracking=True
     )
     arrival_date = fields.Date(
-        string='Date',
+        string='Arrival Date',
         required=False,
         tracking=True
     )
     receive_date = fields.Date(
-        string='Date',
+        string='Receive Date',
         required=False,
         tracking=True
     )
