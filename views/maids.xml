@@ -375,7 +375,7 @@
     <menuitem id="housemaid_maids_menu"
         name="Maids"
         action="housemaid_maids_action"
-        parent="housemaid_menu_data"
-        sequence="12"/>
+        parent="housemaid_menu_maid"
+        sequence="21"/>
 
 </odoo>

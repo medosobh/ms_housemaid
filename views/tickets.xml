@@ -43,7 +43,8 @@
                         name="%(housemaid_contract_action_wizard)d"
                         type="action"
                         class="oe_highlight"
-                        attrs="{'invisible': [('state', 'in', ('draft','check','search','runout','confirm'))]}" />
+                        attrs="{'invisible': [('state', 'in', ('draft','check','found','search','runout','confirm'))]}"
+                        context="{'tickets_id': id,'sponsers_id': sponsers_id, 'user_id': user_id}" />
                     <button string="Start 90days Garanty"
                         name="action_garanty_ticket"
                         type="object"
@@ -279,6 +280,8 @@
                 <field name="children_no"/>
                 <field name="marital_status"/>
                 <field name="maids_id"/>
+                <field name="company_id"
+                    groups="base.group_multi_company"/>
             </tree>
         </field>
     </record>
@@ -403,5 +406,5 @@
         name="Tickets"
         action="housemaid_tickets_action"
         parent="housemaid_menu_tickets"
-        sequence="21"/>
+        sequence="31"/>
 </odoo>

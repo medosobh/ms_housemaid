@@ -421,18 +421,18 @@ class maids(models.Model):
         required=False,
         tracking=True,
     )
+    user_id = fields.Many2one(
+        string="Operation Man",
+        comodel_name='res.users',
+        required=True,
+        tracking=True,
+    )
     company_id = fields.Many2one(
         string='Company',
         comodel_name='res.company',
         change_default=True,
         default=lambda self: self.env.company,
         required=False,
-        tracking=True,
-    )
-    user_id = fields.Many2one(
-        string="Operation Man",
-        comodel_name='res.users',
-        required=True,
         tracking=True,
     )
     tickets_id = fields.Many2one(

@@ -4,23 +4,25 @@ from odoo.exceptions import UserError
 
 class contract(models.TransientModel):
     _name = 'housemaid.contract'
-    _description = 'Close Ticket Wizard'
+    _description = 'Contract Wizard'
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
+    
     tickets_id = fields.Many2one(
         comodel_name='housemaid.tickets',
-        required=False,
+        required=True,
         string='Ticket no.',
     )
     sponsers_id = fields.Many2one(
         'housemaid.sponsers',
         string='Current Sponser',
+        required=True,
         tracking=True,
     )
     maids_id = fields.Many2one(
         comodel_name='housemaid.maids',
         string='Maid',
-        help='Maids Check, Reserved or Hired',
+        required=True,
         tracking=True,
     )
     offices_id = fields.Many2one(
@@ -30,10 +32,10 @@ class contract(models.TransientModel):
         required=True,
         tracking=True,
     )
-    
+
     contract_no = fields.Char(
         string='Contract No.',
-        required=False,
+        required=True,
         tracking=True,
     )
     start_contract = fields.Date(
@@ -48,7 +50,7 @@ class contract(models.TransientModel):
     )
     visa_no = fields.Char(
         string='Visa No.',
-        required=False,
+        required=True,
         tracking=True,
     )
     user_id = fields.Many2one(

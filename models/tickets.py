@@ -15,13 +15,13 @@ class tickets(models.Model):
     @api.model
     def create(self, vals):
         if not vals.get('code') or vals['code'] == _('New'):
-            if self.type == 'sales':
+            if vals['type'] == 'sales':
                 vals['code'] = self.env['ir.sequence'].next_by_code(
                     'housemaid.sales.tickets') or _('New')
-            elif self.type == 'transfer':
+            elif vals['type'] == 'transfer':
                 vals['code'] = self.env['ir.sequence'].next_by_code(
                     'housemaid.transfer.tickets') or _('New')
-            elif self.type == 'temp':
+            elif vals['type'] == 'temp':
                 vals['code'] = self.env['ir.sequence'].next_by_code(
                     'housemaid.temporary.tickets') or _('New')
             else:
@@ -59,8 +59,10 @@ class tickets(models.Model):
 
     def action_confirm_ticket(self):
         self.ensure_one()
-        self.state = 'confirm'
-        print('action_confirm_ticket')
+        if self.sponser_id == False:
+            raise UserError('Please Select Sponser before confirm!')
+        else:
+            self.state = 'confirm'
 
     @api.onchange('garanty_day')
     def action_garanty_ticket(self):
@@ -284,18 +286,18 @@ class tickets(models.Model):
         help="Country of Maid.",
         tracking=True,
     )
+    user_id = fields.Many2one(
+        string="Responsable",
+        comodel_name='res.users',
+        required=True,
+        tracking=True,
+    )
     company_id = fields.Many2one(
         string='Company',
         comodel_name='res.company',
         change_default=True,
         default=lambda self: self.env.company,
         required=False,
-        tracking=True,
-    )
-    user_id = fields.Many2one(
-        string="Responsable",
-        comodel_name='res.users',
-        required=True,
         tracking=True,
     )
     active = fields.Boolean(
@@ -334,7 +336,7 @@ class tickets(models.Model):
         if self.type == 'sales':
             maids_ids = self.env['housemaid.maids'].search(
                 [
-                    ('state', 'in', ('draft', 'open', 'ready','transfer')),
+                    ('state', 'in', ('draft', 'open', 'ready', 'transfer')),
                     ('active', '=', True),
                     ('tickets_id', '=', False),
                 ]
@@ -361,7 +363,30 @@ class tickets(models.Model):
         elif self.type == 'transfer':
             maids_ids = self.env['housemaid.maids'].search(
                 [
-                    ('state', 'not in', ('backout', 'reserve')),
+                    ('state', 'in', ('ready', 'transfer')),
+                    ('active', '=', True),
+                ]
+            )
+            if self.jobs_id != False:
+                maids_ids1 = maids_ids.filtered(
+                    lambda maids: maids.jobs_id.id == self.jobs_id.id)
+            else:
+                maids_ids1 = maids_ids
+
+            if len(self.country_id) == 1:
+                maids_ids2 = maids_ids1.filtered(
+                    lambda maids: maids.country_id.id == self.country_id.id)
+            else:
+                maids_ids2 = maids_ids1
+
+            if self.monthly_salary != 0:
+                maids_ids3 = maids_ids2.filtered(
+                    lambda maids: maids.monthly_salary == self.monthly_salary)
+            else:
+                maids_ids3 = maids_ids2
+        elif self.type == 'temp':
+            maids_ids = self.env['housemaid.maids'].search(
+                [
                     ('state', 'in', ('ready')),
                     ('active', '=', True),
                 ]

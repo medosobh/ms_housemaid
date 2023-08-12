@@ -95,6 +95,13 @@ class offices(models.Model):
         string='Description',
         tracking=True,
     )
+    user_id = fields.Many2one(
+        comodel_name='res.users',
+        string="Operation Man",
+        default=lambda self: self.env.user.id,
+        required=True,
+        tracking=True,
+    )
     company_id = fields.Many2one(
         comodel_name='res.company',
         string='Company',
@@ -103,13 +110,6 @@ class offices(models.Model):
         required=False,
         readonly=True,
         tracking=True
-    )
-    user_id = fields.Many2one(
-        comodel_name='res.users',
-        string="Operation Man",
-        default=lambda self: self.env.user.id,
-        required=True,
-        tracking=True,
     )
     active = fields.Boolean(
         string="Active",
