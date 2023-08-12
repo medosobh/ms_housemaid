@@ -35,7 +35,6 @@ class maidslogs(models.Model):
     offices_id = fields.Many2one(
         'housemaid.offices',
         string='Offices',
-        related='maids_id.offices_id',
         required=True,
         tracking=True,
     )
@@ -68,7 +67,6 @@ class maidslogs(models.Model):
     country_id = fields.Many2one(
         string="Country",
         comodel_name='res.country',
-        related='maids_id.country_id',
         help="Country of Maid.",
         tracking=True,
     )

@@ -31,7 +31,9 @@
                                 class="oe_inline"/>
                         </group>
                         <group>
-                            <field name="user_id"
+                            <field name="country_id"
+                                class="oe_inline"/>
+                            <field name="company_id"
                                 class="oe_inline"/>
                             <field name="description"
                                 class="oe_inline"/>
