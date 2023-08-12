@@ -97,7 +97,7 @@ class maidslogs(models.Model):
     )
     description = fields.Text(
         string='Description',
-        required=True,
+        required=False,
         tracking=True,
     )
     active = fields.Boolean(

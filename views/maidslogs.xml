@@ -16,6 +16,9 @@
                                 class="oe_inline"/>
                             <field name="sponsers_id"
                                 class="oe_inline"/>
+                            <field name="new_sponsers_id"
+                                class="oe_inline"
+                                invisible="1"/>
                             <field name="maids_id"
                                 class="oe_inline"/>
                             <field name="offices_id"
@@ -59,8 +62,12 @@
             type="xml">
             <tree string="Contracts"
                 sample="1">
+                <field name="issue_date" />
                 <field name="tickets_id" />
+                <field name="type" />
                 <field name="sponsers_id" />
+                <field name="new_sponsers_id"
+                    invisible="1"/>
                 <field name="maids_id" />
                 <field name="offices_id" />
                 <field name="sponsers_id" />

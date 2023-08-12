@@ -1,5 +1,6 @@
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError
+from datetime import date, datetime, timedelta
 
 
 class contract(models.TransientModel):
@@ -103,15 +104,29 @@ class contract(models.TransientModel):
     )
     description = fields.Text(
         string='Description',
-        required=True,
+        required=False,
         tracking=True,
     )
 
     def action_create_contract(self):
         self.ensure_one()
-        context = dict(self.env.context or {})
-        user_id = context.get('user_id', False)
-        tickets_id = context.get('tickets_id', False)
-        # change ticket state
+        vals = {
+            'issue_date': date.today(),
+            'tickets_id': self.tickets_id.id,
+            'type': self.type,
+            'sponsers_id': self.sponsers_id.id,
+            'new_sponsers_id': self.new_sponsers_id.id,
+            'maids_id': self.maids_id.id,
+            'offices_id': self.offices_id.id,
+            'contract_no': self.contract_no,
+            'start_contract': self.start_contract,
+            'end_contract': self.end_contract,
+            'visa_no': self.visa_no,
+            'user_id': self.user_id.id,
+            'country_id': self.country_id.id,
+            'company_id': self.company_id.id,
+            'description': self.description,
+        }
+        self.env['housemaid.maidslogs'].self.create(vals)
 
-        print('action_closed_ticket')
+        print('action_create_contract')
