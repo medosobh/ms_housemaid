@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="housemaid_contract_wizard_form"
+            model="ir.ui.view">
+            <field name="name">housemaid.contract.form</field>
+            <field name="model">housemaid.contract</field>
+            <field name="arch"
+                type="xml">
+                <form>
+                    <group name="contract"
+                        string="Contract">
+                        <group>
+                            <field name="tickets_id"
+                                class="oe_inline"/>
+                            <field name="sponsers_id"
+                                class="oe_inline"/>
+                            <field name="maids_id"
+                                class="oe_inline"/>
+                            <field name="sponsers_id"
+                                class="oe_inline"/>
+                        </group>
+                        <group>
+                            <field name="contract_no"
+                                class="oe_inline"/>
+                            <field name="start_contract"
+                                class="oe_inline"/>
+                            <field name="end_contract"
+                                class="oe_inline"/>
+                            <field name="visa_no"
+                                class="oe_inline"/>
+                        </group>
+                        <field name="user_id"
+                            class="oe_inline"/>
+                        <field name="description"
+                            class="oe_inline"/>
+                    </group>
+
+                    <footer>
+                        <button string="Create"
+                            name="action_create_contract"
+                            context="{'tickets_id': id, 'user_id': user_id}"
+                            type="object"
+                            class="oe_highlight"
+                            data-hotkey="q"/>
+                        <button string="Cancel"
+                            class="btn btn-secondary"
+                            special="cancel"
+                            data-hotkey="z"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="housemaid_contract_action_wizard"
+            model="ir.actions.act_window">
+            <field name="name">Create Contract</field>
+            <field name="res_model">housemaid.contract</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>
