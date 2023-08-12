@@ -65,6 +65,13 @@ class maidslogs(models.Model):
         required=True,
         tracking=True,
     )
+    country_id = fields.Many2one(
+        string="Country",
+        comodel_name='res.country',
+        related='maids_id.country_id',
+        help="Country of Maid.",
+        tracking=True,
+    )
     company_id = fields.Many2one(
         string='Company',
         comodel_name='res.company',

@@ -30,102 +30,103 @@
                         <field name="visa_no"
                             class="oe_inline"/>
                     </group>
-                    <field name="user_id"
-                        class="oe_inline"/>
-                    <field name="description"
-                        class="oe_inline"/>
+                    <group>
+                        <field name="user_id"
+                            class="oe_inline"/>
+                        <field name="description"
+                            class="oe_inline"/>
+                    </group>
                 </group>
-            </group>
-        </form>
-    </field>
-</record>
+            </form>
+        </field>
+    </record>
 
-<record id="housemaid_maidslogs_tree"
-    model="ir.ui.view">
-    <field name="name">housemaid.maidslogs.tree</field>
-    <field name="model">housemaid.maidslogs</field>
-    <field name="arch"
-        type="xml">
-        <tree string="Contracts"
-            sample="1">
-            <field name="tickets_id" />
-            <field name="sponsers_id" />
-            <field name="maids_id" />
-            <field name="sponsers_id" />
-            <field name="contract_no" />
-            <field name="start_contract" />
-            <field name="end_contract" />
-            <field name="visa_no" />
-            <field name="user_id" />
-            <field name="description" />
-            <field name="company_id"
-                groups="base.group_multi_company"/>
-        </tree>
-    </field>
-</record>
-
-<record id="housemaid_maidslogs_search"
-    model="ir.ui.view">
-    <field name="name">housemaid.maidslogs.search</field>
-    <field name="model">housemaid.maidslogs</field>
-    <field name="arch"
-        type="xml">
-        <search string="Contracts">
-            <field name="company_id"
-                widget="selection"/>
-            <field name="user_id"
-                widget="selection"/>
-            <field name="country_id"
-                widget="selection"/>
-            <filter name="filter_archived"
-                string="Archived"
-                domain="[('active', '=', False)]"/>
-            <group expand="0"
-                string="Group by">
-                <filter string="Company"
-                    name="group_by_company_id"
-                    context="{'group_by':'company_id'}"/>
-                <filter string="Operator"
-                    name="group_by_user"
-                    context="{'group_by':'user_id'}"/>
-                <filter string="Country"
-                    name="group_by_country_id"
-                    context="{'group_by':'country_id'}"/>
-            </group>
-            <searchpanel>
+    <record id="housemaid_maidslogs_tree"
+        model="ir.ui.view">
+        <field name="name">housemaid.maidslogs.tree</field>
+        <field name="model">housemaid.maidslogs</field>
+        <field name="arch"
+            type="xml">
+            <tree string="Contracts"
+                sample="1">
+                <field name="tickets_id" />
+                <field name="sponsers_id" />
+                <field name="maids_id" />
+                <field name="sponsers_id" />
+                <field name="contract_no" />
+                <field name="start_contract" />
+                <field name="end_contract" />
+                <field name="visa_no" />
+                <field name="user_id" />
+                <field name="description" />
                 <field name="company_id"
-                    select="multi"
-                    string="Office"
-                    enable_counters="1"/>
+                    groups="base.group_multi_company"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="housemaid_maidslogs_search"
+        model="ir.ui.view">
+        <field name="name">housemaid.maidslogs.search</field>
+        <field name="model">housemaid.maidslogs</field>
+        <field name="arch"
+            type="xml">
+            <search string="Contracts">
+                <field name="company_id"
+                    widget="selection"/>
+                <field name="user_id"
+                    widget="selection"/>
                 <field name="country_id"
-                    select="multi"
-                    string="Country"
-                    enable_counters="1"/>
-                <field name="offices_id"
-                    select="multi"
-                    string="Office"
-                    enable_counters="1"/>
+                    widget="selection"/>
+                <filter name="filter_archived"
+                    string="Archived"
+                    domain="[('active', '=', False)]"/>
+                <group expand="0"
+                    string="Group by">
+                    <filter string="Company"
+                        name="group_by_company_id"
+                        context="{'group_by':'company_id'}"/>
+                    <filter string="Operator"
+                        name="group_by_user"
+                        context="{'group_by':'user_id'}"/>
+                    <filter string="Country"
+                        name="group_by_country_id"
+                        context="{'group_by':'country_id'}"/>
+                </group>
+                <searchpanel>
+                    <field name="company_id"
+                        select="multi"
+                        string="Office"
+                        enable_counters="1"/>
+                    <field name="country_id"
+                        select="multi"
+                        string="Country"
+                        enable_counters="1"/>
+                    <field name="offices_id"
+                        select="multi"
+                        string="Office"
+                        enable_counters="1"/>
 
-            </searchpanel>
-        </search>
-    </field>
-</record>
+                </searchpanel>
+            </search>
+        </field>
+    </record>
 
-<record id="housemaid_maidslogs_action"
-    model="ir.actions.act_window">
-    <field name="name">Contracts</field>
-    <field name="res_model">housemaid.maidslogs</field>
-    <field name="view_mode">tree,form</field>
-    <field name="help"
-        type="html">
-        <p class="o_view_nocontent_smiling_face">Create your first Contract!</p>
-    </field>
-</record>
+    <record id="housemaid_maidslogs_action"
+        model="ir.actions.act_window">
+        <field name="name">Contracts</field>
+        <field name="res_model">housemaid.maidslogs</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help"
+            type="html">
+            <p class="o_view_nocontent_smiling_face">Create your first Contract!</p>
+        </field>
+    </record>
 
-<menuitem id="housemaid_maidslogs_menu"
-    name="Contracts"
-    action="housemaid_maidslogs_action"
-    parent="housemaid_menu_maid"
-    sequence="22"/>
+    <menuitem id="housemaid_maidslogs_menu"
+        name="Contracts"
+        action="housemaid_maidslogs_action"
+        parent="housemaid_menu_maid"
+        sequence="22"/>
 
 </odoo>
