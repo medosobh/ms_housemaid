@@ -60,17 +60,17 @@
                 <sheet>
                     <div role="alert"
                         class="alert alert-warning"
-                        attrs="{'invisible': ['&amp;',('state', 'in', ('found','confirm','hire','garanty','closed')),('sponsers_id', '!=', False) ]}">
+                        attrs="{'invisible': ['&amp;',('state', 'in', ('found','confirm','hire','garanty','closed')),('sponsers_id', '!=', False)]}">
                         Enter a Sponser before confirm.
                     </div>
                     <div role="alert"
                         class="alert alert-warning"
-                        attrs="{'invisible': ['&amp;',('state', 'in', ('confirm','hire','garanty','closed'),('maids_id', '!=', False) ]}">
+                        attrs="{'invisible': ['&amp;',('state', 'in', ('confirm','hire','garanty','closed')),('maids_id', '!=', False)]}">
                         At action page below; pick a maid and click on hire link icon to attache the maid to ticket.
                     </div>
                     <div role="alert"
                         class="alert alert-warning"
-                        attrs="{'invisible': ['&amp;',('state', 'in', 'hire',('garanty','closed'),('garanty_day'), '!=', False) ]}">
+                        attrs="{'invisible': ['&amp;',('state', 'in', ('hire','garanty','closed')),('garanty_day', '!=', False)]}">
                         Enter Garanty Date to change the state.
                     </div>
                     <div class="oe_title">
