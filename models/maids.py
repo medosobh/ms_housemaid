@@ -23,6 +23,29 @@ class maids(models.Model):
             'ms_housemaid', 'static/img', 'maid.png')
         return base64.b64encode(open(image_path, 'rb').read())
 
+    @api.depends('name', 'code')
+    def name_get(self):
+        result = []
+        for record in self:
+            if record.code:
+                name = '[' + record.code + '] ' + record.name
+            else:
+                name = record.name
+            result.append((record.id, name))
+        return result
+
+    @api.depends('birthday')
+    def _get_age(self):
+        self.ensure_one()
+        if not self.birthday:
+            self.age = 0
+        elif not self.birthday:
+            raise UserError('Please define birthday for current maid')
+        else:
+            self.age = (date.today().year - self.birthday.year)
+
+        return self.age
+
     # object in search page
     def action_check_maid(self):
         self.ensure_one()
@@ -125,36 +148,6 @@ class maids(models.Model):
             'tag': 'reload',
         }
 
-        # maid state to hiring
-        for rec in self:
-            rec.state = 'hiring'
-        # create activity to operation user to proceed on maid
-        # update maid field ticket id once more!!
-        print('Recruitment Procedures!')
-
-    @api.depends('name', 'code')
-    def name_get(self):
-        result = []
-        for record in self:
-            if record.code:
-                name = '[' + record.code + '] ' + record.name
-            else:
-                name = record.name
-            result.append((record.id, name))
-        return result
-
-    @api.depends('birthday')
-    def _get_age(self):
-        self.ensure_one()
-        if not self.birthday:
-            self.age = 0
-        elif not self.birthday:
-            raise UserError('Please define birthday for current maid')
-        else:
-            self.age = (date.today().year - self.birthday.year)
-
-        return self.age
-
     state = fields.Selection(
         string='State',
         selection=[
@@ -169,8 +162,8 @@ class maids(models.Model):
             ('garanty', '90Days Garanty'),  # fa-warning
             ('work', 'Work at Sponser'),  # fa-user-plus
             ('backout', 'Backout'),  # 3  stop here fa-ban # show in Maid Form only
-            ('runaway','runaway'),
-            ('contract_end','Contract End'),
+            ('runaway', 'runaway'),
+            ('contract_end', 'Contract End'),
             # no search state!
         ],
         default='draft',
@@ -483,5 +476,3 @@ class maids(models.Model):
         required=True,
         tracking=True,
     )
-
-

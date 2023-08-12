@@ -59,10 +59,11 @@ class tickets(models.Model):
 
     def action_confirm_ticket(self):
         self.ensure_one()
-        if self.sponser_id == False:
-            raise UserError('Please Select Sponser before confirm!')
-        else:
+        if self.sponsers_id.id != False:
             self.state = 'confirm'
+        else:
+            raise UserError('Please Select Sponser before confirm!')
+            
 
     @api.onchange('garanty_day')
     def action_garanty_ticket(self):
@@ -128,7 +129,8 @@ class tickets(models.Model):
     )
     sponsers_id = fields.Many2one(
         'housemaid.sponsers',
-        string='Link to Sponser',
+        string='Sponser',
+        required=False,
         tracking=True,
     )
     # maid search data

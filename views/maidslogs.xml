@@ -126,7 +126,7 @@
         <menuitem id="housemaid_maidslogs_menu"
             name="Contracts"
             action="housemaid_maids_action"
-            parent="housemaid_menu_data"
+            parent="housemaid_menu_maid"
             sequence="22"/>
 
     </odoo>
