@@ -105,9 +105,9 @@
     </record>
 
     <menuitem id="housemaid_closedtickets_menu"
-        name="Contracts"
+        name="Closed Tickets"
         action="housemaid_closedtickets_action"
-        parent="housemaid_menu_maid"
+        parent="housemaid_menu_tickets"
         sequence="32"/>
 
 </odoo>
