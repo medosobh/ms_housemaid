@@ -45,38 +45,8 @@ class maids(models.Model):
             self.age = (date.today().year - self.birthday.year)
         return self.age
 
-    # object in search page
-    def action_check_maid(self):
-        self.ensure_one()
-        # test maid ticket id exist or update?
-        context = dict(self.env.context or {})
-        tickets_id = context.get('tickets_id', False)
-        sponsers_id = context.get('sponsers_id', False)
-        if self.tickets_id.id == False:
-            # maid state to check
-            self.state = 'check'
-            # create activity to user to check on maid
-            user_id = context.get('user_id', False)
-            # create an activity
-            # users = self.env.ref('ms_housemaid.group_housemaid_operator').users
-            # for user in users:
-            self.activity_schedule(
-                'ms_housemaid.mail_act_checking',
-                user_id=user_id,
-                note=f'Please Check Maid {self.name} of the ticket {tickets_id.code}'
-            )
-            # change ticket state
-            record = self.env['housemaid.tickets'].browse(int(tickets_id.id))
-            record.state = 'check'
-        else:
-            raise UserError("Maid already linked to another Ticket!")
-        # refresh page
-        return {
-            'type': 'ir.actions.client',
-            'tag': 'reload',
-        }
-
     # object in Maid form
+
     def action_draft_maid(self):
         self.ensure_one()
         # maid state to draft
@@ -119,32 +89,55 @@ class maids(models.Model):
             self.sponsers_id = False
             self.garanty_day = False
 
-    def action_hiring_maid(self):
+    # object in search page
+    def action_check_maid(self):
         self.ensure_one()
-        # test maid ticket id exist or update?
-        context = dict(self.env.context or {})
-        tickets_id = context.get('tickets_id', False)
-        sponsers_id = context.get('sponsers_id', False)
-        if self.tickets_id == tickets_id:
-            # maid state to check
-            self.state = 'hiring'
-            self.tickets_id = tickets_id
-            self.sponsers_id = sponsers_id
-            # create activity to user to check on maid
-            user_id = context.get('user_id', False)
+        # test maids_tickets_id exist or not?
+        if self.tickets_id.id == False:
+            active_id = self._context.get('active_id')
+            if active_id:
+                ticket_rec = self.env['housemaid.tickets'].browse(
+                    int(active_id))
             # create an activity
-            # users = self.env.ref('ms_housemaid.group_housemaid_operator').users
-            # for user in users:
             self.activity_schedule(
-                'ms_housemaid.mail_act_hiring',
-                user_id=user_id,
-                note=f'Please proceed hiring for {self.name} of the ticket {self.tickets_id.code}'
+                'ms_housemaid.mail_act_checking',
+                user_id=ticket_rec.user_id,
+                note=f'Sponser: {ticket_rec.new_sponsers_id} ask checking Maid: {self.name} of the ticket {ticket_rec.code}'
             )
             # change ticket state
-            record = self.env['housemaid.tickets'].browse(tickets_id)
-            record.state = 'hiring'
+            ticket_rec.state = 'check'
+            # maid state to check
+            self.state = 'check'
         else:
-            raise UserError("Maid already linked to another Ticket!")
+            raise UserError(
+                "Maid already linked to another Ticket review maid cv.!")
+        # refresh page
+        return {
+            'type': 'ir.actions.client',
+            'tag': 'reload',
+        }
+
+    def action_hiring_maid(self):
+        self.ensure_one()
+        # test maids_tickets_id exist or not?
+        if self.tickets_id.id == False:
+            active_id = self._context.get('active_id')
+            if active_id:
+                ticket_rec = self.env['housemaid.tickets'].browse(
+                    int(active_id))
+            # create an activity
+            self.activity_schedule(
+                'ms_housemaid.mail_act_hiring',
+                user_id=ticket_rec.user_id,
+                note=f'Sponser: {ticket_rec.new_sponsers_id} ask hiring Maid: {self.name} of the ticket {ticket_rec.code}'
+            )
+            # change ticket state
+            ticket_rec.state = 'hiring'
+            # maid state to check
+            self.state = 'hiring'
+        else:
+            raise UserError(
+                "Maid already linked to another Ticket review maid cv.!")
         # refresh page
         return {
             'type': 'ir.actions.client',

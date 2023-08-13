@@ -19,8 +19,9 @@ class maidslogs(models.Model):
     )
     tickets_id = fields.Many2one(
         comodel_name='housemaid.tickets',
-        required=True,
         string='Ticket no.',
+        required=True,
+        tracking=True,
     )
     type = fields.Selection(
         string='Type',
@@ -88,6 +89,7 @@ class maidslogs(models.Model):
         string="Country",
         comodel_name='res.country',
         help="Country of Maid.",
+        required=False,
         tracking=True,
     )
     user_id = fields.Many2one(

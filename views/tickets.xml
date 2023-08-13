@@ -18,7 +18,7 @@
                         type="object"
                         class="oe_highlight"
                         attrs="{'invisible': [('state', 'in', ('check','search','found','confirm','garanty','hiring','closed'))]}"
-                        context="{'tickets_id': id,'sponsers_id':sponsers_id, 'user_id': user_id}"/>
+                        context="{'tickets_id': id, 'user_id': user_id}"/>
                     <button string="Draft"
                         name="action_draft_ticket"
                         type="object"
@@ -44,7 +44,7 @@
                         type="action"
                         class="oe_highlight"
                         attrs="{'invisible': [('state', 'in', ('draft','check','found','search','runout','confirm','garanty'))]}"
-                        context="{'tickets_id': id,'sponsers_id': sponsers_id, 'user_id': user_id}" />
+                        context="{'tickets_id': id, 'user_id': user_id, 'sponsers_id': new_sponsers_id}" />
                     <button string="Start 90days Garanty"
                         name="action_garanty_ticket"
                         type="object"
@@ -55,12 +55,12 @@
                         type="action"
                         class="oe_highlight"
                         attrs="{'invisible': [('state', 'in', ('draft','check','search','closed'))]}"
-                        context="{'tickets_id': id,'sponsers_id': sponsers_id, 'user_id': user_id}"/>
+                        context="{'tickets_id': id, 'user_id': user_id, 'sponsers_id': new_sponsers_id}"/>
                 </header>
                 <sheet>
                     <div role="alert"
                         class="alert alert-warning"
-                        attrs="{'invisible': [('sponsers_id', '!=', False)]}">
+                        attrs="{'invisible': [('new_sponsers_id', '!=', False)]}">
                         Enter a Sponser before confirm.
                     </div>
                     <div role="alert"
@@ -92,7 +92,7 @@
                                 <field name="sponser_email"
                                     widget="email"
                                     class="oe_inline"/>
-                                <field name="sponsers_id"
+                                <field name="new_sponsers_id"
                                     class="oe_inline"/>
                             </group>
                         </group>
@@ -160,6 +160,8 @@
                                     widget="selection"/>
                                 <field name="maids_id"
                                     widget="selection"/>
+                                <field name="old_sponsers_id"
+                                    widget="selection"/>
                                 <field name="garanty_day" />
                                 <field name="active"
                                     invisible="1"/>
@@ -177,16 +179,14 @@
                                         icon="fa-question-circle"
                                         type="object"
                                         help="Ask Operation to Check Avaliability!"
-                                        attrs="{'invisible': [('state', 'in', ('open', 'ready'))]}"
-                                        context="{'tickets_id': id,'sponsers_id':sponsers_id, 'user_id': user_id}"/>
+                                        attrs="{'invisible': [('state', 'in', ('open', 'ready'))]}" />
                                     <button name="action_hiring_maid"
                                         string="Hire"
                                         class="oe_inline oe_stat_button"
                                         icon="fa-link"
                                         type="object"
                                         help="Move Maid to Action page!"
-                                        attrs="{'invisible': [('state', 'in', ('draft','check'))]}"
-                                        context="{'tickets_id': id,'sponsers_id':sponsers_id, 'user_id': user_id}"/>
+                                        attrs="{'invisible': [('state', 'in', ('draft','check'))]}" />
                                     <field name="state"/>
                                     <field name="code"/>
                                     <field name="phone"/>
@@ -223,15 +223,13 @@
                                         icon="fa-unlink"
                                         type="object"
                                         help="Reset Maid to Draft and keep ticket state!"
-                                        attrs="{'invisible': [('state', 'in', ('draft', 'check'))]}"
-                                        context="{'tickets_id': id,'sponsers_id':sponsers_id, 'user_id': user_id}"/>
+                                        attrs="{'invisible': [('state', 'in', ('draft', 'check'))]}" />
                                     <button name="action_hiring_maid"
                                         string="Hire"
                                         icon="fa-link"
                                         type="object"
                                         help="Ask Operation to Proceed Recrutement!"
-                                        attrs="{'invisible': [('state', 'in', ('draft','check','hiring','backout'))]}"
-                                        context="{'tickets_id': id,'sponsers_id':sponsers_id, 'user_id': user_id}"/>
+                                        attrs="{'invisible': [('state', 'in', ('draft','check','hiring','backout'))]}" />
                                     <field name="state"/>
                                     <field name="code"/>
                                     <field name="phone"/>
@@ -282,7 +280,7 @@
                 <field name="sponser_name"/>
                 <field name="sponser_phone"/>
                 <field name="sponser_email"/>
-                <field name="sponsers_id"/>
+                <field name="new_sponsers_id"/>
                 <field name="activity_ids"
                     widget="list_activity"/>
                 <field name="monthly_salary"/>
@@ -295,6 +293,7 @@
                 <field name="children_no"/>
                 <field name="marital_status"/>
                 <field name="maids_id"/>
+                <field name="old_sponsers_id"/>
                 <field name="company_id"
                     groups="base.group_multi_company"/>
             </tree>

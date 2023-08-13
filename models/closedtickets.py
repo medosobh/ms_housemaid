@@ -12,17 +12,19 @@ class closedtickets(models.Model):
         string='Issue Date',
         required=True,
         default=datetime.today(),
-        tracking=True
+        tracking=True,
     )
     closereason_id = fields.Many2one(
         comodel_name='housemaid.closereason',
-        required=True,
         string='Reason',
+        required=True,
+        tracking=True,
     )
     tickets_id = fields.Many2one(
         comodel_name='housemaid.tickets',
-        required=True,
         string='Ticket no.',
+        required=True,
+        tracking=True,
     )
     sponsers_id = fields.Many2one(
         'housemaid.sponsers',

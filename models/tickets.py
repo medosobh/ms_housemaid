@@ -126,9 +126,17 @@ class tickets(models.Model):
         default=lambda self: _('name@mail.com'),
         tracking=True,
     )
-    sponsers_id = fields.Many2one(
+    new_sponsers_id = fields.Many2one(
         'housemaid.sponsers',
-        string='Sponser',
+        string='New Sponser',
+        required=False,
+        tracking=True,
+    )
+    old_sponsers_id = fields.Many2one(
+        'housemaid.sponsers',
+        string='Old Sponser',
+        related='maids_id.sponsers_id',
+        readonly=False,
         required=False,
         tracking=True,
     )

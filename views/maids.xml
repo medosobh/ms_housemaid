@@ -224,7 +224,6 @@
                     widget="selection"/>
                 <field name="sponsers_id"
                     widget="selection"/>
-
             </tree>
         </field>
     </record>
@@ -381,5 +380,4 @@
         action="housemaid_maids_action"
         parent="housemaid_menu_maid"
         sequence="21"/>
-
 </odoo>
