@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="housemaid_closed_tickets_form"
+        model="ir.ui.view">
+        <field name="name">housemaid.closed_tickets.form</field>
+        <field name="model">housemaid.closed_tickets</field>
+        <field name="arch"
+            type="xml">
+            <form name="closedtickets"
+                string="Closed Tickets">
+                <sheet>
+                    <group name="closedticket"
+                        string="Closed Ticket">
+                        <group>
+                            <field name="issue_date"
+                                class="oe_inline"/>
+                            <field name="closereason_id"
+                                class="oe_inline"/>
+                            <field name="tickets_id"
+                                class="oe_inline"/>
+                            <field name="sponsers_id"
+                                class="oe_inline"/>
+                            <field name="maids_id"
+                                class="oe_inline"/>
+                            <field name="user_id"
+                                class="oe_inline"/>
+                            <field name="description" />
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="housemaid_closed_tickets_tree"
+        model="ir.ui.view">
+        <field name="name">housemaid.closed_tickets.tree</field>
+        <field name="model">housemaid.closed_tickets</field>
+        <field name="arch"
+            type="xml">
+            <tree name="contracts"
+                string="Contracts"
+                sample="1">
+                <field name="issue_date" />
+                <field name="closereason_id" />
+                <field name="tickets_id" />
+                <field name="sponsers_id" />
+                <field name="maids_id" />
+                <field name="user_id" />
+                <field name="description" />
+            </tree>
+        </field>
+    </record>
+
+    <record id="housemaid_closed_tickets_search"
+        model="ir.ui.view">
+        <field name="name">housemaid.closed_tickets.search</field>
+        <field name="model">housemaid.closed_tickets</field>
+        <field name="arch"
+            type="xml">
+            <search string="Contracts">
+                <field name="closereason_id"
+                    widget="selection"/>
+                <field name="sponsers_id"
+                    widget="selection"/>
+                <field name="maids_id"
+                    widget="selection"/>
+                <filter name="filter_archived"
+                    string="Archived"
+                    domain="[('active', '=', False)]"/>
+                <group expand="0"
+                    string="Group by">
+                    <filter string="Company"
+                        name="group_by_closereason_id"
+                        context="{'group_by':'closereason_id'}"/>
+                    <filter string="Operator"
+                        name="group_by_user"
+                        context="{'group_by':'user_id'}"/>
+                </group>
+                <searchpanel>
+                    <field name="closereason_id"
+                        select="multi"
+                        string="Reasons"
+                        enable_counters="1"/>
+                </searchpanel>
+            </search>
+        </field>
+    </record>
+
+    <record id="housemaid_closed_tickets_action"
+        model="ir.actions.act_window">
+        <field name="name">Contracts</field>
+        <field name="res_model">housemaid.closed_tickets</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help"
+            type="html">
+            <p class="o_view_nocontent_smiling_face">Create your first closed ticket!</p>
+        </field>
+    </record>
+
+    <menuitem id="housemaid_closed_tickets_menu"
+        name="Contracts"
+        action="housemaid_closed_tickets_action"
+        parent="housemaid_menu_maid"
+        sequence="32"/>
+
+</odoo>

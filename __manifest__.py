@@ -31,6 +31,7 @@
         'views/tickets.xml',
         'views/jobs.xml',
         'views/closereason.xml',
+        'views/closedtickets.xml',
     ],
     'demo': [
         ''

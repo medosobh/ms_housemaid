@@ -1,0 +1,49 @@
+from odoo import api, fields, models, _
+from odoo.exceptions import UserError
+from datetime import date, datetime, timedelta
+
+
+class closedtickets(models.Model):
+    _name = 'housemaid.closedtickets'
+    _description = 'Closed Ticket'
+    _inherit = ['mail.thread', 'mail.activity.mixin']
+
+    issue_date = fields.Date(
+        string='Issue Date',
+        required=True,
+        default=datetime.today(),
+        tracking=True
+    )
+    closereason_id = fields.Many2one(
+        comodel_name='housemaid.closereason',
+        required=False,
+        string='Reason',
+    )
+    tickets_id = fields.Many2one(
+        comodel_name='housemaid.tickets',
+        required=True,
+        string='Ticket no.',
+    )
+    sponsers_id = fields.Many2one(
+        'housemaid.sponsers',
+        string='Current Sponser',
+        required=True,
+        tracking=True,
+    )
+    maids_id = fields.Many2one(
+        comodel_name='housemaid.maids',
+        string='Maid',
+        required=True,
+        tracking=True,
+    )
+    user_id = fields.Many2one(
+        string="Responsable",
+        comodel_name='res.users',
+        required=True,
+        tracking=True,
+    )
+    description = fields.Text(
+        string='Description',
+        required=True,
+        tracking=True,
+    )

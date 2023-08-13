@@ -8,3 +8,5 @@ ms_housemaid.access_housemaid_jobs,access_housemaid_jobs,ms_housemaid.model_hous
 ms_housemaid.access_housemaid_closeticket,access_housemaid_closeticket,ms_housemaid.model_housemaid_closeticket,base.group_user,1,1,1,1
 ms_housemaid.access_housemaid_closereason,access_housemaid_closereason,ms_housemaid.model_housemaid_closereason,base.group_user,1,1,1,1
 ms_housemaid.access_housemaid_contract,access_housemaid_contract,ms_housemaid.model_housemaid_contract,base.group_user,1,1,1,1
+ms_housemaid.access_housemaid_closedtickets,access_housemaid_closedtickets,ms_housemaid.model_housemaid_closedtickets,base.group_user,1,1,1,1
+

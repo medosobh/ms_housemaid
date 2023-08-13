@@ -14,6 +14,10 @@
                             class="oe_inline"/>
                         <field name="tickets_id"
                             class="oe_inline"/>
+                        <field name="sponsers_id"
+                            class="oe_inline"/>
+                        <field name="maids_id"
+                            class="oe_inline"/>
                         <field name="user_id"
                             class="oe_inline"/>
                         <field name="description"
@@ -23,7 +27,6 @@
                     <footer>
                         <button string="Close Ticket"
                             name="action_closed_ticket"
-                            context="{'tickets_id': id, 'user_id': user_id}"
                             type="object"
                             class="oe_highlight"
                             data-hotkey="q"/>

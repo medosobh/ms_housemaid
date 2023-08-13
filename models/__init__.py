@@ -6,3 +6,4 @@ from . import sponsers
 from . import tickets
 from . import jobs
 from . import closereason
+from . import close_tickets

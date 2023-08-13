@@ -20,7 +20,6 @@ class contract(models.TransientModel):
             res['maids_id'] = ticket_rec.maids_id
             res['offices_id'] = ticket_rec.offices_id
             res['user_id'] = ticket_rec.user_id
-            print(active_id)
         return res
 
     tickets_id = fields.Many2one(
