@@ -44,8 +44,8 @@
         <field name="model">housemaid.closedtickets</field>
         <field name="arch"
             type="xml">
-            <tree name="contracts"
-                string="Contracts"
+            <tree name="closedtickets"
+                string="Closed Tickets"
                 sample="1">
                 <field name="issue_date" />
                 <field name="closereason_id" />
@@ -64,7 +64,7 @@
         <field name="model">housemaid.closedtickets</field>
         <field name="arch"
             type="xml">
-            <search string="Contracts">
+            <search string="Closed Tickets">
                 <field name="closereason_id"
                     widget="selection"/>
                 <field name="sponsers_id"
@@ -95,7 +95,7 @@
 
     <record id="housemaid_closedtickets_action"
         model="ir.actions.act_window">
-        <field name="name">Contracts</field>
+        <field name="name">Closed Tickets</field>
         <field name="res_model">housemaid.closedtickets</field>
         <field name="view_mode">tree,form</field>
         <field name="help"
