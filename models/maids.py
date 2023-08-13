@@ -1,8 +1,8 @@
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError
+from datetime import date, datetime, timedelta
 from odoo.modules.module import get_module_resource
 import base64
-from datetime import date, datetime, timedelta
 
 
 class maids(models.Model):
@@ -43,7 +43,6 @@ class maids(models.Model):
             raise UserError('Please define birthday for current maid')
         else:
             self.age = (date.today().year - self.birthday.year)
-
         return self.age
 
     # object in search page
@@ -237,7 +236,6 @@ class maids(models.Model):
         string="Arabic Language",
         required=False,
         tracking=True,
-
     )
     english_lang = fields.Boolean(
         string="English Language",
