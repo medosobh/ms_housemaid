@@ -51,7 +51,8 @@ class maids(models.Model):
         self.ensure_one()
         # test maid ticket id exist or update?
         context = dict(self.env.context or {})
-        tickets = context.get('tickets_id', False)
+        tickets_id = context.get('tickets_id', False)
+        sponsers_id = context.get('sponsers_id', False)
         if self.tickets_id.id == False:
             # maid state to check
             self.state = 'check'
@@ -63,10 +64,10 @@ class maids(models.Model):
             self.activity_schedule(
                 'ms_housemaid.mail_act_checking',
                 user_id=user_id,
-                note=f'Please Check Maid {self.name} of the ticket {self.tickets_id.code}'
+                note=f'Please Check Maid {self.name} of the ticket {tickets_id.code}'
             )
             # change ticket state
-            record = self.env['housemaid.tickets'].browse(tickets)
+            record = self.env['housemaid.tickets'].browse(int(tickets_id.id))
             record.state = 'check'
         else:
             raise UserError("Maid already linked to another Ticket!")
@@ -82,6 +83,7 @@ class maids(models.Model):
         # maid state to draft
         self.state = 'draft'
         self.tickets_id = False
+        self.sponsers_id = False
 
     def action_open_maid(self):
         self.ensure_one()
@@ -115,6 +117,7 @@ class maids(models.Model):
             # change ticket state
             self.tickets_id.state = 'runout'
             self.tickets_id = False
+            self.sponsers_id = False
             self.garanty_day = False
 
     def action_hiring_maid(self):
@@ -122,10 +125,12 @@ class maids(models.Model):
         # test maid ticket id exist or update?
         context = dict(self.env.context or {})
         tickets_id = context.get('tickets_id', False)
+        sponsers_id = context.get('sponsers_id', False)
         if self.tickets_id == tickets_id:
             # maid state to check
             self.state = 'hiring'
             self.tickets_id = tickets_id
+            self.sponsers_id = sponsers_id
             # create activity to user to check on maid
             user_id = context.get('user_id', False)
             # create an activity
@@ -429,8 +434,15 @@ class maids(models.Model):
     )
     tickets_id = fields.Many2one(
         comodel_name='housemaid.tickets',
-        required=False,
         string='Ticket no.',
+        required=False,
+        tracking=True,
+    )
+    sponsers_id = fields.Many2one(
+        'housemaid.sponsers',
+        string='Current Sponser',
+        required=False,
+        tracking=True,
     )
     garanty_day = fields.Date(
         string='Start Garanty Date',

@@ -18,7 +18,7 @@
                         type="object"
                         class="oe_highlight"
                         attrs="{'invisible': [('state', 'in', ('check','search','found','confirm','garanty','hiring','closed'))]}"
-                        context="{'tickets_id': id, 'user_id': user_id}"/>
+                        context="{'tickets_id': id,'sponsers_id':sponsers_id, 'user_id': user_id}"/>
                     <button string="Draft"
                         name="action_draft_ticket"
                         type="object"
@@ -55,7 +55,7 @@
                         type="action"
                         class="oe_highlight"
                         attrs="{'invisible': [('state', 'in', ('draft','check','search','closed'))]}"
-                        context="{'tickets_id': id, 'user_id': user_id}"/>
+                        context="{'tickets_id': id,'sponsers_id': sponsers_id, 'user_id': user_id}"/>
                 </header>
                 <sheet>
                     <div role="alert"
@@ -178,7 +178,7 @@
                                         type="object"
                                         help="Ask Operation to Check Avaliability!"
                                         attrs="{'invisible': [('state', 'in', ('open', 'ready'))]}"
-                                        context="{'tickets_id': id, 'user_id': user_id}"/>
+                                        context="{'tickets_id': id,'sponsers_id':sponsers_id, 'user_id': user_id}"/>
                                     <button name="action_hiring_maid"
                                         string="Hire"
                                         class="oe_inline oe_stat_button"
@@ -186,7 +186,7 @@
                                         type="object"
                                         help="Move Maid to Action page!"
                                         attrs="{'invisible': [('state', 'in', ('draft','check'))]}"
-                                        context="{'tickets_id': id, 'user_id': user_id}"/>
+                                        context="{'tickets_id': id,'sponsers_id':sponsers_id, 'user_id': user_id}"/>
                                     <field name="state"/>
                                     <field name="code"/>
                                     <field name="phone"/>
@@ -224,14 +224,14 @@
                                         type="object"
                                         help="Reset Maid to Draft and keep ticket state!"
                                         attrs="{'invisible': [('state', 'in', ('draft', 'check'))]}"
-                                        context="{'tickets_id': id, 'user_id': user_id}"/>
+                                        context="{'tickets_id': id,'sponsers_id':sponsers_id, 'user_id': user_id}"/>
                                     <button name="action_hiring_maid"
                                         string="Hire"
                                         icon="fa-link"
                                         type="object"
                                         help="Ask Operation to Proceed Recrutement!"
                                         attrs="{'invisible': [('state', 'in', ('draft','check','hiring','backout'))]}"
-                                        context="{'tickets_id': id, 'user_id': user_id}"/>
+                                        context="{'tickets_id': id,'sponsers_id':sponsers_id, 'user_id': user_id}"/>
                                     <field name="state"/>
                                     <field name="code"/>
                                     <field name="phone"/>

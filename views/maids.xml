@@ -141,7 +141,8 @@
                                     widget="selection"/>
                                 <field name="tickets_id"
                                     widget="selection"/>
-
+                                <field name="sponsers_id"
+                                    widget="selection"/>
                                 <field name="active"
                                     invisible="1"/>
                             </group>
@@ -221,6 +222,9 @@
                     widget="selection"/>
                 <field name="tickets_id"
                     widget="selection"/>
+                <field name="sponsers_id"
+                    widget="selection"/>
+
             </tree>
         </field>
     </record>
@@ -285,6 +289,9 @@
                                     </li>
                                     <li>Ticket:
                                         <field name="tickets_id"/>
+                                    </li>
+                                    <li>Sponser:
+                                        <field name="sponsers_id"/>
                                     </li>
                                 </ul>
                             </div>
