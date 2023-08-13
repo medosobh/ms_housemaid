@@ -6,6 +6,7 @@ from datetime import date, datetime, timedelta
 class contract(models.TransientModel):
     _name = 'housemaid.contract'
     _description = 'Contract Wizard'
+    
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
     @api.model
@@ -45,7 +46,7 @@ class contract(models.TransientModel):
     )
     new_sponsers_id = fields.Many2one(
         'housemaid.sponsers',
-        string='Current Sponser',
+        string='New Sponser',
         required=False,
         tracking=True,
     )
@@ -128,5 +129,3 @@ class contract(models.TransientModel):
             'description': self.description,
         }
         self.env['housemaid.maidslogs'].self.create(vals)
-
-        print('action_create_contract')

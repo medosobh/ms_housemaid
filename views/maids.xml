@@ -131,25 +131,24 @@
                                 <field name="skills_driving"
                                     widget="boolean_toggle"/>
                             </group>
-                            <group name="more"
-                                string="Addtional Information">
-                                <field name="partner_id"/>
-                                <field name="description"/>
-                            </group>
                             <group name="operation"
                                 string="Operation">
-                                <field name="sponsers_id"/>
                                 <field name="visa_no"/>
-                                <field name="contract_no"/>
-                                <field name="arrival_date"/>
-                                <field name="receive_date"/>
+                                <field name="garanty_day" />
                                 <field name="company_id"
                                     groups="base.group_multi_company"/>
                                 <field name="user_id"
                                     widget="selection"/>
                                 <field name="tickets_id"
                                     widget="selection"/>
-                                <field name="garanty_day" />
+
+                                <field name="active"
+                                    invisible="1"/>
+                            </group>
+                            <group name="more"
+                                string="Addtional Information">
+                                <field name="partner_id"/>
+                                <field name="description"/>
                                 <field name="active"
                                     invisible="1"/>
                             </group>
@@ -159,14 +158,6 @@
                         <page name="housemaid_maids_maidslogs"
                             string="History">
                             <field name="maidslogs_ids">
-                                <!-- <tree>
-                                    <field name="date"/>
-                                    <field name="state"/>
-                                    <field name="visa_no"/>
-                                    <field name="contract_no"/>
-                                    <field name="start_contract"/>
-                                    <field name="end_contract"/>
-                                </tree> -->
                             </field>
                         </page>
                     </notebook>
@@ -189,16 +180,13 @@
             <tree string="Maids List"
                 sample="1">
                 <field name="state"/>
-                <field name="sponsers_id"/>
                 <field name="visa_no"/>
                 <field name="passport_no"/>
                 <field name="indentation"/>
-                <field name="arrival_date"/>
-                <field name="receive_date"/>
                 <field name="company_id"
                     groups="base.group_multi_company"/>
-                <field name="offices_id"/>
                 <field name="country_id"/>
+                <field name="offices_id"/>
                 <field name="name"/>
                 <field name="code"
                     optional="hide"/>
@@ -328,9 +316,11 @@
             <search string="Maids">
                 <field name="company_id"
                     widget="selection"/>
-                <field name="user_id"
-                    widget="selection"/>
                 <field name="country_id"
+                    widget="selection"/>
+                <field name="offices_id"
+                    widget="selection"/>
+                <field name="user_id"
                     widget="selection"/>
                 <filter name="filter_archived"
                     string="Archived"
@@ -340,21 +330,28 @@
                     <filter string="Company"
                         name="group_by_company_id"
                         context="{'group_by':'company_id'}"/>
-                    <filter string="Operator"
-                        name="group_by_user"
-                        context="{'group_by':'user_id'}"/>
                     <filter string="Country"
                         name="group_by_country_id"
                         context="{'group_by':'country_id'}"/>
+                    <filter string="External Office"
+                        name="group_by_offices_id"
+                        context="{'group_by':'offices_id'}"/>
+                    <filter string="Operator"
+                        name="group_by_user"
+                        context="{'group_by':'user_id'}"/>
                 </group>
                 <searchpanel>
-                    <field name="offices_id"
+                    <field name="company_id"
                         select="multi"
-                        string="Office"
+                        string="Company"
                         enable_counters="1"/>
                     <field name="country_id"
                         select="multi"
                         string="Country"
+                        enable_counters="1"/>
+                    <field name="offices_id"
+                        select="multi"
+                        string="Office"
                         enable_counters="1"/>
                 </searchpanel>
             </search>

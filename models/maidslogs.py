@@ -8,6 +8,7 @@ from datetime import date, datetime, timedelta
 class maidslogs(models.Model):
     _name = 'housemaid.maidslogs'
     _description = 'Maid Logs'
+    _rec_name = 'contract_no'
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
     issue_date = fields.Date(
@@ -75,10 +76,12 @@ class maidslogs(models.Model):
         required=True,
         tracking=True
     )
-    user_id = fields.Many2one(
-        string="Responsable",
-        comodel_name='res.users',
-        required=True,
+    company_id = fields.Many2one(
+        string='Company',
+        comodel_name='res.company',
+        change_default=True,
+        default=lambda self: self.env.company,
+        required=False,
         tracking=True,
     )
     country_id = fields.Many2one(
@@ -87,12 +90,10 @@ class maidslogs(models.Model):
         help="Country of Maid.",
         tracking=True,
     )
-    company_id = fields.Many2one(
-        string='Company',
-        comodel_name='res.company',
-        change_default=True,
-        default=lambda self: self.env.company,
-        required=False,
+    user_id = fields.Many2one(
+        string="Responsable",
+        comodel_name='res.users',
+        required=True,
         tracking=True,
     )
     description = fields.Text(

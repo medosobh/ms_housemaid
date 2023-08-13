@@ -63,7 +63,6 @@ class tickets(models.Model):
             self.state = 'confirm'
         else:
             raise UserError('Please Select Sponser before confirm!')
-            
 
     @api.onchange('garanty_day')
     def action_garanty_ticket(self):
@@ -345,7 +344,7 @@ class tickets(models.Model):
         if self.type == 'sales':
             maids_ids = self.env['housemaid.maids'].search(
                 [
-                    ('state', 'in', ('draft', 'open', 'ready', 'transfer')),
+                    ('state', 'in', ('draft', 'check', 'open', 'ready')),
                     ('active', '=', True),
                     ('tickets_id', '=', False),
                 ]
@@ -396,7 +395,24 @@ class tickets(models.Model):
         elif self.type == 'temp':
             maids_ids = self.env['housemaid.maids'].search(
                 [
-                    ('state', 'in', ('ready')),
+                    ('state', 'in', ('ready', 'transfer')),
                     ('active', '=', True),
                 ]
             )
+            if self.jobs_id != False:
+                maids_ids1 = maids_ids.filtered(
+                    lambda maids: maids.jobs_id.id == self.jobs_id.id)
+            else:
+                maids_ids1 = maids_ids
+
+            if len(self.country_id) == 1:
+                maids_ids2 = maids_ids1.filtered(
+                    lambda maids: maids.country_id.id == self.country_id.id)
+            else:
+                maids_ids2 = maids_ids1
+
+            if self.monthly_salary != 0:
+                maids_ids3 = maids_ids2.filtered(
+                    lambda maids: maids.monthly_salary == self.monthly_salary)
+            else:
+                maids_ids3 = maids_ids2

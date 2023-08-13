@@ -55,7 +55,6 @@ class maids(models.Model):
         if self.tickets_id.id == False:
             # maid state to check
             self.state = 'check'
-            # self.tickets_id = tickets
             # create activity to user to check on maid
             user_id = context.get('user_id', False)
             # create an activity
@@ -445,11 +444,6 @@ class maids(models.Model):
         required=False,
         tracking=True,
     )
-    sponsers_id = fields.Many2one(
-        'housemaid.sponsers',
-        string='Current Sponser',
-        tracking=True,
-    )
     contract_no = fields.Char(
         string='Contract No.',
         required=False,
@@ -460,19 +454,8 @@ class maids(models.Model):
         required=False,
         tracking=True
     )
-    arrival_date = fields.Date(
-        string='Arrival Date',
-        required=False,
-        tracking=True
-    )
-    receive_date = fields.Date(
-        string='Receive Date',
-        required=False,
-        tracking=True
-    )
     active = fields.Boolean(
         string="Active",
         default=True,
-        required=True,
         tracking=True,
     )

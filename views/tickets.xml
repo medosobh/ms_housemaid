@@ -33,17 +33,17 @@
                         name="action_runout_ticket"
                         type="object"
                         class="oe_highlight"
-                        attrs="{'invisible': [('state', 'in', ('draft','found','confirm','runout'))]}" />
+                        attrs="{'invisible': [('state', 'in', ('draft','found','confirm','runout','garanty'))]}" />
                     <button string="Sponser confirm"
                         name="action_confirm_ticket"
                         type="object"
                         class="oe_highlight"
-                        attrs="{'invisible': [('state', 'in', ('draft','check','search','runout','confirm','hiring'))]}" />
+                        attrs="{'invisible': [('state', 'in', ('draft','check','search','runout','confirm','hiring','garanty'))]}" />
                     <button string="Contract"
                         name="%(housemaid_contract_action_wizard)d"
                         type="action"
                         class="oe_highlight"
-                        attrs="{'invisible': [('state', 'in', ('draft','check','found','search','runout','confirm'))]}"
+                        attrs="{'invisible': [('state', 'in', ('draft','check','found','search','runout','confirm','garanty'))]}"
                         context="{'tickets_id': id,'sponsers_id': sponsers_id, 'user_id': user_id}" />
                     <button string="Start 90days Garanty"
                         name="action_garanty_ticket"
@@ -60,17 +60,17 @@
                 <sheet>
                     <div role="alert"
                         class="alert alert-warning"
-                        attrs="{'invisible': ['&amp;',('state', 'in', ('found','confirm','hire','garanty','closed')),('sponsers_id', '!=', False)]}">
+                        attrs="{'invisible': [('sponsers_id', '!=', False)]}">
                         Enter a Sponser before confirm.
                     </div>
                     <div role="alert"
                         class="alert alert-warning"
-                        attrs="{'invisible': ['&amp;',('state', 'in', ('confirm','hire','garanty','closed')),('maids_id', '!=', False)]}">
+                        attrs="{'invisible': [('maids_id', '!=', False)]}">
                         At action page below; pick a maid and click on hire link icon to attache the maid to ticket.
                     </div>
                     <div role="alert"
                         class="alert alert-warning"
-                        attrs="{'invisible': ['&amp;',('state', 'in', ('hire','garanty','closed')),('garanty_day', '!=', False)]}">
+                        attrs="{'invisible': [('garanty_day', '!=', False)]}">
                         Enter Garanty Date to change the state.
                     </div>
                     <div class="oe_title">
@@ -185,7 +185,7 @@
                                         icon="fa-link"
                                         type="object"
                                         help="Move Maid to Action page!"
-                                        attrs="{'invisible': [('state', 'in', ('draft'))]}"
+                                        attrs="{'invisible': [('state', 'in', ('draft','check'))]}"
                                         context="{'tickets_id': id, 'user_id': user_id}"/>
                                     <field name="state"/>
                                     <field name="code"/>
@@ -222,15 +222,15 @@
                                         class="oe_inline oe_stat_button"
                                         icon="fa-unlink"
                                         type="object"
-                                        help="Ask Operation to Check Avaliability!"
-                                        attrs="{'invisible': [('state', 'in', ('open', 'ready'))]}"
+                                        help="Reset Maid to Draft and keep ticket state!"
+                                        attrs="{'invisible': [('state', 'in', ('draft', 'check'))]}"
                                         context="{'tickets_id': id, 'user_id': user_id}"/>
                                     <button name="action_hiring_maid"
                                         string="Hire"
                                         icon="fa-link"
                                         type="object"
                                         help="Ask Operation to Proceed Recrutement!"
-                                        attrs="{'invisible': [('state', 'in', ('check','hiring','backout'))]}"
+                                        attrs="{'invisible': [('state', 'in', ('draft',check','hiring','backout'))]}"
                                         context="{'tickets_id': id, 'user_id': user_id}"/>
                                     <field name="state"/>
                                     <field name="code"/>

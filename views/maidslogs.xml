@@ -7,7 +7,8 @@
         <field name="model">housemaid.maidslogs</field>
         <field name="arch"
             type="xml">
-            <form>
+            <form name="contract"
+                string="Contract">
                 <sheet>
                     <group name="contract"
                         string="Contract">
@@ -60,7 +61,8 @@
         <field name="model">housemaid.maidslogs</field>
         <field name="arch"
             type="xml">
-            <tree string="Contracts"
+            <tree name="contracts"
+                string="Contracts"
                 sample="1">
                 <field name="issue_date" />
                 <field name="tickets_id" />

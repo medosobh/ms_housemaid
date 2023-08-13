@@ -8,6 +8,7 @@
             <field name="arch"
                 type="xml">
                 <form>
+                    <h1>Create a New contract for hired Maid</h1>
                     <group name="contract"
                         string="Contract">
                         <group>
@@ -36,9 +37,9 @@
                                 class="oe_inline"/>
                         </group>
                         <group>
-                            <field name="country_id"
-                                class="oe_inline"/>
                             <field name="company_id"
+                                class="oe_inline"/>
+                            <field name="country_id"
                                 class="oe_inline"/>
                             <field name="description"/>
                         </group>
