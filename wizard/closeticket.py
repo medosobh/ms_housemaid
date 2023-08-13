@@ -23,7 +23,7 @@ class closeticket(models.TransientModel):
 
     closereason_id = fields.Many2one(
         comodel_name='housemaid.closereason',
-        required=False,
+        required=True,
         string='Reason',
     )
     tickets_id = fields.Many2one(
