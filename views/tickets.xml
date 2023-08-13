@@ -230,7 +230,7 @@
                                         icon="fa-link"
                                         type="object"
                                         help="Ask Operation to Proceed Recrutement!"
-                                        attrs="{'invisible': [('state', 'in', ('draft',check','hiring','backout'))]}"
+                                        attrs="{'invisible': [('state', 'in', ('draft','check','hiring','backout'))]}"
                                         context="{'tickets_id': id, 'user_id': user_id}"/>
                                     <field name="state"/>
                                     <field name="code"/>

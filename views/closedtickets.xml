@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <record id="housemaid_closed_tickets_form"
+    <record id="housemaid_closedtickets_form"
         model="ir.ui.view">
-        <field name="name">housemaid.closed_tickets.form</field>
-        <field name="model">housemaid.closed_tickets</field>
+        <field name="name">housemaid.closedtickets.form</field>
+        <field name="model">housemaid.closedtickets</field>
         <field name="arch"
             type="xml">
             <form name="closedtickets"
@@ -38,10 +38,10 @@
         </field>
     </record>
 
-    <record id="housemaid_closed_tickets_tree"
+    <record id="housemaid_closedtickets_tree"
         model="ir.ui.view">
-        <field name="name">housemaid.closed_tickets.tree</field>
-        <field name="model">housemaid.closed_tickets</field>
+        <field name="name">housemaid.closedtickets.tree</field>
+        <field name="model">housemaid.closedtickets</field>
         <field name="arch"
             type="xml">
             <tree name="contracts"
@@ -58,10 +58,10 @@
         </field>
     </record>
 
-    <record id="housemaid_closed_tickets_search"
+    <record id="housemaid_closedtickets_search"
         model="ir.ui.view">
-        <field name="name">housemaid.closed_tickets.search</field>
-        <field name="model">housemaid.closed_tickets</field>
+        <field name="name">housemaid.closedtickets.search</field>
+        <field name="model">housemaid.closedtickets</field>
         <field name="arch"
             type="xml">
             <search string="Contracts">
@@ -93,10 +93,10 @@
         </field>
     </record>
 
-    <record id="housemaid_closed_tickets_action"
+    <record id="housemaid_closedtickets_action"
         model="ir.actions.act_window">
         <field name="name">Contracts</field>
-        <field name="res_model">housemaid.closed_tickets</field>
+        <field name="res_model">housemaid.closedtickets</field>
         <field name="view_mode">tree,form</field>
         <field name="help"
             type="html">
@@ -104,9 +104,9 @@
         </field>
     </record>
 
-    <menuitem id="housemaid_closed_tickets_menu"
+    <menuitem id="housemaid_closedtickets_menu"
         name="Contracts"
-        action="housemaid_closed_tickets_action"
+        action="housemaid_closedtickets_action"
         parent="housemaid_menu_maid"
         sequence="32"/>
 

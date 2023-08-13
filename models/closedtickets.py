@@ -47,3 +47,8 @@ class closedtickets(models.Model):
         required=True,
         tracking=True,
     )
+    active = fields.Boolean(
+        string="Active",
+        default=True,
+        tracking=True,
+    )
