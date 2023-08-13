@@ -7,7 +7,7 @@ from datetime import date, datetime, timedelta
 
 class maidslogs(models.Model):
     _name = 'housemaid.maidslogs'
-    _description = 'Maid Logs'
+    _description = 'Contracts'
     _rec_name = 'contract_no'
     _inherit = ['mail.thread', 'mail.activity.mixin']
 

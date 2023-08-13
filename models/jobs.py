@@ -7,7 +7,7 @@ from datetime import date, datetime, timedelta
 
 class jobs(models.Model):
     _name = 'housemaid.jobs'
-    _description = 'Jobs Records.'
+    _description = 'Jobs Title'
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _sql_constraints = [
         ('name_uniq', 'unique(name)', "A name can only be assigned to one Job!"),

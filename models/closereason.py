@@ -7,7 +7,7 @@ from datetime import date, datetime, timedelta
 
 class closereason(models.Model):
     _name = 'housemaid.closereason'
-    _description = 'Jobs Records.'
+    _description = 'Close Reason'
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _sql_constraints = [
         ('name_uniq', 'unique(name)', "A name can only be assigned to one Job!"),
