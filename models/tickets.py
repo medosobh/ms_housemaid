@@ -72,7 +72,7 @@ class tickets(models.Model):
             print('keep in draft mode')
         else:
             self.state = 'garanty'
-            print('action_garanty_ticket')
+            self.maids_id.garanty_day = self.garanty_day
 
     code = fields.Char(
         string='Code',
@@ -324,6 +324,7 @@ class tickets(models.Model):
         'housemaid.offices',
         string='Offices',
         related='maids_id.offices_id',
+        readonly=True,
         required=True,
         tracking=True,
     )
