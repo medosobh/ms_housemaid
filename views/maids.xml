@@ -156,9 +156,9 @@
                         </group>
                     </div>
                     <notebook>
-                        <page name="housemaid_maids_maidslogs"
+                        <page name="housemaid_maids_maidscontracts"
                             string="History">
-                            <field name="maidslogs_ids">
+                            <field name="maidscontracts_ids">
                             </field>
                         </page>
                     </notebook>

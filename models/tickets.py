@@ -74,18 +74,9 @@ class tickets(models.Model):
         else:
             self.state = 'garanty'
             self.maids_id.garanty_day = self.garanty_day
+            self.close_ticket_day = self.garanty_day + timedelta(days=90)
             
-    def _compute_close_ticket_days(self):
-        # compute days pass from garanty day till today
-        if self.garanty_day == False:
-            self.close_ticket_days = 0
-        else:
-            days_diff = (date.today().day - self.garanty_day.day)
-            if days_diff > 0:
-                self.close_ticket_days = days_diff
-            else:
-                self.close_ticket_days = 0
-
+   
     code = fields.Char(
         string='Code',
         required=True,
@@ -363,9 +354,10 @@ class tickets(models.Model):
         required=False,
         tracking=True,
     )
-    close_ticket_days = fields.Integer(
-        string='passed days',
-        compute='_compute_close_ticket_days',
+    close_ticket_day = fields.Date(
+        string='Garanty Expire Date',
+        required=False,
+        tracking=True,
     )
     search_maids_ids = fields.Many2many(
         comodel_name='housemaid.maids',

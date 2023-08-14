@@ -5,8 +5,8 @@ import base64
 from datetime import date, datetime, timedelta
 
 
-class maidslogs(models.Model):
-    _name = 'housemaid.maidslogs'
+class maidscontracts(models.Model):
+    _name = 'housemaid.maidscontracts'
     _description = 'Contracts'
     _rec_name = 'contract_no'
     _inherit = ['mail.thread', 'mail.activity.mixin']
@@ -33,9 +33,9 @@ class maidslogs(models.Model):
         required=False,
         tracking=True,
     )
-    sponsers_id = fields.Many2one(
+    old_sponsers_id = fields.Many2one(
         'housemaid.sponsers',
-        string='Current Sponser',
+        string='old Sponser',
         required=True,
         tracking=True,
     )

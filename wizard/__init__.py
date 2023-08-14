@@ -1,2 +1,2 @@
-from . import closeticket
-from . import contract
+from . import closeticketwizard
+from . import contractwizard

@@ -3,20 +3,21 @@ from odoo.exceptions import UserError
 from datetime import date, datetime, timedelta
 
 
-class contract(models.TransientModel):
-    _name = 'housemaid.contract'
+class contractwizard(models.TransientModel):
+    _name = 'housemaid.contractwizard'
     _description = 'Contract Wizard'
     
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
     @api.model
     def default_get(self, fields):
-        res = super(contract, self).default_get(fields)
+        res = super(contractwizard, self).default_get(fields)
         active_id = self._context.get('active_id')
         if active_id:
             ticket_rec = self.env['housemaid.tickets'].browse(int(active_id))
             res['tickets_id'] = ticket_rec.id
-            res['sponsers_id'] = ticket_rec.sponsers_id
+            res['old_sponsers_id'] = ticket_rec.old_sponsers_id
+            res['new_sponsers_id'] = ticket_rec.new_sponsers_id
             res['maids_id'] = ticket_rec.maids_id
             res['offices_id'] = ticket_rec.offices_id
             res['user_id'] = ticket_rec.user_id
@@ -37,9 +38,9 @@ class contract(models.TransientModel):
         required=False,
         tracking=True,
     )
-    sponsers_id = fields.Many2one(
+    old_sponsers_id = fields.Many2one(
         'housemaid.sponsers',
-        string='Current Sponser',
+        string='Old Sponser',
         required=True,
         tracking=True,
     )
@@ -114,7 +115,7 @@ class contract(models.TransientModel):
             'issue_date': date.today(),
             'tickets_id': self.tickets_id.id,
             'type': self.type,
-            'sponsers_id': self.sponsers_id.id,
+            'old_sponsers_id': self.old_sponsers_id.id,
             'new_sponsers_id': self.new_sponsers_id.id,
             'maids_id': self.maids_id.id,
             'offices_id': self.offices_id.id,

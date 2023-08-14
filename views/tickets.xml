@@ -73,25 +73,25 @@
 ' in search page and '<span t-esc="search_maids_ids_count"/>
 ' in action page.
                 </div>
-                    <div role="alert"
-                        class="alert alert-warning text-center"
-                        attrs="{'invisible': ['|',('new_sponsers_id', '!=', False),('state', 'in', ('draft','search','check','runout','confirm'))]}">
-                        <i class="fa fa-link"/>
+                <div role="alert"
+                    class="alert alert-warning text-center"
+                    attrs="{'invisible': ['|',('new_sponsers_id', '!=', False),('state', 'in', ('draft','search','check','runout','confirm'))]}">
+                    <i class="fa fa-link"/>
                         Enter a Sponser before confirm.
-                    </div>
-                    <div role="alert"
-                        class="alert alert-info text-center"
-                        attrs="{'invisible': ['|',('maids_id', '!=', False),('state', 'in', ('draft','search','runout'))]}">
-                        <i class="fa fa-life-ring"/>
+                </div>
+                <div role="alert"
+                    class="alert alert-info text-center"
+                    attrs="{'invisible': ['|',('maids_id', '!=', False),('state', 'in', ('draft','search','runout'))]}">
+                    <i class="fa fa-life-ring"/>
                         At action page below; pick a maid and click on hire link icon to attache the maid to ticket.
-                    </div>
-                    <div role="alert"
-                        class="alert alert-info text-center"
-                        attrs="{'invisible': ['|',('garanty_day', '!=', False),('state', 'in', ('draft','search','found','runout','confirm'))]}">
-                        <i class="fa fa-life-ring"/>
+                </div>
+                <div role="alert"
+                    class="alert alert-info text-center"
+                    attrs="{'invisible': ['|',('garanty_day', '!=', False),('state', 'in', ('draft','search','found','runout','confirm'))]}">
+                    <i class="fa fa-life-ring"/>
                         Enter Garanty Date to change the state.
-                    </div>
-                    
+                </div>
+
                 <div class="oe_title">
                     <group name="tickets_ticket"
                         string="Ticket">
@@ -196,6 +196,7 @@
                             <field name="maids_id"
                                 widget="selection"/>
                             <field name="garanty_day" />
+                            <field name="close_ticket_day" />
                             <field name="active"
                                 invisible="1"/>
                             <field name="search_maids_ids_count"
@@ -323,13 +324,20 @@
             <field name="monthly_salary"/>
             <field name="currency_id"
                 groups="base.group_multi_currency"/>
-            <field name="contract_period"/>
+            <field name="contract_period"
+                optional="hide"/>
             <field name="country_id"/>
-            <field name="religion"/>
-            <field name="gender"/>
-            <field name="children_no"/>
-            <field name="marital_status"/>
-            <field name="garanty_day" widget="remaining_days"/>
+            <field name="religion"
+                optional="hide"/>
+            <field name="gender"
+                optional="hide"/>
+            <field name="children_no"
+                optional="hide"/>
+            <field name="marital_status"
+                optional="hide"/>
+            <field name="garanty_day" />
+            <field name="close_ticket_day"
+                widget="remaining_days"/>
             <field name="maids_id"/>
             <field name="old_sponsers_id"/>
             <field name="company_id"

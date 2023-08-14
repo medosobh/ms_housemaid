@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 from . import offices
 from . import maids
-from . import maidslogs
+from . import maidscontracts
 from . import sponsers
 from . import tickets
 from . import jobs

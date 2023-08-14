@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <record id="housemaid_maidslogs_form"
+    <record id="housemaid_maidscontracts_form"
         model="ir.ui.view">
-        <field name="name">housemaid.maidslogs.form</field>
-        <field name="model">housemaid.maidslogs</field>
+        <field name="name">housemaid.maidscontracts.form</field>
+        <field name="model">housemaid.maidscontracts</field>
         <field name="arch"
             type="xml">
             <form name="contract"
@@ -15,7 +15,7 @@
                         <group>
                             <field name="tickets_id"
                                 class="oe_inline"/>
-                            <field name="sponsers_id"
+                            <field name="old_sponsers_id"
                                 class="oe_inline"/>
                             <field name="new_sponsers_id"
                                 class="oe_inline"
@@ -55,10 +55,10 @@
         </field>
     </record>
 
-    <record id="housemaid_maidslogs_tree"
+    <record id="housemaid_maidscontracts_tree"
         model="ir.ui.view">
-        <field name="name">housemaid.maidslogs.tree</field>
-        <field name="model">housemaid.maidslogs</field>
+        <field name="name">housemaid.maidscontracts.tree</field>
+        <field name="model">housemaid.maidscontracts</field>
         <field name="arch"
             type="xml">
             <tree name="contracts"
@@ -67,12 +67,10 @@
                 <field name="issue_date" />
                 <field name="tickets_id" />
                 <field name="type" />
-                <field name="sponsers_id" />
-                <field name="new_sponsers_id"
-                    invisible="1"/>
+                <field name="old_sponsers_id" />
+                <field name="new_sponsers_id"/>
                 <field name="maids_id" />
                 <field name="offices_id" />
-                <field name="sponsers_id" />
                 <field name="contract_no" />
                 <field name="start_contract" />
                 <field name="end_contract" />
@@ -85,10 +83,10 @@
         </field>
     </record>
 
-    <record id="housemaid_maidslogs_search"
+    <record id="housemaid_maidscontracts_search"
         model="ir.ui.view">
-        <field name="name">housemaid.maidslogs.search</field>
-        <field name="model">housemaid.maidslogs</field>
+        <field name="name">housemaid.maidscontracts.search</field>
+        <field name="model">housemaid.maidscontracts</field>
         <field name="arch"
             type="xml">
             <search string="Contracts">
@@ -132,10 +130,10 @@
         </field>
     </record>
 
-    <record id="housemaid_maidslogs_action"
+    <record id="housemaid_maidscontracts_action"
         model="ir.actions.act_window">
         <field name="name">Contracts</field>
-        <field name="res_model">housemaid.maidslogs</field>
+        <field name="res_model">housemaid.maidscontracts</field>
         <field name="view_mode">tree,form</field>
         <field name="help"
             type="html">
@@ -143,9 +141,9 @@
         </field>
     </record>
 
-    <menuitem id="housemaid_maidslogs_menu"
+    <menuitem id="housemaid_maidscontracts_menu"
         name="Contracts"
-        action="housemaid_maidslogs_action"
+        action="housemaid_maidscontracts_action"
         parent="housemaid_menu_maid"
         sequence="22"/>
 

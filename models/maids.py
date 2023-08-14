@@ -438,9 +438,9 @@ class maids(models.Model):
         required=False,
         tracking=True,
     )
-    maidslogs_ids = fields.One2many(
+    maidscontracts_ids = fields.One2many(
         string="History",
-        comodel_name='housemaid.maidslogs',
+        comodel_name='housemaid.maidscontracts',
         inverse_name='maids_id',
         required=False,
         tracking=True,

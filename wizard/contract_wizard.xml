@@ -3,8 +3,8 @@
     <data>
         <record id="housemaid_contract_wizard_form"
             model="ir.ui.view">
-            <field name="name">housemaid.contract.form</field>
-            <field name="model">housemaid.contract</field>
+            <field name="name">housemaid.contractwizard.form</field>
+            <field name="model">housemaid.contractwizard</field>
             <field name="arch"
                 type="xml">
                 <form>
@@ -14,7 +14,9 @@
                         <group>
                             <field name="tickets_id"
                                 class="oe_inline"/>
-                            <field name="sponsers_id"
+                            <field name="old_sponsers_id"
+                                class="oe_inline"/>
+                            <field name="new_sponsers_id"
                                 class="oe_inline"/>
                             <field name="maids_id"
                                 class="oe_inline"/>
@@ -24,9 +26,6 @@
                                 class="oe_inline"/>
                         </group>
                         <group>
-                            <field name="new_sponsers_id"
-                                class="oe_inline"
-                                invisible="1"/>
                             <field name="contract_no"
                                 class="oe_inline"/>
                             <field name="start_contract"
@@ -64,7 +63,7 @@
         <record id="housemaid_contract_action_wizard"
             model="ir.actions.act_window">
             <field name="name">Create Contract</field>
-            <field name="res_model">housemaid.contract</field>
+            <field name="res_model">housemaid.contractwizard</field>
             <field name="view_mode">form</field>
             <field name="target">new</field>
         </record>

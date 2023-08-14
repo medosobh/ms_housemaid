@@ -4,7 +4,7 @@ from datetime import date, datetime, timedelta
 
 
 class closeticket(models.TransientModel):
-    _name = 'housemaid.closeticket'
+    _name = 'housemaid.closeticketwizard'
     _description = 'Close Ticket Wizard'
     _inherit = ['mail.thread', 'mail.activity.mixin']
     
