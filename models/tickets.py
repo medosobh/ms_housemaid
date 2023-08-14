@@ -59,7 +59,7 @@ class tickets(models.Model):
 
     def action_confirm_ticket(self):
         self.ensure_one()
-        if self.sponsers_id.id != False:
+        if self.new_sponsers_id.id != False:
             self.state = 'confirm'
         else:
             raise UserError('Please Select Sponser before confirm!')
@@ -129,7 +129,25 @@ class tickets(models.Model):
     new_sponsers_id = fields.Many2one(
         'housemaid.sponsers',
         string='New Sponser',
-        required=False,
+        readonly=True,
+        tracking=True,
+    )
+    old_sponser_name = fields.Char(
+        string='Name',
+        related='maids_id.sponsers_id.name',
+        readonly=True,
+        tracking=True,
+    )
+    old_sponser_phone = fields.Char(
+        string='Phone',
+        related='maids_id.sponsers_id.phone',
+        readonly=True,
+        tracking=True,
+    )
+    old_sponser_email = fields.Char(
+        string='Email',
+        related='maids_id.sponsers_id.email',
+        readonly=True,
         tracking=True,
     )
     old_sponsers_id = fields.Many2one(
