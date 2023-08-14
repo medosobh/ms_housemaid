@@ -92,14 +92,16 @@
 ' in action page.
                 </div>
                 <div class="oe_title">
+                    <group name="tickets_ticket"
+                        string="Ticket">
+                        <field name="code"
+                            class="oe_inline"/>
+                        <field name="type"
+                            class="oe_inline"/>
+                    </group>
+                </div>
+                <div>
                     <group>
-                        <group name="tickets_ticket"
-                            string="Ticket">
-                            <field name="code"
-                                class="oe_inline"/>
-                            <field name="type"
-                                class="oe_inline"/>
-                        </group>
                         <group name="tickets_sponser"
                             string="Sponser information">
                             <field name="sponser_name"
@@ -111,6 +113,20 @@
                                 widget="email"
                                 class="oe_inline"/>
                             <field name="new_sponsers_id"
+                                class="oe_inline"/>
+                        </group>
+                        <group name="tickets_old_sponser"
+                            string="Old Sponser information"
+                            attrs="{'invisible':[('type','=','sales')]}">
+                            <field name="old_sponser_name"
+                                class="oe_inline"/>
+                            <field name="old_sponser_phone"
+                                widget="phone"
+                                class="oe_inline"/>
+                            <field name="old_sponser_email"
+                                widget="email"
+                                class="oe_inline"/>
+                            <field name="old_sponsers_id"
                                 class="oe_inline"/>
                         </group>
                     </group>
@@ -177,8 +193,6 @@
                             <field name="user_id"
                                 widget="selection"/>
                             <field name="maids_id"
-                                widget="selection"/>
-                            <field name="old_sponsers_id"
                                 widget="selection"/>
                             <field name="garanty_day" />
                             <field name="active"
@@ -431,7 +445,7 @@
     <field name="name">Tickets</field>
     <field name="type">ir.actions.act_window</field>
     <field name="res_model">housemaid.tickets</field>
-    <field name="view_mode">tree,form,kanban</field>
+    <field name="view_mode">kanban,tree,form</field>
     <field name="help"
         type="html">
         <p class="o_view_nocontent_smiling_face">Create your first ticket!</p>
