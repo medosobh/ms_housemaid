@@ -108,6 +108,6 @@
         name="Closed Tickets"
         action="housemaid_closedtickets_action"
         parent="housemaid_menu_tickets"
-        sequence="32"/>
+        sequence="12"/>
 
 </odoo>

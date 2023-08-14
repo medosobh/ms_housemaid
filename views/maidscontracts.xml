@@ -76,7 +76,8 @@
                 <field name="end_contract" />
                 <field name="visa_no" />
                 <field name="user_id" />
-                <field name="description" />
+                <field name="description"
+                    optional="hide"/>
                 <field name="company_id"
                     groups="base.group_multi_company"/>
             </tree>

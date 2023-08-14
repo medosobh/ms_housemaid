@@ -221,6 +221,6 @@
 		name="External Offices"
 		action="housemaid_offices_action"
 		parent="housemaid_menu_data"
-		sequence="11"/>
+		sequence="31"/>
 
 </odoo>

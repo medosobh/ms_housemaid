@@ -200,6 +200,6 @@
         name="Sponsers"
         action="housemaid_sponsers_action"
         parent="housemaid_menu_data"
-        sequence="13"/>
+        sequence="32"/>
 
 </odoo>
