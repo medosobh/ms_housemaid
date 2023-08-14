@@ -64,12 +64,6 @@ class sponsers(models.Model):
         required=False,
         tracking=True
     )
-    country_id = fields.Many2one(
-        string="Country",
-        comodel_name='res.country',
-        help="Country of Sponser.",
-        tracking=True
-    )
     partner_id = fields.Many2one(
         comodel_name='res.partner',
         string='Partner',
@@ -93,9 +87,15 @@ class sponsers(models.Model):
         readonly=True,
         tracking=True
     )
+    country_id = fields.Many2one(
+        string="Country",
+        comodel_name='res.country',
+        help="Country of Sponser.",
+        tracking=True
+    )
     user_id = fields.Many2one(
         comodel_name='res.users',
-        string="Operation Man",
+        string="Responsable",
         required=True,
         tracking=True,
     )
