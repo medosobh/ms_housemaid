@@ -3,14 +3,14 @@ from odoo.exceptions import UserError
 from datetime import date, datetime, timedelta
 
 
-class closeticket(models.TransientModel):
+class closeticketwizard(models.TransientModel):
     _name = 'housemaid.closeticketwizard'
     _description = 'Close Ticket Wizard'
     _inherit = ['mail.thread', 'mail.activity.mixin']
     
     @api.model
     def default_get(self, fields):
-        res = super(closeticket, self).default_get(fields)
+        res = super(closeticketwizard, self).default_get(fields)
         active_id = self._context.get('active_id')
         if active_id:
             ticket_rec = self.env['housemaid.tickets'].browse(int(active_id))
@@ -76,7 +76,7 @@ class closeticket(models.TransientModel):
             'user_id': self.user_id.id,
             'description': self.description,
         }
-        self.env['housemaid.maidslogs'].self.create(vals)
+        self.env['housemaid.maidscontracts'].self.create(vals)
         
         # change ticket state
         record = self.env['housemaid.tickets'].browse(tickets_id)

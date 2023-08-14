@@ -128,4 +128,4 @@ class contractwizard(models.TransientModel):
             'company_id': self.company_id.id,
             'description': self.description,
         }
-        self.env['housemaid.maidslogs'].self.create(vals)
+        self.env['housemaid.maidscontracts'].self.create(vals)
