@@ -39,8 +39,6 @@ class maids(models.Model):
         self.ensure_one()
         if not self.birthday:
             self.age = 0
-        elif not self.birthday:
-            raise UserError('Please define birthday for current maid')
         else:
             self.age = (date.today().year - self.birthday.year)
         return self.age
@@ -312,7 +310,7 @@ class maids(models.Model):
     birthday = fields.Date(
         string='Birthday',
         default=fields.Date.context_today,
-        required=False,
+        required=True,
         tracking=True,
     )
     place_of_birth = fields.Char(

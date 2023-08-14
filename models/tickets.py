@@ -1,5 +1,6 @@
 from odoo import api, fields, models, _
 from odoo.exceptions import UserError
+from datetime import date, datetime, timedelta
 
 
 class tickets(models.Model):
@@ -73,6 +74,17 @@ class tickets(models.Model):
         else:
             self.state = 'garanty'
             self.maids_id.garanty_day = self.garanty_day
+            
+    def _compute_close_ticket_days(self):
+        # compute days pass from garanty day till today
+        if self.garanty_day == False:
+            self.close_ticket_days = 0
+        else:
+            days_diff = (date.today().day - self.garanty_day.day)
+            if days_diff > 0:
+                self.close_ticket_days = days_diff
+            else:
+                self.close_ticket_days = 0
 
     code = fields.Char(
         string='Code',
@@ -110,17 +122,17 @@ class tickets(models.Model):
         required=True,
         tracking=True,
     )
-    sponser_name = fields.Char(
+    new_sponser_name = fields.Char(
         string='Name',
         required=True,
         tracking=True,
     )
-    sponser_phone = fields.Char(
+    new_sponser_phone = fields.Char(
         string='Phone',
         required=True,
         tracking=True,
     )
-    sponser_email = fields.Char(
+    new_sponser_email = fields.Char(
         string='Email',
         required=True,
         default=lambda self: _('name@mail.com'),
@@ -154,8 +166,7 @@ class tickets(models.Model):
         'housemaid.sponsers',
         string='Old Sponser',
         related='maids_id.sponsers_id',
-        readonly=False,
-        required=False,
+        readonly=True,
         tracking=True,
     )
     # maid search data
@@ -352,6 +363,10 @@ class tickets(models.Model):
         required=False,
         tracking=True,
     )
+    close_ticket_days = fields.Integer(
+        string='passed days',
+        compute='_compute_close_ticket_days',
+    )
     search_maids_ids = fields.Many2many(
         comodel_name='housemaid.maids',
         compute='_search_maids',
@@ -364,11 +379,11 @@ class tickets(models.Model):
         string='Maids Actions',
     )
     search_maids_ids_count = fields.Integer(
-        string='search count',
+        string='Search count',
         compute='_compute_search_count',
     )
     action_maids_ids_count = fields.Integer(
-        string='search count',
+        string='Action count',
         compute='_compute_action_count',
     )
 
