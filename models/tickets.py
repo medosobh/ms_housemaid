@@ -88,11 +88,11 @@ class tickets(models.Model):
             ('draft', 'Draft'),  # 1 > #2 button
             ('search', 'Searching'),  # 2 sales request
             ('check', 'Checking'),  # 2 sales request
-            ('found', 'Found or available'),  # 3 > #4 feedback
-            ('runout', 'Not avaliable'),  # 3 > loop #2 ask for reason feedback
+            ('found', 'Found or Available'),  # 3 > #4 feedback
+            ('runout', 'Not Avaliable'),  # 3 > loop #2 ask for reason feedback
             ('confirm', 'Sponser confirm'),  # 5 >#6 button
             ('hiring', 'Hiring'),  # 7 > #8 sales request
-            ('garanty', 'Start 90days Garanty'),  # 8 > # 9 button
+            ('garanty', 'Garanty'),  # 8 > # 9 button
             # once operation close its ticket it will change sales ticket State
             ('closed', 'Closed'),  # 9
         ],
