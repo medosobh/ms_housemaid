@@ -334,17 +334,33 @@ class tickets(models.Model):
         required=False,
         tracking=True,
     )
-    action_maids_ids = fields.One2many(
-        comodel_name='housemaid.maids',
-        inverse_name='tickets_id',
-        string='Maids Actions',
-    )
     search_maids_ids = fields.Many2many(
         comodel_name='housemaid.maids',
         compute='_search_maids',
         string='Maids Search',
         # store=True,
     )
+    action_maids_ids = fields.One2many(
+        comodel_name='housemaid.maids',
+        inverse_name='tickets_id',
+        string='Maids Actions',
+    )
+    search_maids_ids_count = fields.Integer(
+        string='search count',
+        compute='_compute_search_count',
+    )
+    action_maids_ids_count = fields.Integer(
+        string='search count',
+        compute='_compute_action_count',
+    )
+
+    @api.depends('search_maids_ids')
+    def _compute_search_count(self):
+        self.search_maids_ids_count = len(self.search_maids_ids)
+
+    @api.depends('action_maids_ids')
+    def _compute_action_count(self):
+        self.action_maids_ids_count = len(self.action_maids_ids)
 
     @api.depends('jobs_id', 'country_id', 'monthly_salary')
     def _search_maids(self):

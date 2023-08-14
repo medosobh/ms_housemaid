@@ -12,7 +12,8 @@
                         widget="statusbar"
                         options="{'clickable': '1'}"
                         clickable="True"
-                        type="object"/>
+                        type="object"
+                        statusbar_visible="draft,search,check,confirm,hiring,garanty,closed"/>
                     <button string="Searching"
                         name="action_search_ticket"
                         type="object"
@@ -59,366 +60,387 @@
                 </header>
                 <sheet>
                     <div role="alert"
-                        class="alert alert-warning"
-                        attrs="{'invisible': [('new_sponsers_id', '!=', False)]}">
+                        class="alert alert-danger text-center"
+                        attrs="{'invisible': ['|',('search_maids_ids_count', '>', 0),('action_maids_ids_count', '>', 0)]}">
+                        <i class="fa fa-bell"/>
+                        Thier are no maids match your requirements!
+                    </div>
+                    <div role="alert"
+                        class="alert alert-warning text-center"
+                        attrs="{'invisible': ['|',('new_sponsers_id', '!=', False),('state', 'in', ('draft'))]}">
+                        <i class="fa fa-link"/>
                         Enter a Sponser before confirm.
                     </div>
                     <div role="alert"
-                        class="alert alert-warning"
-                        attrs="{'invisible': [('maids_id', '!=', False)]}">
+                        class="alert alert-warning text-center"
+                        attrs="{'invisible': ['|',('maids_id', '!=', False),('state', 'in', ('draft'))]}">
+                        <i class="fa fa-life-ring"/>
                         At action page below; pick a maid and click on hire link icon to attache the maid to ticket.
                     </div>
                     <div role="alert"
-                        class="alert alert-warning"
-                        attrs="{'invisible': [('garanty_day', '!=', False)]}">
+                        class="alert alert-warning text-center"
+                        attrs="{'invisible': ['|',('garanty_day', '!=', False),('state', 'in', ('draft'))]}">
+                        <i class="fa fa-life-ring"/>
                         Enter Garanty Date to change the state.
                     </div>
-                    <div class="oe_title">
-                        <group>
-                            <group name="tickets_ticket"
-                                string="Ticket">
-                                <field name="code"
-                                    class="oe_inline"/>
-                                <field name="type"
-                                    class="oe_inline"/>
-                            </group>
-                            <group name="tickets_sponser"
-                                string="Sponser information">
-                                <field name="sponser_name"
-                                    class="oe_inline"/>
-                                <field name="sponser_phone"
-                                    widget="phone"
-                                    class="oe_inline"/>
-                                <field name="sponser_email"
-                                    widget="email"
-                                    class="oe_inline"/>
-                                <field name="new_sponsers_id"
-                                    class="oe_inline"/>
-                            </group>
+                    <div role="alert"
+                        class="alert alert-info text-center"
+                        attrs="{'invisible': [('state', 'not in', ('found','runout'))]}">
+                        <i class="fa fa-bell"/>
+                        Please check search and action list below. it shows '<span t-esc="search_maids_ids_count"/>
+' in search page and '<span t-esc="search_maids_ids_count"/>
+' in action page.
+                </div>
+                <div class="oe_title">
+                    <group>
+                        <group name="tickets_ticket"
+                            string="Ticket">
+                            <field name="code"
+                                class="oe_inline"/>
+                            <field name="type"
+                                class="oe_inline"/>
                         </group>
-                    </div>
-                    <div>
-                        <group name="tickets_maid"
-                            string="Maid Requirements">
-                            <group name="maids_basic"
-                                string="Salary and Contract">
-                                <field name="jobs_id"
-                                    class="oe_inline"/>
-                                <field name="monthly_salary"
-                                    class="oe_inline"/>
-                                <field name="currency_id"
-                                    groups="base.group_multi_currency"
-                                    class="oe_inline"/>
-                                <field name="contract_period"
-                                    class="oe_inline"/>
-                            </group>
-                            <group name="education"
-                                string="Language and Education">
-                                <field name="arabic_lang"
-                                    widget="boolean_toggle"/>
-                                <field name="english_lang"
-                                    widget="boolean_toggle"/>
-                                <field name="education"/>
-                            </group>
-                            <group name="personal"
-                                string="Information">
-                                <field name="country_id"/>
+                        <group name="tickets_sponser"
+                            string="Sponser information">
+                            <field name="sponser_name"
+                                class="oe_inline"/>
+                            <field name="sponser_phone"
+                                widget="phone"
+                                class="oe_inline"/>
+                            <field name="sponser_email"
+                                widget="email"
+                                class="oe_inline"/>
+                            <field name="new_sponsers_id"
+                                class="oe_inline"/>
+                        </group>
+                    </group>
+                </div>
+                <div>
+                    <group name="tickets_maid"
+                        string="Maid Requirements">
+                        <group name="maids_basic"
+                            string="Salary and Contract">
+                            <field name="jobs_id"
+                                class="oe_inline"/>
+                            <field name="monthly_salary"
+                                class="oe_inline"/>
+                            <field name="currency_id"
+                                groups="base.group_multi_currency"
+                                class="oe_inline"/>
+                            <field name="contract_period"
+                                class="oe_inline"/>
+                        </group>
+                        <group name="education"
+                            string="Language and Education">
+                            <field name="arabic_lang"
+                                widget="boolean_toggle"/>
+                            <field name="english_lang"
+                                widget="boolean_toggle"/>
+                            <field name="education"/>
+                        </group>
+                        <group name="personal"
+                            string="Information">
+                            <field name="country_id"/>
+                            <field name="religion"/>
+                            <field name="gender"/>
+                            <field name="children_no"/>
+                            <field name="marital_status"/>
+                        </group>
+                        <group name="attribute"
+                            string="Attribute">
+                            <field name="skin_color"/>
+                            <field name="age"/>
+                            <field name="hight"/>
+                            <field name="weight"/>
+                        </group>
+                        <group name="skills"
+                            string="Skills">
+                            <field name="skills_cleaning"
+                                widget="boolean_toggle"/>
+                            <field name="skills_arabic_cooking"
+                                widget="boolean_toggle"/>
+                            <field name="skills_baby_sitting"
+                                widget="boolean_toggle"/>
+                            <field name="skills_washing"
+                                widget="boolean_toggle"/>
+                            <field name="skills_ironing"
+                                widget="boolean_toggle"/>
+                            <field name="skills_googlelocation"
+                                widget="boolean_toggle"/>
+                            <field name="skills_driving"
+                                widget="boolean_toggle"/>
+                        </group>
+                        <group name="responsable"
+                            string="Ticket Responsable">
+                            <field name="company_id"
+                                groups="base.group_multi_company"/>
+                            <field name="user_id"
+                                widget="selection"/>
+                            <field name="maids_id"
+                                widget="selection"/>
+                            <field name="old_sponsers_id"
+                                widget="selection"/>
+                            <field name="garanty_day" />
+                            <field name="active"
+                                invisible="1"/>
+                            <field name="search_maids_ids_count"
+                                invisible="1"/>
+                            <field name="action_maids_ids_count"
+                                invisible="1"/>
+                        </group>
+                    </group>
+                </div>
+                <notebook>
+                    <page name="search"
+                        string="Search">
+                        <field name="search_maids_ids">
+                            <tree editable="none">
+                                <button name="action_check_maid"
+                                    string="Check"
+                                    class="oe_inline oe_stat_button"
+                                    icon="fa-question-circle"
+                                    type="object"
+                                    help="Ask Operation to Check Avaliability!"
+                                    attrs="{'invisible': [('state', 'in', ('open', 'ready'))]}" />
+                                <button name="action_hiring_maid"
+                                    string="Hire"
+                                    class="oe_inline oe_stat_button"
+                                    icon="fa-link"
+                                    type="object"
+                                    help="Move Maid to Action page!"
+                                    attrs="{'invisible': [('state', 'in', ('draft','check','confirm'))]}" />
+                                <field name="state"/>
+                                <field name="code"/>
+                                <field name="phone"/>
+                                <field name="name"/>
+                                <field name="email"/>
+                                <field name="jobs_id"/>
+                                <field name="monthly_salary"/>
+                                <field name="contract_period"/>
+                                <field name="passport_no"/>
                                 <field name="religion"/>
                                 <field name="gender"/>
-                                <field name="children_no"/>
                                 <field name="marital_status"/>
-                            </group>
-                            <group name="attribute"
-                                string="Attribute">
-                                <field name="skin_color"/>
-                                <field name="age"/>
-                                <field name="hight"/>
-                                <field name="weight"/>
-                            </group>
-                            <group name="skills"
-                                string="Skills">
-                                <field name="skills_cleaning"
-                                    widget="boolean_toggle"/>
-                                <field name="skills_arabic_cooking"
-                                    widget="boolean_toggle"/>
-                                <field name="skills_baby_sitting"
-                                    widget="boolean_toggle"/>
-                                <field name="skills_washing"
-                                    widget="boolean_toggle"/>
-                                <field name="skills_ironing"
-                                    widget="boolean_toggle"/>
-                                <field name="skills_googlelocation"
-                                    widget="boolean_toggle"/>
-                                <field name="skills_driving"
-                                    widget="boolean_toggle"/>
-                            </group>
-                            <group name="responsable"
-                                string="Ticket Responsable">
+                                <field name="country_id"/>
+                                <field name="partner_id"/>
+                                <field name="description"/>
+                                <field name="active"
+                                    invisible="1"/>
                                 <field name="company_id"
                                     groups="base.group_multi_company"/>
                                 <field name="user_id"
                                     widget="selection"/>
-                                <field name="maids_id"
-                                    widget="selection"/>
-                                <field name="old_sponsers_id"
-                                    widget="selection"/>
-                                <field name="garanty_day" />
+                                <field name="currency_id"
+                                    groups="base.group_multi_currency"/>
+                            </tree>
+                        </field>
+                    </page>
+                    <page name="action"
+                        string="Actions">
+                        <field name="action_maids_ids">
+                            <tree create="0">
+                                <button name="action_draft_maid"
+                                    string="Remove"
+                                    class="oe_inline oe_stat_button"
+                                    icon="fa-unlink"
+                                    type="object"
+                                    help="Reset Maid to Draft and keep ticket state!"
+                                    attrs="{'invisible': [('state', 'in', ('draft', 'check'))]}" />
+                                <button name="action_hiring_maid"
+                                    string="Hire"
+                                    icon="fa-link"
+                                    type="object"
+                                    help="Ask Operation to Proceed Recrutement!"
+                                    attrs="{'invisible': [('state', 'in', ('draft','check','confirm','hiring','backout'))]}" />
+                                <field name="state"/>
+                                <field name="code"/>
+                                <field name="phone"/>
+                                <field name="name"/>
+                                <field name="email"/>
+                                <field name="jobs_id"/>
+                                <field name="monthly_salary"/>
+                                <field name="contract_period"/>
+                                <field name="passport_no"/>
+                                <field name="religion"/>
+                                <field name="gender"/>
+                                <field name="marital_status"/>
+                                <field name="country_id"/>
+                                <field name="partner_id"/>
+                                <field name="description"/>
                                 <field name="active"
                                     invisible="1"/>
-                            </group>
-                        </group>
-                    </div>
-                    <notebook>
-                        <page name="search"
-                            string="Search">
-                            <field name="search_maids_ids">
-                                <tree editable="none">
-                                    <button name="action_check_maid"
-                                        string="Check"
-                                        class="oe_inline oe_stat_button"
-                                        icon="fa-question-circle"
-                                        type="object"
-                                        help="Ask Operation to Check Avaliability!"
-                                        attrs="{'invisible': [('state', 'in', ('open', 'ready'))]}" />
-                                    <button name="action_hiring_maid"
-                                        string="Hire"
-                                        class="oe_inline oe_stat_button"
-                                        icon="fa-link"
-                                        type="object"
-                                        help="Move Maid to Action page!"
-                                        attrs="{'invisible': [('state', 'in', ('draft','check'))]}" />
-                                    <field name="state"/>
-                                    <field name="code"/>
-                                    <field name="phone"/>
-                                    <field name="name"/>
-                                    <field name="email"/>
-                                    <field name="jobs_id"/>
-                                    <field name="monthly_salary"/>
-                                    <field name="contract_period"/>
-                                    <field name="passport_no"/>
-                                    <field name="religion"/>
-                                    <field name="gender"/>
-                                    <field name="marital_status"/>
-                                    <field name="country_id"/>
-                                    <field name="partner_id"/>
-                                    <field name="description"/>
-                                    <field name="active"
-                                        invisible="1"/>
-                                    <field name="company_id"
-                                        groups="base.group_multi_company"/>
-                                    <field name="user_id"
-                                        widget="selection"/>
-                                    <field name="currency_id"
-                                        groups="base.group_multi_currency"/>
-                                </tree>
-                            </field>
-                        </page>
-                        <page name="action"
-                            string="Actions">
-                            <field name="action_maids_ids">
-                                <tree create="0">
-                                    <button name="action_draft_maid"
-                                        string="Remove"
-                                        class="oe_inline oe_stat_button"
-                                        icon="fa-unlink"
-                                        type="object"
-                                        help="Reset Maid to Draft and keep ticket state!"
-                                        attrs="{'invisible': [('state', 'in', ('draft', 'check'))]}" />
-                                    <button name="action_hiring_maid"
-                                        string="Hire"
-                                        icon="fa-link"
-                                        type="object"
-                                        help="Ask Operation to Proceed Recrutement!"
-                                        attrs="{'invisible': [('state', 'in', ('draft','check','hiring','backout'))]}" />
-                                    <field name="state"/>
-                                    <field name="code"/>
-                                    <field name="phone"/>
-                                    <field name="name"/>
-                                    <field name="email"/>
-                                    <field name="jobs_id"/>
-                                    <field name="monthly_salary"/>
-                                    <field name="contract_period"/>
-                                    <field name="passport_no"/>
-                                    <field name="religion"/>
-                                    <field name="gender"/>
-                                    <field name="marital_status"/>
-                                    <field name="country_id"/>
-                                    <field name="partner_id"/>
-                                    <field name="description"/>
-                                    <field name="active"
-                                        invisible="1"/>
-                                    <field name="company_id"
-                                        groups="base.group_multi_company"/>
-                                    <field name="user_id"
-                                        widget="selection"/>
-                                    <field name="currency_id"
-                                        groups="base.group_multi_currency"/>
-                                </tree>
-                            </field>
-                        </page>
-                    </notebook>
-                </sheet>
-                <div class="oe_chatter">
-                    <field name="message_follower_ids"/>
-                    <field name="activity_ids"/>
-                    <field name="message_ids"/>
-                </div>
-            </form>
-        </field>
-    </record>
-
-    <record id="housemaid_tickets_tree"
-        model="ir.ui.view">
-        <field name="name">housemaid.tickets.tree</field>
-        <field name="model">housemaid.tickets</field>
-        <field name="arch"
-            type="xml">
-            <tree string="Tickets List"
-                sample="1">
-                <field name="code"/>
-                <field name="state"/>
-                <field name="sponser_name"/>
-                <field name="sponser_phone"/>
-                <field name="sponser_email"/>
-                <field name="new_sponsers_id"/>
-                <field name="activity_ids"
-                    widget="list_activity"/>
-                <field name="monthly_salary"/>
-                <field name="currency_id"
-                    groups="base.group_multi_currency"/>
-                <field name="contract_period"/>
-                <field name="country_id"/>
-                <field name="religion"/>
-                <field name="gender"/>
-                <field name="children_no"/>
-                <field name="marital_status"/>
-                <field name="maids_id"/>
-                <field name="old_sponsers_id"/>
-                <field name="company_id"
-                    groups="base.group_multi_company"/>
-            </tree>
-        </field>
-    </record>
-
-    <record id="housemaid_offices_kanban"
-        model="ir.ui.view">
-        <field name="name">housemaid.tickets.kanban</field>
-        <field name="model">housemaid.tickets</field>
-        <field name="arch"
-            type="xml">
-            <kanban default_group_by="state"
-                class="o_kanban_mobile">
-                <field name="id"/>
-                <field name="code"/>
-                <field name="type"/>
-                <field name="jobs_id"/>
-                <field name="country_id"/>
+                                <field name="company_id"
+                                    groups="base.group_multi_company"/>
+                                <field name="user_id"
+                                    widget="selection"/>
+                                <field name="currency_id"
+                                    groups="base.group_multi_currency"/>
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
+            </sheet>
+            <div class="oe_chatter">
+                <field name="message_follower_ids"/>
                 <field name="activity_ids"/>
-                <templates>
-                    <t t-name="kanban-box">
-                        <div t-attf-class="oe_kanban_global_click o_kanban_record_has_image_fill">
-                            <div class="oe_kanban_details">
-                                <strong class="o_kanban_record_title">
-                                    <field name="code"/>
-                                </strong>
-                                <div class="o_kanban_tags_section"/>
-                                <ul>
-                                    <li>Type:
-                                        <field name="type"/>
-                                    </li>
-                                    <li>Applied Job:
-                                        <field name="jobs_id"/>
-                                    </li>
-                                    <li>From Country:
-                                        <field name="country_id" />
-                                    </li>
-                                    <li>Applied Maid:
-                                        <field name="maids_id" />
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="oe_kanban_content position-absolute fixed-bottom mr-2">
-                                <div class="o_kanban_record_bottom">
-                                    <div class="oe_kanban_bottom_left"/>
-                                    <div class="oe_kanban_bottom_right float-right">
-                                        <div class="hr_activity_container">
-                                            <field name="activity_ids"
-                                                widget="kanban_activity"/>
-                                        </div>
+                <field name="message_ids"/>
+            </div>
+        </form>
+    </field>
+</record>
+
+<record id="housemaid_tickets_tree"
+    model="ir.ui.view">
+    <field name="name">housemaid.tickets.tree</field>
+    <field name="model">housemaid.tickets</field>
+    <field name="arch"
+        type="xml">
+        <tree string="Tickets List"
+            sample="1">
+            <field name="code"/>
+            <field name="state"/>
+            <field name="sponser_name"/>
+            <field name="sponser_phone"/>
+            <field name="sponser_email"/>
+            <field name="new_sponsers_id"/>
+            <field name="activity_ids"
+                widget="list_activity"/>
+            <field name="monthly_salary"/>
+            <field name="currency_id"
+                groups="base.group_multi_currency"/>
+            <field name="contract_period"/>
+            <field name="country_id"/>
+            <field name="religion"/>
+            <field name="gender"/>
+            <field name="children_no"/>
+            <field name="marital_status"/>
+            <field name="maids_id"/>
+            <field name="old_sponsers_id"/>
+            <field name="company_id"
+                groups="base.group_multi_company"/>
+        </tree>
+    </field>
+</record>
+
+<record id="housemaid_offices_kanban"
+    model="ir.ui.view">
+    <field name="name">housemaid.tickets.kanban</field>
+    <field name="model">housemaid.tickets</field>
+    <field name="arch"
+        type="xml">
+        <kanban default_group_by="state"
+            class="o_kanban_mobile">
+            <field name="id"/>
+            <field name="code"/>
+            <field name="type"/>
+            <field name="jobs_id"/>
+            <field name="country_id"/>
+            <field name="activity_ids"/>
+            <templates>
+                <t t-name="kanban-box">
+                    <div t-attf-class="oe_kanban_global_click o_kanban_record_has_image_fill">
+                        <div class="oe_kanban_details">
+                            <strong class="o_kanban_record_title">
+                                <field name="code"/>
+                            </strong>
+                            <div class="o_kanban_tags_section"/>
+                            <ul>
+                                <li>Type:
+                                    <field name="type"/>
+                                </li>
+                                <li>Applied Job:
+                                    <field name="jobs_id"/>
+                                </li>
+                                <li>From Country:
+                                    <field name="country_id" />
+                                </li>
+                                <li>Applied Maid:
+                                    <field name="maids_id" />
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="oe_kanban_content position-absolute fixed-bottom mr-2">
+                            <div class="o_kanban_record_bottom">
+                                <div class="oe_kanban_bottom_left"/>
+                                <div class="oe_kanban_bottom_right float-right">
+                                    <div class="hr_activity_container">
+                                        <field name="activity_ids"
+                                            widget="kanban_activity"/>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </t>
-                </templates>
-            </kanban>
-        </field>
-    </record>
+                    </div>
+                </t>
+            </templates>
+        </kanban>
+    </field>
+</record>
 
-    <record id="housemaid_tickets_search"
-        model="ir.ui.view">
-        <field name="name">housemaid.tickets.search</field>
-        <field name="model">housemaid.tickets</field>
-        <field name="arch"
-            type="xml">
-            <search string="Tickets List">
+<record id="housemaid_tickets_search"
+    model="ir.ui.view">
+    <field name="name">housemaid.tickets.search</field>
+    <field name="model">housemaid.tickets</field>
+    <field name="arch"
+        type="xml">
+        <search string="Tickets List">
+            <field name="company_id"
+                widget="selection"/>
+            <field name="user_id"
+                widget="selection"/>
+            <field name="country_id"
+                widget="selection"/>
+            <filter name="filter_archived"
+                string="Archived"
+                domain="[('active', '=', False)]"/>
+            <group expand="0"
+                string="Group by">
+                <filter string="State"
+                    name="group_by_state"
+                    context="{'group_by':'state'}"/>
+                <filter string="Company"
+                    name="group_by_company_id"
+                    context="{'group_by':'company_id'}"/>
+                <filter string="Sales Man"
+                    name="group_by_user"
+                    context="{'group_by':'user_id'}"/>
+                <filter string="Country"
+                    name="group_by_country_id"
+                    context="{'group_by':'country_id'}"/>
+            </group>
+            <searchpanel>
                 <field name="company_id"
-                    widget="selection"/>
-                <field name="user_id"
-                    widget="selection"/>
+                    select="multi"
+                    string="Company"
+                    enable_counters="1"/>
                 <field name="country_id"
-                    widget="selection"/>
-                <filter name="filter_archived"
-                    string="Archived"
-                    domain="[('active', '=', False)]"/>
-                <group expand="0"
-                    string="Group by">
-                    <filter string="State"
-                        name="group_by_state"
-                        context="{'group_by':'state'}"/>
-                    <filter string="Company"
-                        name="group_by_company_id"
-                        context="{'group_by':'company_id'}"/>
-                    <filter string="Sales Man"
-                        name="group_by_user"
-                        context="{'group_by':'user_id'}"/>
-                    <filter string="Country"
-                        name="group_by_country_id"
-                        context="{'group_by':'country_id'}"/>
-                </group>
-                <searchpanel>
-                    <field name="company_id"
-                        select="multi"
-                        string="Company"
-                        enable_counters="1"/>
-                    <field name="country_id"
-                        select="multi"
-                        string="Country"
-                        enable_counters="1"/>
-                    <field name="jobs_id"
-                        select="multi"
-                        string="Job"
-                        enable_counters="1"/>
-                </searchpanel>
-            </search>
-        </field>
-    </record>
+                    select="multi"
+                    string="Country"
+                    enable_counters="1"/>
+                <field name="jobs_id"
+                    select="multi"
+                    string="Job"
+                    enable_counters="1"/>
+            </searchpanel>
+        </search>
+    </field>
+</record>
 
-    <record id="housemaid_tickets_action"
-        model="ir.actions.act_window">
-        <field name="name">Tickets</field>
-        <field name="type">ir.actions.act_window</field>
-        <field name="res_model">housemaid.tickets</field>
-        <field name="view_mode">tree,form,kanban</field>
-        <field name="help"
-            type="html">
-            <p class="o_view_nocontent_smiling_face">Create your first ticket!</p>
-        </field>
-    </record>
+<record id="housemaid_tickets_action"
+    model="ir.actions.act_window">
+    <field name="name">Tickets</field>
+    <field name="type">ir.actions.act_window</field>
+    <field name="res_model">housemaid.tickets</field>
+    <field name="view_mode">tree,form,kanban</field>
+    <field name="help"
+        type="html">
+        <p class="o_view_nocontent_smiling_face">Create your first ticket!</p>
+    </field>
+</record>
 
-    <menuitem id="housemaid_tickets_menu"
-        name="Tickets"
-        action="housemaid_tickets_action"
-        parent="housemaid_menu_tickets"
-        sequence="31"/>
+<menuitem id="housemaid_tickets_menu"
+    name="Tickets"
+    action="housemaid_tickets_action"
+    parent="housemaid_menu_tickets"
+    sequence="31"/>
 </odoo>
