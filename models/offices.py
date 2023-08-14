@@ -97,7 +97,7 @@ class offices(models.Model):
     )
     user_id = fields.Many2one(
         comodel_name='res.users',
-        string="Operation Man",
+        string="Responsable",
         default=lambda self: self.env.user.id,
         required=True,
         tracking=True,

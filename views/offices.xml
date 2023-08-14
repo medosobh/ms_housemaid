@@ -87,23 +87,23 @@
 				<field name="phone"
 					widget="phone"/>
 				<field name="phone2"
-					widget="phone"/>
+					widget="phone"
+					optional="hide"/>
 				<field name="phone3"
-					widget="phone"/>
+					widget="phone"
+					optional="hide"/>
 				<field name="email"
 					widget="email" />
 				<field name="contact_person" />
 				<field name="address"/>
 				<field name="country_id"/>
 				<field name="partner_id"/>
-				<field name="description"/>
 				<field name="activity_ids"/>
 				<field name="active"
 					invisible="1"/>
 				<field name="company_id"
 					groups="base.group_multi_company"/>
-				<field name="user_id"
-					widget="selection"/>
+				<field name="user_id" />
 			</tree>
 		</field>
 	</record>
@@ -172,9 +172,9 @@
 			<search string="External Offices">
 				<field name="company_id"
 					widget="selection"/>
-				<field name="user_id"
-					widget="selection"/>
 				<field name="country_id"
+					widget="selection"/>
+				<field name="user_id"
 					widget="selection"/>
 				<filter name="filter_archived"
 					string="Archived"
@@ -184,12 +184,12 @@
 					<filter string="Company"
 						name="group_by_company_id"
 						context="{'group_by':'company_id'}"/>
-					<filter string="Sales Man"
-						name="group_by_user"
-						context="{'group_by':'user_id'}"/>
 					<filter string="Country"
 						name="group_by_country_id"
 						context="{'group_by':'country_id'}"/>
+					<filter string="Responsable"
+						name="group_by_user"
+						context="{'group_by':'user_id'}"/>
 				</group>
 				<searchpanel>
 					<field name="company_id"
