@@ -15,14 +15,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <t <t t-foreach="ms_housemaid.maids"
+                        <t t-foreach="maids"
                             t-as="maids">
                             <tr>
                                 <td>
                                     <t t-esc="maids.name"/>
                                 </td>
                             </tr>
-                        </t>>
+                        </t>
                     </tbody>
                 </table>
             </div>
