@@ -5,7 +5,7 @@
         name="Maids">
         <t t-call="website.layout">
             <div class="container">
-                hi, external office your maid's cv is here 
+                hi, external office your maid's cv list is here 
                 <table class="table table-bordered">
                     <thead>
                         <tr>

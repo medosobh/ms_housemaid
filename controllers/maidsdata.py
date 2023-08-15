@@ -12,6 +12,7 @@ class maids(http.Controller):
     @http.route('/housemaid/maids/', website=True, auth='user')
     def housmaid_maids(self, **kw):
         # return "hello external office"
+        maids = request.env['ms_housemaid.maids'].sudo().search()
         return request.render("ms_housemaid.maids_page", {
             'maids': maids
         })
