@@ -31,4 +31,25 @@
 
     </data>
 
+    <data noupdate="1">
+        <record id="menu_mymaids"
+            model="website.menu">
+            <field name="name">My Maids</field>
+            <field name="url">/mymaids</field>
+            <field name="parent_id"
+                ref="website.main_menu"/>
+            <field name="sequence">55</field>
+        </record>
+
+        <record id="menu_create_maid_form"
+            model="website.menu">
+            <field name="name">Create Maid</field>
+            <field name="url">/maidform</field>
+            <field name="parent_id"
+                ref="website.main_menu"/>
+            <field name="sequence">56</field>
+        </record>
+
+    </data>
+
 </odoo>
