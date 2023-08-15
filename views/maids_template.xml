@@ -1,32 +1,116 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
+    <data noupdate="1">
+        <record id="menu_mymaids"
+            model="website.menu">
+            <field name="name">My Maids</field>
+            <field name="url">/mymaids</field>
+            <field name="parent_id"
+                ref="website.main_menu"/>
+            <field name="sequence">55</field>
+        </record>
+    </data>
+
     <template id="maids_page"
         name="Maids">
         <t t-call="website.layout">
-            <div class="container">
-                hi, external office your maid's cv list is here 
-                <table class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <td>
-                                Name:
-                            </td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <t t-foreach="maids"
-                            t-as="maid">
+            <div class="oe_structure">
+                <div class="container">
+                    <br />
+                    <center>
+                        <h3> hi, external office your maid's cv list is here</h3>
+                    </center>
+                    <br />
+                    <table class="table table-bordered">
+                        <thead style="font-size: 16px;">
                             <tr>
-                                <td>
-                                    <t t-esc="maid.name"/>
-                                </td>
+                                <td>Code:</td>
+                                <td>Name:</td>
+                                <td>Job:</td>
+                                <td>Salary:</td>
+                                <td>State:</td>
                             </tr>
-                        </t>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            <t t-foreach="maids"
+                                t-as="maid">
+                                <tr>
+                                    <td>
+                                        <t t-esc="maid.code"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="maid.name"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="maid.jobs_id.name"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="maid.monthly_salary"/>
+                                    </td>
+                                    <td>
+                                        <t t-esc="maid.state"/>
+                                    </td>
+                                </tr>
+                            </t>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </t>
     </template>
+
+    <data noupdate="1">
+        <record id="menu_create_maid_form"
+            model="website.menu">
+            <field name="name">Create Maid</field>
+            <field name="url">/maidform</field>
+            <field name="parent_id"
+                ref="website.main_menu"/>
+            <field name="sequence">56</field>
+        </record>
+    </data>
+
+    <template id="maid_form"
+        name="Create New Maid">
+        <t t-call="website.layout">
+            <div class="oe_structure">
+                <div class="container">
+                    <form role="form"
+                        method="post"
+                        action="/create/webmaid">
+                        <input type="hidden"
+                            name="csrf_token"
+                            t-att-value="request.csrf_token()"/>
+
+                        <div class="form-group">
+                            <label for="maid_code"
+                                class="control-label">
+                                    Code
+                            </label>
+                            <input type="text"
+                                name="maid_code"
+                                t-att-value="maid_code"
+                                id="maid_code"
+                                class="form-control"
+                                required="required"/>
+
+                        </div>
+                        <div class="clearfix oe_login_button">
+                            <button type="submit"
+                                name="do"
+                                value="1"
+                                class="btn btn-primary pull-left">Submit</button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </t>
+
+    </template>
+
+
+
 
 </odoo>
