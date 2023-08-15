@@ -16,20 +16,28 @@ class closeticketwizard(models.TransientModel):
             ticket_rec = self.env['housemaid.tickets'].browse(int(active_id))
             res['tickets_id'] = ticket_rec.id
             res['type'] = ticket_rec.type
-            res['sponsers_id'] = ticket_rec.sponsers_id
+            res['new_sponsers_id'] = ticket_rec.new_sponsers_id
+            res['old_sponsers_id'] = ticket_rec.old_sponsers_id
             res['maids_id'] = ticket_rec.maids_id
             res['user_id'] = ticket_rec.user_id
         return res
 
+    issue_date = fields.Date(
+        string='Date',
+        required=True,
+        tracking=True,
+    )
     closereason_id = fields.Many2one(
         comodel_name='housemaid.closereason',
-        required=True,
         string='Reason',
+        required=True,
+        tracking=True,
     )
     tickets_id = fields.Many2one(
         comodel_name='housemaid.tickets',
-        required=True,
         string='Ticket no.',
+        readonly=True,
+        tracking=True,
     )
     type = fields.Selection(
         string='Type',
@@ -38,25 +46,31 @@ class closeticketwizard(models.TransientModel):
             ('transfer', 'Transfer'),
             ('temp', 'Temporary'),
         ],
-        required=True,
+        readonly=True,
         tracking=True,
     )
-    sponsers_id = fields.Many2one(
+    new_sponsers_id = fields.Many2one(
         'housemaid.sponsers',
-        string='Current Sponser',
-        required=True,
+        string='New Sponser',
+        readonly=True,
+        tracking=True,
+    )
+    old_sponsers_id = fields.Many2one(
+        'housemaid.sponsers',
+        string='Old Sponser',
+        readonly=True,
         tracking=True,
     )
     maids_id = fields.Many2one(
         comodel_name='housemaid.maids',
         string='Maid',
-        required=True,
+        readonly=True,
         tracking=True,
     )
     user_id = fields.Many2one(
         string="Responsable",
         comodel_name='res.users',
-        required=True,
+        readonly=True,
         tracking=True,
     )
     description = fields.Text(
@@ -69,14 +83,16 @@ class closeticketwizard(models.TransientModel):
         self.ensure_one()
         vals = {
             'issue_date': date.today(),
+            'closereason_id': self.closereason_id.id,
             'tickets_id': self.tickets_id.id,
             'type': self.type,
-            'sponsers_id': self.sponsers_id.id,
+            'new_sponsers_id': self.new_sponsers_id.id,
+            'old_sponsers_id': self.old_sponsers_id.id,
             'maids_id': self.maids_id.id,
             'user_id': self.user_id.id,
             'description': self.description,
         }
-        self.env['housemaid.maidscontracts'].self.create(vals)
+        self.env['housemaid.closedtickets'].self.create(vals)
         
         # change ticket state
         record = self.env['housemaid.tickets'].browse(tickets_id)
@@ -84,6 +100,5 @@ class closeticketwizard(models.TransientModel):
         record.activity_schedule(
             'ms_housemaid.mail_act_close',
             user_id=self.user_id.id,
-            note=f'Please check maid {record.maids_id.name} of the ticket {record.code}'
+            note=f'Please check ticket {record.code}; it was closed due to {self.closereason_id}'
         )
-        print('action_closed_ticket')

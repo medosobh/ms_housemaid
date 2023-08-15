@@ -11,6 +11,23 @@ class maidscontracts(models.Model):
     _rec_name = 'contract_no'
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
+    @api.depends('name', 'contract_no', 'maids_id')
+    def name_get(self):
+        result = []
+        for record in self:
+            if record.tickets_id:
+                name = '[' + record.contract_no + '] ' + record.maids_id
+            else:
+                name = record.name
+            result.append((record.id, name))
+        return result
+
+    name = fields.Char(
+        string='Name',
+        default=lambda self: _('New'),
+        readonly=True,
+        tracking=True,
+    )
     issue_date = fields.Date(
         string='Issue Date',
         required=True,
@@ -33,16 +50,16 @@ class maidscontracts(models.Model):
         required=False,
         tracking=True,
     )
-    old_sponsers_id = fields.Many2one(
-        'housemaid.sponsers',
-        string='old Sponser',
-        required=True,
-        tracking=True,
-    )
     new_sponsers_id = fields.Many2one(
         'housemaid.sponsers',
         string='New Sponser',
         required=False,
+        tracking=True,
+    )
+    old_sponsers_id = fields.Many2one(
+        'housemaid.sponsers',
+        string='old Sponser',
+        required=True,
         tracking=True,
     )
     maids_id = fields.Many2one(

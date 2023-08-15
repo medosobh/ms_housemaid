@@ -6,8 +6,27 @@ from datetime import date, datetime, timedelta
 class closedtickets(models.Model):
     _name = 'housemaid.closedtickets'
     _description = 'Closed Ticket'
+    _rec_name = 'name'
     _inherit = ['mail.thread', 'mail.activity.mixin']
-
+    
+    
+    @api.depends('name', 'closereason_id', 'tickets_id')
+    def name_get(self):
+        result = []
+        for record in self:
+            if record.tickets_id:
+                name = '[' + record.tickets_id + '] ' + record.closereason_id
+            else:
+                name = record.name
+            result.append((record.id, name))
+        return result
+    
+    name= fields.Char(
+        string='Name',
+        default=lambda self: _('New'),
+        readonly=True,
+        tracking=True,
+    )
     issue_date = fields.Date(
         string='Issue Date',
         required=True,

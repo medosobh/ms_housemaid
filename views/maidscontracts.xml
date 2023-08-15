@@ -13,6 +13,8 @@
                     <group name="contract"
                         string="Contract">
                         <group>
+                            <field name="name"
+                                class="oe_inline"/>
                             <field name="tickets_id"
                                 class="oe_inline"/>
                             <field name="old_sponsers_id"
@@ -64,6 +66,7 @@
             <tree name="contracts"
                 string="Contracts"
                 sample="1">
+                <field name="name" />
                 <field name="issue_date" />
                 <field name="tickets_id" />
                 <field name="type" />

@@ -14,7 +14,9 @@
                             class="oe_inline"/>
                         <field name="tickets_id"
                             class="oe_inline"/>
-                        <field name="sponsers_id"
+                        <field name="new_sponsers_id"
+                            class="oe_inline"/>
+                        <field name="old_sponsers_id"
                             class="oe_inline"/>
                         <field name="maids_id"
                             class="oe_inline"/>

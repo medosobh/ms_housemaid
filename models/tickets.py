@@ -46,17 +46,14 @@ class tickets(models.Model):
     def action_draft_ticket(self):
         self.ensure_one()
         self.state = 'draft'
-        print('action_draft_ticket')
 
     def action_found_ticket(self):
         self.ensure_one()
         self.state = 'found'
-        print('action_avaliable_ticket')
 
     def action_runout_ticket(self):
         self.ensure_one()
         self.state = 'runout'
-        print('action_runout_ticket')
 
     def action_confirm_ticket(self):
         self.ensure_one()
@@ -68,15 +65,11 @@ class tickets(models.Model):
     @api.onchange('garanty_day')
     def action_garanty_ticket(self):
         self.ensure_one()
-        if self.garanty_day == False:
-            # do nothing
-            print('keep in draft mode')
-        else:
+        if self.garanty_day != False:
             self.state = 'garanty'
             self.maids_id.garanty_day = self.garanty_day
             self.close_ticket_day = self.garanty_day + timedelta(days=90)
-            
-   
+
     code = fields.Char(
         string='Code',
         required=True,

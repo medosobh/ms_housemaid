@@ -23,6 +23,7 @@ class contractwizard(models.TransientModel):
             res['user_id'] = ticket_rec.user_id
         return res
 
+    
     tickets_id = fields.Many2one(
         comodel_name='housemaid.tickets',
         required=True,
@@ -129,3 +130,10 @@ class contractwizard(models.TransientModel):
             'description': self.description,
         }
         self.env['housemaid.maidscontracts'].self.create(vals)
+        # change ticket state
+        record = self.env['housemaid.tickets'].browse(tickets_id)
+        record.activity_schedule(
+            'ms_housemaid.mail_act_hiring',
+            user_id=self.user_id.id,
+            note=f'Please check ticket {record.code}; a contract no: {self.contract_no} was created.'
+        )
