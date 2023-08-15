@@ -1,6 +1,6 @@
 {
     'name': 'Housemaid Sales and Operation System',
-    'version': '1.0',
+    'version': '15.0.1.0',
     'description': 'A system that help to maintain maids data and manage match \
          and hiring maid ',
     'summary': '',
