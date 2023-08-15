@@ -380,9 +380,74 @@ class tickets(models.Model):
     def _compute_action_count(self):
         self.action_maids_ids_count = len(self.action_maids_ids)
 
-    @api.depends('jobs_id', 'country_id', 'monthly_salary')
+    @api.depends('jobs_id', 'country_id', 'monthly_salary', 'arabic_lang',
+                 'english_lang', 'religion', 'gender', 'marital_status', 'skin_color',
+                 'age', 'hight', 'weight', 'skills_cleaning', 'skills_arabic_cooking',
+                 'skills_baby_sitting', 'skills_washing', 'skills_ironing',
+                 'skills_googlelocation', 'skills_driving')
     def _search_maids(self):
         self.ensure_one()
+        # test list
+        # jobs_id  ==
+        # country_id ==
+        # 2 condition with id
+        # monthly_salary ==
+        # arabic_lang ==
+        # english_lang ==
+        # religion ==
+        # gender ==
+        # marital_status ==
+        # skin_color ==
+        # skills_cleaning ==
+        # skills_arabic_cooking ==
+        # skills_baby_sitting ==
+        # skills_washing ==
+        # skills_ironing ==
+        # skills_googlelocation ==
+        # skills_driving ==
+        # 16 condition ==
+        # age +- 2
+        # hight +- 1 feet
+        # weight +- 5 kg
+        # 3 condition with range
+        domain = []
+
+        id_fields = ('jobs_id', 'country_id')
+        fields = ('monthly_salary', 'arabic_lang',
+                  'english_lang', 'religion', 'gender', 'marital_status', 'skin_color',
+                  'skills_cleaning', 'skills_arabic_cooking',
+                  'skills_baby_sitting', 'skills_washing', 'skills_ironing',
+                  'skills_googlelocation', 'skills_driving'
+                  )
+        range_fields = ('age', 'hight', 'weight')
+
+        for field in id_fields:
+            if self[field].id != False:
+                print('test1')
+                conditions = (field, '=', self[field].id)
+                domain.append(conditions)
+            print(domain)
+
+        for field in fields:
+            if self[field] != False:
+                print('test2')
+                conditions = (field, 'in', self[field])
+                domain.append(conditions)
+            print(domain)
+
+        for field in range_fields:
+            if self[field] != False:
+                print('test3')
+                min_value = self[field] * 0.9
+                max_value = self[field] * 1.1
+                conditions = ([
+                    '&',
+                    (field, '<', max_value),
+                    (field, '>', min_value)
+                ])
+                domain.append(conditions)
+            print(domain)
+
         self.search_maids_ids = []
         if self.type == 'sales':
             maids_ids = self.env['housemaid.maids'].search(
@@ -392,6 +457,7 @@ class tickets(models.Model):
                     ('tickets_id', '=', False),
                 ]
             )
+
             if self.jobs_id != False:
                 maids_ids1 = maids_ids.filtered(
                     lambda maids: maids.jobs_id.id == self.jobs_id.id)
@@ -409,6 +475,12 @@ class tickets(models.Model):
                     lambda maids: maids.monthly_salary == self.monthly_salary)
             else:
                 maids_ids3 = maids_ids2
+
+            if self.arabic_lang:
+                maids_ids4 = maids_ids3.filtered(
+                    lambda maids: maids.arabic_lang == self.arabic_lang)
+            else:
+                maids_ids4 = maids_ids3
 
             self.search_maids_ids = [(6, 0, maids_ids3.ids)]
         elif self.type == 'transfer':
