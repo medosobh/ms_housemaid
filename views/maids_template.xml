@@ -4,8 +4,28 @@
     <template id="maids_page"
         name="Maids">
         <t t-call="website.layout">
-            hi, external office enter your maid's cv here 
-
+            <div class="container">
+                hi, external office your maid's cv is here 
+                <table>
+                    <thead>
+                        <tr>
+                            <td>
+                                Name:
+                            </td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <t <t t-foreach="ms_housemaid.maids"
+                            t-as="maids">
+                            <tr>
+                                <td>
+                                    <t t-esc="maids.name"/>
+                                </td>
+                            </tr>
+                        </t>>
+                    </tbody>
+                </table>
+            </div>
         </t>
     </template>
 
