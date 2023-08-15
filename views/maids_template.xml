@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="maids_page"
+        name="Maids">
+        <t t-call="website.layout">
+            hi, external office enter your maid's cv here 
+
+        </t>
+    </template>
+
+</odoo>

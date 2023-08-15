@@ -23,6 +23,7 @@
         'data/data_views.xml',
         'wizard/closeticket_wizard.xml',
         'wizard/contract_wizard.xml',
+        'views/maids_template.xml',
         'views/menu.xml',
         'views/offices.xml',
         'views/maids.xml',
