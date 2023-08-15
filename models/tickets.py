@@ -125,7 +125,7 @@ class tickets(models.Model):
     new_sponsers_id = fields.Many2one(
         'housemaid.sponsers',
         string='New Sponser',
-        readonly=True,
+        required=True,
         tracking=True,
     )
     old_sponser_name = fields.Char(
@@ -454,9 +454,7 @@ class tickets(models.Model):
                     domain.append(conditions)
                 print(domain)
 
-            maids_ids = self.env['housemaid.maids'].search(
-                [domain]
-            )
+            maids_ids = self.env['housemaid.maids'].search(domain)
             print(maids_ids)
 
             self.search_maids_ids = [(6, 0, maids_ids.ids)]

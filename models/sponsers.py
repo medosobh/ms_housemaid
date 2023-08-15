@@ -103,7 +103,6 @@ class sponsers(models.Model):
         comodel_name='res.currency',
         string='Currency',
         related='company_id.currency_id',
-        readonly=True,
         ondelete='set null',
         help="Used to display the currency when tracking monetary values",
         tracking=True

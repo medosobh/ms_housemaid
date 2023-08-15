@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
+
     <record id="housemaid_tickets_form"
         model="ir.ui.view">
         <field name="name">housemaid.tickets.form</field>
