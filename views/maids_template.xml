@@ -15,7 +15,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <t t-foreach="maids"
+                        <t t-foreach="ms_housemaid.maids"
                             t-as="maids">
                             <tr>
                                 <td>
