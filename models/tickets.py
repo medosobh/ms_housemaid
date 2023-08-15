@@ -454,10 +454,10 @@ class tickets(models.Model):
                     domain.append(conditions)
                 print(domain)
 
-                maids_ids = self.env['housemaid.maids'].search(
-                    [domain]
-                )
-                print(maids_ids)
+            maids_ids = self.env['housemaid.maids'].search(
+                [domain]
+            )
+            print(maids_ids)
 
             self.search_maids_ids = [(6, 0, maids_ids.ids)]
         elif self.type == 'transfer':
@@ -493,56 +493,55 @@ class tickets(models.Model):
                     domain.append(conditions)
                 print(domain)
 
-                maids_ids = self.env['housemaid.maids'].search(
-                    [domain]
-                )
-                print(maids_ids)
+            maids_ids = self.env['housemaid.maids'].search(
+                [domain]
+            )
+            print(maids_ids)
+
+            self.search_maids_ids = [(6, 0, maids_ids.ids)]
+
+        elif self.type == 'temp':
+            domain = [
+                ('state', 'in', ('ready', 'transfer')),
+                ('active', '=', True),
+            ]
+
+            for field in id_fields:
+                if self[field].id != False:
+                    print('test1')
+                    conditions = (field+'.id', '=', self[field].id)
+                    domain.append(conditions)
+                print(domain)
+
+            for field in fields:
+                if self[field] != False:
+                    print('test2')
+                    conditions = (field, '=', self[field])
+                    domain.append(conditions)
+                print(domain)
+
+            for field in range_fields:
+                if self[field] != False:
+                    print('test3')
+                    min_value = self[field] * 0.9
+                    max_value = self[field] * 1.1
+                    conditions = ([
+                        '&',
+                        (field, '<', max_value),
+                        (field, '>', min_value)
+                    ])
+                    domain.append(conditions)
+                print(domain)
+
+            maids_ids = self.env['housemaid.maids'].search(
+                [domain]
+            )
+            print(maids_ids)
 
             self.search_maids_ids = [(6, 0, maids_ids.ids)]
 
             maids_ids = self.env['housemaid.maids'].search(
-                [
-
-                ]
+                [domain]
             )
-            if self.jobs_id != False:
-                maids_ids1 = maids_ids.filtered(
-                    lambda maids: maids.jobs_id.id == self.jobs_id.id)
-            else:
-                maids_ids1 = maids_ids
-
-            if len(self.country_id) == 1:
-                maids_ids2 = maids_ids1.filtered(
-                    lambda maids: maids.country_id.id == self.country_id.id)
-            else:
-                maids_ids2 = maids_ids1
-
-            if self.monthly_salary != 0:
-                maids_ids3 = maids_ids2.filtered(
-                    lambda maids: maids.monthly_salary == self.monthly_salary)
-            else:
-                maids_ids3 = maids_ids2
-        elif self.type == 'temp':
-            maids_ids = self.env['housemaid.maids'].search(
-                [
-                    ('state', 'in', ('ready', 'transfer')),
-                    ('active', '=', True),
-                ]
-            )
-            if self.jobs_id != False:
-                maids_ids1 = maids_ids.filtered(
-                    lambda maids: maids.jobs_id.id == self.jobs_id.id)
-            else:
-                maids_ids1 = maids_ids
-
-            if len(self.country_id) == 1:
-                maids_ids2 = maids_ids1.filtered(
-                    lambda maids: maids.country_id.id == self.country_id.id)
-            else:
-                maids_ids2 = maids_ids1
-
-            if self.monthly_salary != 0:
-                maids_ids3 = maids_ids2.filtered(
-                    lambda maids: maids.monthly_salary == self.monthly_salary)
-            else:
-                maids_ids3 = maids_ids2
+        else:
+            self.search_maids_ids = []
