@@ -11,7 +11,7 @@
                     <field name="state"
                         widget="statusbar"
                         options="{'clickable': '1'}"
-                        clickable="True"
+                        clickable="False"
                         type="object"
                         statusbar_visible="draft,search,check,confirm,hiring,garanty,closed"/>
                     <button string="Searching"
@@ -24,7 +24,7 @@
                         name="action_draft_ticket"
                         type="object"
                         class="oe_highlight"
-                        attrs="{'invisible': [('state', 'in', ('draft'))]}" />
+                        attrs="{'invisible': [('state', 'in', ('draft','check','search','found','runout','confirm','garanty','hiring','closed'))]}" />
                     <button string="Found"
                         name="action_found_ticket"
                         type="object"
