@@ -14,6 +14,7 @@
         'mail',
         'resource',
         'web',
+        'website',
         'web_kanban_gauge',
     ],
     'data': [
