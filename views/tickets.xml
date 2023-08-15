@@ -10,7 +10,6 @@
                 <header>
                     <field name="state"
                         widget="statusbar"
-                        options="{'clickable': '1'}"
                         clickable="False"
                         type="object"
                         statusbar_visible="draft,search,check,confirm,hiring,garanty,closed"/>
