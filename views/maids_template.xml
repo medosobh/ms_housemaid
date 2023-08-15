@@ -6,7 +6,7 @@
         <t t-call="website.layout">
             <div class="container">
                 hi, external office your maid's cv is here 
-                <table>
+                <table class="table table-bordered">
                     <thead>
                         <tr>
                             <td>
@@ -15,11 +15,11 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <t t-foreach="ms_housemaid.maids"
-                            t-as="maids">
+                        <t t-foreach="maids"
+                            t-as="maid">
                             <tr>
                                 <td>
-                                    <t t-esc="maids.name"/>
+                                    <t t-esc="maid.name"/>
                                 </td>
                             </tr>
                         </t>
