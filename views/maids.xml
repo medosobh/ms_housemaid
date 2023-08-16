@@ -380,4 +380,5 @@
         action="housemaid_maids_action"
         parent="housemaid_menu_maid"
         sequence="21"/>
+
 </odoo>

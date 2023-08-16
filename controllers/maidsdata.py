@@ -19,15 +19,15 @@ class maids(http.Controller):
             'maids': maids
         })
 
+
+class createmaids(http.Controller):
     @http.route('/maidform', website=True, auth='user', type="http")
     def maid_form(self, **kw):
         print("open form")
-        # maids = request.env['housemaid.maids'].sudo().search([])
-        return request.render('ms_housemaid.maid_form', {
-        })
+        return request.render('ms_housemaid.maid_form', {})
 
     @http.route('/create/maid', website=True, auth='user', type="http")
-    def maid_form(self, **kw):
+    def create_maid(self, **kw):
         print("save form")
         request.env['housemaid.maids'].sudo().create(kw)
         return request.render('ms_housemaid.create_success', {})
