@@ -245,12 +245,18 @@
                                             </p>
                                         </div>
 
-                                        <p class="mb-1"
-                                            style="font-size: .77rem;">contract Period</p>
-                                        <div class="col-sm-9">
-                                            <p class="text-muted mb-0">
-                                                <t t-out="maid.contract_period"/>
-                                            </p>
+                                        
+
+                                        <hr/>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Contract Period</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-0">
+                                                    <t t-out="maid.contract_period"/>
+                                                </p>
+                                            </div>
                                         </div>
 
                                     </div>
@@ -270,8 +276,8 @@
                                                 <p class="mb-0">Arabic</p>
                                             </div>
                                             <div class="col-sm-9">
-                                                <p class="text-muted mb-0">
-                                                    <t t-att-checked="'checked' if maid.arabic_lang else None" t-out="maid.arabic_lang"/>
+                                                <p class="form-check form-switch mb-0">
+                                                    <t t-out="maid.arabic_lang"/>
                                                 </p>
                                             </div>
                                         </div>
