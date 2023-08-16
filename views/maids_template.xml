@@ -92,63 +92,532 @@
             position="inside">
             <t t-if="page_name == 'my_maids_portal_form_view'">
                 <section style="background-color: #eee;">
-                    <div class="container">
-                        <div>
-                            <p t-out="image" />
+                    <div class="container py-5">
+
+                        <div class="row">
+
+                            <div class="col-lg-4">
+                                <div class="card mb-4">
+                                    <div class="card-body text-center">
+                                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
+                                            alt="avatar"
+                                            class="rounded-circle img-fluid"
+                                            style="width: 150px;"/>
+                                        <h5 class="my-3">
+                                            <t t-out="maid.name"/>
+                                        </h5>
+
+                                        <p class="text-muted mb-1">
+                                            <t t-out="maid.jobs_id.name"/>
+                                        </p>
+                                        <p class="text-muted mb-1">
+                                            <t t-out="maid.state"/>
+                                        </p>
+
+                                        <p class="text-muted mb-4">
+                                            <t t-out="maid.country_id.name"/>
+                                        </p>
+
+                                        <div class="d-flex justify-content-center mb-2">
+                                            <button type="button"
+                                                class="btn btn-primary">Follow</button>
+                                            <button type="button"
+                                                class="btn btn-outline-primary ms-1">Message</button>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <div class="col-lg-8">
+                                <div class="card mb-4">
+                                    <div class="card-body">
+
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Office</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-0">
+                                                    <t t-out="maid.offices_id.name"/>
+                                                </p>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Code</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-0">
+                                                    <t t-out="maid.code"/>
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <hr/>
+
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Full Name</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-0">
+                                                    <t t-out="maid.name"/>
+                                                </p>
+                                            </div>
+                                        </div>
+
+
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Phone</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-0">
+                                                    <t t-out="maid.phone"/>
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Email</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-0">
+                                                    <t t-out="maid.email"/>
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <hr/>
+
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Address</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-0">
+                                                    <t t-out="maid.country_id.name"/>
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                            </div>
                         </div>
-                        <div>
-                            <p t-out="maid.offices_id.name"/>
-                            <p t-out="maid.code"/>
-                            <p t-out="maid.jobs_id.name"/>
-                            <p t-out="maid.monthly_salary"/>
-                            <p t-out="maid.currency_id.name"/>
-                            <p t-out="maid.state"/>
-                            <p t-out="maid.contract_period"/>
+
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="card mb-4 mb-md-0">
+                                    <div class="card-body">
+
+                                        <p class="mb-4">Job Information
+                                        </p>
+
+                                        <p class="mb-1"
+                                            style="font-size: .77rem;">Job Title</p>
+                                        <div class="col-sm-9">
+                                            <p class="text-muted mb-0">
+                                                <t t-out="maid.jobs_id.name"/>
+                                            </p>
+                                        </div>
+
+                                        <p class="mb-1"
+                                            style="font-size: .77rem;">Monthly Salary</p>
+                                        <div class="col-sm-9">
+                                            <p class="text-muted mb-0">
+                                                <t t-out="maid.monthly_salary"/>
+                                            </p>
+                                        </div>
+
+                                        <p class="mb-1"
+                                            style="font-size: .77rem;">Currency</p>
+                                        <div class="col-sm-9">
+                                            <p class="text-muted mb-0">
+                                                <t t-out="maid.currency_id.name"/>
+                                            </p>
+                                        </div>
+
+                                        <p class="mb-1"
+                                            style="font-size: .77rem;">contract Period</p>
+                                        <div class="col-sm-9">
+                                            <p class="text-muted mb-0">
+                                                <t t-out="maid.contract_period"/>
+                                            </p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="card mb-4 mb-md-0">
+                                    <div class="card-body">
+
+                                        <p class="mb-4">Language and Education
+                                        </p>
+
+                                        <p class="mb-1"
+                                            style="font-size: .77rem;">Arabic</p>
+                                        <div class="col-sm-9">
+                                            <p class="text-muted mb-0">
+                                                <t t-out="maid.arabic_lang"/>
+                                            </p>
+                                        </div>
+
+                                        <p class="mb-1"
+                                            style="font-size: .77rem;">English</p>
+                                        <div class="col-sm-9">
+                                            <p class="text-muted mb-0">
+                                                <t t-out="maid.english_lang"/>
+                                            </p>
+                                        </div>
+
+                                        <p class="mb-1"
+                                            style="font-size: .77rem;">Education</p>
+                                        <div class="col-sm-9">
+                                            <p class="text-muted mb-0">
+                                                <t t-out="maid.education"/>
+                                            </p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="card mb-4 mb-md-0">
+                                    <div class="card-body">
+
+                                        <p class="mb-4">Passport
+                                        </p>
+
+                                        <p class="mb-1"
+                                            style="font-size: .77rem;">Passport No</p>
+                                        <div class="col-sm-9">
+                                            <p class="text-muted mb-0">
+                                                <t t-out="maid.passport_no"/>
+                                            </p>
+                                        </div>
+
+                                        <p class="mb-1"
+                                            style="font-size: .77rem;">Issue Place</p>
+                                        <div class="col-sm-9">
+                                            <p class="text-muted mb-0">
+                                                <t t-out="maid.passport_place"/>
+                                            </p>
+                                        </div>
+
+                                        <p class="mb-1"
+                                            style="font-size: .77rem;">Issue Date</p>
+                                        <div class="col-sm-9">
+                                            <p class="text-muted mb-0">
+                                                <t t-out="maid.passport_issue_date"/>
+                                            </p>
+                                        </div>
+
+                                        <p class="mb-1"
+                                            style="font-size: .77rem;">Expire Date</p>
+                                        <div class="col-sm-9">
+                                            <p class="text-muted mb-0">
+                                                <t t-out="maid.passport_expire_date"/>
+                                            </p>
+                                        </div>
+
+                                        <p class="mb-1"
+                                            style="font-size: .77rem;">indentation</p>
+                                        <div class="col-sm-9">
+                                            <p class="text-muted mb-0">
+                                                <t t-out="maid.indentation"/>
+                                            </p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="card mb-4 mb-md-0">
+                                    <div class="card-body">
+
+                                        <p class="mb-4">Personal information
+                                        </p>
+
+                                        <p class="mb-1"
+                                            style="font-size: .77rem;">Religion</p>
+                                        <div class="col-sm-9">
+                                            <p class="text-muted mb-0">
+                                                <t t-out="maid.religion"/>
+                                            </p>
+                                        </div>
+
+                                        <p class="mb-1"
+                                            style="font-size: .77rem;">Gender</p>
+                                        <div class="col-sm-9">
+                                            <p class="text-muted mb-0">
+                                                <t t-out="maid.gender"/>
+                                            </p>
+                                        </div>
+
+                                        <p class="mb-1"
+                                            style="font-size: .77rem;">Children No</p>
+                                        <div class="col-sm-9">
+                                            <p class="text-muted mb-0">
+                                                <t t-out="maid.children_no"/>
+                                            </p>
+                                        </div>
+
+                                        <p class="mb-1"
+                                            style="font-size: .77rem;">birthday</p>
+                                        <div class="col-sm-9">
+                                            <p class="text-muted mb-0">
+                                                <t t-out="maid.birthday"/>
+                                            </p>
+                                        </div>
+
+                                        <p class="mb-1"
+                                            style="font-size: .77rem;">Place of Birth</p>
+                                        <div class="col-sm-9">
+                                            <p class="text-muted mb-0">
+                                                <t t-out="maid.place_of_birth"/>
+                                            </p>
+                                        </div>
+
+                                        <p class="mb-1"
+                                            style="font-size: .77rem;">Marital Status</p>
+                                        <div class="col-sm-9">
+                                            <p class="text-muted mb-0">
+                                                <t t-out="maid.marital_status"/>
+                                            </p>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="card mb-4 mb-md-0">
+                                    <div class="card-body">
+
+                                        <p class="mb-4">Personal Attribute
+                                        </p>
+
+                                        <hr/>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Skin Color</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-0">
+                                                    <t t-out="maid.skin_color"/>
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <hr/>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Age</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-0">
+                                                    <t t-out="maid.age"/>
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <hr/>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Hight</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-0">
+                                                    <t t-out="maid.hight"/>
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                        <hr/>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">weight</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-0">
+                                                    <t t-out="maid.weight"/>
+                                                </p>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="card mb-4 mb-md-0">
+                                    <div class="card-body">
+
+                                        <p class="mb-4">Personal Skills
+                                        </p>
+                                        <hr/>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Cleaning</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-0">
+                                                    <t t-out="maid.skills_cleaning"/>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <hr/>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Arabic Cooking</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-0">
+                                                    <t t-out="maid.skills_arabic_cooking"/>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <hr/>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Baby Sitting</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-0">
+                                                    <t t-out="maid.skills_baby_sitting"/>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <hr/>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Washing</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-0">
+                                                    <t t-out="maid.skills_washing"/>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <hr/>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Ironing</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-0">
+                                                    <t t-out="maid.skills_ironing"/>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <hr/>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Google Location</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-0">
+                                                    <t t-out="maid.skills_googlelocation"/>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <hr/>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Driving</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-0">
+                                                    <t t-out="maid.skills_driving"/>
+                                                </p>
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-6">
+                                <div class="card mb-4 mb-md-0">
+                                    <div class="card-body">
+
+                                        <p class="mb-4">Addtional Information
+                                        </p>
+                                        <hr/>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Partner</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-0">
+                                                    <t t-out="maid.partner_id.name"/>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <hr/>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Responsable</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-0">
+                                                    <t t-out="maid.user_id.name"/>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <hr/>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Company</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-0">
+                                                    <t t-out="maid.company_id.name"/>
+                                                </p>
+                                            </div>
+                                        </div>
+                                        <hr/>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Description</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-0">
+                                                    <t t-out="maid.description"/>
+                                                </p>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </div>
+                            </div>
+
+
                         </div>
-                        <div>
-                            <p t-out="maid.arabic_lang"/>
-                            <p t-out="maid.english_lang"/>
-                            <p t-out="maid.education"/>
-                        </div>
-                        <div>
-                            <p t-out="maid.passport_no"/>
-                            <p t-out="maid.passport_place"/>
-                            <p t-out="maid.passport_issue_date"/>
-                            <p t-out="maid.passport_expire_date"/>
-                            <p t-out="maid.indentation"/>
-                        </div>
-                        <div>
-                            <p t-out="maid.religion"/>
-                            <p t-out="maid.gender"/>
-                            <p t-out="maid.children_no"/>
-                            <p t-out="maid.birthday"/>
-                            <p t-out="maid.place_of_birth"/>
-                            <p t-out="maid.marital_status"/>
-                        </div>
-                        <div>
-                            <p t-out="maid.skin_color"/>
-                            <p t-out="maid.age"/>
-                            <p t-out="maid.hight"/>
-                            <p t-out="maid.weight"/>
-                        </div>
-                        <div>
-                            <p t-out="maid.skills_cleaning"/>
-                            <p t-out="maid.skills_arabic_cooking"/>
-                            <p t-out="maid.skills_baby_sitting"/>
-                            <p t-out="maid.skills_washing"/>
-                            <p t-out="maid.skills_ironing"/>
-                            <p t-out="maid.skills_googlelocation"/>
-                            <p t-out="maid.skills_driving"/>
-                        </div>
-                        <div>
-                            <p t-out="maid.country_id.name"/>
-                            <p t-out="maid.partner_id.name"/>
-                            <p t-out="maid.description"/>
-                            <p t-out="maid.user_id.name"/>
-                            <p t-out="maid.company_id.name"/>
-                        </div>
+
                     </div>
                 </section>
+
+
+                <div>
+                    <t t-out="image" />
+                </div>
+
             </t>
         </xpath>
     </template>

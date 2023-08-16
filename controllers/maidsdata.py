@@ -6,7 +6,7 @@
 from odoo import http, _
 from odoo.http import request
 from odoo.exceptions import UserError, ValidationError
-from odoo.addons.portal.controllers.portal import CustomerPortal
+from odoo.addons.portal.controllers.portal import CustomerPortal, pager
 
 
 class maidsportal(CustomerPortal):
@@ -16,12 +16,23 @@ class maidsportal(CustomerPortal):
         rtn['maids_count'] = request.env['housemaid.maids'].search_count([])
         return rtn
 
-    @http.route(['/my/maids'], website=True, auth='user', type="http")
-    def my_maids_list_view(self, **kw):
-        maids = request.env['housemaid.maids'].sudo().search([])
+    @http.route(['/my/maids', '/my/mades/page/<int:page>'], website=True, auth='user', type="http")
+    def my_maids_list_view(self,page=1, **kw):
+
+        
+        total_maids = request.env['housemaid.maids'].sudo().search_count([])
+        page_details = pager(
+            url='/my/maids',
+            total=total_maids,
+            page=page,
+            step=5
+        )
+        maids = request.env['housemaid.maids'].sudo().search(
+            [], limit=5, offset=page_details['offset'])
         vals = {
             'maids': maids,
-            'page_name': 'my_maids_portal_list_view'
+            'page_name': 'my_maids_portal_list_view',
+            'pager': page_details,
         }
         return request.render("ms_housemaid.my_maids_portal_list_view", vals)
 
