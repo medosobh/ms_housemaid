@@ -125,11 +125,11 @@
                 <p t-out="maid.skills_ironing"/>
                 <p t-out="maid.skills_googlelocation"/>
                 <p t-out="maid.skills_driving"/>
-                <p t-out="maid.country_id"/>
+                <p t-out="maid.country_id.name"/>
                 <p t-out="maid.partner_id"/>
                 <p t-out="maid.description"/>
-                <p t-out="maid.user_id"/>
-                <p t-out="maid.company_id"/>
+                <p t-out="maid.user_id.name"/>
+                <p t-out="maid.company_id.name"/>
             </div>
 
         </xpath>

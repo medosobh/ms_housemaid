@@ -19,14 +19,18 @@ class maidsportal(CustomerPortal):
     @http.route(['/my/maids'], website=True, auth='user', type="http")
     def my_maids_list_view(self, **kw):
         maids = request.env['housemaid.maids'].sudo().search([])
-        return request.render("ms_housemaid.my_maids_portal_list_view", {
+        vals = {
             'maids': maids,
             'page_name': 'my_maids_portal_list_view'
-        })
+        }
+        return request.render("ms_housemaid.my_maids_portal_list_view", vals)
 
     @http.route(['/my/maids/<model("housemaid.maids"):maids_id>'], website=True, auth='user', type="http")
     def my_maids_form_view(self, maids_id, **kw):
-        vals = {'maid': maids_id}
+        vals = {
+            'maid': maids_id,
+            'page_name': 'my_maids_portal_form_view'
+        }
         return request.render("ms_housemaid.my_maids_portal_form_view", vals)
 
 
