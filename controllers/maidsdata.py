@@ -26,10 +26,8 @@ class maidsportal(CustomerPortal):
 
     @http.route(['/my/maids/<model("housemaid.maids"):maids_id>'], website=True, auth='user', type="http")
     def my_maids_form_view(self, maids_id, **kw):
-        vals = {'maid':maids_id}
-        return request.render("ms_housemaid.my_maids_portal_form_view",{
-            vals
-        })
+        vals = {'maid': maids_id}
+        return request.render("ms_housemaid.my_maids_portal_form_view", vals)
 
 
 class createmaids(http.Controller):

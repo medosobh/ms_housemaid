@@ -86,6 +86,12 @@
         inherit_id="portal.portal_sidebar">
         <xpath expr="//div[hasclass('o_portal_sidebar')]"
             position="inside">
+
+            <div>
+                <p t-out="image"
+                    widget="image"
+                    class="oe_avatar" />
+            </div>
             <div class="row mt16">
                 <p t-out="maid.offices_id.name"/>
                 <p t-out="maid.code"/>
