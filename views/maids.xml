@@ -10,14 +10,14 @@
                 <header>
                     <field name="state"
                         widget="statusbar"
-                        options="{'clickable': '1'}"
-                        clickable="True"
-                        type="object"/>
-                    <button string="Set to Draft"
+                        clickable="False"
+                        type="object"
+                        statusbar_visible="draft,hiring,garanty,work"/>
+                    <button string="Draft"
                         name="action_draft_maid"
                         type="object"
                         class="oe_highlight"
-                        attrs="{'invisible': [('state', 'in', ('draft'))]}" />
+                        attrs="{'invisible': [('state', 'in', ('draft','open','ready','hiring','garanty','backout','runaway','contract_end'))]}" />
                     <button string="Checking"
                         name="action_check_maid"
                         type="object"
@@ -27,22 +27,22 @@
                         name="action_open_maid"
                         type="object"
                         class="oe_highlight"
-                        attrs="{'invisible': [('state', 'in', ('draft','open','ready','hiring','backout'))]}" />
+                        attrs="{'invisible': [('state', 'in', ('draft','open','ready','transfer','hiring','garanty','runaway','backout','contract_end'))]}" />
                     <button string="Ready to Work"
                         name="action_ready_maid"
                         type="object"
                         class="oe_highlight"
-                        attrs="{'invisible': [('state', 'in', ('draft','ready','open','hiring','backout'))]}" />
+                        attrs="{'invisible': [('state', 'in', ('draft','ready','open','transfer','hiring','garanty','runaway','backout','contract_end'))]}" />
                     <button string="Hiring"
                         name="action_hiring_maid"
                         type="object"
                         class="oe_highlight"
-                        attrs="{'invisible': [('state', 'in', ('draft','check','open','ready', 'hiring','backout'))]}" />
-                    <button string="Set Backout"
+                        attrs="{'invisible': [('state', 'in', ('draft','check','open','ready', 'hiring','backout','runaway','contract_end'))]}" />
+                    <button string="Backout"
                         name="action_backout_maid"
                         type="object"
                         class="oe_highlight"
-                        attrs="{'invisible': [('state', 'in', ('backout'))]}" />
+                        attrs="{'invisible': [('state', 'in', ('trabsfer','backout'))]}" />
                 </header>
                 <sheet>
                     <div>

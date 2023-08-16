@@ -151,10 +151,10 @@ class maids(models.Model):
             ('open', 'Open to Work'),  # 3 > #4 fa-hourglass # show in search page
             # 3 > #4 fa-hourglass # show in search page
             ('ready', 'Ready Inhouse'),  # fa-home
-            ('transfer', 'Sponser Treansfer'),  # fa-retweet #  fa-exchange
+            ('transfer', 'Treansfer'),  # fa-retweet #  fa-exchange
             ('hiring', 'Hiring'),  # 5 fa-link # show in action page
-            ('garanty', '90Days Garanty'),  # fa-warning
-            ('work', 'Work at Sponser'),  # fa-user-plus
+            ('garanty', 'Garanty'),  # fa-warning
+            ('work', 'Working'),  # fa-user-plus
             ('backout', 'Backout'),  # 3  stop here fa-ban # show in Maid Form only
             ('runaway', 'runaway'),
             ('contract_end', 'Contract End'),
