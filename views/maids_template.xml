@@ -1,112 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <template id="maids_page"
-        name="Maids">
-        <t t-call="website.layout">
-            <div class="oe_structure">
-                <div class="container">
-                    <br />
-                    <center>
-                        <h3> hi, external office your maid's cv list is here</h3>
-                    </center>
-                    <br />
-                    <table class="table table-bordered">
-                        <thead style="font-size: 16px;">
-                            <tr>
-                                <td>Code:</td>
-                                <td>Name:</td>
-                                <td>Job:</td>
-                                <td>Salary:</td>
-                                <td>State:</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <t t-foreach="maids"
-                                t-as="maid">
-                                <tr>
-                                    <td>
-                                        <t t-esc="maid.code"/>
-                                    </td>
-                                    <td>
-                                        <t t-esc="maid.name"/>
-                                    </td>
-                                    <td>
-                                        <t t-esc="maid.jobs_id.name"/>
-                                    </td>
-                                    <td>
-                                        <t t-esc="maid.monthly_salary"/>
-                                    </td>
-                                    <td>
-                                        <t t-esc="maid.state"/>
-                                    </td>
-                                </tr>
-                            </t>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-        </t>
-    </template>
 
-    <template id="maid_form"
-        name="Create New Maid">
-        <t t-call="website.layout">
-            <div class="oe_structure">
-                <div class="container">
-                    <form role="form"
-                        action="/create/maid"
-                        method="POST">
-                        <input type="hidden"
-                            name="csrf_token"
-                            t-att-value="request.csrf_token()"/>
-                        <div class="form-group">
-                            <label for="maid_code"
-                                class="control-label">
-                                    Code
-                            </label>
-                            <input type="text"
-                                name="maid_code"
-                                t-att-value="maid_code"
-                                id="maid_code"
-                                class="form-control"
-                                required="required"/>
-                        </div>
-                        <div class="clearfix oe_login_button">
-                            <button type="submit"
-                                name="do"
-                                value="1"
-                                class="btn btn-primary pull-left">Create</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </t>
-    </template>
-
-    <record id="create_success"
-        model="website.page">
-        <field name="name">Thanks</field>
-        <field name="type">qweb</field>
-        <field name="url">/maid-create-successfuly</field>
-        <field name="website_published">True</field>
-        <field name="key">ms_housemaid.create_successfuly</field>
-        <field name="arch"
-            type="xml">
-            <t name="Success"
-                t-name="ms_housemaid.create_successfuly">
-                <t t-call="website.layout">
-                    <div id="wrap">
-                        <h1>Successfuly!</h1>
-                        <div class="alert alert-success"
-                            role="status">
-                            Maid CV saved Successfuly.
-                        </div>
-                    </div>
-                </t>
+    <template id="portal_my_home"
+        inherit_id="housemaid_portal_my_home">
+        <xpath expr="//div[hasclass('o_portal_docs')]"
+            position="inside">
+            <t t-call="portal.portal_docs_entry">
+                <t t-set="url">/my/maids</t>
+                <t t-set="title">Maids</t>
+                <t t-set="placeholder_count"
+                    t-value='maids_count'/>
             </t>
+        </xpath>
+    </template>
 
-        </field>
-    </record>
+
+
+
+
 
 </odoo>

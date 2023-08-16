@@ -13,9 +13,8 @@
         'base_setup',
         'mail',
         'resource',
-        'web',
-        'website',
         'web_kanban_gauge',
+        'portal',
     ],
     'data': [
         'security/security.xml',
