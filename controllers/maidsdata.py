@@ -47,10 +47,10 @@ class maidsportal(CustomerPortal):
         maids_index = maids_ids.index(maids_id.id)
         print('hi---------', maids_index)
         if maids_index != 0 and maids_ids[maids_index - 1]:
-            vals['prev_record'] = '{}', format(
+            vals['prev_record'] = format(
                 maids_ids[maids_index-1])
         if maids_index < len(maids_ids) -1 and maids_ids[maids_index + 1]:
-            vals['next_record'] = '{}', format(
+            vals['next_record'] = format(
                 maids_ids[maids_index+1])
 
         return request.render("ms_housemaid.my_maids_portal_form_view", vals)

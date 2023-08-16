@@ -103,6 +103,7 @@
                                             alt="avatar"
                                             class="rounded-circle img-fluid"
                                             style="width: 150px;"/>
+                                        <t t-out="image" />
                                         <h5 class="my-3">
                                             <t t-out="maid.name"/>
                                         </h5>
@@ -221,31 +222,41 @@
                                         <p class="mb-4">Job Information
                                         </p>
 
-                                        <p class="mb-1"
-                                            style="font-size: .77rem;">Job Title</p>
-                                        <div class="col-sm-9">
-                                            <p class="text-muted mb-0">
-                                                <t t-out="maid.jobs_id.name"/>
-                                            </p>
+                                        <hr/>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Job Title</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-0">
+                                                    <t t-out="maid.jobs_id.name"/>
+                                                </p>
+                                            </div>
                                         </div>
 
-                                        <p class="mb-1"
-                                            style="font-size: .77rem;">Monthly Salary</p>
-                                        <div class="col-sm-9">
-                                            <p class="text-muted mb-0">
-                                                <t t-out="maid.monthly_salary"/>
-                                            </p>
+                                        <hr/>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Monthly Salary</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-0">
+                                                    <t t-out="maid.monthly_salary"/>
+                                                </p>
+                                            </div>
                                         </div>
 
-                                        <p class="mb-1"
-                                            style="font-size: .77rem;">Currency</p>
-                                        <div class="col-sm-9">
-                                            <p class="text-muted mb-0">
-                                                <t t-out="maid.currency_id.name"/>
-                                            </p>
+                                        <hr/>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Currency</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-0">
+                                                    <t t-out="maid.currency_id.name"/>
+                                                </p>
+                                            </div>
                                         </div>
-
-                                        
 
                                         <hr/>
                                         <div class="row">
@@ -262,7 +273,7 @@
                                     </div>
                                 </div>
                             </div>
-
+                       
                             <div class="col-md-6">
                                 <div class="card mb-4 mb-md-0">
                                     <div class="card-body">
@@ -309,7 +320,7 @@
                                     </div>
                                 </div>
                             </div>
-
+                        
                             <div class="col-md-6">
                                 <div class="card mb-4 mb-md-0">
                                     <div class="card-body">
@@ -380,7 +391,8 @@
                                     </div>
                                 </div>
                             </div>
-
+                       </div>
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="card mb-4 mb-md-0">
                                     <div class="card-body">
@@ -463,7 +475,7 @@
                                     </div>
                                 </div>
                             </div>
-
+                        
                             <div class="col-md-6">
                                 <div class="card mb-4 mb-md-0">
                                     <div class="card-body">
@@ -522,7 +534,7 @@
                                     </div>
                                 </div>
                             </div>
-
+                        
                             <div class="col-md-6">
                                 <div class="card mb-4 mb-md-0">
                                     <div class="card-body">
@@ -612,7 +624,8 @@
                                     </div>
                                 </div>
                             </div>
-
+                        </div>
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="card mb-4 mb-md-0">
                                     <div class="card-body">
@@ -668,17 +681,10 @@
                                     </div>
                                 </div>
                             </div>
-
-
                         </div>
 
                     </div>
                 </section>
-
-
-                <div>
-                    <t t-out="image" />
-                </div>
 
             </t>
         </xpath>
