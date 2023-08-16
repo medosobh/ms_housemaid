@@ -17,9 +17,8 @@ class maidsportal(CustomerPortal):
         return rtn
 
     @http.route(['/my/maids', '/my/mades/page/<int:page>'], website=True, auth='user', type="http")
-    def my_maids_list_view(self,page=1, **kw):
+    def my_maids_list_view(self, page=1, **kw):
 
-        
         total_maids = request.env['housemaid.maids'].sudo().search_count([])
         page_details = pager(
             url='/my/maids',
@@ -42,6 +41,18 @@ class maidsportal(CustomerPortal):
             'maid': maids_id,
             'page_name': 'my_maids_portal_form_view'
         }
+        maids_rec = request.env['housemaid.maids'].sudo().search([])
+        maids_ids = maids_rec.ids
+        print('hi.........', maids_ids)
+        maids_index = maids_ids.index(maids_id.id)
+        print('hi---------', maids_index)
+        if maids_index != 0 and maids_ids[maids_index - 1]:
+            vals['prev_record'] = '/my/maids/{}', format(
+                maids_index[maids_index - 1])
+        if maids_index != 0 and maids_index < len(maids_ids) and maids_ids[maids_index + 1]:
+            vals['next_record'] = '/my/maids/{}', format(
+                maids_index[maids_index + 1])
+
         return request.render("ms_housemaid.my_maids_portal_form_view", vals)
 
 

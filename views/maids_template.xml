@@ -264,28 +264,40 @@
                                         <p class="mb-4">Language and Education
                                         </p>
 
-                                        <p class="mb-1"
-                                            style="font-size: .77rem;">Arabic</p>
-                                        <div class="col-sm-9">
-                                            <p class="text-muted mb-0">
-                                                <t t-out="maid.arabic_lang"/>
-                                            </p>
+                                        <hr/>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Arabic</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-0">
+                                                    <t t-att-checked="'checked' if maid.arabic_lang else None" t-out="maid.arabic_lang"/>
+                                                </p>
+                                            </div>
                                         </div>
 
-                                        <p class="mb-1"
-                                            style="font-size: .77rem;">English</p>
-                                        <div class="col-sm-9">
-                                            <p class="text-muted mb-0">
-                                                <t t-out="maid.english_lang"/>
-                                            </p>
+                                        <hr/>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">English</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-0">
+                                                    <t t-out="maid.english_lang"/>
+                                                </p>
+                                            </div>
                                         </div>
 
-                                        <p class="mb-1"
-                                            style="font-size: .77rem;">Education</p>
-                                        <div class="col-sm-9">
-                                            <p class="text-muted mb-0">
-                                                <t t-out="maid.education"/>
-                                            </p>
+                                        <hr/>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Education</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-0">
+                                                    <t t-out="maid.education"/>
+                                                </p>
+                                            </div>
                                         </div>
 
                                     </div>
@@ -299,44 +311,64 @@
                                         <p class="mb-4">Passport
                                         </p>
 
-                                        <p class="mb-1"
-                                            style="font-size: .77rem;">Passport No</p>
-                                        <div class="col-sm-9">
-                                            <p class="text-muted mb-0">
-                                                <t t-out="maid.passport_no"/>
-                                            </p>
+                                        <hr/>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Passport No.</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-0">
+                                                    <t t-out="maid.passport_no"/>
+                                                </p>
+                                            </div>
                                         </div>
 
-                                        <p class="mb-1"
-                                            style="font-size: .77rem;">Issue Place</p>
-                                        <div class="col-sm-9">
-                                            <p class="text-muted mb-0">
-                                                <t t-out="maid.passport_place"/>
-                                            </p>
+                                        <hr/>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Issue Place</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-0">
+                                                    <t t-out="maid.passport_place"/>
+                                                </p>
+                                            </div>
                                         </div>
 
-                                        <p class="mb-1"
-                                            style="font-size: .77rem;">Issue Date</p>
-                                        <div class="col-sm-9">
-                                            <p class="text-muted mb-0">
-                                                <t t-out="maid.passport_issue_date"/>
-                                            </p>
+                                        <hr/>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Issue Date</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-0">
+                                                    <t t-out="maid.passport_issue_date"/>
+                                                </p>
+                                            </div>
                                         </div>
 
-                                        <p class="mb-1"
-                                            style="font-size: .77rem;">Expire Date</p>
-                                        <div class="col-sm-9">
-                                            <p class="text-muted mb-0">
-                                                <t t-out="maid.passport_expire_date"/>
-                                            </p>
+                                        <hr/>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Expire Date</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-0">
+                                                    <t t-out="maid.passport_expire_date"/>
+                                                </p>
+                                            </div>
                                         </div>
 
-                                        <p class="mb-1"
-                                            style="font-size: .77rem;">indentation</p>
-                                        <div class="col-sm-9">
-                                            <p class="text-muted mb-0">
-                                                <t t-out="maid.indentation"/>
-                                            </p>
+                                        <hr/>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Indentation</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-0">
+                                                    <t t-out="maid.indentation"/>
+                                                </p>
+                                            </div>
                                         </div>
 
                                     </div>
@@ -350,52 +382,76 @@
                                         <p class="mb-4">Personal information
                                         </p>
 
-                                        <p class="mb-1"
-                                            style="font-size: .77rem;">Religion</p>
-                                        <div class="col-sm-9">
-                                            <p class="text-muted mb-0">
-                                                <t t-out="maid.religion"/>
-                                            </p>
+                                        <hr/>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Religion</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-0">
+                                                    <t t-out="maid.religion"/>
+                                                </p>
+                                            </div>
                                         </div>
 
-                                        <p class="mb-1"
-                                            style="font-size: .77rem;">Gender</p>
-                                        <div class="col-sm-9">
-                                            <p class="text-muted mb-0">
-                                                <t t-out="maid.gender"/>
-                                            </p>
+                                        <hr/>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Gender</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-0">
+                                                    <t t-out="maid.gender"/>
+                                                </p>
+                                            </div>
                                         </div>
 
-                                        <p class="mb-1"
-                                            style="font-size: .77rem;">Children No</p>
-                                        <div class="col-sm-9">
-                                            <p class="text-muted mb-0">
-                                                <t t-out="maid.children_no"/>
-                                            </p>
+                                        <hr/>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Children No</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-0">
+                                                    <t t-out="maid.children_no"/>
+                                                </p>
+                                            </div>
                                         </div>
 
-                                        <p class="mb-1"
-                                            style="font-size: .77rem;">birthday</p>
-                                        <div class="col-sm-9">
-                                            <p class="text-muted mb-0">
-                                                <t t-out="maid.birthday"/>
-                                            </p>
+                                        <hr/>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Birthday</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-0">
+                                                    <t t-out="maid.birthday"/>
+                                                </p>
+                                            </div>
                                         </div>
 
-                                        <p class="mb-1"
-                                            style="font-size: .77rem;">Place of Birth</p>
-                                        <div class="col-sm-9">
-                                            <p class="text-muted mb-0">
-                                                <t t-out="maid.place_of_birth"/>
-                                            </p>
+                                        <hr/>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Place of Birth</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-0">
+                                                    <t t-out="maid.place_of_birth"/>
+                                                </p>
+                                            </div>
                                         </div>
 
-                                        <p class="mb-1"
-                                            style="font-size: .77rem;">Marital Status</p>
-                                        <div class="col-sm-9">
-                                            <p class="text-muted mb-0">
-                                                <t t-out="maid.marital_status"/>
-                                            </p>
+                                        <hr/>
+                                        <div class="row">
+                                            <div class="col-sm-3">
+                                                <p class="mb-0">Marital Status</p>
+                                            </div>
+                                            <div class="col-sm-9">
+                                                <p class="text-muted mb-0">
+                                                    <t t-out="maid.marital_status"/>
+                                                </p>
+                                            </div>
                                         </div>
 
                                     </div>
