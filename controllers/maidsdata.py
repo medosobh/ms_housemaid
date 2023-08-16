@@ -10,23 +10,25 @@ from odoo.addons.portal.controllers.portal import CustomerPortal
 
 
 class maidsportal(CustomerPortal):
-    
-    def _prepare_portal_layout_values(self, counters):
-        rtn = super(maidsportal,self)._prepare_portal_layout_values(counters)
-        rtn['maids_count'] = request.env['housemaid.maids'].sudo().search_count([])
+
+    def _prepare_home_portal_values(self, counters):
+        rtn = super(maidsportal, self)._prepare_home_portal_values(counters)
+        rtn['maids_count'] = request.env['housemaid.maids'].search_count([])
         return rtn
 
-
-
-class maids(http.Controller):
-
-    @http.route('/mymaids', website=True, auth='user', type="http")
-    def housmaid_maids(self, **kw):
-        # return "hello external office"
-        print("display list")
+    @http.route(['/my/maids'], website=True, auth='user', type="http")
+    def my_maids_list_view(self, **kw):
         maids = request.env['housemaid.maids'].sudo().search([])
-        return request.render("ms_housemaid.maids_page", {
-            'maids': maids
+        return request.render("ms_housemaid.my_maids_portal_list_view", {
+            'maids': maids,
+            'page_name': 'my_maids_portal_list_view'
+        })
+
+    @http.route(['/my/maids/<model("housemaid.maids"):maids_id>'], website=True, auth='user', type="http")
+    def my_maids_form_view(self, maids_id, **kw):
+        vals = {'maid':maids_id}
+        return request.render("ms_housemaid.my_maids_portal_form_view",{
+            vals
         })
 
 
