@@ -132,15 +132,11 @@
                                             <t t-out="maid.country_id.name"/>
                                         </p>
 
-                                        <P>
-                                            <a herf="/my/maids/print/" calss="fa fa-download">Download cv</a>
-                                        </P>
-
                                         <div class="d-flex justify-content-center mb-2">
-                                            <button type="button"
-                                                class="btn btn-primary">Follow</button>
-                                            <button type="button"
-                                                class="btn btn-outline-primary ms-1">Message</button>
+
+                                            <a herf="/my/maids/print/"
+                                                calss="fa fa-download">Download</a>
+
                                         </div>
                                     </div>
                                 </div>
