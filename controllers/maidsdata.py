@@ -66,9 +66,7 @@ class maidsportal(CustomerPortal):
         }
         maids_rec = request.env['housemaid.maids'].sudo().search([])
         maids_ids = maids_rec.ids
-        print('hi.........', maids_ids)
         maids_index = maids_ids.index(maids_id.id)
-        print('hi---------', maids_index)
         if maids_index != 0 and maids_ids[maids_index - 1]:
             vals['prev_record'] = format(
                 maids_ids[maids_index-1])

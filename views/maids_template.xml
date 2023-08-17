@@ -23,7 +23,8 @@
             <li t-if="page_name == 'my_maids_portal_form_view'"
                 class="breadcrumb-item">
                 <a href="/my/maids">
-                    Maids</a>
+                    Maids</a> /                
+                <span t-out="maid.name"/>
             </li>
         </xpath>
     </template>
@@ -105,10 +106,10 @@
                                 <div class="card mb-4 rounded-lg">
                                     <div class="card-body text-center">
                                         <t t-if="maid.image">
-                                            <img t-attf-scr="data:image/png;base64{{maid.image}}"
+                                            <img t-attf-scr="{{maid.image}}"
                                                 alt="avatar"
                                                 class="rounded-circle img-fluid"
-                                                style="width: 150px;"/>
+                                                style="width: 150px;higtht: 150px;"/>
                                         </t>
                                         <t t-else="">
                                             <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
@@ -700,6 +701,13 @@
                             </div>
                         </div>
 
+                    </div>
+                    <div class="container py-5">
+                        <h3>Chat Logs</h3>
+                        <t t-call="portal.message_thread">
+                            <t t-set="object"
+                                t-value="maid"/>
+                        </t>
                     </div>
                 </section>
 

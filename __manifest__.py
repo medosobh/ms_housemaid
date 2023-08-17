@@ -15,6 +15,7 @@
         'resource',
         'web_kanban_gauge',
         'portal',
+        'web',
     ],
     'data': [
         'security/security.xml',
