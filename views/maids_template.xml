@@ -109,7 +109,7 @@
                                             <img t-attf-scr="{{maid.image}}"
                                                 alt="avatar"
                                                 class="rounded-circle img-fluid"
-                                                style="width: 150px;hight: 150px;"/>
+                                                style="width: 150px;height: 150px;"/>
                                         </t>
                                         <t t-else="">
                                             <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
@@ -131,6 +131,10 @@
                                         <p class="text-muted mb-4">
                                             <t t-out="maid.country_id.name"/>
                                         </p>
+
+                                        <P>
+                                            <a herf="/my/maids/print/" calss="fa fa-download">Download cv</a>
+                                        </P>
 
                                         <div class="d-flex justify-content-center mb-2">
                                             <button type="button"
