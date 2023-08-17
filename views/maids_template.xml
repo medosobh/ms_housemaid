@@ -104,8 +104,8 @@
                             <div class="col-lg-4">
                                 <div class="card mb-4 rounded-lg">
                                     <div class="card-body text-center">
-                                        <t t-if="maids.image">
-                                            <img t-attf-scr="data:image/png;base64{{maids.image}}"
+                                        <t t-if="maid.image">
+                                            <img t-attf-scr="data:image/png;base64{{maid.image}}"
                                                 alt="avatar"
                                                 class="rounded-circle img-fluid"
                                                 style="width: 150px;"/>
