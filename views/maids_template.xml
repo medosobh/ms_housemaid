@@ -47,6 +47,7 @@
                                 <td class="test-center">Job:</td>
                                 <td class="test-center">Salary:</td>
                                 <td class="test-center">Currency:</td>
+                                <td class="test-center">Country:</td>
                                 <td class="test-center">State:</td>
                             </tr>
                         </thead>
@@ -71,8 +72,12 @@
                                     <td>
                                         <t t-out="maid.monthly_salary"/>
                                     </td>
+
                                     <td>
                                         <t t-out="maid.currency_id.name"/>
+                                    </td>
+                                    <td>
+                                        <t t-out="maid.country_id.name"/>
                                     </td>
                                     <td>
                                         <t t-out="maid.state"/>
@@ -97,13 +102,20 @@
                         <div class="row">
 
                             <div class="col-lg-4">
-                                <div class="card mb-4">
+                                <div class="card mb-4 rounded-lg">
                                     <div class="card-body text-center">
-                                        <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
-                                            alt="avatar"
-                                            class="rounded-circle img-fluid"
-                                            style="width: 150px;"/>
-                                        <t t-out="image" />
+                                        <t t-if="maids.image">
+                                            <img t-attf-scr="data:image/png;base64{{maids.image}}"
+                                                alt="avatar"
+                                                class="rounded-circle img-fluid"
+                                                style="width: 150px;"/>
+                                        </t>
+                                        <t-else="">
+                                            <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"
+                                                alt="avatar"
+                                                class="rounded-circle img-fluid"
+                                                style="width: 150px;"/>
+                                        </t>
                                         <h5 class="my-3">
                                             <t t-out="maid.name"/>
                                         </h5>
@@ -146,7 +158,7 @@
                                             </div>
                                         </div>
 
-
+                                        <hr/>
                                         <div class="row">
                                             <div class="col-sm-3">
                                                 <p class="mb-0">Code</p>
@@ -171,7 +183,7 @@
                                             </div>
                                         </div>
 
-
+                                        <hr/>
                                         <div class="row">
                                             <div class="col-sm-3">
                                                 <p class="mb-0">Phone</p>
@@ -182,7 +194,7 @@
                                                 </p>
                                             </div>
                                         </div>
-
+                                        <hr/>
                                         <div class="row">
                                             <div class="col-sm-3">
                                                 <p class="mb-0">Email</p>
@@ -215,7 +227,8 @@
 
 
                         <div class="row">
-                            <div class="col-md-6">
+
+                            <div class="col-md-4">
                                 <div class="card mb-4 mb-md-0">
                                     <div class="card-body">
 
@@ -224,10 +237,10 @@
 
                                         <hr/>
                                         <div class="row">
-                                            <div class="col-sm-3">
+                                            <div class="col-sm-5">
                                                 <p class="mb-0">Job Title</p>
                                             </div>
-                                            <div class="col-sm-9">
+                                            <div class="col-sm-7">
                                                 <p class="text-muted mb-0">
                                                     <t t-out="maid.jobs_id.name"/>
                                                 </p>
@@ -236,10 +249,10 @@
 
                                         <hr/>
                                         <div class="row">
-                                            <div class="col-sm-3">
+                                            <div class="col-sm-5">
                                                 <p class="mb-0">Monthly Salary</p>
                                             </div>
-                                            <div class="col-sm-9">
+                                            <div class="col-sm-7">
                                                 <p class="text-muted mb-0">
                                                     <t t-out="maid.monthly_salary"/>
                                                 </p>
@@ -248,10 +261,10 @@
 
                                         <hr/>
                                         <div class="row">
-                                            <div class="col-sm-3">
+                                            <div class="col-sm-5">
                                                 <p class="mb-0">Currency</p>
                                             </div>
-                                            <div class="col-sm-9">
+                                            <div class="col-sm-7">
                                                 <p class="text-muted mb-0">
                                                     <t t-out="maid.currency_id.name"/>
                                                 </p>
@@ -260,10 +273,10 @@
 
                                         <hr/>
                                         <div class="row">
-                                            <div class="col-sm-3">
+                                            <div class="col-sm-5">
                                                 <p class="mb-0">Contract Period</p>
                                             </div>
-                                            <div class="col-sm-9">
+                                            <div class="col-sm-7">
                                                 <p class="text-muted mb-0">
                                                     <t t-out="maid.contract_period"/>
                                                 </p>
@@ -273,8 +286,9 @@
                                     </div>
                                 </div>
                             </div>
-                       
-                            <div class="col-md-6">
+
+
+                            <div class="col-md-4">
                                 <div class="card mb-4 mb-md-0">
                                     <div class="card-body">
 
@@ -283,10 +297,10 @@
 
                                         <hr/>
                                         <div class="row">
-                                            <div class="col-sm-3">
+                                            <div class="col-sm-5">
                                                 <p class="mb-0">Arabic</p>
                                             </div>
-                                            <div class="col-sm-9">
+                                            <div class="col-sm-7">
                                                 <p class="form-check form-switch mb-0">
                                                     <t t-out="maid.arabic_lang"/>
                                                 </p>
@@ -295,10 +309,10 @@
 
                                         <hr/>
                                         <div class="row">
-                                            <div class="col-sm-3">
+                                            <div class="col-sm-5">
                                                 <p class="mb-0">English</p>
                                             </div>
-                                            <div class="col-sm-9">
+                                            <div class="col-sm-7">
                                                 <p class="text-muted mb-0">
                                                     <t t-out="maid.english_lang"/>
                                                 </p>
@@ -307,10 +321,10 @@
 
                                         <hr/>
                                         <div class="row">
-                                            <div class="col-sm-3">
+                                            <div class="col-sm-5">
                                                 <p class="mb-0">Education</p>
                                             </div>
-                                            <div class="col-sm-9">
+                                            <div class="col-sm-7">
                                                 <p class="text-muted mb-0">
                                                     <t t-out="maid.education"/>
                                                 </p>
@@ -320,8 +334,8 @@
                                     </div>
                                 </div>
                             </div>
-                        
-                            <div class="col-md-6">
+
+                            <div class="col-md-4">
                                 <div class="card mb-4 mb-md-0">
                                     <div class="card-body">
 
@@ -330,10 +344,10 @@
 
                                         <hr/>
                                         <div class="row">
-                                            <div class="col-sm-3">
+                                            <div class="col-sm-5">
                                                 <p class="mb-0">Passport No.</p>
                                             </div>
-                                            <div class="col-sm-9">
+                                            <div class="col-sm-7">
                                                 <p class="text-muted mb-0">
                                                     <t t-out="maid.passport_no"/>
                                                 </p>
@@ -342,10 +356,10 @@
 
                                         <hr/>
                                         <div class="row">
-                                            <div class="col-sm-3">
+                                            <div class="col-sm-5">
                                                 <p class="mb-0">Issue Place</p>
                                             </div>
-                                            <div class="col-sm-9">
+                                            <div class="col-sm-7">
                                                 <p class="text-muted mb-0">
                                                     <t t-out="maid.passport_place"/>
                                                 </p>
@@ -354,10 +368,10 @@
 
                                         <hr/>
                                         <div class="row">
-                                            <div class="col-sm-3">
+                                            <div class="col-sm-5">
                                                 <p class="mb-0">Issue Date</p>
                                             </div>
-                                            <div class="col-sm-9">
+                                            <div class="col-sm-7">
                                                 <p class="text-muted mb-0">
                                                     <t t-out="maid.passport_issue_date"/>
                                                 </p>
@@ -366,10 +380,10 @@
 
                                         <hr/>
                                         <div class="row">
-                                            <div class="col-sm-3">
+                                            <div class="col-sm-5">
                                                 <p class="mb-0">Expire Date</p>
                                             </div>
-                                            <div class="col-sm-9">
+                                            <div class="col-sm-7">
                                                 <p class="text-muted mb-0">
                                                     <t t-out="maid.passport_expire_date"/>
                                                 </p>
@@ -378,10 +392,10 @@
 
                                         <hr/>
                                         <div class="row">
-                                            <div class="col-sm-3">
+                                            <div class="col-sm-5">
                                                 <p class="mb-0">Indentation</p>
                                             </div>
-                                            <div class="col-sm-9">
+                                            <div class="col-sm-7">
                                                 <p class="text-muted mb-0">
                                                     <t t-out="maid.indentation"/>
                                                 </p>
@@ -391,9 +405,11 @@
                                     </div>
                                 </div>
                             </div>
-                       </div>
+
+                        </div>
                         <div class="row">
-                            <div class="col-md-6">
+
+                            <div class="col-md-4">
                                 <div class="card mb-4 mb-md-0">
                                     <div class="card-body">
 
@@ -402,10 +418,10 @@
 
                                         <hr/>
                                         <div class="row">
-                                            <div class="col-sm-3">
+                                            <div class="col-sm-5">
                                                 <p class="mb-0">Religion</p>
                                             </div>
-                                            <div class="col-sm-9">
+                                            <div class="col-sm-7">
                                                 <p class="text-muted mb-0">
                                                     <t t-out="maid.religion"/>
                                                 </p>
@@ -414,10 +430,10 @@
 
                                         <hr/>
                                         <div class="row">
-                                            <div class="col-sm-3">
+                                            <div class="col-sm-5">
                                                 <p class="mb-0">Gender</p>
                                             </div>
-                                            <div class="col-sm-9">
+                                            <div class="col-sm-7">
                                                 <p class="text-muted mb-0">
                                                     <t t-out="maid.gender"/>
                                                 </p>
@@ -426,10 +442,10 @@
 
                                         <hr/>
                                         <div class="row">
-                                            <div class="col-sm-3">
+                                            <div class="col-sm-5">
                                                 <p class="mb-0">Children No</p>
                                             </div>
-                                            <div class="col-sm-9">
+                                            <div class="col-sm-7">
                                                 <p class="text-muted mb-0">
                                                     <t t-out="maid.children_no"/>
                                                 </p>
@@ -438,10 +454,10 @@
 
                                         <hr/>
                                         <div class="row">
-                                            <div class="col-sm-3">
+                                            <div class="col-sm-5">
                                                 <p class="mb-0">Birthday</p>
                                             </div>
-                                            <div class="col-sm-9">
+                                            <div class="col-sm-7">
                                                 <p class="text-muted mb-0">
                                                     <t t-out="maid.birthday"/>
                                                 </p>
@@ -450,10 +466,10 @@
 
                                         <hr/>
                                         <div class="row">
-                                            <div class="col-sm-3">
+                                            <div class="col-sm-5">
                                                 <p class="mb-0">Place of Birth</p>
                                             </div>
-                                            <div class="col-sm-9">
+                                            <div class="col-sm-7">
                                                 <p class="text-muted mb-0">
                                                     <t t-out="maid.place_of_birth"/>
                                                 </p>
@@ -462,10 +478,10 @@
 
                                         <hr/>
                                         <div class="row">
-                                            <div class="col-sm-3">
+                                            <div class="col-sm-5">
                                                 <p class="mb-0">Marital Status</p>
                                             </div>
-                                            <div class="col-sm-9">
+                                            <div class="col-sm-7">
                                                 <p class="text-muted mb-0">
                                                     <t t-out="maid.marital_status"/>
                                                 </p>
@@ -475,8 +491,8 @@
                                     </div>
                                 </div>
                             </div>
-                        
-                            <div class="col-md-6">
+
+                            <div class="col-md-4">
                                 <div class="card mb-4 mb-md-0">
                                     <div class="card-body">
 
@@ -485,10 +501,10 @@
 
                                         <hr/>
                                         <div class="row">
-                                            <div class="col-sm-3">
+                                            <div class="col-sm-5">
                                                 <p class="mb-0">Skin Color</p>
                                             </div>
-                                            <div class="col-sm-9">
+                                            <div class="col-sm-7">
                                                 <p class="text-muted mb-0">
                                                     <t t-out="maid.skin_color"/>
                                                 </p>
@@ -497,10 +513,10 @@
 
                                         <hr/>
                                         <div class="row">
-                                            <div class="col-sm-3">
+                                            <div class="col-sm-5">
                                                 <p class="mb-0">Age</p>
                                             </div>
-                                            <div class="col-sm-9">
+                                            <div class="col-sm-7">
                                                 <p class="text-muted mb-0">
                                                     <t t-out="maid.age"/>
                                                 </p>
@@ -509,10 +525,10 @@
 
                                         <hr/>
                                         <div class="row">
-                                            <div class="col-sm-3">
+                                            <div class="col-sm-5">
                                                 <p class="mb-0">Hight</p>
                                             </div>
-                                            <div class="col-sm-9">
+                                            <div class="col-sm-7">
                                                 <p class="text-muted mb-0">
                                                     <t t-out="maid.hight"/>
                                                 </p>
@@ -521,10 +537,10 @@
 
                                         <hr/>
                                         <div class="row">
-                                            <div class="col-sm-3">
+                                            <div class="col-sm-5">
                                                 <p class="mb-0">weight</p>
                                             </div>
-                                            <div class="col-sm-9">
+                                            <div class="col-sm-7">
                                                 <p class="text-muted mb-0">
                                                     <t t-out="maid.weight"/>
                                                 </p>
@@ -534,8 +550,8 @@
                                     </div>
                                 </div>
                             </div>
-                        
-                            <div class="col-md-6">
+
+                            <div class="col-md-4">
                                 <div class="card mb-4 mb-md-0">
                                     <div class="card-body">
 
@@ -543,10 +559,10 @@
                                         </p>
                                         <hr/>
                                         <div class="row">
-                                            <div class="col-sm-3">
+                                            <div class="col-sm-5">
                                                 <p class="mb-0">Cleaning</p>
                                             </div>
-                                            <div class="col-sm-9">
+                                            <div class="col-sm-7">
                                                 <p class="text-muted mb-0">
                                                     <t t-out="maid.skills_cleaning"/>
                                                 </p>
@@ -554,10 +570,10 @@
                                         </div>
                                         <hr/>
                                         <div class="row">
-                                            <div class="col-sm-3">
+                                            <div class="col-sm-5">
                                                 <p class="mb-0">Arabic Cooking</p>
                                             </div>
-                                            <div class="col-sm-9">
+                                            <div class="col-sm-7">
                                                 <p class="text-muted mb-0">
                                                     <t t-out="maid.skills_arabic_cooking"/>
                                                 </p>
@@ -565,10 +581,10 @@
                                         </div>
                                         <hr/>
                                         <div class="row">
-                                            <div class="col-sm-3">
+                                            <div class="col-sm-5">
                                                 <p class="mb-0">Baby Sitting</p>
                                             </div>
-                                            <div class="col-sm-9">
+                                            <div class="col-sm-7">
                                                 <p class="text-muted mb-0">
                                                     <t t-out="maid.skills_baby_sitting"/>
                                                 </p>
@@ -576,10 +592,10 @@
                                         </div>
                                         <hr/>
                                         <div class="row">
-                                            <div class="col-sm-3">
+                                            <div class="col-sm-5">
                                                 <p class="mb-0">Washing</p>
                                             </div>
-                                            <div class="col-sm-9">
+                                            <div class="col-sm-7">
                                                 <p class="text-muted mb-0">
                                                     <t t-out="maid.skills_washing"/>
                                                 </p>
@@ -587,10 +603,10 @@
                                         </div>
                                         <hr/>
                                         <div class="row">
-                                            <div class="col-sm-3">
+                                            <div class="col-sm-5">
                                                 <p class="mb-0">Ironing</p>
                                             </div>
-                                            <div class="col-sm-9">
+                                            <div class="col-sm-7">
                                                 <p class="text-muted mb-0">
                                                     <t t-out="maid.skills_ironing"/>
                                                 </p>
@@ -598,10 +614,10 @@
                                         </div>
                                         <hr/>
                                         <div class="row">
-                                            <div class="col-sm-3">
+                                            <div class="col-sm-5">
                                                 <p class="mb-0">Google Location</p>
                                             </div>
-                                            <div class="col-sm-9">
+                                            <div class="col-sm-7">
                                                 <p class="text-muted mb-0">
                                                     <t t-out="maid.skills_googlelocation"/>
                                                 </p>
@@ -609,10 +625,10 @@
                                         </div>
                                         <hr/>
                                         <div class="row">
-                                            <div class="col-sm-3">
+                                            <div class="col-sm-5">
                                                 <p class="mb-0">Driving</p>
                                             </div>
-                                            <div class="col-sm-9">
+                                            <div class="col-sm-7">
                                                 <p class="text-muted mb-0">
                                                     <t t-out="maid.skills_driving"/>
                                                 </p>
@@ -626,7 +642,8 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-md-6">
+
+                            <div class="col-md-4">
                                 <div class="card mb-4 mb-md-0">
                                     <div class="card-body">
 
@@ -634,10 +651,10 @@
                                         </p>
                                         <hr/>
                                         <div class="row">
-                                            <div class="col-sm-3">
+                                            <div class="col-sm-5">
                                                 <p class="mb-0">Partner</p>
                                             </div>
-                                            <div class="col-sm-9">
+                                            <div class="col-sm-7">
                                                 <p class="text-muted mb-0">
                                                     <t t-out="maid.partner_id.name"/>
                                                 </p>
@@ -645,10 +662,10 @@
                                         </div>
                                         <hr/>
                                         <div class="row">
-                                            <div class="col-sm-3">
+                                            <div class="col-sm-5">
                                                 <p class="mb-0">Responsable</p>
                                             </div>
-                                            <div class="col-sm-9">
+                                            <div class="col-sm-7">
                                                 <p class="text-muted mb-0">
                                                     <t t-out="maid.user_id.name"/>
                                                 </p>
@@ -656,10 +673,10 @@
                                         </div>
                                         <hr/>
                                         <div class="row">
-                                            <div class="col-sm-3">
+                                            <div class="col-sm-5">
                                                 <p class="mb-0">Company</p>
                                             </div>
-                                            <div class="col-sm-9">
+                                            <div class="col-sm-7">
                                                 <p class="text-muted mb-0">
                                                     <t t-out="maid.company_id.name"/>
                                                 </p>
@@ -667,10 +684,10 @@
                                         </div>
                                         <hr/>
                                         <div class="row">
-                                            <div class="col-sm-3">
+                                            <div class="col-sm-5">
                                                 <p class="mb-0">Description</p>
                                             </div>
-                                            <div class="col-sm-9">
+                                            <div class="col-sm-7">
                                                 <p class="text-muted mb-0">
                                                     <t t-out="maid.description"/>
                                                 </p>
