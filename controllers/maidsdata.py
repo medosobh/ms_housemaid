@@ -11,6 +11,16 @@ from odoo.addons.portal.controllers.portal import CustomerPortal, pager as porta
 
 class maidsportal(CustomerPortal):
 
+    @http.route('/my/maid/new', website=True, auth='user', type="http")
+    def maid_create_form(self, **kw):
+        offices = request.env['housemaid.offices'].sudo().search([])
+        
+        
+        return request.render('ms_housemaid.my_maids_portal_new_form_view', {
+            'offices': offices
+        })
+        
+
     def _prepare_home_portal_values(self, counters):
         rtn = super(maidsportal, self)._prepare_home_portal_values(counters)
         rtn['maids_count'] = request.env['housemaid.maids'].search_count([])
@@ -90,17 +100,5 @@ class maidsportal(CustomerPortal):
         return self._show_report(self, model=maids_id, report_type='pdf', report_ref='', download=True)
 
 
-class createmaids(http.Controller):
-    @http.route('/maidform', website=True, auth='user', type="http")
-    def maid_form(self, **kw):
-        offices = request.env['housemaid.offices'].sudo().search([])
-        print("open form")
-        return request.render('ms_housemaid.maid_form', {
-            'offices': offices
-        })
 
-    @http.route('/create/maid', website=True, auth='user', type="http")
-    def create_maid(self, **kw):
-        print("save form")
-        request.env['housemaid.maids'].sudo().create(kw)
-        return request.render('ms_housemaid.create_success', {})
+    
