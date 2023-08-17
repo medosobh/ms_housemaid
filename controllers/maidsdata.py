@@ -14,12 +14,20 @@ class maidsportal(CustomerPortal):
     @http.route('/my/maid/new', website=True, auth='user', type="http")
     def maid_create_form(self, **kw):
         offices = request.env['housemaid.offices'].sudo().search([])
-        
-        
-        return request.render('ms_housemaid.my_maids_portal_new_form_view', {
-            'offices': offices
-        })
-        
+        country = request.env['res.country'].sudo().search([])
+        new_maid_url = '/my/maid/new'
+
+        vals = {
+            'default_url': new_maid_url,
+            'offices': offices,
+            'country': country,
+            'page_name': 'my_maids_portal_new_form_view',
+        }
+
+        return request.render(
+            'ms_housemaid.my_maids_portal_new_form_view',
+            vals
+        )
 
     def _prepare_home_portal_values(self, counters):
         rtn = super(maidsportal, self)._prepare_home_portal_values(counters)
@@ -98,7 +106,3 @@ class maidsportal(CustomerPortal):
     def my_maids_report_print(self, maids_id, **kw):
 
         return self._show_report(self, model=maids_id, report_type='pdf', report_ref='', download=True)
-
-
-
-    
