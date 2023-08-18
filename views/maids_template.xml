@@ -41,6 +41,7 @@
 	</template>
 	<template id="my_maids_portal_list_view" name="Maids">
 		<t t-call="portal.portal_layout">
+			<t t-set="breadcrumbs_searchbar" t-value="True"/>
 			<div class="oe_structure">
 				<div class="container">
 					<br />
@@ -407,12 +408,12 @@
 										<div class="row">
 											<div class="col-sm-5">
 												<p class="mb-0">
-													Indentation
+													Identation
 												</p>
 											</div>
 											<div class="col-sm-7">
 												<p class="text-muted mb-0">
-													<t t-out="maid.indentation" />
+													<t t-out="maid.Identation" />
 												</p>
 											</div>
 										</div>
@@ -758,8 +759,15 @@
 					</div>
 				</t>
 				<form>
-					<div class="container">
-						<div calss="form-group row">
+					<div class="container py-5">
+						<div calss="row">
+							<div calss="form-group col-lg-4">
+								<div class="card mb-4">
+									<label for="image">upload image</label>
+									<input type="file" id="image" name="image" accept="image/*" class="form_control"/>
+									<input type="submit"/>
+								</div>
+							</div>
 							<div calss="form-group col-lg-8">
 								<div class="card mb-8">
 									<div calss="form-group row">
@@ -801,13 +809,6 @@
 											</t>
 										</select>
 									</div>
-								</div>
-							</div>
-							<div calss="form-group col-lg-4">
-								<div class="card mb-4">
-									<label for="image">upload image</label>
-									<input type="file" id="image" name="image" accept="image/*" class="form_control"/>
-									<input type="submit"/>
 								</div>
 							</div>
 						</div>

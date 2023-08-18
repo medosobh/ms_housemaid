@@ -270,9 +270,9 @@ class maids(models.Model):
         required=False,
         tracking=True,
     )
-    indentation = fields.Char(
-        string='Indentation No.',
-        required=True,
+    Identation = fields.Char(
+        string='Identation No.',
+        required=False,
         tracking=True,
     )
     # ----------------------------------------------
@@ -317,7 +317,7 @@ class maids(models.Model):
     )
     place_of_birth = fields.Char(
         string='Place of Birth',
-        required=True,
+        required=False,
         tracking=True,
     )
     marital_status = fields.Selection(

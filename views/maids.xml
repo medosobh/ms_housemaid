@@ -95,7 +95,7 @@
                                 <field name="passport_place"/>
                                 <field name="passport_issue_date"/>
                                 <field name="passport_expire_date"/>
-                                <field name="indentation"/>
+                                <field name="Identation"/>
                             </group>
                             <group name="personal"
                                 string="Personal information">
@@ -183,7 +183,7 @@
                 <field name="state"/>
                 <field name="visa_no"/>
                 <field name="passport_no"/>
-                <field name="indentation"/>
+                <field name="Identation"/>
                 <field name="company_id"
                     groups="base.group_multi_company"/>
                 <field name="country_id"/>
@@ -247,7 +247,7 @@
                 <field name="currency_id"/>
                 <field name="passport_no"/>
                 <field name="passport_expire_date"/>
-                <field name="indentation"/>
+                <field name="Identation"/>
                 <field name="country_id"/>
                 <field name="religion"/>
                 <field name="gender"/>

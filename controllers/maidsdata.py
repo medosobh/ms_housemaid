@@ -107,8 +107,8 @@ class maidsportal(CustomerPortal):
             'page_name': 'my_maids_portal_list_view',
             'pager': pager,
             'searchbar_sortings': searchbar_sortings,
-            'searchbar_groupby': searchbar_groupby,
             'sortby': sortby,
+            'searchbar_groupby': searchbar_groupby,
             'groupby': groupby,
         }
 
