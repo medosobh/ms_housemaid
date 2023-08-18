@@ -183,6 +183,7 @@ class maids(models.Model):
     name = fields.Char(
         string='Name',
         default=lambda self: _('New'),
+        index=True,
         required=True,
         tracking=True,
     )
@@ -215,6 +216,7 @@ class maids(models.Model):
         comodel_name='res.currency',
         ondelete='set null',
         help="Used to display the currency when tracking monetary values",
+        required=False,
         tracking=True,
     )
     contract_period = fields.Integer(

@@ -11,8 +11,14 @@ from odoo.addons.portal.controllers.portal import CustomerPortal, pager as porta
 
 class maidsportal(CustomerPortal):
 
+    def _prepare_home_portal_values(self, counters):
+        values = super(maidsportal, self)._prepare_home_portal_values(counters)
+        values['maids_count'] = request.env['housemaid.maids'].search_count([])
+        return values
+    
     @http.route('/my/maid/new', website=True, auth='user', type="http", method=["POST","GET"])
     def maid_create_form(self, **kw):
+        vals = super()._prepare_portal_layout_values()
         offices = request.env['housemaid.offices'].sudo().search([])
         country = request.env['res.country'].sudo().search([])
         new_maid_url = '/my/maid/new'
@@ -58,13 +64,11 @@ class maidsportal(CustomerPortal):
         
         )
 
-    def _prepare_home_portal_values(self, counters):
-        rtn = super(maidsportal, self)._prepare_home_portal_values(counters)
-        rtn['maids_count'] = request.env['housemaid.maids'].search_count([])
-        return rtn
+    
 
     @http.route(['/my/maids', '/my/maids/page/<int:page>'], type="http", website=True, auth='user')
     def my_maids_list_view(self, page=1, sortby=None, groupby=None, **kw):
+        vals = super()._prepare_portal_layout_values()
         searchbar_sortings = {
             'id': {'label': 'ID Desc', 'order': 'id desc'},
             'name': {'label': 'Name', 'order': 'name'},
@@ -115,10 +119,8 @@ class maidsportal(CustomerPortal):
 
     @http.route(['/my/maids/<model("housemaid.maids"):maids_id>'], website=True, auth='user', type="http")
     def my_maids_form_view(self, maids_id, **kw):
-        vals = {
-            'maid': maids_id,
-            'page_name': 'my_maids_portal_form_view'
-        }
+        vals = super()._prepare_portal_layout_values()
+        
         maids_rec = request.env['housemaid.maids'].sudo().search([])
         maids_ids = maids_rec.ids
         maids_index = maids_ids.index(maids_id.id)
@@ -128,10 +130,14 @@ class maidsportal(CustomerPortal):
         if maids_index < len(maids_ids) - 1 and maids_ids[maids_index + 1]:
             vals['next_record'] = format(
                 maids_ids[maids_index+1])
-
+            
+        vals = {
+            'maid': maids_id,
+            'page_name': 'my_maids_portal_form_view'
+        }    
         return request.render("ms_housemaid.my_maids_portal_form_view", vals)
 
     @http.route(['/my/maids/print/<model("housemaid.maids"):maids_id>'], website=True, auth='user', type="http")
     def my_maids_report_print(self, maids_id, **kw):
-
+        vals = super()._prepare_portal_layout_values()
         return self._show_report(self, model=maids_id, report_type='pdf', report_ref='', download=True)
