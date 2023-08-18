@@ -41,78 +41,77 @@
 	</template>
 	<template id="my_maids_portal_list_view" name="Maids">
 		<t t-call="portal.portal_layout">
-			<div class="oe_structure">
-				<div class="container">
-					<br />
-					<center>
-						<h3>
+			<t t-set="breadcrumbs_searchbar" t-value="True"/>
+			<div class="container">
+				<br />
+				<center>
+					<h3>
 							hi, your maid's cv list is here
 						</h3>
-					</center>
-					<br />
-					<table class="table table-bordered">
-						<thead style="font-size: 16px;">
-							<tr>
-								<td class="test-center">
+				</center>
+				<br />
+				<t t-if="my_maids_portal_list_view" t-call="portal.portal_table">
+					<thead style="font-size: 16px;">
+						<tr class="active">
+							<td class="test-center">
 									Office:
 								</td>
-								<td class="test-center">
+							<td class="test-center">
 									Code:
 								</td>
-								<td class="test-center">
+							<td class="test-center">
 									Name:
 								</td>
-								<td class="test-center">
+							<td class="test-center">
 									Job:
 								</td>
-								<td class="test-center">
+							<td class="test-center">
 									Salary:
 								</td>
-								<td class="test-center">
+							<td class="test-center">
 									Currency:
 								</td>
-								<td class="test-center">
+							<td class="test-center">
 									Country:
 								</td>
-								<td class="test-center">
+							<td class="test-center">
 									State:
 								</td>
+						</tr>
+					</thead>
+					<tbody>
+						<t t-foreach="maids" t-as="maid">
+							<tr>
+								<td>
+									<t t-out="maid.offices_id.name" />
+								</td>
+								<td>
+									<t t-out="maid.code" />
+								</td>
+								<td>
+									<a t-attf-href="/my/maids/#{maid.id}">
+										<t t-out="maid.name" />
+									</a>
+								</td>
+								<td>
+									<t t-out="maid.jobs_id.name" />
+								</td>
+								<td>
+									<t t-out="maid.monthly_salary" />
+								</td>
+								<td>
+									<t t-out="maid.currency_id.name" />
+								</td>
+								<td>
+									<t t-out="maid.country_id.name" />
+								</td>
+								<td>
+									<t t-out="maid.state" />
+								</td>
 							</tr>
-						</thead>
-						<tbody>
-							<t t-foreach="maids" t-as="maid">
-								<tr>
-									<td>
-										<t t-out="maid.offices_id.name" />
-									</td>
-									<td>
-										<t t-out="maid.code" />
-									</td>
-									<td>
-										<a t-attf-href="/my/maids/#{maid.id}">
-											<t t-out="maid.name" />
-										</a>
-									</td>
-									<td>
-										<t t-out="maid.jobs_id.name" />
-									</td>
-									<td>
-										<t t-out="maid.monthly_salary" />
-									</td>
-									<td>
-										<t t-out="maid.currency_id.name" />
-									</td>
-									<td>
-										<t t-out="maid.country_id.name" />
-									</td>
-									<td>
-										<t t-out="maid.state" />
-									</td>
-								</tr>
-							</t>
-						</tbody>
-					</table>
-				</div>
+						</t>
+					</tbody>
+				</t>
 			</div>
 		</t>
 	</template>
