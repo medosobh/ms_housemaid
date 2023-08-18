@@ -11,11 +11,39 @@ from odoo.addons.portal.controllers.portal import CustomerPortal, pager as porta
 
 class maidsportal(CustomerPortal):
 
-    @http.route('/my/maid/new', website=True, auth='user', type="http")
+    @http.route('/my/maid/new', website=True, auth='user', type="http", method=["POST","GET"])
     def maid_create_form(self, **kw):
         offices = request.env['housemaid.offices'].sudo().search([])
         country = request.env['res.country'].sudo().search([])
         new_maid_url = '/my/maid/new'
+        
+        error_list = []
+        maid_vals = {}
+        if kw.get('office'):
+            error_list.append('Name is mandatory.')
+        else:
+            maid_vals
+
+        if request.httprequest.method == "POST":
+            print("post....")
+            maid_vals = {
+                'offices_id': kw.get('offices'),
+                'code': kw.get('code'),
+                'name': kw.get('name'),
+                'phone': kw.get('phone'),
+                'email': kw.get('email'),
+                'country_id': kw.get('country'),
+                
+            }
+            if not error_list:
+                request.env['housemaid.maids'].sudo().create(maid_vals)
+                success_msg = 'Successfuly, New Maid Created'
+                vals['success_msg'] = success_msg
+            else:
+                vals['error_list'] = error_list
+        else:
+            print("get....")
+
 
         vals = {
             'default_url': new_maid_url,
@@ -26,7 +54,8 @@ class maidsportal(CustomerPortal):
 
         return request.render(
             'ms_housemaid.my_maids_portal_new_form_view',
-            vals
+            vals,
+        
         )
 
     def _prepare_home_portal_values(self, counters):
