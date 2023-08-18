@@ -34,11 +34,27 @@ class maidsportal(CustomerPortal):
     @http.route('/my/maid/new', website=True, auth='user', type="http", method=["POST", "GET"])
     def maid_create_form(self, **kw):
         vals = super()._prepare_portal_layout_values()
-        offices = request.env['housemaid.offices'].sudo().search([])
+        user_id = request.env.uid
+        curr_user = request.env['res.users'].search([
+            ('id', '=', user_id),
+        ],
+            limit=1
+        )
+        user_office = curr_user.offices_id.id
+        domain = [
+            ('id', '=', user_office),
+        ]
+        
+        offices = request.env['housemaid.offices'].sudo().search(domain)
         jobs = request.env['housemaid.jobs'].sudo().search([])
         country = request.env['res.country'].sudo().search([])
         currency = request.env['res.currency'].sudo().search([])
         education = request.env['housemaid.educations'].sudo().search([])
+        religion = dict(
+            request.env['housemaid.maids'].fields_get(allfields=['religion'])
+                        )
+        print(religion)
+        
         new_maid_url = '/my/maid/new'
 
         error_list = []
@@ -72,6 +88,12 @@ class maidsportal(CustomerPortal):
                 'arabic_lang': kw.get('arabic'),
                 'english_lang': kw.get('english'),
                 'educations_id': kw.get('education'),
+                'passport_no': kw.get('passport_no'),
+                'passport_place': kw.get('passport_place'),
+                'passport_issue_date': kw.get('passport_issue_date'),
+                'passport_expire_date': kw.get('passport_expire_date'),
+                'identation': kw.get('identation'),
+                'religion': kw.get('religion'),
 
             }
             if not error_list:

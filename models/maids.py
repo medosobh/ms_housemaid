@@ -194,7 +194,7 @@ class maids(models.Model):
         tracking=True,
     )
     email = fields.Char(
-        string='email',
+        string='Email',
         required=False,
         default=lambda self: _('name@mail.com'),
         tracking=True,
@@ -263,7 +263,7 @@ class maids(models.Model):
         required=False,
         tracking=True,
     )
-    Identation = fields.Char(
+    identation = fields.Char(
         string='Identation No.',
         required=False,
         tracking=True,
