@@ -3,8 +3,10 @@
 #    License, author and contributors information in:                         #
 #    __manifest__.py file at the root folder of this module.                  #
 ###############################################################################
-from odoo import http, _
+from odoo import fields, http, _
 from odoo.http import request
+from odoo.fields import Command
+from odoo.addons.portal.controllers.mail import _message_post_helper
 from odoo.exceptions import UserError, ValidationError
 from odoo.addons.portal.controllers.portal import CustomerPortal, pager as portal_pager
 
@@ -13,16 +15,29 @@ class maidsportal(CustomerPortal):
 
     def _prepare_home_portal_values(self, counters):
         values = super(maidsportal, self)._prepare_home_portal_values(counters)
-        values['maids_count'] = request.env['housemaid.maids'].search_count([])
+        user_id = request.env.uid
+        curr_user = request.env['res.users'].search([
+            ('id', '=', user_id),
+        ],
+            limit=1
+        )
+        user_office = curr_user.offices_id.id
+
+        maids_domain = [
+            ('user_id', '=', user_id),
+            ('offices_id', '=', user_office),
+        ]
+        values['maids_count'] = request.env['housemaid.maids'].search_count(
+            maids_domain)
         return values
-    
-    @http.route('/my/maid/new', website=True, auth='user', type="http", method=["POST","GET"])
+
+    @http.route('/my/maid/new', website=True, auth='user', type="http", method=["POST", "GET"])
     def maid_create_form(self, **kw):
         vals = super()._prepare_portal_layout_values()
         offices = request.env['housemaid.offices'].sudo().search([])
         country = request.env['res.country'].sudo().search([])
         new_maid_url = '/my/maid/new'
-        
+
         error_list = []
         maid_vals = {}
         if kw.get('office'):
@@ -39,7 +54,7 @@ class maidsportal(CustomerPortal):
                 'phone': kw.get('phone'),
                 'email': kw.get('email'),
                 'country_id': kw.get('country'),
-                
+
             }
             if not error_list:
                 request.env['housemaid.maids'].sudo().create(maid_vals)
@@ -49,7 +64,6 @@ class maidsportal(CustomerPortal):
                 vals['error_list'] = error_list
         else:
             print("get....")
-
 
         vals = {
             'default_url': new_maid_url,
@@ -61,10 +75,8 @@ class maidsportal(CustomerPortal):
         return request.render(
             'ms_housemaid.my_maids_portal_new_form_view',
             vals,
-        
-        )
 
-    
+        )
 
     @http.route(['/my/maids', '/my/maids/page/<int:page>'], type="http", website=True, auth='user')
     def my_maids_list_view(self, page=1, sortby=None, groupby=None, **kw):
@@ -73,11 +85,25 @@ class maidsportal(CustomerPortal):
             'id': {'label': 'ID Desc', 'order': 'id desc'},
             'name': {'label': 'Name', 'order': 'name'},
             'country_id': {'label': 'Country', 'order': 'country_id'},
+            'state': {'label': 'State', 'order': 'state'},
         }
         searchbar_groupby = {
             'country_id': {'input': 'country_id', 'label': 'Country', 'order': 1},
             'jobs_id': {'input': 'jobs_id', 'label': 'Jobs', 'order': 1},
+            'state': {'input': 'state', 'label': 'State', 'order': 1},
         }
+
+        user_id = request.env.uid
+        curr_user = request.env['res.users'].search([
+            ('id', '=', user_id),
+        ],
+            limit=1
+        )
+        user_office = curr_user.offices_id.id
+        maids_domain = [
+            ('user_id', '=', user_id),
+            ('offices_id', '=', user_office),
+        ]
         # default sort by order
         if not sortby:
             sortby = 'id'
@@ -85,8 +111,10 @@ class maidsportal(CustomerPortal):
         # default groupby
         if not groupby:
             groupby = 'None'
-
-        total_maids = request.env['housemaid.maids'].sudo().search_count([])
+        
+        total_maids = request.env['housemaid.maids'].sudo(
+        ).search_count(maids_domain)
+        
         maid_url = '/my/maids'
         pager = portal_pager(
             url=maid_url,
@@ -96,7 +124,7 @@ class maidsportal(CustomerPortal):
             step=10,
         )
         maids = request.env['housemaid.maids'].sudo().search(
-            [],
+            maids_domain,
             limit=10,
             order=order,
             offset=pager['offset'],
@@ -120,8 +148,20 @@ class maidsportal(CustomerPortal):
     @http.route(['/my/maids/<model("housemaid.maids"):maids_id>'], website=True, auth='user', type="http")
     def my_maids_form_view(self, maids_id, **kw):
         vals = super()._prepare_portal_layout_values()
-        
-        maids_rec = request.env['housemaid.maids'].sudo().search([])
+    
+        user_id = request.env.uid
+        curr_user = request.env['res.users'].search([
+            ('id', '=', user_id),
+        ],
+            limit=1
+        )
+        user_office = curr_user.offices_id.id
+        maids_domain = [
+            ('user_id', '=', user_id),
+            ('offices_id', '=', user_office),
+        ]
+
+        maids_rec = request.env['housemaid.maids'].sudo().search(maids_domain)
         maids_ids = maids_rec.ids
         maids_index = maids_ids.index(maids_id.id)
         if maids_index != 0 and maids_ids[maids_index - 1]:
@@ -130,11 +170,11 @@ class maidsportal(CustomerPortal):
         if maids_index < len(maids_ids) - 1 and maids_ids[maids_index + 1]:
             vals['next_record'] = format(
                 maids_ids[maids_index+1])
-            
+
         vals = {
             'maid': maids_id,
             'page_name': 'my_maids_portal_form_view'
-        }    
+        }
         return request.render("ms_housemaid.my_maids_portal_form_view", vals)
 
     @http.route(['/my/maids/print/<model("housemaid.maids"):maids_id>'], website=True, auth='user', type="http")

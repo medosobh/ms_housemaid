@@ -116,3 +116,13 @@ class offices(models.Model):
         default=True,
         tracking=True
     )
+
+
+class ResUsers(models.Model):
+    _inherit = 'res.users'
+    
+    offices_id = fields.Many2one(
+        'housemaid.offices',
+        string='Offices',
+        required=False,
+    )
