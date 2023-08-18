@@ -153,7 +153,7 @@
                                 widget="boolean_toggle"/>
                             <field name="english_lang"
                                 widget="boolean_toggle"/>
-                            <field name="education"/>
+                            <field name="educations_id"/>
                         </group>
                         <group name="personal"
                             string="Information">

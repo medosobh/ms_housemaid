@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="housemaid_educations_form"
+        model="ir.ui.view">
+        <field name="name">housemaid.educations.form</field>
+        <field name="model">housemaid.educations</field>
+        <field name="arch"
+            type="xml">
+            <form string="Educations">
+                <group name="information"
+                    string="Educations">
+                    <field name="name"
+                        class="oe_inline"/>
+                </group>
+            </form>
+        </field>
+    </record>
+
+    <record id="housemaid_educations_tree"
+        model="ir.ui.view">
+        <field name="name">housemaid.educations.tree</field>
+        <field name="model">housemaid.educations</field>
+        <field name="arch"
+            type="xml">
+            <tree string="Educations List"
+                sample="1">
+                <field name="name"/>
+            </tree>
+        </field>
+    </record>
+    
+    <record id="housemaid_educations_action"
+        model="ir.actions.act_window">
+        <field name="name">Educations</field>
+        <field name="res_model">housemaid.educations</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help"
+            type="html">
+            <p class="o_view_nocontent_smiling_face">Create your first Educations name!</p>
+        </field>
+    </record>
+
+    <menuitem id="housemaid_educations_menu"
+        name="Eductions"
+        action="housemaid_educations_action"
+        parent="housemaid_menu_configuration"
+        sequence="53"/>
+</odoo>

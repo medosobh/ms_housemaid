@@ -7,3 +7,4 @@ from . import tickets
 from . import jobs
 from . import closereason
 from . import closedtickets
+from . import educations

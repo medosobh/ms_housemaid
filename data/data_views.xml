@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-
     <data noupdate="0">
         <record model="housemaid.jobs"
             id="housemaid_jobs_1">
@@ -11,7 +10,6 @@
             <field name="name">housedriver</field>
         </record>
     </data>
-
     <data noupdate="0">
         <record model="housemaid.closereason"
             id="housemaid_closereason_1">
@@ -21,7 +19,7 @@
             id="housemaid_closereason_2">
             <field name="name">Sponser Cancel</field>
         </record>
-         <record model="housemaid.closereason"
+        <record model="housemaid.closereason"
             id="housemaid_closereason_3">
             <field name="name">Office could not find</field>
         </record>
@@ -42,7 +40,32 @@
             <field name="name">Ticket duplicated</field>
         </record>
     </data>
-
+    <data noupdate="0">
+        <record model="housemaid.educations"
+            id="housemaid_educations_1">
+            <field name="name">No</field>
+        </record>
+        <record model="housemaid.educations"
+            id="housemaid_educations_2">
+            <field name="name">Read and Write</field>
+        </record>
+        <record model="housemaid.educations"
+            id="housemaid_educations_3">
+            <field name="name">Less than High School</field>
+        </record>
+        <record model="housemaid.educations"
+            id="housemaid_educations_4">
+            <field name="name">High School or Diploma</field>
+        </record>
+        <record model="housemaid.educations"
+            id="housemaid_educations_5">
+            <field name="name">Collage No Dgree</field>
+        </record>
+        <record model="housemaid.educations"
+            id="housemaid_educations_6">
+            <field name="name">Collage Dgree</field>
+        </record>
+    </data>
     <data noupdate="0">
         <record id="mail_act_searching"
             model="mail.activity.type">
@@ -69,5 +92,4 @@
             <field name="res_model">housemaid.tickets</field>
         </record>
     </data>
-
 </odoo>

@@ -35,15 +35,26 @@ class maidsportal(CustomerPortal):
     def maid_create_form(self, **kw):
         vals = super()._prepare_portal_layout_values()
         offices = request.env['housemaid.offices'].sudo().search([])
+        jobs = request.env['housemaid.jobs'].sudo().search([])
         country = request.env['res.country'].sudo().search([])
+        currency = request.env['res.currency'].sudo().search([])
+        education = request.env['housemaid.educations'].sudo().search([])
         new_maid_url = '/my/maid/new'
 
         error_list = []
         maid_vals = {}
         if kw.get('office'):
+            error_list.append('Office is mandatory.')
+        if kw.get('code'):
+            error_list.append('Code is mandatory.')
+        if kw.get('name'):
             error_list.append('Name is mandatory.')
-        else:
-            maid_vals
+        if kw.get('jobs'):
+            error_list.append('Job is mandatory.')
+        if kw.get('salary'):
+            error_list.append('Monthly Salary is mandatory.')
+        if kw.get('currency'):
+            error_list.append('Currency is mandatory.')
 
         if request.httprequest.method == "POST":
             print("post....")
@@ -54,6 +65,13 @@ class maidsportal(CustomerPortal):
                 'phone': kw.get('phone'),
                 'email': kw.get('email'),
                 'country_id': kw.get('country'),
+                'jobs_id': kw.get('jobs'),
+                'monthly_salary': kw.get('salary'),
+                'currency': kw.get('currency'),
+                'contract_period': kw.get('period'),
+                'arabic_lang': kw.get('arabic'),
+                'english_lang': kw.get('english'),
+                'educations_id': kw.get('education'),
 
             }
             if not error_list:
@@ -68,7 +86,10 @@ class maidsportal(CustomerPortal):
         vals = {
             'default_url': new_maid_url,
             'offices': offices,
+            'jobs': jobs,
             'country': country,
+            'currency': currency,
+            'education': education,
             'page_name': 'my_maids_portal_new_form_view',
         }
 
@@ -88,9 +109,10 @@ class maidsportal(CustomerPortal):
             'state': {'label': 'State', 'order': 'state'},
         }
         searchbar_groupby = {
-            'country_id': {'input': 'country_id', 'label': 'Country', 'order': 1},
-            'jobs_id': {'input': 'jobs_id', 'label': 'Jobs', 'order': 1},
-            'state': {'input': 'state', 'label': 'State', 'order': 1},
+            'None': {'input': 'None', 'label': _('None')},
+            'country_id': {'input': 'country_id', 'label': _('Country')},
+            'jobs_id': {'input': 'jobs_id', 'label': _('Jobs')},
+            'state': {'input': 'state', 'label': _('State')},
         }
 
         user_id = request.env.uid
@@ -111,10 +133,10 @@ class maidsportal(CustomerPortal):
         # default groupby
         if not groupby:
             groupby = 'None'
-        
+
         total_maids = request.env['housemaid.maids'].sudo(
         ).search_count(maids_domain)
-        
+
         maid_url = '/my/maids'
         pager = portal_pager(
             url=maid_url,
@@ -148,7 +170,7 @@ class maidsportal(CustomerPortal):
     @http.route(['/my/maids/<model("housemaid.maids"):maids_id>'], website=True, auth='user', type="http")
     def my_maids_form_view(self, maids_id, **kw):
         vals = super()._prepare_portal_layout_values()
-    
+
         user_id = request.env.uid
         curr_user = request.env['res.users'].search([
             ('id', '=', user_id),

@@ -189,18 +189,11 @@ class tickets(models.Model):
         string="English Language",
         tracking=True,
     )
-    education = fields.Selection(
-        selection=[
-            ('no', 'No'),
-            ('basic', 'Read and Write'),
-            ('low', 'less then high school'),
-            ('mid', 'high school diploma'),
-            ('mid2', 'collage no dgree'),
-            ('mid3', 'collage dgree'),
-        ],
+    educations_id = fields.Many2one(
+        comodel_name='housemaid.educations',
+        required=False,
         string="Education level",
         help='Set the Education level',
-        tracking=True,
     )
     # ----------------------------------------------
     religion = fields.Selection(

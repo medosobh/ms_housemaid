@@ -41,78 +41,74 @@
 	</template>
 	<template id="my_maids_portal_list_view" name="Maids">
 		<t t-call="portal.portal_layout">
-			<t t-set="breadcrumbs_searchbar" t-value="True"/>
-			<div class="container">
-				<br />
-				<center>
-					<h3>
-							hi, your maid's cv list is here
-						</h3>
-				</center>
-				<br />
-				<t t-if="my_maids_portal_list_view" t-call="portal.portal_table">
-					<thead style="font-size: 16px;">
-						<tr class="active">
-							<td class="test-center">
+			<t t-call="portal.portal_searchbar">
+				<t t-set="title">Maids List</t>
+			</t>
+			<t t-if="not maids">
+				<p>There are currently no maids for your office.</p>
+			</t>
+			<t t-if="maids" t-call="portal.portal_table">
+				<thead style="font-size: 16px;">
+					<tr class="active">
+						<td class="test-center">
 									Office:
 								</td>
-							<td class="test-center">
+						<td class="test-center">
 									Code:
 								</td>
-							<td class="test-center">
+						<td class="test-center">
 									Name:
 								</td>
-							<td class="test-center">
+						<td class="test-center">
 									Job:
 								</td>
-							<td class="test-center">
+						<td class="test-center">
 									Salary:
 								</td>
-							<td class="test-center">
+						<td class="test-center">
 									Currency:
 								</td>
-							<td class="test-center">
+						<td class="test-center">
 									Country:
 								</td>
-							<td class="test-center">
+						<td class="test-center">
 									State:
 								</td>
+					</tr>
+				</thead>
+				<tbody>
+					<t t-foreach="maids" t-as="maid">
+						<tr>
+							<td>
+								<t t-out="maid.offices_id.name" />
+							</td>
+							<td>
+								<t t-out="maid.code" />
+							</td>
+							<td>
+								<a t-attf-href="/my/maids/#{maid.id}">
+									<t t-out="maid.name" />
+								</a>
+							</td>
+							<td>
+								<t t-out="maid.jobs_id.name" />
+							</td>
+							<td>
+								<t t-out="maid.monthly_salary" />
+							</td>
+							<td>
+								<t t-out="maid.currency_id.name" />
+							</td>
+							<td>
+								<t t-out="maid.country_id.name" />
+							</td>
+							<td>
+								<t t-out="maid.state" />
+							</td>
 						</tr>
-					</thead>
-					<tbody>
-						<t t-foreach="maids" t-as="maid">
-							<tr>
-								<td>
-									<t t-out="maid.offices_id.name" />
-								</td>
-								<td>
-									<t t-out="maid.code" />
-								</td>
-								<td>
-									<a t-attf-href="/my/maids/#{maid.id}">
-										<t t-out="maid.name" />
-									</a>
-								</td>
-								<td>
-									<t t-out="maid.jobs_id.name" />
-								</td>
-								<td>
-									<t t-out="maid.monthly_salary" />
-								</td>
-								<td>
-									<t t-out="maid.currency_id.name" />
-								</td>
-								<td>
-									<t t-out="maid.country_id.name" />
-								</td>
-								<td>
-									<t t-out="maid.state" />
-								</td>
-							</tr>
-						</t>
-					</tbody>
-				</t>
-			</div>
+					</t>
+				</tbody>
+			</t>
 		</t>
 	</template>
 	<template id="my_maids_portal_form_view" inherit_id="portal.portal_sidebar" name="Maid Form">
@@ -337,7 +333,7 @@
 											</div>
 											<div class="col-sm-7">
 												<p class="text-muted mb-0">
-													<t t-out="maid.education" />
+													<t t-out="maid.educations_id.name" />
 												</p>
 											</div>
 										</div>
@@ -756,57 +752,124 @@
 						<t t-out="error"/>
 					</div>
 				</t>
-				<form>
-					<div class="container py-5">
+				<form data-model_name="housmaid.maids">
+					<div class="container-fluid">
 						<div calss="row">
-							<div calss="form-group col-lg-4">
-								<div class="card mb-4">
-									<label for="image">upload image</label>
-									<input type="file" id="image" name="image" accept="image/*" class="form_control"/>
-									<input type="submit"/>
+							<div class="col-sm-8">
+								<div class="card sm-8">
+									<div class="card-body">
+										<div calss="form-group row-md-6">
+											<label class="col-sm-4 col-form-label" for="offices">Office</label>
+											<select name="offices" id="offices" class="form_control">
+												<option>Select Office</option>
+												<t t-foreach="offices" t-as="office">
+													<option t-att-value="office.id">
+														<t t-out="office.name" />
+													</option>
+												</t>
+											</select>
+										</div>
+										<div calss="form-group row-md-6">
+											<label class="col-sm-4 col-form-label" for="code">Code</label>
+											<input type="char" name="code" id="code" class="form_control" placeholder="maid code"/>
+										</div>
+										<div calss="form-group row-md-6">
+											<label class="col-sm-4 col-form-label" for="name">Name</label>
+											<input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+											<input type="char" name="name" id="name" class="form_control" placeholder="maid name"/>
+										</div>
+										<div calss="form-group row-md-6">
+											<label class="col-sm-4 col-form-label" for="phone">Phone</label>
+											<input type="tel" name="phone" id="phone" class="form_control" placeholder="+123456789"/>
+										</div>
+										<div calss="form-group row-md-6">
+											<label class="col-sm-4 col-form-label" for="email">Email</label>
+											<input type="email" name="email" id="email" class="form_control" placeholder="name@email.com"/>
+										</div>
+										<div calss="form-group row-md-8">
+											<label class="col-sm-4 col-form-label" for="country">Country</label>
+											<select name="country" id="country" class="form_control">
+												<option>Select Country</option>
+												<t t-foreach="country" t-as="country">
+													<option t-att-value="country.id">
+														<t t-out="country.name" />
+													</option>
+												</t>
+											</select>
+										</div>
+									</div>
 								</div>
 							</div>
-							<div calss="form-group col-lg-8">
-								<div class="card mb-8">
-									<div calss="form-group row">
-										<label class="col-sm-2 col-form-label" for="offices">Office</label>
-										<select name="offices" id="offices" class="form_control">
-											<option>Select Office</option>
-											<t t-foreach="offices" t-as="office">
-												<option t-att-value="office.id">
-													<t t-out="office.name" />
+							<div class="col-sm-4">
+								<div class="card sm-4">
+									<div class="card-body">
+										<label lass="col-sm-4 col-form-label" for="image">upload maid photo</label>
+										<div>
+											<input type="file" id="image" name="image" accept="image/*" class="form_control"/>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div calss="row">
+							<div class="col-sm-6">
+								<div class="card-body">
+									<div calss="form-group row-md-6">
+										<label class="col-sm-4 col-form-label" for="jobs">Job</label>
+										<select name="jobs" id="jobs" class="form_control">
+											<option>Select Job</option>
+											<t t-foreach="jobs" t-as="job">
+												<option t-att-value="job.id">
+													<t t-out="job.name" />
 												</option>
 											</t>
 										</select>
 									</div>
-									<div calss="form-group row">
-										<label class="col-sm-2 col-form-label" for="code">Code</label>
-										<input type="char" name="code" id="code" class="form_control" placeholder="maid code"/>
+									<div calss="form-group row-md-6">
+										<label class="col-sm-4 col-form-label" for="salary">Monthly Salary</label>
+										<input type="number" name="salary" id="salary" class="form_control" placeholder="1000"/>
 									</div>
-									<div calss="form-group row">
-										<label class="col-sm-2 col-form-label" for="name">Name</label>
-										<input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
-										<input type="char" name="name" id="name" class="form_control" placeholder="maid name"/>
-									</div>
-									<div calss="form-group row">
-										<label class="col-sm-2 col-form-label" for="phone">Phone</label>
-										<input type="tel" name="phone" id="phone" class="form_control" placeholder="+123456789"/>
-									</div>
-									<div calss="form-group row">
-										<label class="col-sm-2 col-form-label" for="email">Email</label>
-										<input type="email" name="email" id="email" class="form_control" placeholder="name@email.com"/>
-									</div>
-									<div calss="form-group row">
-										<label class="col-sm-2 col-form-label" for="country">Country</label>
-										<select name="country" id="country" class="form_control">
-											<option>Select Country</option>
-											<t t-foreach="country" t-as="country">
-												<option t-att-value="country.id">
-													<t t-out="country.name" />
+									<div calss="form-group row-md-6">
+										<label class="col-sm-4 col-form-label" for="currency">Currency</label>
+										<select name="currency" id="currency" class="form_control">
+											<option>Select Currency</option>
+											<t t-foreach="currency" t-as="currency">
+												<option t-att-value="currency.id">
+													<t t-out="currency.name" />
 												</option>
 											</t>
 										</select>
 									</div>
+									<div calss="form-group row-md-6">
+										<label class="col-sm-4 col-form-label" for="period">Contract Period</label>
+										<input type="number" name="period" id="period" class="form_control" placeholder="1,2,3"/>
+									</div>
+								</div>
+							</div>
+							<div class="col-sm-6">
+								<div class="card-body">
+									<div calss="form-group row-md-6">
+										<label class="col-sm-4 col-form-label" for="arabic">Arabic Language</label>
+										<input type="checkbox" name="arabic" id="arabic" class="form_control"/>
+									</div>
+									<div calss="form-group row-md-6">
+										<label class="col-sm-4 col-form-label" for="english">English Language</label>
+										<input type="checkbox" name="english" id="english" class="form_control" placeholder="1000"/>
+									</div>
+									<div calss="form-group row-md-6">
+										<label class="col-sm-4 col-form-label" for="education">Education</label>
+										<select name="education" id="education" class="form_control">
+											<option>Select Education</option>
+											<t t-foreach="education" t-as="education">
+												<option t-att-value="education.id">
+													<t t-out="education.name" />
+												</option>
+											</t>
+										</select>
+									</div>
+
+
+
 								</div>
 							</div>
 						</div>
