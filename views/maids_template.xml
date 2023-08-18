@@ -749,7 +749,7 @@
 		<t t-call="portal.portal_layout">
 			<t t-call="portal.portal_table">
 				<div class="alert alert-success" role="alert" t-if="success_msg" >
-  					<t t-out="success_msg"/>
+					<t t-out="success_msg"/>
 				</div>
 				<t t-foreach="error_list" t-as="error">
 					<div class="alert alert-danger" role="alert">
@@ -757,70 +757,68 @@
 					</div>
 				</t>
 				<form>
-					<div class="page">
-						<div calss="card mb-4 rounded-lg">
-							<div calss="form-group col-xs-4">
-								<div calss="form-group row">
-									<label class="col-sm-2 col-form-label" for="offices">Office</label>
-									<select name="offices" id="offices" class="form_control">
-										<option>Select Office</option>
-										<t t-foreach="offices" t-as="office">
-											<option t-att-value="office.id">
-												<t t-out="office.name" />
-											</option>
-										</t>
-									</select>
-								</div>
-								<div calss="form-group row">
-									<label class="col-sm-2 col-form-label" for="code">Code</label>
-									<input type="char" name="code" id="code" class="form_control" placeholder="maid code"/>
-								</div>
-								<div calss="form-group row">
-									<label class="col-sm-2 col-form-label" for="name">Name</label>
-									<input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
-									<input type="char" name="name" id="name" class="form_control" placeholder="maid name"/>
-								</div>
-								<div calss="form-group row">
-									<label class="col-sm-2 col-form-label" for="phone">Phone</label>
-									<input type="tel" name="phone" id="phone" class="form_control" placeholder="+123456789"/>
-								</div>
-								<div calss="form-group row">
-									<label class="col-sm-2 col-form-label" for="email">Email</label>
-									<input type="email" name="email" id="email" class="form_control" placeholder="name@email.com"/>
-								</div>
-								<div calss="form-group row">
-									<label class="col-sm-2 col-form-label" for="country">Country</label>
-									<select name="country" id="country" class="form_control">
-										<option>Select Country</option>
-										<t t-foreach="country" t-as="country">
-											<option t-att-value="country.id">
-												<t t-out="country.name" />
-											</option>
-										</t>
-									</select>
-								</div>
+					<div calss="form-group row">
+						<div calss="form-group col-xs-2">
+							<div calss="form-group row">
+								<label class="col-sm-2 col-form-label" for="offices">Office</label>
+								<select name="offices" id="offices" class="form_control">
+									<option>Select Office</option>
+									<t t-foreach="offices" t-as="office">
+										<option t-att-value="office.id">
+											<t t-out="office.name" />
+										</option>
+									</t>
+								</select>
 							</div>
-							<div calss="form-group col-xs-4">
-								<label for="image">upload image</label>
-								<input type="file" id="image" name="image" accept="image/*" class="form_control"/>
-								<input type="submit"/>
+							<div calss="form-group row">
+								<label class="col-sm-2 col-form-label" for="code">Code</label>
+								<input type="char" name="code" id="code" class="form_control" placeholder="maid code"/>
+							</div>
+							<div calss="form-group row">
+								<label class="col-sm-2 col-form-label" for="name">Name</label>
+								<input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+								<input type="char" name="name" id="name" class="form_control" placeholder="maid name"/>
+							</div>
+							<div calss="form-group row">
+								<label class="col-sm-2 col-form-label" for="phone">Phone</label>
+								<input type="tel" name="phone" id="phone" class="form_control" placeholder="+123456789"/>
+							</div>
+							<div calss="form-group row">
+								<label class="col-sm-2 col-form-label" for="email">Email</label>
+								<input type="email" name="email" id="email" class="form_control" placeholder="name@email.com"/>
+							</div>
+							<div calss="form-group row">
+								<label class="col-sm-2 col-form-label" for="country">Country</label>
+								<select name="country" id="country" class="form_control">
+									<option>Select Country</option>
+									<t t-foreach="country" t-as="country">
+										<option t-att-value="country.id">
+											<t t-out="country.name" />
+										</option>
+									</t>
+								</select>
 							</div>
 						</div>
-						<div calss="form-group row">
-							<div class="form-group col">
+						<div calss="form-group col-xs-4">
+							<label for="image">upload image</label>
+							<input type="file" id="image" name="image" accept="image/*" class="form_control"/>
+							<input type="submit"/>
+						</div>
+					</div>
+					<div calss="form-group row">
+						<div class="form-group col">
 						
 						</div>
-							<div class="form-group col">
+						<div class="form-group col">
 						
 						</div>
-							<div class="form-group col">
+						<div class="form-group col">
 						
 						</div>
-						</div>
-						<div calss="form-group row">
-							<div calss="col-sm-10">
-								<button type="submit" calss="btn btn-primary" >Save Maid CV</button>
-							</div>
+					</div>
+					<div calss="form-group row">
+						<div calss="col-sm-10">
+							<button type="submit" calss="btn btn-primary" >Save Maid CV</button>
 						</div>
 					</div>
 				</form>
