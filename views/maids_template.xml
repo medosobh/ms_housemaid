@@ -752,15 +752,15 @@
 						<t t-out="error"/>
 					</div>
 				</t>
-				<form data-model_name="housmaid.maids">
-					<div class="container-fluid">
-						<div calss="row">
-							<div class="col-sm-8">
-								<div class="card sm-8">
+				<section data-model_name="housmaid.maids">
+					<div class="float-container">
+						<div calss="row align-items-start">
+							<div class="col-sm-6">
+								<div class="card">
 									<div class="card-body">
 										<div>Main Information</div>
-										<div calss="form-group row-md-8">
-											<label class="col-sm-4 col-form-label" for="offices">Office</label>
+										<div calss="form-group">
+											<label class="col-sm-2 col-form-label" for="offices">Office</label>
 											<select name="offices" id="offices" class="form_control">
 												<option>Select Office</option>
 												<t t-foreach="offices" t-as="office">
@@ -770,25 +770,25 @@
 												</t>
 											</select>
 										</div>
-										<div calss="form-group row-md-8">
-											<label class="col-sm-4 col-form-label" for="code">Code</label>
+										<div calss="form-group">
+											<label class="col-sm-2 col-form-label" for="code">Code</label>
 											<input type="char" name="code" id="code" class="form_control" placeholder="maid code"/>
 										</div>
-										<div calss="form-group row-md-8">
-											<label class="col-sm-4 col-form-label" for="name">Name</label>
+										<div calss="form-group">
+											<label class="col-sm-2 col-form-label" for="name">Name</label>
 											<input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
 											<input type="char" name="name" id="name" class="form_control" placeholder="maid name"/>
 										</div>
-										<div calss="form-group row-md-8">
-											<label class="col-sm-4 col-form-label" for="phone">Phone</label>
+										<div calss="form-group">
+											<label class="col-sm-2 col-form-label" for="phone">Phone</label>
 											<input type="tel" name="phone" id="phone" class="form_control" placeholder="+123456789"/>
 										</div>
-										<div calss="form-group row-md-8">
-											<label class="col-sm-4 col-form-label" for="email">Email</label>
+										<div calss="form-group">
+											<label class="col-sm-2 col-form-label" for="email">Email</label>
 											<input type="email" name="email" id="email" class="form_control" placeholder="name@email.com"/>
 										</div>
-										<div calss="form-group row-md-8">
-											<label class="col-sm-4 col-form-label" for="country">Country</label>
+										<div calss="form-group">
+											<label class="col-sm-2 col-form-label" for="country">Country</label>
 											<select name="country" id="country" class="form_control">
 												<option>Select Country</option>
 												<t t-foreach="country" t-as="country">
@@ -801,12 +801,14 @@
 									</div>
 								</div>
 							</div>
-							<div class="col-sm-4">
-								<div class="card sm-4">
+							<div class="col-sm-6">
+								<div class="card">
 									<div class="card-body">
-										<label lass="col-sm-4 col-form-label" for="image">upload maid photo</label>
-										<div>
-											<input type="file" id="image" name="image" accept="image/*" class="form_control"/>
+										<div calss="form-group">
+											<label lass="col-sm-4 col-form-label" for="image">upload maid photo</label>
+											<div>
+												<input type="file" id="image" name="image" accept="image/*" class="form_control"/>
+											</div>
 										</div>
 									</div>
 								</div>
@@ -874,80 +876,83 @@
 											</select>
 										</div>
 									</div>
-									<div calss="row">
-										<div class="col-sm-8">
-											<div class="card sm-8">
-												<div class="card-body">
-													<div>Passport</div>
-													<div calss="form-group row-md-8">
-														<label class="col-sm-6 col-form-label" for="passport_no">Passport No</label>
-														<input type="char" name="passport_no" id="passport_no" class="form_control" placeholder="A123456789"/>
-													</div>
-													<div calss="form-group row-md-8">
-														<label class="col-sm-6 col-form-label" for="passport_place">Passport Place</label>
-														<input type="char" name="passport_place" id="passport_place" class="form_control" placeholder="City Town"/>
-													</div>
-													<div calss="form-group row-md-8">
-														<label class="col-sm-6 col-form-label" for="passport_issue_date">Passport Issue Date</label>
-														<input type="date" name="passport_issue_date" id="passport_issue_date" class="form_control" />
-													</div>
-													<div calss="form-group row-md-8">
-														<label class="col-sm-6 col-form-label" for="passport_expire_date">Passport Expire Date</label>
-														<input type="date" name="passport_expire_date" id="passport_expire_date" class="form_control" />
-													</div>
-													<div calss="form-group row-md-8">
-														<label class="col-sm-6 col-form-label" for="identation">Identation</label>
-														<input type="char" name="identation" id="identation" class="form_control" placeholder="maid code"/>
-													</div>
-												</div>
-											</div>
+								</div>
+							</div>
+						</div>
+						<div calss="row">
+							<div class="col-sm-6">
+								<div class="card sm-6">
+									<div class="card-body">
+										<div>Passport</div>
+										<div calss="form-group">
+											<label class="col-sm-4 col-form-label" for="passport_no">Passport No</label>
+											<input type="char" name="passport_no" id="passport_no" class="form_control" placeholder="A123456789"/>
 										</div>
-										<div class="col-sm-6">
-											<div class="card sm-8">
-												<div class="card-body">
-													<div>Personal information</div>
-													<div calss="form-group row-md-6">
-														<label class="col-sm-4 col-form-label" for="religion">Religion</label>
-														<select name="religion" id="religion" class="form_control">
-															<option>Select Religion</option>
-															<option value="Baha i">Baha i</option>
-															<option value="Buddhism">Buddhism</option>
-															<option value="Christianity">Christianity</option>
-															<option value="Confucianism">Confucianism</option>
-															<option value="Hinduism">Hinduism</option>
-															<option value="Islam">Islam</option>
-															<option value="Jainism">Jainism</option>
-															<option value="Judaism">Judaism</option>
-															<option value="Shinto">Shinto</option>
-															<option value="Sikhism">Sikhism</option>
-															<option value="Taoism">Taoism</option>
-															<option value="Zoroastrianism">Zoroastrianism</option>
-															<option value="Buddhism">Buddhism</option>
-														</select>
-														
-													</div>
-
-
-
-
-
-
-
-												</div>
-											</div>
+										<div calss="form-group">
+											<label class="col-sm-4 col-form-label" for="passport_place">Passport Place</label>
+											<input type="char" name="passport_place" id="passport_place" class="form_control" placeholder="City Town"/>
+										</div>
+										<div calss="form-group">
+											<label class="col-sm-4 col-form-label" for="passport_issue_date">Passport Issue Date</label>
+											<input type="date" name="passport_issue_date" id="passport_issue_date" class="form_control" />
+										</div>
+										<div calss="form-group">
+											<label class="col-sm-4 col-form-label" for="passport_expire_date">Passport Expire Date</label>
+											<input type="date" name="passport_expire_date" id="passport_expire_date" class="form_control" />
+										</div>
+										<div calss="form-group">
+											<label class="col-sm-4 col-form-label" for="identation">Identation</label>
+											<input type="char" name="identation" id="identation" class="form_control" placeholder="123456789012"/>
 										</div>
 									</div>
 								</div>
 							</div>
+							<div class="col-sm-6">
+								<div class="card sm-6">
+									<div class="card-body">
+										<div>Personal information</div>
+										<div calss="form-group">
+											<label class="col-sm-2 col-form-label" for="religion">Religion</label>
+											<select name="religion" id="religion" class="form_control">
+												<option>Select Religion</option>
+												<option value="Baha i">Baha i</option>
+												<option value="Buddhism">Buddhism</option>
+												<option value="Christianity">Christianity</option>
+												<option value="Confucianism">Confucianism</option>
+												<option value="Hinduism">Hinduism</option>
+												<option value="Islam">Islam</option>
+												<option value="Jainism">Jainism</option>
+												<option value="Judaism">Judaism</option>
+												<option value="Shinto">Shinto</option>
+												<option value="Sikhism">Sikhism</option>
+												<option value="Taoism">Taoism</option>
+												<option value="Zoroastrianism">Zoroastrianism</option>
+												<option value="Buddhism">Buddhism</option>
+											</select>
+										</div>
+										<div calss="form-group">
+											<label class="col-sm-2 col-form-label" for="gender">Gender</label>
+											<select name="gender" id="gender" class="form_control">
+												<option>Select Gender</option>
+												<option value="male">Male</option>
+												<option value="femal">Femal</option>
+											</option>
+										</select>
+									</div>
+								</div>
+							</div>
 						</div>
+					</div>
+					<footer>
 						<div calss="form-group row">
 							<div calss="col-sm-10">
 								<button type="submit" calss="btn btn-primary" >Save Maid CV</button>
 							</div>
 						</div>
-					</div>
-				</form>
-			</t>
+					</footer>
+				</div>
+			</section>
 		</t>
-	</template>
+	</t>
+</template>
 </odoo>

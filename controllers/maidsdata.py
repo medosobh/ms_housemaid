@@ -50,10 +50,15 @@ class maidsportal(CustomerPortal):
         country = request.env['res.country'].sudo().search([])
         currency = request.env['res.currency'].sudo().search([])
         education = request.env['housemaid.educations'].sudo().search([])
-        religion = dict(
-            request.env['housemaid.maids'].fields_get(allfields=['religion'])
-                        )
+        
+        religion = dict(request.env['housemaid.maids'].fields_get(allfields=['religion'])['religion']['selection'])
         print(religion)
+        print(len(religion))
+        
+        gender_dict = dict(request.env['housemaid.maids'].fields_get(allfields=['gender'])['gender']['selection'])
+        gender = dict(gender_dict.keys())
+        print(gender)
+        print(len(gender))
         
         new_maid_url = '/my/maid/new'
 
@@ -94,6 +99,7 @@ class maidsportal(CustomerPortal):
                 'passport_expire_date': kw.get('passport_expire_date'),
                 'identation': kw.get('identation'),
                 'religion': kw.get('religion'),
+                'gender': kw.get('gender'),
 
             }
             if not error_list:
