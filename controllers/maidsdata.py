@@ -55,8 +55,7 @@ class maidsportal(CustomerPortal):
         print(religion)
         print(len(religion))
         
-        gender_dict = dict(request.env['housemaid.maids'].fields_get(allfields=['gender'])['gender']['selection'])
-        gender = dict(gender_dict.keys())
+        gender = dict(request.env['housemaid.maids'].fields_get(allfields=['gender'])['gender']['selection'])
         print(gender)
         print(len(gender))
         
