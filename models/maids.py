@@ -214,12 +214,11 @@ class maids(models.Model):
     currency_id = fields.Many2one(
         string='Currency',
         comodel_name='res.currency',
-        ondelete='set null',
         help="Used to display the currency when tracking monetary values",
-        required=False,
+        required=True,
         tracking=True,
     )
-    contract_period = fields.Integer(
+    contract_period = fields.Char(
         string='Contract Period in Years',
         required=False,
         tracking=True
@@ -255,7 +254,6 @@ class maids(models.Model):
     passport_issue_date = fields.Date(
         string='Issue Date',
         required=False,
-        default=datetime.today(),
         tracking=True,
     )
     passport_expire_date = fields.Date(
@@ -297,14 +295,13 @@ class maids(models.Model):
         required=False,
         tracking=True,
     )
-    children_no = fields.Integer(
+    children_no = fields.Char(
         string='Children No',
         required=False,
         tracking=True,
     )
     birthday = fields.Date(
         string='Birthday',
-        default=fields.Date.context_today,
         required=True,
         tracking=True,
     )
@@ -330,19 +327,19 @@ class maids(models.Model):
         required=False,
         tracking=True,
     )
-    age = fields.Integer(
+    age = fields.Char(
         string='Age in Years',
         compute='_get_age',
         required=False,
         tracking=True,
     )
-    hight = fields.Float(
+    hight = fields.Char(
         string='Hight in feet,inch',
         digits=(2, 1),
         required=False,
         tracking=True,
     )
-    weight = fields.Integer(
+    weight = fields.Char(
         string='Weight in kg',
         required=False,
         tracking=True,

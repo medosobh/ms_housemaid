@@ -45,9 +45,10 @@ class maidsportal(CustomerPortal):
             ('id', '=', user_office),
         ]
         
-        offices = request.env['housemaid.offices'].sudo().search(domain)
+        offices = request.env['housemaid.offices'].sudo().search(domain, limit=1)
         jobs = request.env['housemaid.jobs'].sudo().search([])
-        country = request.env['res.country'].sudo().search([])
+        # country = request.env['res.country'].sudo().search([])
+        country = offices.country_id
         currency = request.env['res.currency'].sudo().search([])
         education = request.env['housemaid.educations'].sudo().search([])
         
@@ -63,22 +64,26 @@ class maidsportal(CustomerPortal):
 
         error_list = []
         maid_vals = {}
-        if kw.get('office'):
+        if not kw.get('user'):
+            error_list.append('User is mandatory.')
+        if not kw.get('offices'):
             error_list.append('Office is mandatory.')
-        if kw.get('code'):
+        if not kw.get('code'):
             error_list.append('Code is mandatory.')
-        if kw.get('name'):
+        if not kw.get('name'):
             error_list.append('Name is mandatory.')
-        if kw.get('jobs'):
+        if not kw.get('jobs'):
             error_list.append('Job is mandatory.')
-        if kw.get('salary'):
+        if not kw.get('salary'):
             error_list.append('Monthly Salary is mandatory.')
-        if kw.get('currency'):
+        if not kw.get('currency'):
             error_list.append('Currency is mandatory.')
 
         if request.httprequest.method == "POST":
             print("post....")
+            print(kw)
             maid_vals = {
+                'user_id': kw.get('user'),
                 'offices_id': kw.get('offices'),
                 'code': kw.get('code'),
                 'name': kw.get('name'),
@@ -87,7 +92,7 @@ class maidsportal(CustomerPortal):
                 'country_id': kw.get('country'),
                 'jobs_id': kw.get('jobs'),
                 'monthly_salary': kw.get('salary'),
-                'currency': kw.get('currency'),
+                'currency_id': int(kw.get('currency')),
                 'contract_period': kw.get('period'),
                 'arabic_lang': kw.get('arabic'),
                 'english_lang': kw.get('english'),
@@ -113,8 +118,8 @@ class maidsportal(CustomerPortal):
                 'skills_ironing': kw.get('skills_ironing'),
                 'skills_googlelocation': kw.get('skills_googlelocation'),
                 'skills_driving': kw.get('skills_driving'),
-
             }
+            print(error_list)
             if not error_list:
                 request.env['housemaid.maids'].sudo().create(maid_vals)
                 success_msg = 'Successfuly, New Maid Created'
@@ -126,12 +131,15 @@ class maidsportal(CustomerPortal):
 
         vals = {
             'default_url': new_maid_url,
+            'user': curr_user,
             'offices': offices,
             'jobs': jobs,
             'country': country,
             'currency': currency,
             'education': education,
             'page_name': 'my_maids_portal_new_form_view',
+            # 'success_msg':success_msg,
+            # 'error_list': error_list,
         }
 
         return request.render(

@@ -752,30 +752,41 @@
 						<t t-out="error"/>
 					</div>
 				</t>
-				<section>
-					<div class="float-container">
-						<div calss="row">
+				<form method="POST" class="form-inline">
+					<!-- <div class="container"> -->
+						<div calss="form-group row">
 							<div class="col-sm-6">
 								<div class="card">
 									<div class="card-body">
 										<div>Main Information</div>
 										<div calss="form-group">
-											<label class="col-sm-2 col-form-label" for="offices">Office</label>
-											<select name="offices" id="offices" class="form_control">
-												<option>Select Office</option>
-												<t t-foreach="offices" t-as="office">
-													<option t-att-value="office.id">
-														<t t-out="office.name" />
+											<label class="col-sm-4 col-form-label" for="user">Responsable *</label>
+											<select name="user" id="user" class="form_control">
+												<option>Select Responsable</option>
+												<t t-foreach="user" t-as="user">
+													<option t-att-value="user.id">
+														<t t-out="user.name" />
 													</option>
 												</t>
 											</select>
 										</div>
 										<div calss="form-group">
-											<label class="col-sm-2 col-form-label" for="code">Code</label>
+											<label class="col-sm-4 col-form-label" for="offices">Office *</label>
+											<select name="offices" id="offices" class="form_control">
+												<option>Select Office</option>
+												<t t-foreach="offices" t-as="offices">
+													<option t-att-value="offices.id">
+														<t t-out="offices.name" />
+													</option>
+												</t>
+											</select>
+										</div>
+										<div calss="form-group">
+											<label class="col-sm-2 col-form-label" for="code">Code *</label>
 											<input type="char" name="code" id="code" class="form_control" placeholder="maid code"/>
 										</div>
 										<div calss="form-group">
-											<label class="col-sm-2 col-form-label" for="name">Name</label>
+											<label class="col-sm-2 col-form-label" for="name">Name *</label>
 											<input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
 											<input type="char" name="name" id="name" class="form_control" placeholder="maid name"/>
 										</div>
@@ -788,7 +799,7 @@
 											<input type="email" name="email" id="email" class="form_control" placeholder="name@email.com"/>
 										</div>
 										<div calss="form-group">
-											<label class="col-sm-2 col-form-label" for="country">Country</label>
+											<label class="col-sm-4 col-form-label" for="country">Country *</label>
 											<select name="country" id="country" class="form_control">
 												<option>Select Country</option>
 												<t t-foreach="country" t-as="country">
@@ -804,8 +815,9 @@
 							<div class="col-sm-6">
 								<div class="card">
 									<div class="card-body">
+									<div>maid photo</div>
 										<div calss="form-group">
-											<label lass="col-sm-4 col-form-label" for="image">upload maid photo</label>
+											<label lass="col-sm-4 col-form-label" for="image">upload</label>
 											<div>
 												<input type="file" id="image" name="image" accept="image/*" class="form_control"/>
 											</div>
@@ -813,14 +825,16 @@
 									</div>
 								</div>
 							</div>
+
 						</div>
-						<div calss="row">
+						<div calss="form-group row">
+
 							<div class="col-sm-6">
 								<div class="card sm-8">
 									<div class="card-body">
 										<div>Job Information</div>
 										<div calss="form-group">
-											<label class="col-sm-4 col-form-label" for="jobs">Job</label>
+											<label class="col-sm-4 col-form-label" for="jobs">Job *</label>
 											<select name="jobs" id="jobs" class="form_control">
 												<option>Select Job</option>
 												<t t-foreach="jobs" t-as="job">
@@ -831,11 +845,11 @@
 											</select>
 										</div>
 										<div calss="form-group">
-											<label class="col-sm-4 col-form-label" for="salary">Monthly Salary</label>
+											<label class="col-sm-4 col-form-label" for="salary">Monthly Salary *</label>
 											<input type="number" name="salary" id="salary" class="form_control" placeholder="1000"/>
 										</div>
 										<div calss="form-group">
-											<label class="col-sm-4 col-form-label" for="currency">Currency</label>
+											<label class="col-sm-4 col-form-label" for="currency">Currency *</label>
 											<select name="currency" id="currency" class="form_control">
 												<option>Select Currency</option>
 												<t t-foreach="currency" t-as="currency">
@@ -847,7 +861,7 @@
 										</div>
 										<div calss="form-group">
 											<label class="col-sm-4 col-form-label" for="period">Contract Period</label>
-											<input type="number" name="period" id="period" class="form_control" placeholder="1,2,3"/>
+											<input type="char" name="period" id="period" class="form_control" placeholder="1,2,3"/>
 										</div>
 									</div>
 								</div>
@@ -867,7 +881,7 @@
 										<div calss="form-group">
 											<label class="col-sm-4 col-form-label" for="education">Education</label>
 											<select name="education" id="education" class="form_control">
-												<option>Select Education</option>
+												<option value="">Select Education</option>
 												<t t-foreach="education" t-as="education">
 													<option t-att-value="education.id">
 														<t t-out="education.name" />
@@ -879,13 +893,13 @@
 								</div>
 							</div>
 						</div>
-						<div calss="row">
+						<div calss="form-group row">
 							<div class="col-sm-6">
 								<div class="card sm-6">
 									<div class="card-body">
 										<div>Passport</div>
 										<div calss="form-group">
-											<label class="col-sm-4 col-form-label" for="passport_no">Passport No</label>
+											<label class="col-sm-4 col-form-label" for="passport_no">Passport No *</label>
 											<input type="char" name="passport_no" id="passport_no" class="form_control" placeholder="A123456789"/>
 										</div>
 										<div calss="form-group">
@@ -914,7 +928,7 @@
 										<div calss="form-group">
 											<label class="col-sm-2 col-form-label" for="religion">Religion</label>
 											<select name="religion" id="religion" class="form_control">
-												<option>Select Religion</option>
+												<option value="">Select Religion</option>
 												<option value="Baha i">Baha i</option>
 												<option value="Buddhism">Buddhism</option>
 												<option value="Christianity">Christianity</option>
@@ -933,27 +947,27 @@
 										<div calss="form-group">
 											<label class="col-sm-2 col-form-label" for="gender">Gender</label>
 											<select name="gender" id="gender" class="form_control">
-												<option>Select Gender</option>
+												<option value="">Select Gender</option>
 												<option value="male">Male</option>
 												<option value="femal">Femal</option>
 											</select>
 										</div>
 										<div calss="form-group">
 											<label class="col-sm-4 col-form-label" for="children_no">Children No</label>
-											<input type="number" name="children_no" id="children_no" class="form_control" placeholder="1,2,3"/>
+											<input type="char" name="children_no" id="children_no" class="form_control" placeholder="1,2,3"/>
 										</div>
 										<div calss="form-group">
-											<label class="col-sm-4 col-form-label" for="birthday">Birthday</label>
+											<label class="col-sm-4 col-form-label" for="birthday">Birthday *</label>
 											<input type="date" name="birthday" id="birthday" class="form_control" />
 										</div>
 										<div calss="form-group">
 											<label class="col-sm-4 col-form-label" for="place_of_birth">Place Of Birth</label>
-											<input type="char" name="place_of_birth" id="place_of_birth" class="form_control" />
+											<input type="char" name="place_of_birth" id="place_of_birth" class="form_control" placeholder="City Town"/>
 										</div>
 										<div calss="form-group">
 											<label class="col-sm-2 col-form-label" for="marital_status">Marital Status</label>
 											<select name="marital_status" id="marital_status" class="form_control">
-												<option>Select Marital Status</option>
+												<option value="">Select Marital Status</option>
 												<option value="single">single</option>
 												<option value="married">married</option>
 												<option value="widowed">widowed</option>
@@ -964,7 +978,7 @@
 								</div>
 							</div>
 						</div>
-						<div calss="row">
+						<div calss="form-group row">
 							<div class="col-sm-6">
 								<div class="card sm-8">
 									<div class="card-body">
@@ -974,16 +988,12 @@
 											<input type="char" name="skin_color" id="skin_color" class="form_control" placeholder="Fair"/>
 										</div>
 										<div calss="form-group">
-											<label class="col-sm-4 col-form-label" for="period">Age</label>
-											<input type="number" name="age" id="age" class="form_control"/>
-										</div>
-										<div calss="form-group">
 											<label class="col-sm-4 col-form-label" for="hight">Hight</label>
-											<input type="number" name="hight" id="hight" class="form_control" placeholder="5.4 inch"/>
+											<input type="char" name="hight" id="hight" class="form_control" placeholder="5.4 inch"/>
 										</div>
 										<div calss="form-group">
 											<label class="col-sm-4 col-form-label" for="weight">Weight</label>
-											<input type="number" name="weight" id="weight" class="form_control" placeholder="60 kg"/>
+											<input type="char" name="weight" id="weight" class="form_control" placeholder="60 kg"/>
 										</div>
 									</div>
 								</div>
@@ -1024,7 +1034,7 @@
 								</div>
 							</div>
 						</div>
-					</div>
+					<!-- </div> -->
 					<footer>
 						<div calss="form-group row">
 							<div calss="col-sm-10">
@@ -1032,7 +1042,7 @@
 							</div>
 						</div>
 					</footer>
-				</section>
+				</form>
 			</t>
 		</t>
 	</template>
