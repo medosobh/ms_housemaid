@@ -99,6 +99,7 @@ class maidsportal(CustomerPortal):
                 'identation': kw.get('identation'),
                 'religion': kw.get('religion'),
                 'gender': kw.get('gender'),
+                'children_no': kw.get('children_no'),
 
             }
             if not error_list:
