@@ -100,6 +100,19 @@ class maidsportal(CustomerPortal):
                 'religion': kw.get('religion'),
                 'gender': kw.get('gender'),
                 'children_no': kw.get('children_no'),
+                'birthday': kw.get('birthday'),
+                'place_of_birth': kw.get('place_of_birth'),
+                'marital_status': kw.get('marital_status'),
+                'skin_color': kw.get('skin_color'),
+                'hight': kw.get('hight'),
+                'weight': kw.get('weight'),
+                'skills_cleaning': kw.get('skills_cleaning'),
+                'skills_arabic_cooking': kw.get('skills_arabic_cooking'),
+                'skills_baby_sitting': kw.get('skills_baby_sitting'),
+                'skills_washing': kw.get('skills_washing'),
+                'skills_ironing': kw.get('skills_ironing'),
+                'skills_googlelocation': kw.get('skills_googlelocation'),
+                'skills_driving': kw.get('skills_driving'),
 
             }
             if not error_list:

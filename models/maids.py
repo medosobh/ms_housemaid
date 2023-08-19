@@ -342,7 +342,7 @@ class maids(models.Model):
         required=False,
         tracking=True,
     )
-    weight = fields.Char(
+    weight = fields.Integer(
         string='Weight in kg',
         required=False,
         tracking=True,

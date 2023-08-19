@@ -752,9 +752,9 @@
 						<t t-out="error"/>
 					</div>
 				</t>
-				<section data-model_name="housmaid.maids">
+				<section>
 					<div class="float-container">
-						<div calss="row align-items-start">
+						<div calss="row">
 							<div class="col-sm-6">
 								<div class="card">
 									<div class="card-body">
@@ -948,7 +948,7 @@
 										</div>
 										<div calss="form-group">
 											<label class="col-sm-4 col-form-label" for="place_of_birth">Place Of Birth</label>
-											<input type="date" name="place_of_birth" id="place_of_birth" class="form_control" />
+											<input type="char" name="place_of_birth" id="place_of_birth" class="form_control" />
 										</div>
 										<div calss="form-group">
 											<label class="col-sm-2 col-form-label" for="marital_status">Marital Status</label>
@@ -964,45 +964,27 @@
 								</div>
 							</div>
 						</div>
-
 						<div calss="row">
 							<div class="col-sm-6">
 								<div class="card sm-8">
 									<div class="card-body">
 										<div>Personal Attribute</div>
-
-										<div calss="form-group row-md-6">
-											<label class="col-sm-4 col-form-label" for="jobs">Job</label>
-											<select name="jobs" id="jobs" class="form_control">
-												<option>Select Job</option>
-												<t t-foreach="jobs" t-as="job">
-													<option t-att-value="job.id">
-														<t t-out="job.name" />
-													</option>
-												</t>
-											</select>
+										<div calss="form-group">
+											<label class="col-sm-4 col-form-label" for="skin_color">Skin Color</label>
+											<input type="char" name="skin_color" id="skin_color" class="form_control" placeholder="Fair"/>
 										</div>
-										<div calss="form-group row-md-6">
-											<label class="col-sm-4 col-form-label" for="salary">Monthly Salary</label>
-											<input type="number" name="salary" id="salary" class="form_control" placeholder="1000"/>
+										<div calss="form-group">
+											<label class="col-sm-4 col-form-label" for="period">Age</label>
+											<input type="number" name="age" id="age" class="form_control"/>
 										</div>
-										<div calss="form-group row-md-6">
-											<label class="col-sm-4 col-form-label" for="currency">Currency</label>
-											<select name="currency" id="currency" class="form_control">
-												<option>Select Currency</option>
-												<t t-foreach="currency" t-as="currency">
-													<option t-att-value="currency.id">
-														<t t-out="currency.name" />
-													</option>
-												</t>
-											</select>
+										<div calss="form-group">
+											<label class="col-sm-4 col-form-label" for="hight">Hight</label>
+											<input type="number" name="hight" id="hight" class="form_control" placeholder="5.4 inch"/>
 										</div>
-										<div calss="form-group row-md-6">
-											<label class="col-sm-4 col-form-label" for="period">Contract Period</label>
-											<input type="number" name="period" id="period" class="form_control" placeholder="1,2,3"/>
+										<div calss="form-group">
+											<label class="col-sm-4 col-form-label" for="weight">Weight</label>
+											<input type="number" name="weight" id="weight" class="form_control" placeholder="60 kg"/>
 										</div>
-
-
 									</div>
 								</div>
 							</div>
@@ -1038,31 +1020,18 @@
 											<label class="col-sm-4 col-form-label" for="skills_driving">Drive License</label>
 											<input type="checkbox" name="skills_driving" id="skills_driving" class="form_control" placeholder="1000"/>
 										</div>
-
-
-
-
-
-
-
-
-										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-
-
-
-
-						<footer>
-							<div calss="form-group row">
-								<div calss="col-sm-10">
-									<button type="submit" calss="btn btn-primary" >Save Maid CV</button>
-								</div>
-							</div>
-						</footer>
 					</div>
+					<footer>
+						<div calss="form-group row">
+							<div calss="col-sm-10">
+								<button type="submit" calss="btn btn-primary" >Save Maid CV</button>
+							</div>
+						</div>
+					</footer>
 				</section>
 			</t>
 		</t>
