@@ -936,23 +936,22 @@
 												<option>Select Gender</option>
 												<option value="male">Male</option>
 												<option value="femal">Femal</option>
-											</option>
-										</select>
+											</select>
+										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-					<footer>
-						<div calss="form-group row">
-							<div calss="col-sm-10">
-								<button type="submit" calss="btn btn-primary" >Save Maid CV</button>
+						<footer>
+							<div calss="form-group row">
+								<div calss="col-sm-10">
+									<button type="submit" calss="btn btn-primary" >Save Maid CV</button>
+								</div>
 							</div>
-						</div>
-					</footer>
-				</div>
-			</section>
+						</footer>
+					</div>
+				</section>
+			</t>
 		</t>
-	</t>
-</template>
+	</template>
 </odoo>
