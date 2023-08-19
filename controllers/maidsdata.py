@@ -159,8 +159,6 @@ class maidsportal(CustomerPortal):
             'currency': currency,
             'education': education,
             'page_name': 'my_maids_portal_new_form_view',
-            # 'success_msg':success_msg,
-            # 'error_list': error_list,
         }
 
         return request.render(
