@@ -42,6 +42,8 @@
     'auto_install': False,
     'application': True,
     'assets': {
-
-    }
+        'web.assets_frontend': [
+            'ms_housemaid/static/src/js/custom_script.js',
+        ]
+    },
 }

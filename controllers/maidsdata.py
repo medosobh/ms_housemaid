@@ -44,22 +44,25 @@ class maidsportal(CustomerPortal):
         domain = [
             ('id', '=', user_office),
         ]
-        
-        offices = request.env['housemaid.offices'].sudo().search(domain, limit=1)
+
+        offices = request.env['housemaid.offices'].sudo().search(
+            domain, limit=1)
         jobs = request.env['housemaid.jobs'].sudo().search([])
         # country = request.env['res.country'].sudo().search([])
         country = offices.country_id
         currency = request.env['res.currency'].sudo().search([])
         education = request.env['housemaid.educations'].sudo().search([])
-        
-        religion = dict(request.env['housemaid.maids'].fields_get(allfields=['religion'])['religion']['selection'])
+
+        religion = dict(request.env['housemaid.maids'].fields_get(
+            allfields=['religion'])['religion']['selection'])
         print(religion)
         print(len(religion))
-        
-        gender = dict(request.env['housemaid.maids'].fields_get(allfields=['gender'])['gender']['selection'])
+
+        gender = dict(request.env['housemaid.maids'].fields_get(
+            allfields=['gender'])['gender']['selection'])
         print(gender)
         print(len(gender))
-        
+
         new_maid_url = '/my/maid/new'
 
         error_list = []
@@ -82,6 +85,24 @@ class maidsportal(CustomerPortal):
         if request.httprequest.method == "POST":
             print("post....")
             print(kw)
+            passport_issue_date = len(kw.get('passport_issue_date'))
+            if not passport_issue_date:
+                passport_issue_date = None
+            else:
+                passport_issue_date = kw.get('passport_issue_date')
+
+            passport_expire_date = len(kw.get('passport_expire_date'))
+            if not passport_expire_date:
+                passport_expire_date = None
+            else:
+                passport_expire_date = kw.get('passport_expire_date')
+
+            birthday = len(kw.get('birthday'))
+            if not birthday:
+                birthday = None
+            else:
+                birthday = kw.get('birthday')
+
             maid_vals = {
                 'user_id': kw.get('user'),
                 'offices_id': kw.get('offices'),
@@ -99,13 +120,13 @@ class maidsportal(CustomerPortal):
                 'educations_id': kw.get('education'),
                 'passport_no': kw.get('passport_no'),
                 'passport_place': kw.get('passport_place'),
-                'passport_issue_date': kw.get('passport_issue_date'),
-                'passport_expire_date': kw.get('passport_expire_date'),
+                'passport_issue_date': passport_issue_date,
+                'passport_expire_date': passport_expire_date,
                 'identation': kw.get('identation'),
                 'religion': kw.get('religion'),
                 'gender': kw.get('gender'),
                 'children_no': kw.get('children_no'),
-                'birthday': kw.get('birthday'),
+                'birthday': birthday,
                 'place_of_birth': kw.get('place_of_birth'),
                 'marital_status': kw.get('marital_status'),
                 'skin_color': kw.get('skin_color'),

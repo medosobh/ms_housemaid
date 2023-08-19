@@ -754,7 +754,7 @@
 				</t>
 				<form method="POST" class="form-inline">
 					<!-- <div class="container"> -->
-						<div calss="form-group row">
+						<div calss="form-group row justify-content-start">
 							<div class="col-sm-6">
 								<div class="card">
 									<div class="card-body">
@@ -903,16 +903,16 @@
 											<input type="char" name="passport_no" id="passport_no" class="form_control" placeholder="A123456789"/>
 										</div>
 										<div calss="form-group">
-											<label class="col-sm-4 col-form-label" for="passport_place">Passport Place</label>
+											<label class="col-sm-4 col-form-label" for="passport_place">Issue Place</label>
 											<input type="char" name="passport_place" id="passport_place" class="form_control" placeholder="City Town"/>
 										</div>
 										<div calss="form-group">
-											<label class="col-sm-4 col-form-label" for="passport_issue_date">Passport Issue Date</label>
-											<input type="date" name="passport_issue_date" id="passport_issue_date" class="form_control" />
+											<label class="col-sm-4 col-form-label" for="passport_issue_date">Issue Date</label>
+											<input type="date" name="passport_issue_date" id="passport_issue_date" class="form_control o_website_form_date" />
 										</div>
 										<div calss="form-group">
-											<label class="col-sm-4 col-form-label" for="passport_expire_date">Passport Expire Date</label>
-											<input type="date" name="passport_expire_date" id="passport_expire_date" class="form_control" />
+											<label class="col-sm-4 col-form-label" for="passport_expire_date">Expire Date</label>
+											<input type="date" name="passport_expire_date" id="passport_expire_date" class="form_control o_website_form_date"/>
 										</div>
 										<div calss="form-group">
 											<label class="col-sm-4 col-form-label" for="identation">Identation</label>
@@ -958,7 +958,7 @@
 										</div>
 										<div calss="form-group">
 											<label class="col-sm-4 col-form-label" for="birthday">Birthday *</label>
-											<input type="date" name="birthday" id="birthday" class="form_control" />
+											<input type="date" name="birthday" id="birthday" class="form_control o_website_form_date"/>
 										</div>
 										<div calss="form-group">
 											<label class="col-sm-4 col-form-label" for="place_of_birth">Place Of Birth</label>
