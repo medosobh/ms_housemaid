@@ -4,7 +4,8 @@
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="doc">
                 <t t-call="web.external_layout">
-                    <div class="page">
+                    <!-- <div class="page"> -->
+                    <div class="page" t-attf-style="background-image:url('/ms_housemaid/static/img/maid.png'); background-size:195mm 282mm; width:195mm; height:282mm;">
                         <h3>First Report</h3>
                         <div calss="row">
                             <div class="col">
@@ -12,7 +13,7 @@
                                     <img t-att-src="image_data_uri(doc.image)" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;height: 150px;"/>
                                 </t>
                                 <t t-else="">
-                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;" />
+                                    <img src="/ms_housemaid/static/img/maid.png" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;" />
                                 </t>
                             </div>
                             <div class="col">
@@ -39,14 +40,48 @@
                                 </p>
                             </div>
                             <div class="col">
-                                <p t-out="doc.jobs_id.name" />
-                                <p t-out="doc.monthly_salary" />
-                                <p t-out="doc.currency_id.name" />
-                                <p t-out="doc.contract_period" />
+                                <p> Job :
+                                    <span t-out="doc.jobs_id.name" />
+                                </p>
+                                <p> Monthly Salary:
+                                    <span t-out="doc.monthly_salary" />
+                                </p>
+                                <p> Currancy:
+                                    <span t-out="doc.currency_id.name" />
+                                </p>
+                                <p> Contract Period:
+                                    <span t-out="doc.contract_period" />
+                                </p>
                             </div>
                             <div class="col">
-                                <p t-out="doc.arabic_lang" />
+                                <p> Arabic Language:
+                                    <t t-if="maids.arabic_lang">
+														Yes:
+                                        <input type="checkbox" id="checkbox_arabic_lang_true" checked="checked" />
+														No:
+                                        <input type="checkbox" id="checkbox_arabic_lang_false"/>
+                                    </t>
+                                    <t t-if="not maids.arabic_lang">
+														Yes:
+                                        <input type="checkbox" id="checkbox_arabic_lang_true" />
+														No:
+                                        <input type="checkbox" id="checkbox_arabic_lang_false" checked="checked"/>
+                                    </t>
+                                </p>
                                 <p t-out="doc.english_lang" />
+                                <t t-if="maids.english_lang">
+														Yes:
+                                        <input type="checkbox" id="checkbox_english_lang_true" checked="checked" />
+														No:
+                                        <input type="checkbox" id="checkbox_english_lang_false"/>
+                                    </t>
+                                    <t t-if="not maids.english_lang">
+														Yes:
+                                        <input type="checkbox" id="checkbox_english_lang_true" />
+														No:
+                                        <input type="checkbox" id="checkbox_english_lang_false" checked="checked"/>
+                                    </t>
+                                    
                                 <p t-out="doc.educations_id.name" />
                             </div>
                             <div class="col">

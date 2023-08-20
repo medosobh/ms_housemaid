@@ -124,7 +124,7 @@
 											<img t-att-src="image_data_uri(maids.image)" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;height: 150px;"/>
 										</t>
 										<t t-else="">
-											<img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;" />
+											<img src="/ms_housemaid/static/img/maid.png" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;" />
 										</t>
 										<h5 class="my-3">
 											<t t-out="maids.name" />
@@ -307,7 +307,18 @@
 											</div>
 											<div class="col-sm-7">
 												<p class="form-check form-switch mb-0">
-													<t t-out="maids.arabic_lang" />
+													<t t-if="maids.arabic_lang">
+														Yes:
+														<input type="checkbox" id="checkbox_arabic_lang_true" checked="checked" disabled="True"/>
+														No:
+														<input type="checkbox" id="checkbox_arabic_lang_false" disabled="True"/>
+													</t>
+													<t t-if="not maids.arabic_lang">
+														Yes:
+														<input type="checkbox" id="checkbox_arabic_lang_true" disabled="True"/>
+														No:
+														<input type="checkbox" id="checkbox_arabic_lang_false" checked="checked" disabled="True"/>
+													</t>
 												</p>
 											</div>
 										</div>
@@ -320,7 +331,18 @@
 											</div>
 											<div class="col-sm-7">
 												<p class="text-muted mb-0">
-													<t t-out="maids.english_lang" />
+													<t t-if="maids.english_lang">
+														Yes:
+														<input type="checkbox" id="checkbox_english_lang_true" checked="checked" disabled="True"/>
+														No:
+														<input type="checkbox" id="checkbox_english_lang_false" disabled="True"/>
+													</t>
+													<t t-if="not maids.english_lang">
+														Yes:
+														<input type="checkbox" id="checkbox_english_lang_true" disabled="True"/>
+														No:
+														<input type="checkbox" id="checkbox_english_lang_false" checked="checked" disabled="True"/>
+													</t>
 												</p>
 											</div>
 										</div>
@@ -579,7 +601,18 @@
 											</div>
 											<div class="col-sm-7">
 												<p class="text-muted mb-0">
-													<t t-out="maids.skills_cleaning" />
+													<t t-if="maids.skills_cleaning">
+														Yes:
+														<input type="checkbox" id="checkbox_skills_cleaning_true" checked="checked" disabled="True"/>
+														No:
+														<input type="checkbox" id="checkbox_skills_cleaning_false" disabled="True"/>
+													</t>
+													<t t-if="not maids.skills_cleaning">
+														Yes:
+														<input type="checkbox" id="checkbox_skills_cleaning_true" disabled="True"/>
+														No:
+														<input type="checkbox" id="checkbox_skills_cleaning_false" checked="checked" disabled="True"/>
+													</t>
 												</p>
 											</div>
 										</div>
@@ -592,7 +625,18 @@
 											</div>
 											<div class="col-sm-7">
 												<p class="text-muted mb-0">
-													<t t-out="maids.skills_arabic_cooking" />
+													<t t-if="maids.skills_arabic_cooking">
+														Yes:
+														<input type="checkbox" id="checkbox_skills_arabic_cooking_true" checked="checked" disabled="True"/>
+														No:
+														<input type="checkbox" id="checkbox_skills_arabic_cooking_false" disabled="True"/>
+													</t>
+													<t t-if="not maids.skills_arabic_cooking">
+														Yes:
+														<input type="checkbox" id="checkbox_skills_arabic_cooking_true" disabled="True"/>
+														No:
+														<input type="checkbox" id="checkbox_skills_arabic_cooking_false" checked="checked" disabled="True"/>
+													</t>
 												</p>
 											</div>
 										</div>
@@ -605,7 +649,18 @@
 											</div>
 											<div class="col-sm-7">
 												<p class="text-muted mb-0">
-													<t t-out="maids.skills_baby_sitting" />
+													<t t-if="maids.skills_baby_sitting">
+														Yes:
+														<input type="checkbox" id="checkbox_skills_baby_sitting_true" checked="checked" disabled="True"/>
+														No:
+														<input type="checkbox" id="checkbox_skills_baby_sitting_false" disabled="True"/>
+													</t>
+													<t t-if="not maids.skills_baby_sitting">
+														Yes:
+														<input type="checkbox" id="checkbox_skills_baby_sitting_true" disabled="True"/>
+														No:
+														<input type="checkbox" id="checkbox_skills_baby_sitting_false" checked="checked" disabled="True"/>
+													</t>
 												</p>
 											</div>
 										</div>
@@ -618,7 +673,18 @@
 											</div>
 											<div class="col-sm-7">
 												<p class="text-muted mb-0">
-													<t t-out="maids.skills_washing" />
+													<t t-if="maids.skills_washing">
+														Yes:
+														<input type="checkbox" id="checkbox_skills_washing_true" checked="checked" disabled="True"/>
+														No:
+														<input type="checkbox" id="checkbox_skills_washing_false" disabled="True"/>
+													</t>
+													<t t-if="not maids.skills_washing">
+														Yes:
+														<input type="checkbox" id="checkbox_skills_washing_true" disabled="True"/>
+														No:
+														<input type="checkbox" id="checkbox_skills_washing_false" checked="checked" disabled="True"/>
+													</t>
 												</p>
 											</div>
 										</div>
@@ -632,6 +698,18 @@
 											<div class="col-sm-7">
 												<p class="text-muted mb-0">
 													<t t-out="maids.skills_ironing" />
+													<t t-if="maids.skills_ironing">
+														Yes:
+														<input type="checkbox" id="checkbox_skills_ironing_true" checked="checked" disabled="True"/>
+														No:
+														<input type="checkbox" id="checkbox_skills_ironing_false" disabled="True"/>
+													</t>
+													<t t-if="not maids.skills_ironing">
+														Yes:
+														<input type="checkbox" id="checkbox_skills_ironing_true" disabled="True"/>
+														No:
+														<input type="checkbox" id="checkbox_skills_ironing_false" checked="checked" disabled="True"/>
+													</t>
 												</p>
 											</div>
 										</div>
@@ -758,7 +836,7 @@
 							<div class="col-sm-6">
 								<div class="card">
 									<div class="card-body">
-									<div>maid photo</div>
+										<div>maid photo</div>
 										<div calss="form-group">
 											<label lass="col-sm-4 col-form-label" for="image">upload</label>
 											<div>
@@ -826,10 +904,7 @@
 								</div>
 							</div>
 						</div>
-
-
 						<div calss="form-group row">
-
 							<div class="col-sm-6">
 								<div class="card sm-8">
 									<div class="card-body">
