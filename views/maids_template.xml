@@ -407,7 +407,7 @@
 											</div>
 											<div class="col-sm-7">
 												<p class="text-muted mb-0">
-													<t t-out="maid.Identation" />
+													<t t-out="maid.identation" />
 												</p>
 											</div>
 										</div>
@@ -753,8 +753,21 @@
 					</div>
 				</t>
 				<form method="POST" class="form-inline">
-					<!-- <div class="container"> -->
-						<div calss="form-group row justify-content-start">
+					<div class="container">
+						<div calss="form-group row">
+							<div class="col-sm-6">
+								<div class="card">
+									<div class="card-body">
+									<div>maid photo</div>
+										<div calss="form-group">
+											<label lass="col-sm-4 col-form-label" for="image">upload</label>
+											<div>
+												<input type="file" id="image" name="image" accept="image/*" class="form_control"/>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
 							<div class="col-sm-6">
 								<div class="card">
 									<div class="card-body">
@@ -762,7 +775,7 @@
 										<div calss="form-group">
 											<label class="col-sm-4 col-form-label" for="user">Responsable *</label>
 											<select name="user" id="user" class="form_control">
-												<option>Select Responsable</option>
+												<option value="">Select Responsable</option>
 												<t t-foreach="user" t-as="user">
 													<option t-att-value="user.id">
 														<t t-out="user.name" />
@@ -773,7 +786,7 @@
 										<div calss="form-group">
 											<label class="col-sm-4 col-form-label" for="offices">Office *</label>
 											<select name="offices" id="offices" class="form_control">
-												<option>Select Office</option>
+												<option value="">Select Office</option>
 												<t t-foreach="offices" t-as="offices">
 													<option t-att-value="offices.id">
 														<t t-out="offices.name" />
@@ -801,7 +814,7 @@
 										<div calss="form-group">
 											<label class="col-sm-4 col-form-label" for="country">Country *</label>
 											<select name="country" id="country" class="form_control">
-												<option>Select Country</option>
+												<option value="">Select Country</option>
 												<t t-foreach="country" t-as="country">
 													<option t-att-value="country.id">
 														<t t-out="country.name" />
@@ -812,21 +825,9 @@
 									</div>
 								</div>
 							</div>
-							<div class="col-sm-6">
-								<div class="card">
-									<div class="card-body">
-									<div>maid photo</div>
-										<div calss="form-group">
-											<label lass="col-sm-4 col-form-label" for="image">upload</label>
-											<div>
-												<input type="file" id="image" name="image" accept="image/*" class="form_control"/>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-
 						</div>
+
+
 						<div calss="form-group row">
 
 							<div class="col-sm-6">
@@ -836,7 +837,7 @@
 										<div calss="form-group">
 											<label class="col-sm-4 col-form-label" for="jobs">Job *</label>
 											<select name="jobs" id="jobs" class="form_control">
-												<option>Select Job</option>
+												<option value="">Select Job</option>
 												<t t-foreach="jobs" t-as="job">
 													<option t-att-value="job.id">
 														<t t-out="job.name" />
@@ -851,7 +852,7 @@
 										<div calss="form-group">
 											<label class="col-sm-4 col-form-label" for="currency">Currency *</label>
 											<select name="currency" id="currency" class="form_control">
-												<option>Select Currency</option>
+												<option value="">Select Currency</option>
 												<t t-foreach="currency" t-as="currency">
 													<option t-att-value="currency.id">
 														<t t-out="currency.name" />
@@ -1034,7 +1035,7 @@
 								</div>
 							</div>
 						</div>
-					<!-- </div> -->
+					</div>
 					<footer>
 						<div calss="form-group row">
 							<div calss="col-sm-10">

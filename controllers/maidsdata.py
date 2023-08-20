@@ -64,27 +64,42 @@ class maidsportal(CustomerPortal):
         print(len(gender))
 
         new_maid_url = '/my/maid/new'
-
-        error_list = []
-        maid_vals = {}
-        if not kw.get('user'):
-            error_list.append('User is mandatory.')
-        if not kw.get('offices'):
-            error_list.append('Office is mandatory.')
-        if not kw.get('code'):
-            error_list.append('Code is mandatory.')
-        if not kw.get('name'):
-            error_list.append('Name is mandatory.')
-        if not kw.get('jobs'):
-            error_list.append('Job is mandatory.')
-        if not kw.get('salary'):
-            error_list.append('Monthly Salary is mandatory.')
-        if not kw.get('currency'):
-            error_list.append('Currency is mandatory.')
+        
+        vals = {
+            'default_url': new_maid_url,
+            'user': curr_user,
+            'offices': offices,
+            'jobs': jobs,
+            'country': country,
+            'currency': currency,
+            'education': education,
+            'page_name': 'my_maids_portal_new_form_view',
+        }
 
         if request.httprequest.method == "POST":
             print("post....")
             print(kw)
+            maid_vals = {}
+            error_list = []
+        
+            if not kw.get('user'):
+                error_list.append('User is mandatory.')
+            if not kw.get('offices'):
+                error_list.append('Office is mandatory.')
+            if not kw.get('code'):
+                error_list.append('Code is mandatory.')
+            if not kw.get('name'):
+                error_list.append('Name is mandatory.')
+            if not kw.get('country'):
+                error_list.append('Country is mandatory.')
+            if not kw.get('jobs'):
+                error_list.append('Job is mandatory.')
+            if not kw.get('salary'):
+                error_list.append('Monthly Salary is mandatory.')
+            if not kw.get('currency'):
+                error_list.append('Currency is mandatory.')
+            if not kw.get('passport_no'):
+                error_list.append('Passport No is mandatory.')
             passport_issue_date = len(kw.get('passport_issue_date'))
             if not passport_issue_date:
                 passport_issue_date = None
@@ -100,6 +115,7 @@ class maidsportal(CustomerPortal):
             birthday = len(kw.get('birthday'))
             if not birthday:
                 birthday = None
+                error_list.append('Birthday is mandatory.')
             else:
                 birthday = kw.get('birthday')
 
@@ -113,7 +129,7 @@ class maidsportal(CustomerPortal):
                 'country_id': kw.get('country'),
                 'jobs_id': kw.get('jobs'),
                 'monthly_salary': kw.get('salary'),
-                'currency_id': int(kw.get('currency')),
+                'currency_id': kw.get('currency'),
                 'contract_period': kw.get('period'),
                 'arabic_lang': kw.get('arabic'),
                 'english_lang': kw.get('english'),
@@ -150,21 +166,9 @@ class maidsportal(CustomerPortal):
         else:
             print("get....")
 
-        vals = {
-            'default_url': new_maid_url,
-            'user': curr_user,
-            'offices': offices,
-            'jobs': jobs,
-            'country': country,
-            'currency': currency,
-            'education': education,
-            'page_name': 'my_maids_portal_new_form_view',
-        }
-
         return request.render(
             'ms_housemaid.my_maids_portal_new_form_view',
             vals,
-
         )
 
     @http.route(['/my/maids', '/my/maids/page/<int:page>'], type="http", website=True, auth='user')
@@ -270,4 +274,4 @@ class maidsportal(CustomerPortal):
     @http.route(['/my/maids/print/<model("housemaid.maids"):maids_id>'], website=True, auth='user', type="http")
     def my_maids_report_print(self, maids_id, **kw):
         vals = super()._prepare_portal_layout_values()
-        return self._show_report(self, model=maids_id, report_type='pdf', report_ref='', download=True)
+        return self._show_report(self, model=maids_id, report_type='pdf', report_ref='report_template_maid_resume', download=True)

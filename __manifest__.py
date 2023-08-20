@@ -15,6 +15,7 @@
         'resource',
         'web_kanban_gauge',
         'portal',
+        'web',
     ],
     'data': [
         'security/security.xml',
@@ -34,6 +35,7 @@
         'views/closereason.xml',
         'views/closedtickets.xml',
         'views/educations.xml',
+        'report/maid_report_template.xml',
     ],
     'demo': [
         ''
