@@ -150,6 +150,8 @@
                                 string="Addtional Information">
                                 <field name="partner_id"/>
                                 <field name="description"/>
+                                <field name="resume" filename="resume_name"/>
+                                <field name="resume_name" invisible="1"/>
                                 <field name="active"
                                     invisible="1"/>
                             </group>
@@ -262,7 +264,7 @@
                         <div t-attf-class="oe_kanban_global_click o_kanban_record_has_image_fill">
                             <t t-if="record.image.raw_value">
                                 <div class="o_kanban_image_fill_left d-none d-md-block"
-                                    t-attf-style="background-image:url('#{kanban_image('housemaid.maids', 'image', record.id.raw_value)}')"/>
+                                    t-att-src="image_data_uri(maids.image)"/>
                             </t>
                             <t t-else="">
                                 <img class="o_kanban_image"

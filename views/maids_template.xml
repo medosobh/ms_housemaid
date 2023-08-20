@@ -143,6 +143,12 @@
 												Download
 											</a>
 										</div>
+										<p class="text-muted mb-4">
+											<a calss="fa-download">
+											Download Attached Resume
+											</a>
+											
+										</p>
 									</div>
 								</div>
 							</div>
@@ -853,21 +859,9 @@
 					</div>
 				</t>
 				<form method="POST" class="form-inline">
-					<div class="container">
-						<div calss="form-group row">
-							<div class="col-sm-6">
-								<div class="card">
-									<div class="card-body">
-										<div>maid photo</div>
-										<div calss="form-group">
-											<label lass="col-sm-4 col-form-label" for="image">upload</label>
-											<div>
-												<input type="file" id="image" name="image" accept="image/*" class="form_control"/>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
+					<div class="oe_structure"/>
+					<div class="container py-5">
+						<div class="form-group row">
 							<div class="col-sm-6">
 								<div class="card">
 									<div class="card-body">
@@ -925,8 +919,22 @@
 									</div>
 								</div>
 							</div>
+							<div class="col-sm-6">
+								<div class="card">
+									<div class="card-body">
+										<div>maid photo</div>
+										<div calss="form-group">
+											<label lass="col-sm-4 col-form-label" for="image">upload</label>
+											<div>
+												<input type="file" id="image" name="image" accept="image/*" class="form_control"/>
+												
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
-						<div calss="form-group row">
+						<div class="form-group row">
 							<div class="col-sm-6">
 								<div class="card sm-8">
 									<div class="card-body">
@@ -991,7 +999,7 @@
 								</div>
 							</div>
 						</div>
-						<div calss="form-group row">
+						<div class="form-group row">
 							<div class="col-sm-6">
 								<div class="card sm-6">
 									<div class="card-body">
@@ -1051,13 +1059,11 @@
 											<label class="col-sm-2 col-form-label" for="gender">Gender</label>
 											<select name="gender" id="gender" class="form_control">
 												<option value="">Select Gender</option>
-
 												<t t-foreach="gender" t-as="gender">
 													<option t-att-value="gender">
 														<t t-out="gender" />
 													</option>
 												</t>
-
 												<!-- <option value="male">Male</option> -->
 												<!-- <option value="femal">Femal</option> -->
 											</select>
@@ -1083,7 +1089,6 @@
 														<t t-out="marital_status" />
 													</option>
 												</t>
-
 												<!-- <option value="single">single</option> -->
 												<!-- <option value="married">married</option> -->
 												<!-- <option value="widowed">widowed</option> -->
@@ -1094,7 +1099,7 @@
 								</div>
 							</div>
 						</div>
-						<div calss="form-group row">
+						<div class="form-group row">
 							<div class="col-sm-6">
 								<div class="card sm-8">
 									<div class="card-body">
@@ -1152,7 +1157,7 @@
 						</div>
 					</div>
 					<footer>
-						<div calss="form-group row">
+						<div class="form-group row">
 							<div calss="col-sm-10">
 								<button type="submit" calss="btn btn-primary" >Save Maid CV</button>
 							</div>

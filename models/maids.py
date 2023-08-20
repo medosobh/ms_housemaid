@@ -455,3 +455,15 @@ class maids(models.Model):
         default=True,
         tracking=True,
     )
+    resume = fields.Binary(
+        string="Resume File",
+        help='Resume, one file to upload',
+        required=False,
+        tracking=True,
+    )
+    resume_name = fields.Char(
+        string='Resume Filename',
+        required=False,
+        tracking=True
+    )
+    
