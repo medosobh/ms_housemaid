@@ -1027,7 +1027,12 @@
 											<label class="col-sm-2 col-form-label" for="religion">Religion</label>
 											<select name="religion" id="religion" class="form_control">
 												<option value="">Select Religion</option>
-												<option value="Baha i">Baha i</option>
+												<t t-foreach="religion" t-as="religion">
+													<option t-att-value="religion">
+														<t t-out="religion" />
+													</option>
+												</t>
+												<!-- <option value="Baha i">Baha i</option>
 												<option value="Buddhism">Buddhism</option>
 												<option value="Christianity">Christianity</option>
 												<option value="Confucianism">Confucianism</option>
@@ -1039,15 +1044,22 @@
 												<option value="Sikhism">Sikhism</option>
 												<option value="Taoism">Taoism</option>
 												<option value="Zoroastrianism">Zoroastrianism</option>
-												<option value="Buddhism">Buddhism</option>
+												<option value="Buddhism">Buddhism</option> -->
 											</select>
 										</div>
 										<div calss="form-group">
 											<label class="col-sm-2 col-form-label" for="gender">Gender</label>
 											<select name="gender" id="gender" class="form_control">
 												<option value="">Select Gender</option>
-												<option value="male">Male</option>
-												<option value="femal">Femal</option>
+
+												<t t-foreach="gender" t-as="gender">
+													<option t-att-value="gender">
+														<t t-out="gender" />
+													</option>
+												</t>
+
+												<!-- <option value="male">Male</option> -->
+												<!-- <option value="femal">Femal</option> -->
 											</select>
 										</div>
 										<div calss="form-group">
@@ -1066,10 +1078,16 @@
 											<label class="col-sm-2 col-form-label" for="marital_status">Marital Status</label>
 											<select name="marital_status" id="marital_status" class="form_control">
 												<option value="">Select Marital Status</option>
-												<option value="single">single</option>
-												<option value="married">married</option>
-												<option value="widowed">widowed</option>
-												<option value="divorced">divorced</option>
+												<t t-foreach="marital_status" t-as="marital_status">
+													<option t-att-value="marital_status">
+														<t t-out="marital_status" />
+													</option>
+												</t>
+
+												<!-- <option value="single">single</option> -->
+												<!-- <option value="married">married</option> -->
+												<!-- <option value="widowed">widowed</option> -->
+												<!-- <option value="divorced">divorced</option> -->
 											</select>
 										</div>
 									</div>

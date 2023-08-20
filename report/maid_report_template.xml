@@ -5,252 +5,256 @@
             <t t-foreach="docs" t-as="doc">
                 <t t-call="web.external_layout">
                     <div class="page">
-                    <!-- <div class="page" t-attf-style="background-image:url('/ms_housemaid/static/img/maid.png'); background-size:195mm 282mm; width:195mm; height:282mm;"> -->
-                        <h3>First Report</h3>
-                        <div calss="row">
-                            <div class="col">
-                                <t t-if="doc.image">
-                                    <img t-att-src="image_data_uri(doc.image)" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;height: 150px;"/>
-                                </t>
-                                <t t-else="">
-                                    <img src="/ms_housemaid/static/img/maid.png" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;" />
-                                </t>
-                            </div>
-                            <div class="col">
-                                <p> State:
-                                    <span t-out="doc.state" />
-                                </p>
-                                <p> Office:
-                                    <span t-out="doc.offices_id.name" />
-                                </p>
-                                <p> Code:
-                                    <span t-out="doc.code" />
-                                </p>
-                                <p> Name:
+                        <!-- <div class="page" t-attf-style="background-image:url('/ms_housemaid/static/img/maid.png'); background-size:195mm 282mm; width:195mm; height:282mm;"> -->
+                        <div class="container py-5">
+                            <div calss="row">
+                                <h4>
                                     <span t-out="doc.name" />
-                                </p>
-                                <p> Phone:
-                                    <span t-out="doc.phone" />
-                                </p>
-                                <p> Email:
-                                    <span t-out="doc.email" />
-                                </p>
-                                <p> Country:
-                                    <span t-out="doc.country_id.name" />
-                                </p>
-                            </div>
-                            <div class="col">
-                                <p> Job :
-                                    <span t-out="doc.jobs_id.name" />
-                                </p>
-                                <p> Monthly Salary:
-                                    <span t-out="doc.monthly_salary" />
-                                </p>
-                                <p> Currancy:
-                                    <span t-out="doc.currency_id.name" />
-                                </p>
-                                <p> Contract Period:
-                                    <span t-out="doc.contract_period" />
-                                </p>
-                            </div>
-                            <div class="col">
-                                <p> Arabic Language:
-                                    <t t-if="doc.arabic_lang">
-														Yes:
-                                        <input type="checkbox" id="checkbox_arabic_lang_true" checked="checked" />
-														No:
-                                        <input type="checkbox" id="checkbox_arabic_lang_false"/>
+                                </h4>
+                                <div class="col">
+                                    <t t-if="doc.image">
+                                        <img t-att-src="image_data_uri(doc.image)" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;height: 150px;"/>
                                     </t>
-                                    <t t-if="not doc.arabic_lang">
-														Yes:
-                                        <input type="checkbox" id="checkbox_arabic_lang_true" />
-														No:
-                                        <input type="checkbox" id="checkbox_arabic_lang_false" checked="checked"/>
+                                    <t t-else="">
+                                        <img src="/ms_housemaid/static/img/maid.png" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;" />
                                     </t>
-                                </p>
-                                <p> English Language:
-                                    <t t-if="doc.english_lang">
+                                </div>
+                                <div class="col">
+                                    <p> State:
+                                        <span t-out="doc.state" />
+                                    </p>
+                                    <p> Office:
+                                        <span t-out="doc.offices_id.name" />
+                                    </p>
+                                    <p> Code:
+                                        <span t-out="doc.code" />
+                                    </p>
+                                    <p> Name:
+                                        <span t-out="doc.name" />
+                                    </p>
+                                    <p> Phone:
+                                        <span t-out="doc.phone" />
+                                    </p>
+                                    <p> Email:
+                                        <span t-out="doc.email" />
+                                    </p>
+                                    <p> Country:
+                                        <span t-out="doc.country_id.name" />
+                                    </p>
+                                </div>
+                                <div class="col">
+                                    <p> Job :
+                                        <span t-out="doc.jobs_id.name" />
+                                    </p>
+                                    <p> Monthly Salary:
+                                        <span t-out="doc.monthly_salary" />
+                                    </p>
+                                    <p> Currancy:
+                                        <span t-out="doc.currency_id.name" />
+                                    </p>
+                                    <p> Contract Period:
+                                        <span t-out="doc.contract_period" />
+                                    </p>
+                                </div>
+                                <div class="col">
+                                    <p> Arabic Language:
+                                        <t t-if="doc.arabic_lang">
 														Yes:
-                                        <input type="checkbox" id="checkbox_english_lang_true" checked="checked" />
+                                            <input type="checkbox" id="checkbox_arabic_lang_true" checked="checked" />
 														No:
-                                        <input type="checkbox" id="checkbox_english_lang_false"/>
-                                    </t>
-                                    <t t-if="not doc.english_lang">
+                                            <input type="checkbox" id="checkbox_arabic_lang_false"/>
+                                        </t>
+                                        <t t-if="not doc.arabic_lang">
 														Yes:
-                                        <input type="checkbox" id="checkbox_english_lang_true" />
+                                            <input type="checkbox" id="checkbox_arabic_lang_true" />
 														No:
-                                        <input type="checkbox" id="checkbox_english_lang_false" checked="checked"/>
-                                    </t>
-                                </p>
-                                <p> Eductaion:
-                                    <span t-out="doc.educations_id.name" />
-                                </p>
-                            </div>
-                            <div class="col">
-                                <p class="mb-4">
+                                            <input type="checkbox" id="checkbox_arabic_lang_false" checked="checked"/>
+                                        </t>
+                                    </p>
+                                    <p> English Language:
+                                        <t t-if="doc.english_lang">
+														Yes:
+                                            <input type="checkbox" id="checkbox_english_lang_true" checked="checked" />
+														No:
+                                            <input type="checkbox" id="checkbox_english_lang_false"/>
+                                        </t>
+                                        <t t-if="not doc.english_lang">
+														Yes:
+                                            <input type="checkbox" id="checkbox_english_lang_true" />
+														No:
+                                            <input type="checkbox" id="checkbox_english_lang_false" checked="checked"/>
+                                        </t>
+                                    </p>
+                                    <p> Eductaion:
+                                        <span t-out="doc.educations_id.name" />
+                                    </p>
+                                </div>
+                                <div class="col">
+                                    <p class="mb-4">
 											Passport
 										</p>
-                                <p> Passport No:
-                                    <span t-out="doc.passport_no" />
-                                </p>
-                                <p> Passport Place:
-                                    <span t-out="doc.passport_place" />
-                                </p>
-                                <p> Issue Date:
-                                    <span t-out="doc.passport_issue_date" />
-                                </p>
-                                <p> Expire Date:
-                                    <span t-out="doc.passport_expire_date" />
-                                </p>
-                                <p> Identation No:
-                                    <span t-out="doc.identation" />
-                                </p>
-                            </div>
-                            <div class="col">
-                                <p class="mb-4">
+                                    <p> Passport No:
+                                        <span t-out="doc.passport_no" />
+                                    </p>
+                                    <p> Passport Place:
+                                        <span t-out="doc.passport_place" />
+                                    </p>
+                                    <p> Issue Date:
+                                        <span t-out="doc.passport_issue_date" />
+                                    </p>
+                                    <p> Expire Date:
+                                        <span t-out="doc.passport_expire_date" />
+                                    </p>
+                                    <p> Identation No:
+                                        <span t-out="doc.identation" />
+                                    </p>
+                                </div>
+                                <div class="col">
+                                    <p class="mb-4">
 											Personal information
 										</p>
-                                <p> Religion:
-                                    <span t-out="doc.religion" />
-                                </p>
-                                <p> Gender:
-                                    <span t-out="doc.gender" />
-                                </p>
-                                <p> Children No:
-                                    <span t-out="doc.children_no" />
-                                </p>
-                                <p> Birthday:
-                                    <span t-out="doc.birthday" />
-                                </p>
-                                <p> Place Of Birth:
-                                    <span t-out="doc.place_of_birth" />
-                                </p>
-                                <p> Marital Status:
-                                    <span t-out="doc.marital_status" />
-                                </p>
-                            </div>
-                            <div class="col">
-                                <p class="mb-4">
+                                    <p> Religion:
+                                        <span t-out="doc.religion" />
+                                    </p>
+                                    <p> Gender:
+                                        <span t-out="doc.gender" />
+                                    </p>
+                                    <p> Children No:
+                                        <span t-out="doc.children_no" />
+                                    </p>
+                                    <p> Birthday:
+                                        <span t-out="doc.birthday" />
+                                    </p>
+                                    <p> Place Of Birth:
+                                        <span t-out="doc.place_of_birth" />
+                                    </p>
+                                    <p> Marital Status:
+                                        <span t-out="doc.marital_status" />
+                                    </p>
+                                </div>
+                                <div class="col">
+                                    <p class="mb-4">
 											Personal Attribute
 										</p>
-                                <p> Skin Color:
-                                    <span t-out="doc.skin_color" />
-                                </p>
-                                <p> Age:
-                                    <span t-out="doc.age" />
-                                </p>
-                                <p> Hight:
-                                    <span t-out="doc.hight" />
-                                </p>
-                                <p> Weight:
-                                    <span t-out="doc.weight" />
-                                </p>
-                            </div>
-                            <div class="col">
-                                <p class="mb-4">
+                                    <p> Skin Color:
+                                        <span t-out="doc.skin_color" />
+                                    </p>
+                                    <p> Age:
+                                        <span t-out="doc.age" />
+                                    </p>
+                                    <p> Hight:
+                                        <span t-out="doc.hight" />
+                                    </p>
+                                    <p> Weight:
+                                        <span t-out="doc.weight" />
+                                    </p>
+                                </div>
+                                <div class="col">
+                                    <p class="mb-4">
 											Personal Skills
 								</p>
-                                <p> Cleaning:
-                                    <t t-if="doc.skills_cleaning">
+                                    <p> Cleaning:
+                                        <t t-if="doc.skills_cleaning">
 														Yes:
-                                        <input type="checkbox" id="checkbox_skills_cleaning_true" checked="checked" />
+                                            <input type="checkbox" id="checkbox_skills_cleaning_true" checked="checked" />
 														No:
-                                        <input type="checkbox" id="checkbox_skills_cleaning_false"/>
-                                    </t>
-                                    <t t-if="not doc.skills_cleaning">
+                                            <input type="checkbox" id="checkbox_skills_cleaning_false"/>
+                                        </t>
+                                        <t t-if="not doc.skills_cleaning">
 														Yes:
-                                        <input type="checkbox" id="checkbox_skills_cleaning_true" />
+                                            <input type="checkbox" id="checkbox_skills_cleaning_true" />
 														No:
-                                        <input type="checkbox" id="checkbox_skills_cleaning_false" checked="checked"/>
-                                    </t>
-                                </p>
-                                <p> Arabic Cooking:
-                                    <t t-if="doc.skills_arabic_cooking">
+                                            <input type="checkbox" id="checkbox_skills_cleaning_false" checked="checked"/>
+                                        </t>
+                                    </p>
+                                    <p> Arabic Cooking:
+                                        <t t-if="doc.skills_arabic_cooking">
 														Yes:
-                                        <input type="checkbox" id="checkbox_skills_arabic_cooking_true" checked="checked" />
+                                            <input type="checkbox" id="checkbox_skills_arabic_cooking_true" checked="checked" />
 														No:
-                                        <input type="checkbox" id="checkbox_skills_arabic_cooking_false"/>
-                                    </t>
-                                    <t t-if="not doc.skills_arabic_cooking">
+                                            <input type="checkbox" id="checkbox_skills_arabic_cooking_false"/>
+                                        </t>
+                                        <t t-if="not doc.skills_arabic_cooking">
 														Yes:
-                                        <input type="checkbox" id="checkbox_skills_arabic_cooking_true" />
+                                            <input type="checkbox" id="checkbox_skills_arabic_cooking_true" />
 														No:
-                                        <input type="checkbox" id="checkbox_skills_arabic_cooking_false" checked="checked"/>
-                                    </t>
-                                </p>
-                                <p> Baby Sitting:
-                                    <t t-if="doc.skills_baby_sitting">
+                                            <input type="checkbox" id="checkbox_skills_arabic_cooking_false" checked="checked"/>
+                                        </t>
+                                    </p>
+                                    <p> Baby Sitting:
+                                        <t t-if="doc.skills_baby_sitting">
 														Yes:
-                                        <input type="checkbox" id="checkbox_skills_baby_sitting_true" checked="checked" />
+                                            <input type="checkbox" id="checkbox_skills_baby_sitting_true" checked="checked" />
 														No:
-                                        <input type="checkbox" id="checkbox_skills_baby_sitting_false"/>
-                                    </t>
-                                    <t t-if="not doc.skills_baby_sitting">
+                                            <input type="checkbox" id="checkbox_skills_baby_sitting_false"/>
+                                        </t>
+                                        <t t-if="not doc.skills_baby_sitting">
 														Yes:
-                                        <input type="checkbox" id="checkbox_skills_baby_sitting_true" />
+                                            <input type="checkbox" id="checkbox_skills_baby_sitting_true" />
 														No:
-                                        <input type="checkbox" id="checkbox_skills_baby_sitting_false" checked="checked"/>
-                                    </t>
-                                </p>
-                                <p> Washing:
-                                    <t t-if="doc.skills_washing">
+                                            <input type="checkbox" id="checkbox_skills_baby_sitting_false" checked="checked"/>
+                                        </t>
+                                    </p>
+                                    <p> Washing:
+                                        <t t-if="doc.skills_washing">
 														Yes:
-                                        <input type="checkbox" id="checkbox_skills_washing_true" checked="checked" />
+                                            <input type="checkbox" id="checkbox_skills_washing_true" checked="checked" />
 														No:
-                                        <input type="checkbox" id="checkbox_skills_washing_false"/>
-                                    </t>
-                                    <t t-if="not doc.skills_washing">
+                                            <input type="checkbox" id="checkbox_skills_washing_false"/>
+                                        </t>
+                                        <t t-if="not doc.skills_washing">
 														Yes:
-                                        <input type="checkbox" id="checkbox_skills_washing_true" />
+                                            <input type="checkbox" id="checkbox_skills_washing_true" />
 														No:
-                                        <input type="checkbox" id="checkbox_skills_washing_false" checked="checked"/>
-                                    </t>
-                                </p>
-                                <p> Ironing:
-                                    <t t-if="doc.skills_ironing">
+                                            <input type="checkbox" id="checkbox_skills_washing_false" checked="checked"/>
+                                        </t>
+                                    </p>
+                                    <p> Ironing:
+                                        <t t-if="doc.skills_ironing">
 														Yes:
-                                        <input type="checkbox" id="checkbox_skills_ironing_true" checked="checked" />
+                                            <input type="checkbox" id="checkbox_skills_ironing_true" checked="checked" />
 														No:
-                                        <input type="checkbox" id="checkbox_skills_ironing_false"/>
-                                    </t>
-                                    <t t-if="not doc.skills_ironing">
+                                            <input type="checkbox" id="checkbox_skills_ironing_false"/>
+                                        </t>
+                                        <t t-if="not doc.skills_ironing">
 														Yes:
-                                        <input type="checkbox" id="checkbox_skills_ironing_true" />
+                                            <input type="checkbox" id="checkbox_skills_ironing_true" />
 														No:
-                                        <input type="checkbox" id="checkbox_skills_ironing_false" checked="checked"/>
-                                    </t>
-                                </p>
-                                <p> Google Location:
-                                    <t t-if="doc.skills_googlelocation">
+                                            <input type="checkbox" id="checkbox_skills_ironing_false" checked="checked"/>
+                                        </t>
+                                    </p>
+                                    <p> Google Location:
+                                        <t t-if="doc.skills_googlelocation">
 														Yes:
-                                        <input type="checkbox" id="checkbox_skills_googlelocation_true" checked="checked" />
+                                            <input type="checkbox" id="checkbox_skills_googlelocation_true" checked="checked" />
 														No:
-                                        <input type="checkbox" id="checkbox_skills_googlelocation_false"/>
-                                    </t>
-                                    <t t-if="not doc.skills_googlelocation">
+                                            <input type="checkbox" id="checkbox_skills_googlelocation_false"/>
+                                        </t>
+                                        <t t-if="not doc.skills_googlelocation">
 														Yes:
-                                        <input type="checkbox" id="checkbox_skills_googlelocation_true" />
+                                            <input type="checkbox" id="checkbox_skills_googlelocation_true" />
 														No:
-                                        <input type="checkbox" id="checkbox_skills_googlelocation_false" checked="checked"/>
-                                    </t>
-                                </p>
-                                <p> Driving:
-                                    <t t-if="doc.skills_driving">
+                                            <input type="checkbox" id="checkbox_skills_googlelocation_false" checked="checked"/>
+                                        </t>
+                                    </p>
+                                    <p> Driving:
+                                        <t t-if="doc.skills_driving">
 														Yes:
-                                        <input type="checkbox" id="checkbox_skills_driving_true" checked="checked" />
+                                            <input type="checkbox" id="checkbox_skills_driving_true" checked="checked" />
 														No:
-                                        <input type="checkbox" id="checkbox_skills_driving_false"/>
-                                    </t>
-                                    <t t-if="not doc.skills_driving">
+                                            <input type="checkbox" id="checkbox_skills_driving_false"/>
+                                        </t>
+                                        <t t-if="not doc.skills_driving">
 														Yes:
-                                        <input type="checkbox" id="checkbox_skills_driving_true" />
+                                            <input type="checkbox" id="checkbox_skills_driving_true" />
 														No:
-                                        <input type="checkbox" id="checkbox_skills_driving_false" checked="checked"/>
-                                    </t>
-                                </p>
-                            </div>
-                            <div class="col">
-                                <p t-out="doc.description" />
+                                            <input type="checkbox" id="checkbox_skills_driving_false" checked="checked"/>
+                                        </t>
+                                    </p>
+                                </div>
+                                <div class="col">
+                                    <p t-out="doc.description" />
+                                </div>
                             </div>
                         </div>
                     </div>

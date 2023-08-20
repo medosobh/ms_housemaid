@@ -55,13 +55,16 @@ class maidsportal(CustomerPortal):
 
         religion = dict(request.env['housemaid.maids'].fields_get(
             allfields=['religion'])['religion']['selection'])
-        print(religion)
-        print(len(religion))
-
+        religion_list = list(religion.keys())
+        
         gender = dict(request.env['housemaid.maids'].fields_get(
             allfields=['gender'])['gender']['selection'])
-        print(gender)
-        print(len(gender))
+        gender_list = list(gender.keys())
+        
+        marital_status = dict(request.env['housemaid.maids'].fields_get(
+            allfields=['marital_status'])['marital_status']['selection'])
+        marital_status_list = list(marital_status.keys())
+
 
         new_maid_url = '/my/maid/new'
 
@@ -73,6 +76,9 @@ class maidsportal(CustomerPortal):
             'country': country,
             'currency': currency,
             'education': education,
+            'religion': religion_list,
+            'gender': gender_list,
+            'marital_status': marital_status_list,
             'page_name': 'my_maids_portal_new_form_view',
         }
 
