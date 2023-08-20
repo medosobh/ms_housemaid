@@ -697,7 +697,6 @@
 											</div>
 											<div class="col-sm-7">
 												<p class="text-muted mb-0">
-													<t t-out="maids.skills_ironing" />
 													<t t-if="maids.skills_ironing">
 														Yes:
 														<input type="checkbox" id="checkbox_skills_ironing_true" checked="checked" disabled="True"/>
@@ -722,7 +721,18 @@
 											</div>
 											<div class="col-sm-7">
 												<p class="text-muted mb-0">
-													<t t-out="maids.skills_googlelocation" />
+													<t t-if="maids.skills_googlelocation">
+														Yes:
+														<input type="checkbox" id="checkbox_skills_googlelocation_true" checked="checked" disabled="True"/>
+														No:
+														<input type="checkbox" id="checkbox_skills_googlelocation_false" disabled="True"/>
+													</t>
+													<t t-if="not maids.skills_googlelocation">
+														Yes:
+														<input type="checkbox" id="checkbox_skills_googlelocation_true" disabled="True"/>
+														No:
+														<input type="checkbox" id="checkbox_skills_googlelocation_false" checked="checked" disabled="True"/>
+													</t>
 												</p>
 											</div>
 										</div>
@@ -736,6 +746,18 @@
 											<div class="col-sm-7">
 												<p class="text-muted mb-0">
 													<t t-out="maids.skills_driving" />
+													<t t-if="maids.skills_driving">
+														Yes:
+														<input type="checkbox" id="checkbox_skills_driving_true" checked="checked" disabled="True"/>
+														No:
+														<input type="checkbox" id="checkbox_skills_driving_false" disabled="True"/>
+													</t>
+													<t t-if="not maids.skills_driving">
+														Yes:
+														<input type="checkbox" id="checkbox_skills_driving_true" disabled="True"/>
+														No:
+														<input type="checkbox" id="checkbox_skills_driving_false" checked="checked" disabled="True"/>
+													</t>
 												</p>
 											</div>
 										</div>

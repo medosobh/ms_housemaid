@@ -68,30 +68,44 @@
                                         <input type="checkbox" id="checkbox_arabic_lang_false" checked="checked"/>
                                     </t>
                                 </p>
-                                <p t-out="doc.english_lang" />
                                 <t t-if="maids.english_lang">
 														Yes:
-                                        <input type="checkbox" id="checkbox_english_lang_true" checked="checked" />
+                                    <input type="checkbox" id="checkbox_english_lang_true" checked="checked" />
 														No:
-                                        <input type="checkbox" id="checkbox_english_lang_false"/>
-                                    </t>
-                                    <t t-if="not maids.english_lang">
+                                    <input type="checkbox" id="checkbox_english_lang_false"/>
+                                </t>
+                                <t t-if="not maids.english_lang">
 														Yes:
-                                        <input type="checkbox" id="checkbox_english_lang_true" />
+                                    <input type="checkbox" id="checkbox_english_lang_true" />
 														No:
-                                        <input type="checkbox" id="checkbox_english_lang_false" checked="checked"/>
-                                    </t>
-                                    
-                                <p t-out="doc.educations_id.name" />
+                                    <input type="checkbox" id="checkbox_english_lang_false" checked="checked"/>
+                                </t>
+                                <p> Eductaion:
+                                    <span t-out="doc.educations_id.name" />
+                                </p>
                             </div>
                             <div class="col">
-                                <p t-out="doc.passport_no" />
-                                <p t-out="doc.passport_place" />
-                                <p t-out="doc.passport_issue_date" />
-                                <p t-out="doc.passport_expire_date" />
-                                <p t-out="doc.identation" />
+                                <p class="mb-4">
+											Passport
+										</p>
+                                <p> Passport No:
+                                    <span t-out="doc.passport_no" />
+                                </p>
+                                <p> Passport Place:
+                                    <span t-out="doc.passport_place" />
+                                </p>
+                                <p> Issue Date:
+                                    <span t-out="doc.passport_issue_date" />
+                                </p>
+                                <p> Expire Date:
+                                    <span t-out="doc.passport_expire_date" />
+                                </p>
+                                <p> Identation No:
+                                    <span t-out="doc.identation" />
+                                </p>
                             </div>
                             <div class="col">
+                            
                                 <p t-out="doc.religion" />
                                 <p t-out="doc.gender" />
                                 <p t-out="doc.children_no" />
