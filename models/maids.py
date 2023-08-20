@@ -202,6 +202,14 @@ class maids(models.Model):
         default=lambda self: _('name@mail.com'),
         tracking=True,
     )
+    country_id = fields.Many2one(
+        string="Country",
+        comodel_name='res.country',
+        help="Country of Maid.",
+        default=lambda self: self.offices_id.country_id,
+        required=True,
+        tracking=True,
+    )
     jobs_id = fields.Many2one(
         comodel_name='housemaid.jobs',
         string='Applied Jobs',
@@ -381,14 +389,6 @@ class maids(models.Model):
     skills_driving = fields.Boolean(
         string="Drive License",
         required=False,
-        tracking=True,
-    )
-    country_id = fields.Many2one(
-        string="Country",
-        comodel_name='res.country',
-        help="Country of Maid.",
-        default=lambda self: self.offices_id.country_id,
-        required=True,
         tracking=True,
     )
     partner_id = fields.Many2one(

@@ -5,8 +5,85 @@
             <t t-foreach="docs" t-as="doc">
                 <t t-call="web.external_layout">
                     <div class="page">
-                    <h1>First Report</h1>
-                </div>
+                        <h3>First Report</h3>
+                        <div calss="row">
+                            <div class="col">
+                                <t t-if="doc.image">
+                                    <img t-att-src="image_data_uri(doc.image)" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;height: 150px;"/>
+                                </t>
+                                <t t-else="">
+                                    <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;" />
+                                </t>
+                            </div>
+                            <div class="col">
+                                <p> State:
+                                    <span t-out="doc.state" />
+                                </p>
+                                <p> Office:
+                                    <span t-out="doc.offices_id.name" />
+                                </p>
+                                <p> Code:
+                                    <span t-out="doc.code" />
+                                </p>
+                                <p> Name:
+                                    <span t-out="doc.name" />
+                                </p>
+                                <p> Phone:
+                                    <span t-out="doc.phone" />
+                                </p>
+                                <p> Email:
+                                    <span t-out="doc.email" />
+                                </p>
+                                <p> Country:
+                                    <span t-out="doc.country_id.name" />
+                                </p>
+                            </div>
+                            <div class="col">
+                                <p t-out="doc.jobs_id.name" />
+                                <p t-out="doc.monthly_salary" />
+                                <p t-out="doc.currency_id.name" />
+                                <p t-out="doc.contract_period" />
+                            </div>
+                            <div class="col">
+                                <p t-out="doc.arabic_lang" />
+                                <p t-out="doc.english_lang" />
+                                <p t-out="doc.educations_id.name" />
+                            </div>
+                            <div class="col">
+                                <p t-out="doc.passport_no" />
+                                <p t-out="doc.passport_place" />
+                                <p t-out="doc.passport_issue_date" />
+                                <p t-out="doc.passport_expire_date" />
+                                <p t-out="doc.identation" />
+                            </div>
+                            <div class="col">
+                                <p t-out="doc.religion" />
+                                <p t-out="doc.gender" />
+                                <p t-out="doc.children_no" />
+                                <p t-out="doc.birthday" />
+                                <p t-out="doc.place_of_birth" />
+                                <p t-out="doc.marital_status" />
+                            </div>
+                            <div class="col">
+                                <p t-out="doc.skin_color" />
+                                <p t-out="doc.age" />
+                                <p t-out="doc.hight" />
+                                <p t-out="doc.weight" />
+                            </div>
+                            <div class="col">
+                                <p t-out="doc.skills_cleaning" />
+                                <p t-out="doc.skills_arabic_cooking" />
+                                <p t-out="doc.skills_baby_sitting" />
+                                <p t-out="doc.skills_washing" />
+                                <p t-out="doc.skills_ironing" />
+                                <p t-out="doc.skills_googlelocation" />
+                                <p t-out="doc.skills_driving" />
+                            </div>
+                            <div class="col">
+                                <p t-out="doc.description" />
+                            </div>
+                        </div>
+                    </div>
                 </t>
             </t>
         </t>
@@ -17,7 +94,7 @@
         <field name="report_type">qweb-pdf</field>
         <field name="report_name">ms_housemaid.report_template_maid_resume</field>
         <field name="report_file">ms_housemaid.report_template_maid_resume</field>
-        <field name="print_report_name">'%s' % object.name</field>
+        <field name="print_report_name">'Resume Of %s' % object.name</field>
         <field name="binding_model_id" ref="model_housemaid_maids"/>
         <field name="binding_type">report</field>
     </record>

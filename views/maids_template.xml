@@ -121,7 +121,7 @@
 								<div class="card mb-4 rounded-lg">
 									<div class="card-body text-center">
 										<t t-if="maids.image">
-											<img t-attf-scr="{{maids.image}}" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;height: 150px;" />
+											<img t-att-src="image_data_uri(maids.image)" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;height: 150px;"/>
 										</t>
 										<t t-else="">
 											<img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;" />
