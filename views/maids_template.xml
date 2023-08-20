@@ -935,7 +935,7 @@
 										<div class="form-group">
 											<label class="col-sm-4 col-form-label" for="description">Description</label>
 											<div>
-												<textarea type="text" name="description" rows="5" id="description" class="form_control" placeholder="write comment"/>
+												<textarea type="text" name="description" rows="10" id="description" class="form_control col-sm-12" placeholder="write comment"/>
 											</div>
 										</div>
 									</div>
