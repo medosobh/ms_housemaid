@@ -776,7 +776,7 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-md-4 border rounded">
+							<div class="col-md-6 border rounded">
 								<div class="card mb-4 mb-md-0">
 									<div class="card-body">
 										<p class="mb-4 bg-info text-white">
@@ -926,19 +926,22 @@
 							<div class="col-sm-6">
 								<div class="card">
 									<div class="card-body">
-										<div>maid photo</div>
 										<div class="form-group">
-											<label lass="col-sm-4 col-form-label" for="image">upload</label>
+											<label lass="col-sm-4 col-form-label" for="image">photo upload</label>
 											<div>
 												<input type="file" id="image" name="image" accept="image/*" class="form_control"/>
 											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-4 col-form-label" for="description">Description</label>
+											<textarea type="text" name="description" rows="5" id="description" class="form_control" placeholder="write comment"/>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
 						<div class="form-group row">
-							<div class="col-sm-6">
+							<div class="col-sm-4">
 								<div class="card sm-8">
 									<div class="card-body">
 										<div>Job Information</div>
@@ -975,7 +978,7 @@
 									</div>
 								</div>
 							</div>
-							<div class="col-sm-6">
+							<div class="col-sm-4">
 								<div class="card sm-8">
 									<div class="card-body">
 										<div>Language and Education</div>
@@ -1001,9 +1004,7 @@
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="form-group row">
-							<div class="col-sm-6">
+							<div class="col-sm-4">
 								<div class="card sm-6">
 									<div class="card-body">
 										<div>Passport</div>
@@ -1030,7 +1031,9 @@
 									</div>
 								</div>
 							</div>
-							<div class="col-sm-6">
+						</div>
+						<div class="form-group row">
+							<div class="col-sm-4">
 								<div class="card sm-6">
 									<div class="card-body">
 										<div>Personal information</div>
@@ -1101,9 +1104,7 @@
 									</div>
 								</div>
 							</div>
-						</div>
-						<div class="form-group row">
-							<div class="col-sm-6">
+							<div class="col-sm-4">
 								<div class="card sm-8">
 									<div class="card-body">
 										<div>Personal Attribute</div>
@@ -1122,7 +1123,7 @@
 									</div>
 								</div>
 							</div>
-							<div class="col-sm-6">
+							<div class="col-sm-4">
 								<div class="card sm-8">
 									<div class="card-body">
 										<div>Personal Skills</div>
@@ -1161,7 +1162,7 @@
 					</div>
 					<footer>
 						<div class="form-group row">
-							<div class="col-sm-10">
+							<div class="col-sm-8">
 								<button type="submit" class="btn btn-primary" >Save Maid CV</button>
 							</div>
 						</div>
