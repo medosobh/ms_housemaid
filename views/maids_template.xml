@@ -143,12 +143,16 @@
 												Download
 											</a>
 										</div>
-										<p class="text-muted mb-4">
-											<a t-attf-href="/my/maids/download_document/{{maids.id}}" class="fa fa-download">
-											Download Attached Resume
-											</a>
-											
-										</p>
+										<t t-if="maids.resume">
+											<p class="text-muted mb-4">
+												<a t-attf-href="/my/maids/download_document/{{maids.id}}" class="fa fa-download">
+													Download Attached Resume
+												</a>
+											</p>
+										</t>
+										<t t-else="">
+											Sorry, no attachment!
+										</t>
 									</div>
 								</div>
 							</div>
@@ -927,7 +931,6 @@
 											<label lass="col-sm-4 col-form-label" for="image">upload</label>
 											<div>
 												<input type="file" id="image" name="image" accept="image/*" class="form_control"/>
-												
 											</div>
 										</div>
 									</div>
