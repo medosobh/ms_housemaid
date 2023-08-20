@@ -9,18 +9,21 @@
                         <!-- <div class="page" t-attf-style="background-image:url('/ms_housemaid/static/img/maid.png'); background-size:195mm 282mm; width:195mm; height:282mm;"> -->
                         <!-- <div class="container py-5"> -->
                         <div class="row">
-                            <h3>
-                                <span t-out="doc.name" />
-                            </h3>
-                            <div class="col-4">
+                            <div class="col-4 text-center">
                                 <t t-if="doc.image">
                                     <img t-att-src="image_data_uri(doc.image)" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;height: 150px;"/>
                                 </t>
                                 <t t-else="">
                                     <img src="/ms_housemaid/static/img/maid.png" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;" />
                                 </t>
+                                <h4>
+                                    <span t-out="doc.name" />
+                                </h4>
                             </div>
-                            <div class="col-8">
+                            <div class="col-8 border rounded">
+                                <p class="mb-4 bg-info text-white">
+									Main Information
+                                </p>
                                 <p> State:
                                     <span t-out="doc.state" />
                                 </p>
@@ -45,21 +48,33 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-6">
-                                <p> Job :
-                                    <span t-out="doc.jobs_id.name" />
+                            <div class="col-4 border rounded">
+                                <div class="card mb-4 mb-md-0">
+                                    <div class="card-body"></div>
+                                    <p class="mb-4 bg-info text-white">
+                                    Job Information
                                 </p>
-                                <p> Monthly Salary:
-                                    <span t-out="doc.monthly_salary" />
-                                </p>
-                                <p> Currancy:
-                                    <span t-out="doc.currency_id.name" />
-                                </p>
-                                <p> Contract Period:
-                                    <span t-out="doc.contract_period" />
-                                </p>
+                                    <p> Job :
+                                        <span t-out="doc.jobs_id.name" />
+                                    </p>
+                                    <p> Monthly Salary:
+                                        <span t-out="doc.monthly_salary" />
+                                    </p>
+                                    <p> Currancy:
+                                        <span t-out="doc.currency_id.name" />
+                                    </p>
+                                    <p> Contract Period:
+                                        <span t-out="doc.contract_period" />
+                                    </p>
+                                </div>
                             </div>
-                            <div class="col-6">
+                        </div>
+                        <div class="col-4 border rounded">
+                            <div class="card mb-4 mb-md-0">
+                                <div class="card-body"></div>
+                                <p class="mb-4 bg-info text-white">
+									Language and Education
+								</p>
                                 <p> Arabic Language:
                                     <t t-if="doc.arabic_lang">
 														Yes:
@@ -93,11 +108,13 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <p class="mb-4">
-											Passport
-										</p>
+                    </div>
+                    <div class="col-4 border rounded">
+                        <div class="card mb-4 mb-md-0">
+                            <div class="card-body">
+                                <p class="mb-4 bg-info text-white">
+									Passport
+								</p>
                                 <p> Passport No:
                                     <span t-out="doc.passport_no" />
                                 </p>
@@ -114,10 +131,16 @@
                                     <span t-out="doc.identation" />
                                 </p>
                             </div>
-                            <div class="col-6">
-                                <p class="mb-4">
-											Personal information
-										</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-4 border rounded">
+                        <div class="card mb-4 mb-md-0">
+                            <div class="card-body">
+                                <p class="mb-4 bg-info text-white">
+									Personal information
+								</p>
                                 <p> Religion:
                                     <span t-out="doc.religion" />
                                 </p>
@@ -138,11 +161,13 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col-6">
-                                <p class="mb-4">
-											Personal Attribute
-										</p>
+                    </div>
+                    <div class="col-4 border rounded">
+                        <div class="card mb-4 mb-md-0">
+                            <div class="card-body">
+                                <p class="mb-4 bg-info text-white">
+                                    Personal Attribute
+                                </p>
                                 <p> Skin Color:
                                     <span t-out="doc.skin_color" />
                                 </p>
@@ -156,9 +181,13 @@
                                     <span t-out="doc.weight" />
                                 </p>
                             </div>
-                            <div class="col-6">
-                                <p class="mb-4">
-											Personal Skills
+                        </div>
+                    </div>
+                    <div class="col-4 border rounded">
+                        <div class="card mb-4 mb-md-0">
+                            <div class="card-body">
+                                <p class="mb-4 bg-info text-white">
+									Personal Skills
 								</p>
                                 <p> Cleaning:
                                     <t t-if="doc.skills_cleaning">
@@ -260,25 +289,28 @@
                                 </p>
                             </div>
                         </div>
-                        <div class="row">
-                            <div class="col">
-                                <p t-out="doc.description" />
-                            </div>
-                        </div>
                     </div>
-                    <!-- </div> -->
-                </t>
-            </t>
+                </div>
+                <div class="row">
+                    <div class="col-6 border rounded">
+                            Description:
+                        <p t-out="doc.description" />
+                    </div>
+                </div>
+            </div>
+            <!-- </div> -->
         </t>
-    </template>
-    <record id="action_report_action_maid_resume" model="ir.actions.report">
-        <field name="name">Maid Resume</field>
-        <field name="model">housemaid.maids</field>
-        <field name="report_type">qweb-pdf</field>
-        <field name="report_name">ms_housemaid.report_template_maid_resume</field>
-        <field name="report_file">ms_housemaid.report_template_maid_resume</field>
-        <field name="print_report_name">'Resume Of %s' % object.name</field>
-        <field name="binding_model_id" ref="model_housemaid_maids"/>
-        <field name="binding_type">report</field>
-    </record>
+    </t>
+</t>
+</template>
+<record id="action_report_action_maid_resume" model="ir.actions.report">
+    <field name="name">Maid Resume</field>
+    <field name="model">housemaid.maids</field>
+    <field name="report_type">qweb-pdf</field>
+    <field name="report_name">ms_housemaid.report_template_maid_resume</field>
+    <field name="report_file">ms_housemaid.report_template_maid_resume</field>
+    <field name="print_report_name">'Resume Of %s' % object.name</field>
+    <field name="binding_model_id" ref="model_housemaid_maids"/>
+    <field name="binding_type">report</field>
+</record>
 </odoo>
