@@ -9,6 +9,8 @@ from odoo.fields import Command
 from odoo.addons.portal.controllers.mail import _message_post_helper
 from odoo.exceptions import UserError, ValidationError
 from odoo.addons.portal.controllers.portal import CustomerPortal, pager as portal_pager
+from odoo.addons.web.controllers.main import serialize_exception, content_disposition
+import base64
 
 
 class maidsportal(CustomerPortal):
@@ -56,15 +58,14 @@ class maidsportal(CustomerPortal):
         religion = dict(request.env['housemaid.maids'].fields_get(
             allfields=['religion'])['religion']['selection'])
         religion_list = list(religion.keys())
-        
+
         gender = dict(request.env['housemaid.maids'].fields_get(
             allfields=['gender'])['gender']['selection'])
         gender_list = list(gender.keys())
-        
+
         marital_status = dict(request.env['housemaid.maids'].fields_get(
             allfields=['marital_status'])['marital_status']['selection'])
         marital_status_list = list(marital_status.keys())
-
 
         new_maid_url = '/my/maid/new'
 
@@ -276,10 +277,54 @@ class maidsportal(CustomerPortal):
             'page_name': 'my_maids_portal_form_view'
         }
         return request.render("ms_housemaid.my_maids_portal_form_view", vals)
-    
-    
 
     @http.route(['/my/maids/print/<model("housemaid.maids"):maids_id>'], website=True, auth='user', type="http")
     def my_maids_report_print(self, maids_id, **kw):
         return self._show_report(model=maids_id, report_type='pdf', download=True,
                                  report_ref='ms_housemaid.action_report_action_maid_resume')
+
+    @http.route('/my/maids/download_document/<model("housemaid.maids"):maids_id>',website=True, type='http', auth="user")
+    @serialize_exception
+    def download_document(self, maids_id, filename=None, **kw):
+        """ Download link for files stored as binary fields.
+        :param str model: name of the model to fetch the binary from
+        :param str field: binary field
+        :param str id: id of the record from which to fetch the binary
+        :param str filename: field holding the file's name, if any
+        :returns: :class:`werkzeug.wrappers.Response`
+        """
+        print(maids_id)
+        binary_file = maids_id.resume
+        filename = maids_id.resume_name
+        filecontent = base64.b64decode(binary_file or '')
+        content_type, disposition_content = False, False
+
+        if not filecontent:
+            return request.not_found()
+        else:
+            if not filename:
+                filename = '%s_%s' % (maids_id._name.replace('.', '_'), maids_id.id)
+            content_type = ('Content-Type', 'application/octet-stream')
+            disposition_content = ('Content-Disposition',
+                                   content_disposition(filename))
+
+        return request.make_response(filecontent, [content_type,
+                                                   disposition_content])
+
+    # Este es la funcion que debes agregar a tu clase
+    def download(self):
+        path = "/my/maids/download_document?"
+        model = "housemaid.maids"
+        filename = "Resume of "
+
+        # esta es la funcion que genera mi archivo y lo almacena en el campo binario
+        self.print_report()
+        url = path + "model={}&id={}&filename={}.xls".format(
+            model, self.id, filename)
+
+        return {
+            'type': 'ir.actions.act_url',
+            'url': url,
+            'target': 'new',
+            'tag': 'reload',
+        }

@@ -117,7 +117,7 @@
 				<section style="background-color: #eee;">
 					<div class="container py-5">
 						<div class="row">
-							<div class="col-lg-4">
+							<div class="col-lg-4 border rounded">
 								<div class="card mb-4 rounded-lg">
 									<div class="card-body text-center">
 										<t t-if="maids.image">
@@ -139,12 +139,12 @@
 											<t t-out="maids.country_id.name" />
 										</p>
 										<div class="d-flex justify-content-center mb-2">
-											<a t-attf-href="/my/maids/print/{{maids.id}}" class="fa-download">
+											<a t-attf-href="/my/maids/print/{{maids.id}}" class="fa fa-download">
 												Download
 											</a>
 										</div>
-										<p t-out="maids.resume" class="text-muted mb-4">
-											<a  class="fa-download">
+										<p class="text-muted mb-4">
+											<a t-attf-href="/my/maids/download_document/{{maids.id}}" class="fa fa-download">
 											Download Attached Resume
 											</a>
 											
@@ -152,7 +152,7 @@
 									</div>
 								</div>
 							</div>
-							<div class="col-lg-8">
+							<div class="col-lg-8 border rounded">
 								<div class="card mb-4">
 									<div class="card-body">
 										<div class="row">
@@ -237,10 +237,10 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-md-4">
+							<div class="col-md-4 border rounded">
 								<div class="card mb-4 mb-md-0">
 									<div class="card-body">
-										<p class="mb-4">
+										<p class="mb-4 bg-info text-white">
 											Job Information
 										</p>
 										<hr />
@@ -298,10 +298,10 @@
 									</div>
 								</div>
 							</div>
-							<div class="col-md-4">
+							<div class="col-md-4 border rounded">
 								<div class="card mb-4 mb-md-0">
 									<div class="card-body">
-										<p class="mb-4">
+										<p class="mb-4 bg-info text-white">
 											Language and Education
 										</p>
 										<hr />
@@ -368,10 +368,10 @@
 									</div>
 								</div>
 							</div>
-							<div class="col-md-4">
+							<div class="col-md-4 border rounded">
 								<div class="card mb-4 mb-md-0">
 									<div class="card-body">
-										<p class="mb-4">
+										<p class="mb-4 bg-info text-white">
 											Passport
 										</p>
 										<hr />
@@ -444,10 +444,10 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-md-4">
+							<div class="col-md-4 border rounded">
 								<div class="card mb-4 mb-md-0">
 									<div class="card-body">
-										<p class="mb-4">
+										<p class="mb-4 bg-info text-white">
 											Personal information
 										</p>
 										<hr />
@@ -531,10 +531,10 @@
 									</div>
 								</div>
 							</div>
-							<div class="col-md-4">
+							<div class="col-md-4 border rounded">
 								<div class="card mb-4 mb-md-0">
 									<div class="card-body">
-										<p class="mb-4">
+										<p class="mb-4 bg-info text-white">
 											Personal Attribute
 										</p>
 										<hr />
@@ -592,10 +592,10 @@
 									</div>
 								</div>
 							</div>
-							<div class="col-md-4">
+							<div class="col-md-4 border rounded">
 								<div class="card mb-4 mb-md-0">
 									<div class="card-body">
-										<p class="mb-4">
+										<p class="mb-4 bg-info text-white">
 											Personal Skills
 										</p>
 										<hr />
@@ -772,10 +772,10 @@
 							</div>
 						</div>
 						<div class="row">
-							<div class="col-md-4">
+							<div class="col-md-4 border rounded">
 								<div class="card mb-4 mb-md-0">
 									<div class="card-body">
-										<p class="mb-4">
+										<p class="mb-4 bg-info text-white">
 											Addtional Information
 										</p>
 										<hr />
