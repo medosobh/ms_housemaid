@@ -64,7 +64,7 @@ class maidsportal(CustomerPortal):
         print(len(gender))
 
         new_maid_url = '/my/maid/new'
-        
+
         vals = {
             'default_url': new_maid_url,
             'user': curr_user,
@@ -81,7 +81,7 @@ class maidsportal(CustomerPortal):
             print(kw)
             maid_vals = {}
             error_list = []
-        
+
             if not kw.get('user'):
                 error_list.append('User is mandatory.')
             if not kw.get('offices'):
@@ -266,12 +266,14 @@ class maidsportal(CustomerPortal):
                 maids_ids[maids_index+1])
 
         vals = {
-            'maid': maids_id,
+            'maids': maids_id,
             'page_name': 'my_maids_portal_form_view'
         }
         return request.render("ms_housemaid.my_maids_portal_form_view", vals)
+    
+    
 
     @http.route(['/my/maids/print/<model("housemaid.maids"):maids_id>'], website=True, auth='user', type="http")
     def my_maids_report_print(self, maids_id, **kw):
-        vals = super()._prepare_portal_layout_values()
-        return self._show_report(self, model=maids_id, report_type='pdf', report_ref='report_template_maid_resume', download=True)
+        return self._show_report(model=maids_id, report_type='pdf', download=True,
+                                 report_ref='ms_housemaid.action_report_action_maid_resume')

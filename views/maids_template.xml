@@ -10,7 +10,7 @@
 					Maids
 				</a>
 				/
-				<span t-out="maid.name" />
+				<span t-out="maids.name" />
 			</li>
 			<li t-if="page_name == 'my_maids_portal_new_form_view'" class="breadcrumb-item">
 					Create New Maid
@@ -77,33 +77,33 @@
 					</tr>
 				</thead>
 				<tbody>
-					<t t-foreach="maids" t-as="maid">
+					<t t-foreach="maids" t-as="maids">
 						<tr>
 							<td>
-								<t t-out="maid.offices_id.name" />
+								<t t-out="maids.offices_id.name" />
 							</td>
 							<td>
-								<t t-out="maid.code" />
+								<t t-out="maids.code" />
 							</td>
 							<td>
-								<a t-attf-href="/my/maids/#{maid.id}">
-									<t t-out="maid.name" />
+								<a t-attf-href="/my/maids/#{maids.id}">
+									<t t-out="maids.name" />
 								</a>
 							</td>
 							<td>
-								<t t-out="maid.jobs_id.name" />
+								<t t-out="maids.jobs_id.name" />
 							</td>
 							<td>
-								<t t-out="maid.monthly_salary" />
+								<t t-out="maids.monthly_salary" />
 							</td>
 							<td>
-								<t t-out="maid.currency_id.name" />
+								<t t-out="maids.currency_id.name" />
 							</td>
 							<td>
-								<t t-out="maid.country_id.name" />
+								<t t-out="maids.country_id.name" />
 							</td>
 							<td>
-								<t t-out="maid.state" />
+								<t t-out="maids.state" />
 							</td>
 						</tr>
 					</t>
@@ -120,26 +120,26 @@
 							<div class="col-lg-4">
 								<div class="card mb-4 rounded-lg">
 									<div class="card-body text-center">
-										<t t-if="maid.image">
-											<img t-attf-scr="{{maid.image}}" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;height: 150px;" />
+										<t t-if="maids.image">
+											<img t-attf-scr="{{maids.image}}" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;height: 150px;" />
 										</t>
 										<t t-else="">
 											<img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;" />
 										</t>
 										<h5 class="my-3">
-											<t t-out="maid.name" />
+											<t t-out="maids.name" />
 										</h5>
 										<p class="text-muted mb-1">
-											<t t-out="maid.jobs_id.name" />
+											<t t-out="maids.jobs_id.name" />
 										</p>
 										<p class="text-muted mb-1">
-											<t t-out="maid.state" />
+											<t t-out="maids.state" />
 										</p>
 										<p class="text-muted mb-4">
-											<t t-out="maid.country_id.name" />
+											<t t-out="maids.country_id.name" />
 										</p>
 										<div class="d-flex justify-content-center mb-2">
-											<a t-attf-href="/my/maids/print/" calss="fa-download">
+											<a t-attf-href="/my/maids/print/{{maids.id}}" calss="fa-download">
 												Download
 											</a>
 										</div>
@@ -157,7 +157,7 @@
 											</div>
 											<div class="col-sm-9">
 												<p class="text-muted mb-0">
-													<t t-out="maid.offices_id.name" />
+													<t t-out="maids.offices_id.name" />
 												</p>
 											</div>
 										</div>
@@ -170,7 +170,7 @@
 											</div>
 											<div class="col-sm-9">
 												<p class="text-muted mb-0">
-													<t t-out="maid.code" />
+													<t t-out="maids.code" />
 												</p>
 											</div>
 										</div>
@@ -183,7 +183,7 @@
 											</div>
 											<div class="col-sm-9">
 												<p class="text-muted mb-0">
-													<t t-out="maid.name" />
+													<t t-out="maids.name" />
 												</p>
 											</div>
 										</div>
@@ -196,7 +196,7 @@
 											</div>
 											<div class="col-sm-9">
 												<p class="text-muted mb-0">
-													<t t-out="maid.phone" />
+													<t t-out="maids.phone" />
 												</p>
 											</div>
 										</div>
@@ -209,7 +209,7 @@
 											</div>
 											<div class="col-sm-9">
 												<p class="text-muted mb-0">
-													<t t-out="maid.email" />
+													<t t-out="maids.email" />
 												</p>
 											</div>
 										</div>
@@ -222,7 +222,7 @@
 											</div>
 											<div class="col-sm-9">
 												<p class="text-muted mb-0">
-													<t t-out="maid.country_id.name" />
+													<t t-out="maids.country_id.name" />
 												</p>
 											</div>
 										</div>
@@ -246,7 +246,7 @@
 											</div>
 											<div class="col-sm-7">
 												<p class="text-muted mb-0">
-													<t t-out="maid.jobs_id.name" />
+													<t t-out="maids.jobs_id.name" />
 												</p>
 											</div>
 										</div>
@@ -259,7 +259,7 @@
 											</div>
 											<div class="col-sm-7">
 												<p class="text-muted mb-0">
-													<t t-out="maid.monthly_salary" />
+													<t t-out="maids.monthly_salary" />
 												</p>
 											</div>
 										</div>
@@ -272,7 +272,7 @@
 											</div>
 											<div class="col-sm-7">
 												<p class="text-muted mb-0">
-													<t t-out="maid.currency_id.name" />
+													<t t-out="maids.currency_id.name" />
 												</p>
 											</div>
 										</div>
@@ -285,7 +285,7 @@
 											</div>
 											<div class="col-sm-7">
 												<p class="text-muted mb-0">
-													<t t-out="maid.contract_period" />
+													<t t-out="maids.contract_period" />
 												</p>
 											</div>
 										</div>
@@ -307,7 +307,7 @@
 											</div>
 											<div class="col-sm-7">
 												<p class="form-check form-switch mb-0">
-													<t t-out="maid.arabic_lang" />
+													<t t-out="maids.arabic_lang" />
 												</p>
 											</div>
 										</div>
@@ -320,7 +320,7 @@
 											</div>
 											<div class="col-sm-7">
 												<p class="text-muted mb-0">
-													<t t-out="maid.english_lang" />
+													<t t-out="maids.english_lang" />
 												</p>
 											</div>
 										</div>
@@ -333,7 +333,7 @@
 											</div>
 											<div class="col-sm-7">
 												<p class="text-muted mb-0">
-													<t t-out="maid.educations_id.name" />
+													<t t-out="maids.educations_id.name" />
 												</p>
 											</div>
 										</div>
@@ -355,7 +355,7 @@
 											</div>
 											<div class="col-sm-7">
 												<p class="text-muted mb-0">
-													<t t-out="maid.passport_no" />
+													<t t-out="maids.passport_no" />
 												</p>
 											</div>
 										</div>
@@ -368,7 +368,7 @@
 											</div>
 											<div class="col-sm-7">
 												<p class="text-muted mb-0">
-													<t t-out="maid.passport_place" />
+													<t t-out="maids.passport_place" />
 												</p>
 											</div>
 										</div>
@@ -381,7 +381,7 @@
 											</div>
 											<div class="col-sm-7">
 												<p class="text-muted mb-0">
-													<t t-out="maid.passport_issue_date" />
+													<t t-out="maids.passport_issue_date" />
 												</p>
 											</div>
 										</div>
@@ -394,7 +394,7 @@
 											</div>
 											<div class="col-sm-7">
 												<p class="text-muted mb-0">
-													<t t-out="maid.passport_expire_date" />
+													<t t-out="maids.passport_expire_date" />
 												</p>
 											</div>
 										</div>
@@ -407,7 +407,7 @@
 											</div>
 											<div class="col-sm-7">
 												<p class="text-muted mb-0">
-													<t t-out="maid.identation" />
+													<t t-out="maids.identation" />
 												</p>
 											</div>
 										</div>
@@ -431,7 +431,7 @@
 											</div>
 											<div class="col-sm-7">
 												<p class="text-muted mb-0">
-													<t t-out="maid.religion" />
+													<t t-out="maids.religion" />
 												</p>
 											</div>
 										</div>
@@ -444,7 +444,7 @@
 											</div>
 											<div class="col-sm-7">
 												<p class="text-muted mb-0">
-													<t t-out="maid.gender" />
+													<t t-out="maids.gender" />
 												</p>
 											</div>
 										</div>
@@ -457,7 +457,7 @@
 											</div>
 											<div class="col-sm-7">
 												<p class="text-muted mb-0">
-													<t t-out="maid.children_no" />
+													<t t-out="maids.children_no" />
 												</p>
 											</div>
 										</div>
@@ -470,7 +470,7 @@
 											</div>
 											<div class="col-sm-7">
 												<p class="text-muted mb-0">
-													<t t-out="maid.birthday" />
+													<t t-out="maids.birthday" />
 												</p>
 											</div>
 										</div>
@@ -483,7 +483,7 @@
 											</div>
 											<div class="col-sm-7">
 												<p class="text-muted mb-0">
-													<t t-out="maid.place_of_birth" />
+													<t t-out="maids.place_of_birth" />
 												</p>
 											</div>
 										</div>
@@ -496,7 +496,7 @@
 											</div>
 											<div class="col-sm-7">
 												<p class="text-muted mb-0">
-													<t t-out="maid.marital_status" />
+													<t t-out="maids.marital_status" />
 												</p>
 											</div>
 										</div>
@@ -518,7 +518,7 @@
 											</div>
 											<div class="col-sm-7">
 												<p class="text-muted mb-0">
-													<t t-out="maid.skin_color" />
+													<t t-out="maids.skin_color" />
 												</p>
 											</div>
 										</div>
@@ -531,7 +531,7 @@
 											</div>
 											<div class="col-sm-7">
 												<p class="text-muted mb-0">
-													<t t-out="maid.age" />
+													<t t-out="maids.age" />
 												</p>
 											</div>
 										</div>
@@ -544,7 +544,7 @@
 											</div>
 											<div class="col-sm-7">
 												<p class="text-muted mb-0">
-													<t t-out="maid.hight" />
+													<t t-out="maids.hight" />
 												</p>
 											</div>
 										</div>
@@ -557,7 +557,7 @@
 											</div>
 											<div class="col-sm-7">
 												<p class="text-muted mb-0">
-													<t t-out="maid.weight" />
+													<t t-out="maids.weight" />
 												</p>
 											</div>
 										</div>
@@ -579,7 +579,7 @@
 											</div>
 											<div class="col-sm-7">
 												<p class="text-muted mb-0">
-													<t t-out="maid.skills_cleaning" />
+													<t t-out="maids.skills_cleaning" />
 												</p>
 											</div>
 										</div>
@@ -592,7 +592,7 @@
 											</div>
 											<div class="col-sm-7">
 												<p class="text-muted mb-0">
-													<t t-out="maid.skills_arabic_cooking" />
+													<t t-out="maids.skills_arabic_cooking" />
 												</p>
 											</div>
 										</div>
@@ -605,7 +605,7 @@
 											</div>
 											<div class="col-sm-7">
 												<p class="text-muted mb-0">
-													<t t-out="maid.skills_baby_sitting" />
+													<t t-out="maids.skills_baby_sitting" />
 												</p>
 											</div>
 										</div>
@@ -618,7 +618,7 @@
 											</div>
 											<div class="col-sm-7">
 												<p class="text-muted mb-0">
-													<t t-out="maid.skills_washing" />
+													<t t-out="maids.skills_washing" />
 												</p>
 											</div>
 										</div>
@@ -631,7 +631,7 @@
 											</div>
 											<div class="col-sm-7">
 												<p class="text-muted mb-0">
-													<t t-out="maid.skills_ironing" />
+													<t t-out="maids.skills_ironing" />
 												</p>
 											</div>
 										</div>
@@ -644,7 +644,7 @@
 											</div>
 											<div class="col-sm-7">
 												<p class="text-muted mb-0">
-													<t t-out="maid.skills_googlelocation" />
+													<t t-out="maids.skills_googlelocation" />
 												</p>
 											</div>
 										</div>
@@ -657,7 +657,7 @@
 											</div>
 											<div class="col-sm-7">
 												<p class="text-muted mb-0">
-													<t t-out="maid.skills_driving" />
+													<t t-out="maids.skills_driving" />
 												</p>
 											</div>
 										</div>
@@ -681,7 +681,7 @@
 											</div>
 											<div class="col-sm-7">
 												<p class="text-muted mb-0">
-													<t t-out="maid.partner_id.name" />
+													<t t-out="maids.partner_id.name" />
 												</p>
 											</div>
 										</div>
@@ -694,7 +694,7 @@
 											</div>
 											<div class="col-sm-7">
 												<p class="text-muted mb-0">
-													<t t-out="maid.user_id.name" />
+													<t t-out="maids.user_id.name" />
 												</p>
 											</div>
 										</div>
@@ -707,7 +707,7 @@
 											</div>
 											<div class="col-sm-7">
 												<p class="text-muted mb-0">
-													<t t-out="maid.company_id.name" />
+													<t t-out="maids.company_id.name" />
 												</p>
 											</div>
 										</div>
@@ -720,7 +720,7 @@
 											</div>
 											<div class="col-sm-7">
 												<p class="text-muted mb-0">
-													<t t-out="maid.description" />
+													<t t-out="maids.description" />
 												</p>
 											</div>
 										</div>
@@ -734,7 +734,7 @@
 							Chat Logs
 						</h3>
 						<t t-call="portal.message_thread">
-							<t t-set="object" t-value="maid" />
+							<t t-set="object" t-value="maids" />
 						</t>
 					</div>
 				</section>

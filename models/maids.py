@@ -17,6 +17,9 @@ class maids(models.Model):
     ]
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
+    def _get_report_base_filename(self):
+        return self.name
+
     @api.model
     def _default_image(self):
         image_path = get_module_resource(
