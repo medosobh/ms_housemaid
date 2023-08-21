@@ -24,57 +24,68 @@
                                 <div class="mb-4 bg-info text-white" >
 									Main Information
                                 </div>
-                                <p > State:
+                                <div>
+                                    <span > State: </span>
                                     <span t-out="doc.state" />
-                                </p>
-                                <p > Office:
+                                </div>
+                                <div>
+                                    <span > Office: </span>
                                     <span t-out="doc.offices_id.name" />
-                                </p>
-                                <p > Code:
+                                </div>
+                                <div>
+                                    <span > Code:</span>
                                     <span t-out="doc.code" />
-                                </p>
-                                <p > Name:
+                                </div>
+                                <div>
+                                    <span > Name:</span>
                                     <span t-out="doc.name" />
-                                </p>
-                                <p > Phone:
+                                </div>
+                                <div>
+                                    <span > Phone:</span>
                                     <span t-out="doc.phone" />
-                                </p>
-                                <p> Email:
+                                </div>
+                                <div>
+                                    <span> Email:</span>
                                     <span t-out="doc.email" />
-                                </p>
-                                <p > Country:
+                                </div>
+                                <div>
+                                    <span > Country:</span>
                                     <span t-out="doc.country_id.name" />
-                                </p>
+                                </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-4 border rounded ">
                                 <div class="card mb-4 mb-md-0">
                                     <div class="card-body">
-                                        <p class="mb-4 bg-info text-white">
+                                        <div class="mb-4 bg-info text-white">
                                             Job Information
-                                        </p>
-                                        <p> Job :
+                                        </div>
+                                        <div>
+                                            <span> Job :</span>
                                             <span t-out="doc.jobs_id.name" />
-                                        </p>
-                                        <p> Monthly Salary:
+                                        </div>
+                                        <div>
+                                            <span> Monthly Salary: </span>
                                             <span t-out="doc.monthly_salary" />
-                                        </p>
-                                        <p> Currancy:
+                                        </div>
+                                        <div>
+                                            <span> Currancy:</span>
                                             <span t-out="doc.currency_id.name" />
-                                        </p>
-                                        <p> Contract Period:
+                                        </div>
+                                        <div>
+                                            <span> Contract Period:</span>
                                             <span t-out="doc.contract_period" />
-                                        </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-4 border rounded">
                                 <div class="card mb-4 mb-md-0">
                                     <div class="card-body">
-                                        <p class="mb-4 bg-info text-white">
+                                        <div class="mb-4 bg-info text-white">
 							    		Language and Education
-        								</p>
+        								</div>
                                         <p> Arabic Language:
                                             <t t-if="doc.arabic_lang">
 														Yes:
@@ -103,33 +114,39 @@
                                                 <input type="checkbox" id="checkbox_english_lang_false" checked="checked"/>
                                             </t>
                                         </p>
-                                        <p> Eductaion:
+                                        <div>
+                                            <span> Eductaion: </span>
                                             <span t-out="doc.educations_id.name" />
-                                        </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-4 border rounded">
                                 <div class="card mb-4 mb-md-0">
                                     <div class="card-body">
-                                        <p class="mb-4 bg-info text-white">
+                                        <div class="mb-4 bg-info text-white">
                                         Passport
-                                        </p>
-                                        <p> Passport No:
+                                        </div>
+                                        <div>
+                                            <span> Passport No:</span>
                                             <span t-out="doc.passport_no" />
-                                        </p>
-                                        <p> Passport Place:
+                                        </div>
+                                        <div>
+                                            <span> Passport Place: </span>
                                             <span t-out="doc.passport_place" />
-                                        </p>
-                                        <p> Issue Date:
+                                        </div>
+                                        <div>
+                                            <span> Issue Date:</span>
                                             <span t-out="doc.passport_issue_date" />
-                                        </p>
-                                        <p> Expire Date:
+                                        </div>
+                                        <div>
+                                            <span> Expire Date:</span>
                                             <span t-out="doc.passport_expire_date" />
-                                        </p>
-                                        <p> Identation No:
+                                        </div>
+                                        <div>
+                                            <span> Identation No:</span>
                                             <span t-out="doc.identation" />
-                                        </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -138,57 +155,67 @@
                             <div class="col-4 border rounded">
                                 <div class="card mb-4 mb-md-0">
                                     <div class="card-body">
-                                        <p class="mb-4 bg-info text-white">
+                                        <div class="mb-4 bg-info text-white">
                                         Personal information
-                                        </p>
-                                        <p> Religion:
+                                        </div>
+                                        <div>
+                                            <span> Religion:</span>
                                             <span t-out="doc.religion" />
-                                        </p>
-                                        <p> Gender:
+                                        </div>
+                                        <div>
+                                            <span> Gender:</span>
                                             <span t-out="doc.gender" />
-                                        </p>
-                                        <p> Children No:
+                                        </div>
+                                        <div>
+                                            <span> Children No:</span>
                                             <span t-out="doc.children_no" />
-                                        </p>
-                                        <p> Birthday:
+                                        </div>
+                                        <div>
+                                            <span> Birthday:</span>
                                             <span t-out="doc.birthday" />
-                                        </p>
-                                        <p> Place Of Birth:
+                                        </div>
+                                        <div>
+                                            <span> Place Of Birth:</span>
                                             <span t-out="doc.place_of_birth" />
-                                        </p>
-                                        <p> Marital Status:
+                                        </div>
+                                        <div>
+                                            <span> Marital Status:</span>
                                             <span t-out="doc.marital_status" />
-                                        </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-4 border rounded">
                                 <div class="card mb-4 mb-md-0">
                                     <div class="card-body">
-                                        <p class="mb-4 bg-info text-white">
+                                        <div class="mb-4 bg-info text-white">
                                         Personal Attribute
-                                        </p>
-                                        <p> Skin Color:
+                                        </div>
+                                        <div>
+                                            <span> Skin Color:</span>
                                             <span t-out="doc.skin_color" />
-                                        </p>
-                                        <p> Age:
+                                        </div>
+                                        <div>
+                                            <span> Age:</span>
                                             <span t-out="doc.age" />
-                                        </p>
-                                        <p> Hight:
+                                        </div>
+                                        <div>
+                                            <span> Hight: </span>
                                             <span t-out="doc.hight" />
-                                        </p>
-                                        <p> Weight:
+                                        </div>
+                                        <div>
+                                            <span> Weight:</span>
                                             <span t-out="doc.weight" />
-                                        </p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="col-4 border rounded">
                                 <div class="card mb-4 mb-md-0">
                                     <div class="card-body">
-                                        <p class="mb-4 bg-info text-white">
+                                        <div class="mb-4 bg-info text-white">
                                         Personal Skills
-                                        </p>
+                                        </div>
                                         <p> Cleaning:
                                             <t t-if="doc.skills_cleaning">
                                                 Yes:
