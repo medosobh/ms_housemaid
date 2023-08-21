@@ -5,6 +5,7 @@
             <t t-foreach="docs" t-as="doc">
                 <t t-call="web.external_layout">
                     <div class="page py-0 my-0">
+                    <link rel="stylesheet" type="text/css" href="/ms_housemaid/static/scr/css/style.css"/>
                         <!-- <div class="page" t-attf-style="background-image:url('/ms_housemaid/static/img/maid.png'); background-size:195mm 282mm; width:195mm; height:282mm;"> -->
                         <div class="oe_structure"/>
                         <div class="row">
@@ -19,7 +20,7 @@
                                     <span t-out="doc.name" />
                                 </h4>
                             </div>
-                            <div class="col-8 border rounded" style="margin: 0px; padding: 0px;">
+                            <div class="col-8 border rounded">
                                 <div class="mb-4 bg-info text-white" >
 									Main Information
                                 </div>
