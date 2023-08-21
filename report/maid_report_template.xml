@@ -17,7 +17,7 @@
                                     <img src="/ms_housemaid/static/img/maid.png" alt="avatar" class="rounded-circle img-fluid" style="width: 150px;" />
                                 </t>
                                 <h4>
-                                    <span t-out="doc.name" />
+                                    <p t-out="doc.name" />
                                 </h4>
                             </div>
                             <div class="col-4 border rounded">
@@ -58,7 +58,9 @@
                                     Description:
                                 </div>
                                 <div>
-                                    <p t-out="doc.description" />
+                                    <h6>
+                                        <p t-out="doc.description" />
+                                    </h6>
                                 </div>
                             </div>
                         </div>

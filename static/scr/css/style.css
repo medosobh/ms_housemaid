@@ -1,15 +1,12 @@
 span {
   margin: 0;
   padding: 0;
-  font-size: 16px;
+  font-size: small !important;
 }
 
-p {
-  margin: 0;
-  padding: 0;
-  font-size: 16px;
+#left {
+  float: left;
 }
-
-
-#left  { float:left;  }
-#right { float:right; }
+#right {
+  float: right;
+}
