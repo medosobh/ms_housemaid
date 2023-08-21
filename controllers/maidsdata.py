@@ -252,11 +252,16 @@ class maidsportal(CustomerPortal):
         print('group by  ', maids_group_by)
         searchbar_inputs = self._get_searchbar_inputs()
         
-        search_domain = searchbar_inputs[search_in]['domain']
-        
+        search_domain=[]
+        # add value domain to dict
         if search and search_in:
             search_domain += self._get_search_domain(search_in, search)
+            
 
+        # return domain key and value
+        # search_domain = searchbar_inputs[search_in]['search_domain']
+        
+        #append search domain to maid domain
         if search_domain:
             maids_domain.append(search_domain)
 
