@@ -10,6 +10,8 @@ from odoo.addons.portal.controllers.mail import _message_post_helper
 from odoo.exceptions import UserError, ValidationError
 from odoo.addons.portal.controllers.portal import CustomerPortal, pager
 from odoo.addons.web.controllers.main import serialize_exception, content_disposition
+from operator import itemgetter
+from odoo.tools import date_utils, groupby as groupbyelem
 import base64
 
 
@@ -181,28 +183,6 @@ class maidsportal(CustomerPortal):
     @http.route(['/my/maids', '/my/maids/page/<int:page>'], type="http", website=True, auth='user')
     def my_maids_list_view(self, page=1, sortby=None, groupby=None, search="", search_in="all", **kw):
         vals = super()._prepare_portal_layout_values()
-        searchbar_sortings = {
-            'ida': {'label': 'ID Asc', 'order': 'id asc'},
-            'idd': {'label': 'ID Desc', 'order': 'id desc'},
-            'name': {'label': 'Name', 'order': 'name'},
-            'country_id': {'label': 'Country', 'order': 'country_id'},
-            'state': {'label': 'State', 'order': 'state'},
-        }
-        searchbar_groupby = {
-            'None': {'input': 'None', 'label': _('None')},
-            'jobs_id': {'input': 'jobs_id', 'label': _('Jobs')},
-            'state': {'input': 'state', 'label': _('State')},
-            'country_id': {'input': 'country_id', 'label': _('Country')},
-        }
-        searchbar_inputs = {
-            'all': {'label': 'All', 'input': 'all', 'domain': []},
-            'name': {'label': 'Name', 'input': 'name', 'domain': [('name'), 'ilike', search]},
-            'state': {'label': 'State', 'input': 'state', 'domain': [('state'), 'ilike', search]},
-            'job': {'label': 'Job', 'input': 'job_id', 'domain': [('job_id.name'), 'ilike', search]},
-        }
-        
-        search_domain = searchbar_inputs[search_in]['domain']
-
         user_id = request.env.uid
         curr_user = request.env['res.users'].search([
             ('id', '=', user_id),
@@ -215,18 +195,46 @@ class maidsportal(CustomerPortal):
             ('offices_id', '=', user_office),
         ]
 
+        searchbar_sortings = {
+            'ida': {'label': 'ID Asc', 'order': 'id asc'},
+            'idd': {'label': 'ID Desc', 'order': 'id desc'},
+            'name': {'label': 'Name', 'order': 'name'},
+            'country_id': {'label': 'Country', 'order': 'country_id'},
+            'state': {'label': 'State', 'order': 'state'},
+        }
         # default sort by order
         if not sortby:
             sortby = 'ida'
         order = searchbar_sortings[sortby]['order']
+
+        searchbar_groupby = {
+            'None': {'input': 'None', 'label': _('None')},
+            'jobs_id': {'input': 'jobs_id', 'label': _('Jobs')},
+            'state': {'input': 'state', 'label': _('State')},
+            'country_id': {'input': 'country_id', 'label': _('Country')},
+        }
+        maids_group_by = searchbar_groupby.get(groupby, {})
+        if groupby in ('jobs_id', 'state', 'country_id'):
+            maids_group_by = searchbar_groupby.get('input')
+            order = maids_group_by+','+order
+        else:
+            maids_group_by = ''
+
+        searchbar_inputs = {
+            'all': {'label': 'All', 'input': 'all', 'domain': []},
+            'name': {'label': 'Name', 'input': 'name', 'domain': [('name'), 'ilike', search]},
+            'state': {'label': 'State', 'input': 'state', 'domain': [('state'), 'ilike', search]},
+            'job': {'label': 'Job', 'input': 'job_id', 'domain': [('job_id.name'), 'ilike', search]},
+        }
         # default groupby
         if not groupby:
             groupby = 'None'
-        
+
+        search_domain = searchbar_inputs[search_in]['domain']
+
         if search_domain:
             maids_domain.append(search_domain)
-            
-        print('important  ',maids_domain)
+
         total_maids = request.env['housemaid.maids'].sudo(
         ).search_count(maids_domain)
 
@@ -234,18 +242,28 @@ class maidsportal(CustomerPortal):
         print('total = ', total_maids)
         pager_detail = pager(
             url=maid_url,
-            url_args={'sortby': sortby, 'groupby': groupby,'search_in': search_in, 'search': search},
+            url_args={'sortby': sortby, 'groupby': groupby,
+                      'search_in': search_in, 'search': search},
             total=total_maids,
             page=page,
             step=10,
         )
         print('pager_detail = ', pager_detail)
+        maids_obj = request.env['housemaid.maids']
         maids = request.env['housemaid.maids'].sudo().search(
             maids_domain,
             limit=10,
             order=order,
             offset=pager_detail['offset'],
         )
+        # start groupby afte maids search
+        if maids_group_by:
+            maids_group_list = [{maids_group_by: k, 'maids': maids_obj.concat(
+                *g)} for k, g in groupbyelem(maids, itemgetter(maids_group_by))]
+
+        else:
+            maids_group_list = [{'maids': maids}]
+
         print('maids = ', maids)
         vals = {
             'default_url': maid_url,

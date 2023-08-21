@@ -47,7 +47,14 @@
 			<t t-if="not maids">
 				<p>There are currently no maids for your office.</p>
 			</t>
+
+
 			<t t-if="maids" t-call="portal.portal_table">
+			
+
+
+
+
 				<thead style="font-size: 16px;">
 					<tr class="active">
 						<td class="test-center">
