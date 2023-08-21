@@ -129,13 +129,13 @@
 										<h5 class="my-3">
 											<t t-out="maids.name" />
 										</h5>
-										<p class="text-muted mb-1">
+										<p class="mb-1">
 											<t t-out="maids.jobs_id.name" />
 										</p>
-										<p class="text-muted mb-1">
+										<p class="mb-1">
 											<t t-out="maids.state" />
 										</p>
-										<p class="text-muted mb-4">
+										<p class="mb-4">
 											<t t-out="maids.country_id.name" />
 										</p>
 										<div class="d-flex justify-content-center mb-2">
@@ -144,7 +144,7 @@
 											</a>
 										</div>
 										<t t-if="maids.resume">
-											<p class="text-muted mb-4">
+											<p class="mb-4">
 												<a t-attf-href="/my/maids/download_document/{{maids.id}}" class="fa fa-download">
 													Download Attached Resume
 												</a>
@@ -166,7 +166,7 @@
 												</p>
 											</div>
 											<div class="col-sm-9">
-												<p class="text-muted mb-0">
+												<p class="mb-0">
 													<t t-out="maids.offices_id.name" />
 												</p>
 											</div>
@@ -179,7 +179,7 @@
 												</p>
 											</div>
 											<div class="col-sm-9">
-												<p class="text-muted mb-0">
+												<p class="mb-0">
 													<t t-out="maids.code" />
 												</p>
 											</div>
@@ -192,7 +192,7 @@
 												</p>
 											</div>
 											<div class="col-sm-9">
-												<p class="text-muted mb-0">
+												<p class="mb-0">
 													<t t-out="maids.name" />
 												</p>
 											</div>
@@ -205,7 +205,7 @@
 												</p>
 											</div>
 											<div class="col-sm-9">
-												<p class="text-muted mb-0">
+												<p class="mb-0">
 													<t t-out="maids.phone" />
 												</p>
 											</div>
@@ -218,7 +218,7 @@
 												</p>
 											</div>
 											<div class="col-sm-9">
-												<p class="text-muted mb-0">
+												<p class="mb-0">
 													<t t-out="maids.email" />
 												</p>
 											</div>
@@ -231,7 +231,7 @@
 												</p>
 											</div>
 											<div class="col-sm-9">
-												<p class="text-muted mb-0">
+												<p class="mb-0">
 													<t t-out="maids.country_id.name" />
 												</p>
 											</div>
@@ -255,7 +255,7 @@
 												</p>
 											</div>
 											<div class="col-sm-7">
-												<p class="text-muted mb-0">
+												<p class="mb-0">
 													<t t-out="maids.jobs_id.name" />
 												</p>
 											</div>
@@ -268,7 +268,7 @@
 												</p>
 											</div>
 											<div class="col-sm-7">
-												<p class="text-muted mb-0">
+												<p class="mb-0">
 													<t t-out="maids.monthly_salary" />
 												</p>
 											</div>
@@ -281,7 +281,7 @@
 												</p>
 											</div>
 											<div class="col-sm-7">
-												<p class="text-muted mb-0">
+												<p class="mb-0">
 													<t t-out="maids.currency_id.name" />
 												</p>
 											</div>
@@ -294,7 +294,7 @@
 												</p>
 											</div>
 											<div class="col-sm-7">
-												<p class="text-muted mb-0">
+												<p class="mb-0">
 													<t t-out="maids.contract_period" />
 												</p>
 											</div>
@@ -316,7 +316,7 @@
 												</p>
 											</div>
 											<div class="col-sm-7">
-												<p class="text-muted mb-0">
+												<p class="mb-0">
 													<t t-if="maids.arabic_lang">
 														Yes:
 														<input type="checkbox" id="checkbox_arabic_lang_true" checked="checked" disabled="True"/>
@@ -340,7 +340,7 @@
 												</p>
 											</div>
 											<div class="col-sm-7">
-												<p class="text-muted mb-0">
+												<p class="mb-0">
 													<t t-if="maids.english_lang">
 														Yes:
 														<input type="checkbox" id="checkbox_english_lang_true" checked="checked" disabled="True"/>
@@ -364,7 +364,7 @@
 												</p>
 											</div>
 											<div class="col-sm-7">
-												<p class="text-muted mb-0">
+												<p class="mb-0">
 													<t t-out="maids.educations_id.name" />
 												</p>
 											</div>
@@ -386,7 +386,7 @@
 												</p>
 											</div>
 											<div class="col-sm-7">
-												<p class="text-muted mb-0">
+												<p class="mb-0">
 													<t t-out="maids.passport_no" />
 												</p>
 											</div>
@@ -399,7 +399,7 @@
 												</p>
 											</div>
 											<div class="col-sm-7">
-												<p class="text-muted mb-0">
+												<p class="mb-0">
 													<t t-out="maids.passport_place" />
 												</p>
 											</div>
@@ -412,7 +412,7 @@
 												</p>
 											</div>
 											<div class="col-sm-7">
-												<p class="text-muted mb-0">
+												<p class="mb-0">
 													<t t-out="maids.passport_issue_date" />
 												</p>
 											</div>
@@ -425,7 +425,7 @@
 												</p>
 											</div>
 											<div class="col-sm-7">
-												<p class="text-muted mb-0">
+												<p class="mb-0">
 													<t t-out="maids.passport_expire_date" />
 												</p>
 											</div>
@@ -438,7 +438,7 @@
 												</p>
 											</div>
 											<div class="col-sm-7">
-												<p class="text-muted mb-0">
+												<p class="mb-0">
 													<t t-out="maids.identation" />
 												</p>
 											</div>
@@ -462,7 +462,7 @@
 												</p>
 											</div>
 											<div class="col-sm-7">
-												<p class="text-muted mb-0">
+												<p class="mb-0">
 													<t t-out="maids.religion" />
 												</p>
 											</div>
@@ -475,7 +475,7 @@
 												</p>
 											</div>
 											<div class="col-sm-7">
-												<p class="text-muted mb-0">
+												<p class="mb-0">
 													<t t-out="maids.gender" />
 												</p>
 											</div>
@@ -488,7 +488,7 @@
 												</p>
 											</div>
 											<div class="col-sm-7">
-												<p class="text-muted mb-0">
+												<p class="mb-0">
 													<t t-out="maids.children_no" />
 												</p>
 											</div>
@@ -501,7 +501,7 @@
 												</p>
 											</div>
 											<div class="col-sm-7">
-												<p class="text-muted mb-0">
+												<p class="mb-0">
 													<t t-out="maids.birthday" />
 												</p>
 											</div>
@@ -514,7 +514,7 @@
 												</p>
 											</div>
 											<div class="col-sm-7">
-												<p class="text-muted mb-0">
+												<p class="mb-0">
 													<t t-out="maids.place_of_birth" />
 												</p>
 											</div>
@@ -527,7 +527,7 @@
 												</p>
 											</div>
 											<div class="col-sm-7">
-												<p class="text-muted mb-0">
+												<p class="mb-0">
 													<t t-out="maids.marital_status" />
 												</p>
 											</div>
@@ -549,7 +549,7 @@
 												</p>
 											</div>
 											<div class="col-sm-7">
-												<p class="text-muted mb-0">
+												<p class="mb-0">
 													<t t-out="maids.skin_color" />
 												</p>
 											</div>
@@ -562,7 +562,7 @@
 												</p>
 											</div>
 											<div class="col-sm-7">
-												<p class="text-muted mb-0">
+												<p class="mb-0">
 													<t t-out="maids.age" />
 												</p>
 											</div>
@@ -575,7 +575,7 @@
 												</p>
 											</div>
 											<div class="col-sm-7">
-												<p class="text-muted mb-0">
+												<p class="mb-0">
 													<t t-out="maids.hight" />
 												</p>
 											</div>
@@ -588,7 +588,7 @@
 												</p>
 											</div>
 											<div class="col-sm-7">
-												<p class="text-muted mb-0">
+												<p class="mb-0">
 													<t t-out="maids.weight" />
 												</p>
 											</div>
@@ -610,7 +610,7 @@
 												</p>
 											</div>
 											<div class="col-sm-7">
-												<p class="text-muted mb-0">
+												<p class="mb-0">
 													<t t-if="maids.skills_cleaning">
 														Yes:
 														<input type="checkbox" id="checkbox_skills_cleaning_true" checked="checked" disabled="True"/>
@@ -634,7 +634,7 @@
 												</p>
 											</div>
 											<div class="col-sm-7">
-												<p class="text-muted mb-0">
+												<p class="mb-0">
 													<t t-if="maids.skills_arabic_cooking">
 														Yes:
 														<input type="checkbox" id="checkbox_skills_arabic_cooking_true" checked="checked" disabled="True"/>
@@ -658,7 +658,7 @@
 												</p>
 											</div>
 											<div class="col-sm-7">
-												<p class="text-muted mb-0">
+												<p class="mb-0">
 													<t t-if="maids.skills_baby_sitting">
 														Yes:
 														<input type="checkbox" id="checkbox_skills_baby_sitting_true" checked="checked" disabled="True"/>
@@ -682,7 +682,7 @@
 												</p>
 											</div>
 											<div class="col-sm-7">
-												<p class="text-muted mb-0">
+												<p class="mb-0">
 													<t t-if="maids.skills_washing">
 														Yes:
 														<input type="checkbox" id="checkbox_skills_washing_true" checked="checked" disabled="True"/>
@@ -706,7 +706,7 @@
 												</p>
 											</div>
 											<div class="col-sm-7">
-												<p class="text-muted mb-0">
+												<p class="mb-0">
 													<t t-if="maids.skills_ironing">
 														Yes:
 														<input type="checkbox" id="checkbox_skills_ironing_true" checked="checked" disabled="True"/>
@@ -730,7 +730,7 @@
 												</p>
 											</div>
 											<div class="col-sm-7">
-												<p class="text-muted mb-0">
+												<p class="mb-0">
 													<t t-if="maids.skills_googlelocation">
 														Yes:
 														<input type="checkbox" id="checkbox_skills_googlelocation_true" checked="checked" disabled="True"/>
@@ -754,7 +754,7 @@
 												</p>
 											</div>
 											<div class="col-sm-7">
-												<p class="text-muted mb-0">
+												<p class="mb-0">
 													<t t-out="maids.skills_driving" />
 													<t t-if="maids.skills_driving">
 														Yes:
@@ -790,7 +790,7 @@
 												</p>
 											</div>
 											<div class="col-sm-7">
-												<p class="text-muted mb-0">
+												<p class="mb-0">
 													<t t-out="maids.partner_id.name" />
 												</p>
 											</div>
@@ -803,7 +803,7 @@
 												</p>
 											</div>
 											<div class="col-sm-7">
-												<p class="text-muted mb-0">
+												<p class="mb-0">
 													<t t-out="maids.user_id.name" />
 												</p>
 											</div>
@@ -816,7 +816,7 @@
 												</p>
 											</div>
 											<div class="col-sm-7">
-												<p class="text-muted mb-0">
+												<p class="mb-0">
 													<t t-out="maids.company_id.name" />
 												</p>
 											</div>
@@ -829,7 +829,7 @@
 												</p>
 											</div>
 											<div class="col-sm-7">
-												<p class="text-muted mb-0">
+												<p class="mb-0">
 													<t t-out="maids.description" />
 												</p>
 											</div>

@@ -4,10 +4,10 @@
         <t t-call="web.html_container">
             <t t-foreach="docs" t-as="doc">
                 <t t-call="web.external_layout">
-                    <div class="page py-0 my-0">
+                    <div class="page">
                         <link rel="stylesheet" type="text/css" href="/ms_housemaid/static/scr/css/style.css"/>
                         <!-- <div class="page" t-attf-style="background-image:url('/ms_housemaid/static/img/maid.png'); background-size:195mm 282mm; width:195mm; height:282mm;"> -->
-                        <div class="oe_structure"/>
+                        <!-- <div class="oe_structure"/> -->
                         <div class="row">
                             <div class="col-4 text-center">
                                 <t t-if="doc.image">
@@ -20,203 +20,198 @@
                                     <span t-out="doc.name" />
                                 </h4>
                             </div>
-                            <div class="col-8 border rounded">
+                            <div class="col-4 border rounded">
                                 <div class="mb-4 bg-info text-white" >
 									Main Information
                                 </div>
                                 <div>
                                     <span > State: </span>
-                                    <span t-out="doc.state" />
+                                    <span id="right" t-out="doc.state" />
                                 </div>
                                 <div>
                                     <span > Office: </span>
-                                    <span t-out="doc.offices_id.name" />
+                                    <span id="right" t-out="doc.offices_id.name" />
                                 </div>
                                 <div>
                                     <span > Code:</span>
-                                    <span t-out="doc.code" />
+                                    <span id="right" t-out="doc.code" />
                                 </div>
                                 <div>
                                     <span > Name:</span>
-                                    <span t-out="doc.name" />
+                                    <span id="right" t-out="doc.name" />
                                 </div>
                                 <div>
                                     <span > Phone:</span>
-                                    <span t-out="doc.phone" />
+                                    <span id="right" t-out="doc.phone" />
                                 </div>
                                 <div>
                                     <span> Email:</span>
-                                    <span t-out="doc.email" />
+                                    <span id="right" t-out="doc.email" />
                                 </div>
                                 <div>
                                     <span > Country:</span>
-                                    <span t-out="doc.country_id.name" />
+                                    <span id="right" t-out="doc.country_id.name" />
+                                </div>
+                            </div>
+                            <div class="col-4 border rounded">
+                                <div class="mb-4 bg-info text-white" >
+                                    Description:
+                                </div>
+                                <div>
+                                    <p t-out="doc.description" />
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-4 border rounded ">
-                                <div class="card mb-4 mb-md-0">
-                                    <div class="card-body">
-                                        <div class="mb-4 bg-info text-white">
+                                <div class="mb-4 bg-info text-white">
                                             Job Information
                                         </div>
-                                        <div>
-                                            <span> Job :</span>
-                                            <span t-out="doc.jobs_id.name" />
-                                        </div>
-                                        <div>
-                                            <span> Monthly Salary: </span>
-                                            <span t-out="doc.monthly_salary" />
-                                        </div>
-                                        <div>
-                                            <span> Currancy:</span>
-                                            <span t-out="doc.currency_id.name" />
-                                        </div>
-                                        <div>
-                                            <span> Contract Period:</span>
-                                            <span t-out="doc.contract_period" />
-                                        </div>
-                                    </div>
+                                <div>
+                                    <span> Job :</span>
+                                    <span id="right" t-out="doc.jobs_id.name" />
+                                </div>
+                                <div>
+                                    <span> Monthly Salary: </span>
+                                    <span id="right" t-out="doc.monthly_salary" />
+                                </div>
+                                <div>
+                                    <span> Currancy:</span>
+                                    <span id="right" t-out="doc.currency_id.name" />
+                                </div>
+                                <div>
+                                    <span> Contract Period:</span>
+                                    <span id="right" t-out="doc.contract_period" />
                                 </div>
                             </div>
                             <div class="col-4 border rounded">
-                                <div class="card mb-4 mb-md-0">
-                                    <div class="card-body">
-                                        <div class="mb-4 bg-info text-white">
+                                <div class="mb-4 bg-info text-white">
 							    		Language and Education
         								</div>
-                                        <p> Arabic Language:
-                                            <t t-if="doc.arabic_lang">
+                                <div>
+                                    <span>Arabic Language:</span>
+                                    <span id="right">
+                                        <t t-if="doc.arabic_lang">
 														Yes:
-                                                <input type="checkbox" id="checkbox_arabic_lang_true" checked="checked" />
+                                            <input type="checkbox" id="checkbox_arabic_lang_true" checked="checked" />
 														No:
-                                                <input type="checkbox" id="checkbox_arabic_lang_false"/>
-                                            </t>
-                                            <t t-if="not doc.arabic_lang">
+                                            <input type="checkbox" id="checkbox_arabic_lang_false"/>
+                                        </t>
+                                        <t t-if="not doc.arabic_lang">
 														Yes:
-                                                <input type="checkbox" id="checkbox_arabic_lang_true" />
+                                            <input type="checkbox" id="checkbox_arabic_lang_true" />
 														No:
-                                                <input type="checkbox" id="checkbox_arabic_lang_false" checked="checked"/>
-                                            </t>
-                                        </p>
-                                        <p> English Language:
-                                            <t t-if="doc.english_lang">
+                                            <input type="checkbox" id="checkbox_arabic_lang_false" checked="checked"/>
+                                        </t>
+                                    </span>
+                                </div>
+                                <div>
+                                    <span>English Language:</span>
+                                    <span id="right">
+                                        <t t-if="doc.english_lang">
 														Yes:
-                                                <input type="checkbox" id="checkbox_english_lang_true" checked="checked" />
+                                            <input type="checkbox" id="checkbox_english_lang_true" checked="checked" />
 														No:
-                                                <input type="checkbox" id="checkbox_english_lang_false"/>
-                                            </t>
-                                            <t t-if="not doc.english_lang">
+                                            <input type="checkbox" id="checkbox_english_lang_false"/>
+                                        </t>
+                                        <t t-if="not doc.english_lang">
 														Yes:
-                                                <input type="checkbox" id="checkbox_english_lang_true" />
+                                            <input type="checkbox" id="checkbox_english_lang_true" />
 														No:
-                                                <input type="checkbox" id="checkbox_english_lang_false" checked="checked"/>
-                                            </t>
-                                        </p>
-                                        <div>
-                                            <span> Eductaion: </span>
-                                            <span t-out="doc.educations_id.name" />
-                                        </div>
-                                    </div>
+                                            <input type="checkbox" id="checkbox_english_lang_false" checked="checked"/>
+                                        </t>
+                                    </span>
+                                </div>
+                                <div>
+                                    <span>Eductaion:</span>
+                                    <span t-out="doc.educations_id.name" />
                                 </div>
                             </div>
                             <div class="col-4 border rounded">
-                                <div class="card mb-4 mb-md-0">
-                                    <div class="card-body">
-                                        <div class="mb-4 bg-info text-white">
+                                <div class="mb-4 bg-info text-white">
                                         Passport
                                         </div>
-                                        <div>
-                                            <span> Passport No:</span>
-                                            <span t-out="doc.passport_no" />
-                                        </div>
-                                        <div>
-                                            <span> Passport Place: </span>
-                                            <span t-out="doc.passport_place" />
-                                        </div>
-                                        <div>
-                                            <span> Issue Date:</span>
-                                            <span t-out="doc.passport_issue_date" />
-                                        </div>
-                                        <div>
-                                            <span> Expire Date:</span>
-                                            <span t-out="doc.passport_expire_date" />
-                                        </div>
-                                        <div>
-                                            <span> Identation No:</span>
-                                            <span t-out="doc.identation" />
-                                        </div>
-                                    </div>
+                                <div>
+                                    <span>Passport No:</span>
+                                    <span id="right" t-out="doc.passport_no" />
+                                </div>
+                                <div>
+                                    <span>Passport Place: </span>
+                                    <span id="right" t-out="doc.passport_place" />
+                                </div>
+                                <div>
+                                    <span>Issue Date:</span>
+                                    <span id="right" t-out="doc.passport_issue_date" />
+                                </div>
+                                <div>
+                                    <span>Expire Date:</span>
+                                    <span id="right" t-out="doc.passport_expire_date" />
+                                </div>
+                                <div>
+                                    <span>Identation No:</span>
+                                    <span id="right" t-out="doc.identation" />
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-4 border rounded">
-                                <div class="card mb-4 mb-md-0">
-                                    <div class="card-body">
-                                        <div class="mb-4 bg-info text-white">
+                                <div class="mb-4 bg-info text-white">
                                         Personal information
                                         </div>
-                                        <div>
-                                            <span> Religion:</span>
-                                            <span t-out="doc.religion" />
-                                        </div>
-                                        <div>
-                                            <span> Gender:</span>
-                                            <span t-out="doc.gender" />
-                                        </div>
-                                        <div>
-                                            <span> Children No:</span>
-                                            <span t-out="doc.children_no" />
-                                        </div>
-                                        <div>
-                                            <span> Birthday:</span>
-                                            <span t-out="doc.birthday" />
-                                        </div>
-                                        <div>
-                                            <span> Place Of Birth:</span>
-                                            <span t-out="doc.place_of_birth" />
-                                        </div>
-                                        <div>
-                                            <span> Marital Status:</span>
-                                            <span t-out="doc.marital_status" />
-                                        </div>
-                                    </div>
+                                <div>
+                                    <span>Religion:</span>
+                                    <span id="right" t-out="doc.religion" />
+                                </div>
+                                <div>
+                                    <span>Gender:</span>
+                                    <span id="right" t-out="doc.gender" />
+                                </div>
+                                <div>
+                                    <span>Children No:</span>
+                                    <span id="right" t-out="doc.children_no" />
+                                </div>
+                                <div>
+                                    <span>Birthday:</span>
+                                    <span id="right" t-out="doc.birthday" />
+                                </div>
+                                <div>
+                                    <span>Place Of Birth:</span>
+                                    <span id="right" t-out="doc.place_of_birth" />
+                                </div>
+                                <div>
+                                    <span>Marital Status:</span>
+                                    <span id="right" t-out="doc.marital_status" />
                                 </div>
                             </div>
                             <div class="col-4 border rounded">
-                                <div class="card mb-4 mb-md-0">
-                                    <div class="card-body">
-                                        <div class="mb-4 bg-info text-white">
+                                <div class="mb-4 bg-info text-white">
                                         Personal Attribute
                                         </div>
-                                        <div>
-                                            <span> Skin Color:</span>
-                                            <span t-out="doc.skin_color" />
-                                        </div>
-                                        <div>
-                                            <span> Age:</span>
-                                            <span t-out="doc.age" />
-                                        </div>
-                                        <div>
-                                            <span> Hight: </span>
-                                            <span t-out="doc.hight" />
-                                        </div>
-                                        <div>
-                                            <span> Weight:</span>
-                                            <span t-out="doc.weight" />
-                                        </div>
-                                    </div>
+                                <div>
+                                    <span>Skin Color:</span>
+                                    <span id="right" t-out="doc.skin_color" />
+                                </div>
+                                <div>
+                                    <span>Age:</span>
+                                    <span id="right" t-out="doc.age" />
+                                </div>
+                                <div>
+                                    <span>Hight: </span>
+                                    <span id="right" t-out="doc.hight" />
+                                </div>
+                                <div>
+                                    <span>Weight:</span>
+                                    <span id="right" t-out="doc.weight" />
                                 </div>
                             </div>
                             <div class="col-4 border rounded">
-                                <div class="card mb-4 mb-md-0">
-                                    <div class="card-body">
-                                        <div class="mb-4 bg-info text-white">
+                                <div class="mb-4 bg-info text-white">
                                         Personal Skills
                                         </div>
-                                        <p> Cleaning:
+                                <div class="row">
+                                    <div class="col-sm-4">
+                                        <span>Cleaning:</span>
+                                        <span id="right">
                                             <t t-if="doc.skills_cleaning">
                                                 Yes:
                                                 <input type="checkbox" id="checkbox_skills_cleaning_true" checked="checked" />
@@ -229,99 +224,111 @@
                                                 No:
                                                 <input type="checkbox" id="checkbox_skills_cleaning_false" checked="checked"/>
                                             </t>
-                                        </p>
-                                        <p> Arabic Cooking:
-                                            <t t-if="doc.skills_arabic_cooking">
-                                                Yes:
-                                                <input type="checkbox" id="checkbox_skills_arabic_cooking_true" checked="checked" />
-                                                No:
-                                                <input type="checkbox" id="checkbox_skills_arabic_cooking_false"/>
-                                            </t>
-                                            <t t-if="not doc.skills_arabic_cooking">
-                                                Yes:
-                                                <input type="checkbox" id="checkbox_skills_arabic_cooking_true" />
-                                                No:
-                                                <input type="checkbox" id="checkbox_skills_arabic_cooking_false" checked="checked"/>
-                                            </t>
-                                        </p>
-                                        <p> Baby Sitting:
-                                            <t t-if="doc.skills_baby_sitting">
-                                                Yes:
-                                                <input type="checkbox" id="checkbox_skills_baby_sitting_true" checked="checked" />
-                                                No:
-                                                <input type="checkbox" id="checkbox_skills_baby_sitting_false"/>
-                                            </t>
-                                            <t t-if="not doc.skills_baby_sitting">
-                                                Yes:
-                                                <input type="checkbox" id="checkbox_skills_baby_sitting_true" />
-                                                No:
-                                                <input type="checkbox" id="checkbox_skills_baby_sitting_false" checked="checked"/>
-                                            </t>
-                                        </p>
-                                        <p> Washing:
-                                            <t t-if="doc.skills_washing">
-                                                Yes:
-                                                <input type="checkbox" id="checkbox_skills_washing_true" checked="checked" />
-                                                No:
-                                                <input type="checkbox" id="checkbox_skills_washing_false"/>
-                                            </t>
-                                            <t t-if="not doc.skills_washing">
-                                                Yes:
-                                                <input type="checkbox" id="checkbox_skills_washing_true" />
-                                                No:
-                                                <input type="checkbox" id="checkbox_skills_washing_false" checked="checked"/>
-                                            </t>
-                                        </p>
-                                        <p> Ironing:
-                                            <t t-if="doc.skills_ironing">
-                                                Yes:
-                                                <input type="checkbox" id="checkbox_skills_ironing_true" checked="checked" />
-                                                No:
-                                                <input type="checkbox" id="checkbox_skills_ironing_false"/>
-                                            </t>
-                                            <t t-if="not doc.skills_ironing">
-                                                Yes:
-                                                <input type="checkbox" id="checkbox_skills_ironing_true" />
-                                                No:
-                                                <input type="checkbox" id="checkbox_skills_ironing_false" checked="checked"/>
-                                            </t>
-                                        </p>
-                                        <p> Google Location:
-                                            <t t-if="doc.skills_googlelocation">
-                                                Yes:
-                                                <input type="checkbox" id="checkbox_skills_googlelocation_true" checked="checked" />
-                                                No:
-                                                <input type="checkbox" id="checkbox_skills_googlelocation_false"/>
-                                            </t>
-                                            <t t-if="not doc.skills_googlelocation">
-                                                Yes:
-                                                <input type="checkbox" id="checkbox_skills_googlelocation_true" />
-                                                No:
-                                                <input type="checkbox" id="checkbox_skills_googlelocation_false" checked="checked"/>
-                                            </t>
-                                        </p>
-                                        <p> Driving:
-                                            <t t-if="doc.skills_driving">
-                                                Yes:
-                                                <input type="checkbox" id="checkbox_skills_driving_true" checked="checked" />
-                                                No:
-                                                <input type="checkbox" id="checkbox_skills_driving_false"/>
-                                            </t>
-                                            <t t-if="not doc.skills_driving">
-                                                Yes:
-                                                <input type="checkbox" id="checkbox_skills_driving_true" />
-                                                No:
-                                                <input type="checkbox" id="checkbox_skills_driving_false" checked="checked"/>
-                                            </t>
-                                        </p>
+                                        </span>
                                     </div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-6 border rounded">
-                                Description:
-                                <p t-out="doc.description" />
+                                <div>
+                                    <span>Arabic Cooking:</span>
+                                    <span id="right">
+                                        <t t-if="doc.skills_arabic_cooking">
+                                                Yes:
+                                            <input type="checkbox" id="checkbox_skills_arabic_cooking_true" checked="checked" />
+                                                No:
+                                            <input type="checkbox" id="checkbox_skills_arabic_cooking_false"/>
+                                        </t>
+                                        <t t-if="not doc.skills_arabic_cooking">
+                                                Yes:
+                                            <input type="checkbox" id="checkbox_skills_arabic_cooking_true" />
+                                                No:
+                                            <input type="checkbox" id="checkbox_skills_arabic_cooking_false" checked="checked"/>
+                                        </t>
+                                    </span>
+                                </div>
+                                <div>
+                                    <span>Baby Sitting:</span>
+                                    <span id="right">
+                                        <t t-if="doc.skills_baby_sitting">
+                                                Yes:
+                                            <input type="checkbox" id="checkbox_skills_baby_sitting_true" checked="checked" />
+                                                No:
+                                            <input type="checkbox" id="checkbox_skills_baby_sitting_false"/>
+                                        </t>
+                                        <t t-if="not doc.skills_baby_sitting">
+                                                Yes:
+                                            <input type="checkbox" id="checkbox_skills_baby_sitting_true" />
+                                                No:
+                                            <input type="checkbox" id="checkbox_skills_baby_sitting_false" checked="checked"/>
+                                        </t>
+                                    </span>
+                                </div>
+                                <div>
+                                    <span>Washing:</span>
+                                    <span id="right">
+                                        <t t-if="doc.skills_washing">
+                                                Yes:
+                                            <input type="checkbox" id="checkbox_skills_washing_true" checked="checked" />
+                                                No:
+                                            <input type="checkbox" id="checkbox_skills_washing_false"/>
+                                        </t>
+                                        <t t-if="not doc.skills_washing">
+                                                Yes:
+                                            <input type="checkbox" id="checkbox_skills_washing_true" />
+                                                No:
+                                            <input type="checkbox" id="checkbox_skills_washing_false" checked="checked"/>
+                                        </t>
+                                    </span>
+                                </div>
+                                <div>
+                                    <span>Ironing:</span>
+                                    <span id="right">
+                                        <t t-if="doc.skills_ironing">
+                                                Yes:
+                                            <input type="checkbox" id="checkbox_skills_ironing_true" checked="checked" />
+                                                No:
+                                            <input type="checkbox" id="checkbox_skills_ironing_false"/>
+                                        </t>
+                                        <t t-if="not doc.skills_ironing">
+                                                Yes:
+                                            <input type="checkbox" id="checkbox_skills_ironing_true" />
+                                                No:
+                                            <input type="checkbox" id="checkbox_skills_ironing_false" checked="checked"/>
+                                        </t>
+                                    </span>
+                                </div>
+                                <div>
+                                    <span>Google Location:</span>
+                                    <span id="right">
+                                        <t t-if="doc.skills_googlelocation">
+                                                Yes:
+                                            <input type="checkbox" id="checkbox_skills_googlelocation_true" checked="checked" />
+                                                No:
+                                            <input type="checkbox" id="checkbox_skills_googlelocation_false"/>
+                                        </t>
+                                        <t t-if="not doc.skills_googlelocation">
+                                                Yes:
+                                            <input type="checkbox" id="checkbox_skills_googlelocation_true" />
+                                                No:
+                                            <input type="checkbox" id="checkbox_skills_googlelocation_false" checked="checked"/>
+                                        </t>
+                                    </span>
+                                </div>
+                                <div>
+                                    <span>Driving:</span>
+                                    <span id="right">
+                                        <t t-if="doc.skills_driving">
+                                                Yes:
+                                            <input type="checkbox" id="checkbox_skills_driving_true" checked="checked" />
+                                                No:
+                                            <input type="checkbox" id="checkbox_skills_driving_false"/>
+                                        </t>
+                                        <t t-if="not doc.skills_driving">
+                                                Yes:
+                                            <input type="checkbox" id="checkbox_skills_driving_true" />
+                                                No:
+                                            <input type="checkbox" id="checkbox_skills_driving_false" checked="checked"/>
+                                        </t>
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
