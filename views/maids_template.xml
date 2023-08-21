@@ -44,77 +44,89 @@
 			<t t-call="portal.portal_searchbar">
 				<t t-set="title">Maids List</t>
 			</t>
-			<t t-if="not maids">
+			<t t-if="not group_maids">
 				<p>There are currently no maids for your office.</p>
 			</t>
+			<t t-if="group_maids" t-call="portal.portal_table">
+				<t t-foreach="group_maids" t-as="group_maids">
+					<thead style="font-size: 16px;">
+						<tr t-if="not groupby =='none'" t-attf-class="{{'thead-light'}}">
+							<t t-if="groupby == 'jobs_id'">
+								<th class="test-left" t-if="groupby == 'jobs_id'" colspan="6">
+								Job: 
+									<span t-out="group_maids['jobs_id'].name">
+								total: 
+										<!-- <t t-out="len(maids['maids'].ids)"/> -->
+									</span>
+								</th>
+							</t>
+							<t t-elif="groupby == 'state'">
+								<th class="test-left" t-if="groupby == 'state'" colspan="6">
+								State: 
+									<span t-out="group_maids['state']">
+								total: 
+										<!-- <t t-out="len(maids['maids'])"/> -->
+									</span>
+								</th>
+							</t>
+							<t t-elif="groupby == 'country_id'">
+								<th class="test-left" t-if="groupby == 'country_id'" colspan="6">
+								State: 
+									<span t-out="group_maids.['country_id'].name">
+								total: 
+										<!-- <t t-out="len(maids['maids'])"/> -->
+									</span>
+								</th>
+							</t>
+							<t t-else="">
+								<span>All List</span>
+							</t>
 
-
-			<t t-if="maids" t-call="portal.portal_table">
-			
-
-
-
-
-				<thead style="font-size: 16px;">
-					<tr class="active">
-						<td class="test-center">
-									Office:
-								</td>
-						<td class="test-center">
-									Code:
-								</td>
-						<td class="test-center">
-									Name:
-								</td>
-						<td class="test-center">
-									Job:
-								</td>
-						<td class="test-center">
-									Salary:
-								</td>
-						<td class="test-center">
-									Currency:
-								</td>
-						<td class="test-center">
-									Country:
-								</td>
-						<td class="test-center">
-									State:
-								</td>
-					</tr>
-				</thead>
-				<tbody>
-					<t t-foreach="maids" t-as="maids">
-						<tr>
-							<td>
-								<t t-out="maids.offices_id.name" />
-							</td>
-							<td>
-								<t t-out="maids.code" />
-							</td>
-							<td>
-								<a t-attf-href="/my/maids/#{maids.id}">
-									<t t-out="maids.name" />
-								</a>
-							</td>
-							<td>
-								<t t-out="maids.jobs_id.name" />
-							</td>
-							<td>
-								<t t-out="maids.monthly_salary" />
-							</td>
-							<td>
-								<t t-out="maids.currency_id.name" />
-							</td>
-							<td>
-								<t t-out="maids.country_id.name" />
-							</td>
-							<td>
-								<t t-out="maids.state" />
-							</td>
 						</tr>
-					</t>
-				</tbody>
+						<tr class="active">
+							<th class="test-center">Country:</th>
+							<th class="test-center">Office:</th>
+							<th class="test-center">Code:</th>
+							<th class="test-center">Name:</th>
+							<th class="test-center">Job:</th>
+							<th class="test-center">Salary:</th>
+							<th class="test-center">Currency:</th>
+							<th class="test-center">State:</th>
+						</tr>
+					</thead>
+					<tbody>
+						<t t-foreach="maids" t-as="maids">
+							<tr>
+								<td>
+									<t t-out="maids.country_id.name" />
+								</td>
+								<td>
+									<t t-out="maids.offices_id.name" />
+								</td>
+								<td>
+									<t t-out="maids.code" />
+								</td>
+								<td>
+									<a t-attf-href="/my/maids/#{maids.id}">
+										<t t-out="maids.name" />
+									</a>
+								</td>
+								<td>
+									<t t-out="maids.jobs_id.name" />
+								</td>
+								<td>
+									<t t-out="maids.monthly_salary" />
+								</td>
+								<td>
+									<t t-out="maids.currency_id.name" />
+								</td>
+								<td>
+									<t t-out="maids.state" />
+								</td>
+							</tr>
+						</t>
+					</tbody>
+				</t>
 			</t>
 			<div class="products_pager form-inline justify-content-center mt-3">
 				<t t-call="portal.pager">
@@ -866,7 +878,7 @@
 	<template id="my_maids_portal_new_form_view" name="New Maid Form">
 		<t t-call="portal.portal_layout">
 			<t t-call="portal.portal_table">
-				<div class="alert alert-success" role="alert" t-if="success_msg" >
+				<div class="alert alert-success" role="alert" t-if="success_msg">
 					<t t-out="success_msg"/>
 				</div>
 				<t t-foreach="error_list" t-as="error">
@@ -1177,7 +1189,7 @@
 					<footer>
 						<div class="form-group row">
 							<div class="col-sm-8">
-								<button type="submit" class="btn btn-primary" >Save Maid CV</button>
+								<button type="submit" class="btn btn-primary">Save Maid CV</button>
 							</div>
 						</div>
 					</footer>

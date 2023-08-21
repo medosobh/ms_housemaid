@@ -35,6 +35,43 @@ class maidsportal(CustomerPortal):
             maids_domain)
         return values
 
+    def _get_searchbar_inputs(self):
+        return {
+            'all': {'label': 'All', 'input': 'all'},
+            'name': {'label': 'Name', 'input': 'name'},
+            'state': {'label': 'State', 'input': 'state'},
+            'job': {'label': 'Job', 'input': 'job_id'},
+        }
+    
+    def _get_searchbar_groupby(self):
+        return {
+            'none': {'input': 'None', 'label': _('None'), 'order': 1},
+            'jobs_id': {'input': 'jobs_id', 'label': _('Jobs'), 'order': 1},
+            'state': {'input': 'state', 'label': _('State'), 'order': 1},
+            'country_id': {'input': 'country_id', 'label': _('Country'), 'order': 1},
+        }
+        
+    def _get_search_domain(self, search_in, search):
+        search_domain = []
+        if search_in in ('name', 'all'):
+            search_domain = OR([search_domain, [('name', 'ilike', search)]])
+        if search_in in ('state', 'all'):
+            search_domain = OR([search_domain, [('state', 'ilike', search)]])
+        if search_in in ('job', 'all'):
+            search_domain = OR([search_domain, [('job_id.name', 'ilike', search)]])
+        
+        return search_domain
+        
+    def _get_searchbar_sortings(self):
+        return {
+            'ida': {'label': 'ID Asc', 'order': 'id asc'},
+            'idd': {'label': 'ID Desc', 'order': 'id desc'},
+            'name': {'label': _('Name'), 'order': 'name'},
+            'country_id': {'label': _('Country'), 'order': 'country_id'},
+            'state': {'label': _('State'), 'order': 'state'},
+        }
+    
+    
     @http.route('/my/maid/new', website=True, auth='user', type="http", method=["POST", "GET"])
     def maid_create_form(self, **kw):
         vals = super()._prepare_portal_layout_values()
@@ -181,7 +218,7 @@ class maidsportal(CustomerPortal):
         )
 
     @http.route(['/my/maids', '/my/maids/page/<int:page>'], type="http", website=True, auth='user')
-    def my_maids_list_view(self, page=1, sortby=None, groupby=None, search="", search_in="all", **kw):
+    def my_maids_list_view(self, page=1, sortby='ida', groupby="none", search="", search_in="all", **kw):
         vals = super()._prepare_portal_layout_values()
         user_id = request.env.uid
         curr_user = request.env['res.users'].search([
@@ -195,42 +232,30 @@ class maidsportal(CustomerPortal):
             ('offices_id', '=', user_office),
         ]
 
-        searchbar_sortings = {
-            'ida': {'label': 'ID Asc', 'order': 'id asc'},
-            'idd': {'label': 'ID Desc', 'order': 'id desc'},
-            'name': {'label': 'Name', 'order': 'name'},
-            'country_id': {'label': 'Country', 'order': 'country_id'},
-            'state': {'label': 'State', 'order': 'state'},
-        }
+        searchbar_sortings = self._get_searchbar_sortings()
         # default sort by order
         if not sortby:
             sortby = 'ida'
+
         order = searchbar_sortings[sortby]['order']
 
-        searchbar_groupby = {
-            'None': {'input': 'None', 'label': _('None')},
-            'jobs_id': {'input': 'jobs_id', 'label': _('Jobs')},
-            'state': {'input': 'state', 'label': _('State')},
-            'country_id': {'input': 'country_id', 'label': _('Country')},
-        }
+        searchbar_groupby = self._get_searchbar_groupby()
+        
         maids_group_by = searchbar_groupby.get(groupby, {})
+        print('group by  ', maids_group_by)
         if groupby in ('jobs_id', 'state', 'country_id'):
-            maids_group_by = searchbar_groupby.get('input')
-            order = maids_group_by+','+order
+            maids_group_by = maids_group_by.get('input')
+            # order = maids_group_by+','+order
         else:
             maids_group_by = ''
 
-        searchbar_inputs = {
-            'all': {'label': 'All', 'input': 'all', 'domain': []},
-            'name': {'label': 'Name', 'input': 'name', 'domain': [('name'), 'ilike', search]},
-            'state': {'label': 'State', 'input': 'state', 'domain': [('state'), 'ilike', search]},
-            'job': {'label': 'Job', 'input': 'job_id', 'domain': [('job_id.name'), 'ilike', search]},
-        }
-        # default groupby
-        if not groupby:
-            groupby = 'None'
-
+        print('group by  ', maids_group_by)
+        searchbar_inputs = self._get_searchbar_inputs()
+        
         search_domain = searchbar_inputs[search_in]['domain']
+        
+        if search and search_in:
+            search_domain += self._get_search_domain(search_in, search)
 
         if search_domain:
             maids_domain.append(search_domain)
@@ -239,16 +264,18 @@ class maidsportal(CustomerPortal):
         ).search_count(maids_domain)
 
         maid_url = '/my/maids/'
-        print('total = ', total_maids)
+        # print('total = ', total_maids)
         pager_detail = pager(
             url=maid_url,
-            url_args={'sortby': sortby, 'groupby': groupby,
-                      'search_in': search_in, 'search': search},
+            url_args={'sortby': sortby,
+                      'groupby': groupby,
+                      'search_in': search_in,
+                      'search': search},
             total=total_maids,
             page=page,
             step=10,
         )
-        print('pager_detail = ', pager_detail)
+        # print('pager_detail = ', pager_detail)
         maids_obj = request.env['housemaid.maids']
         maids = request.env['housemaid.maids'].sudo().search(
             maids_domain,
@@ -256,18 +283,22 @@ class maidsportal(CustomerPortal):
             order=order,
             offset=pager_detail['offset'],
         )
-        # start groupby afte maids search
+        # start groupby after maids search
         if maids_group_by:
-            maids_group_list = [{maids_group_by: k, 'maids': maids_obj.concat(
-                *g)} for k, g in groupbyelem(maids, itemgetter(maids_group_by))]
+            maids_group_list = [{
+                maids_group_by: k,
+                'maids': maids_obj.concat(*g)
+            } for k, g in groupbyelem(maids, itemgetter(maids_group_by))]
 
         else:
             maids_group_list = [{'maids': maids}]
 
-        print('maids = ', maids)
-        vals = {
+        print('datarecord = ', maids_group_list)
+        print('datarecord = ', maids)
+        vals.update({
             'default_url': maid_url,
             'maids': maids,
+            'group_maids': maids_group_list,
             'page_name': 'my_maids_portal_list_view',
             'pager': pager_detail,
             'searchbar_sortings': searchbar_sortings,
@@ -277,7 +308,7 @@ class maidsportal(CustomerPortal):
             'search_in': search_in,
             'searchbar_inputs': searchbar_inputs,
             'search': search,
-        }
+        })
 
         return request.render(
             "ms_housemaid.my_maids_portal_list_view",
