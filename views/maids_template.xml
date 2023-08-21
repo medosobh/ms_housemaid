@@ -109,6 +109,11 @@
 					</t>
 				</tbody>
 			</t>
+			<div class="products_pager form-inline justify-content-center mt-3">
+				<t t-call="portal.pager">
+					<t t-set="_classes">mt-2 ml-md-2</t>
+				</t>
+			</div>
 		</t>
 	</template>
 	<template id="my_maids_portal_form_view" inherit_id="portal.portal_sidebar" name="Maid Form">
