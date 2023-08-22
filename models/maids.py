@@ -99,20 +99,20 @@ class maids(models.Model):
             if active_id:
                 ticket_rec = self.env['housemaid.tickets'].browse(
                     int(active_id))
-            # create an activity
-            self.activity_schedule(
-                'ms_housemaid.mail_act_checking',
-                user_id=ticket_rec.user_id,
-                note=f'Sponser: {ticket_rec.new_sponsers_id} ask checking Maid: {self.name} of the ticket {ticket_rec.code}'
-            )
-            # change ticket state
-            ticket_rec.state = 'check'
-            # maid state to check
-            self.state = 'check'
+                # create an activity
+                self.activity_schedule(
+                    'ms_housemaid.mail_act_checking',
+                    user_id=ticket_rec.user_id,
+                    note=f'Sponser: {ticket_rec.new_sponsers_id} ask checking Maid: {self.name} of the ticket {ticket_rec.code}'
+                )
+                # change ticket state
+                ticket_rec.state = 'check'
         else:
             raise UserError(
                 "Maid already linked to another Ticket review maid cv.!")
         # refresh page
+        # maid state to check
+        self.state = 'check'
         return {
             'type': 'ir.actions.client',
             'tag': 'reload',

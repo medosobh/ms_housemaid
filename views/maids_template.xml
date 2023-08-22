@@ -55,28 +55,25 @@
 							<t t-if="groupby == 'jobs_id'">
 								<th class="test-left" t-if="groupby == 'jobs_id'" colspan="6">
 								Job: 
-									<!-- <span t-out="group_maids.jobs_id.name"> -->
+									<span t-out="group_maids[groupby].name"/>
 								total: 
-										<!-- <t t-out="len(maids['maids'].ids)"/> -->
-									<!-- </span> -->
+									<!-- <t t-out="len(group_maids['maids'].ids)"/> -->
 								</th>
 							</t>
 							<t t-elif="groupby == 'state'">
 								<th class="test-left" t-if="groupby == 'state'" colspan="6">
 								State: 
-									<!-- <span t-out="group_maids['state']"> -->
+									<span t-out="group_maids[groupby].name"/>
 								total: 
-										<!-- <t t-out="len(maids['maids'])"/> -->
-									<!-- </span> -->
+									<!-- <t t-out="len(group_maids['maids'].ids)"/> -->
 								</th>
 							</t>
 							<t t-elif="groupby == 'country_id'">
 								<th class="test-left" t-if="groupby == 'country_id'" colspan="6">
-								State: 
-									<!-- <span t-out="group_maids.['country_id'].name"> -->
+								Country: 
+									<span t-out="group_maids.[groupby].name"/>
 								total: 
-										<!-- <t t-out="len(maids['maids'])"/> -->
-									<!-- </span> -->
+									<!-- <t t-out="len(group_maids['maids'].ids)"/> -->
 								</th>
 							</t>
 							<t t-else="">
