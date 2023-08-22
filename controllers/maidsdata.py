@@ -236,21 +236,23 @@ class maidsportal(CustomerPortal):
         # default sort by order
         if not sortby:
             sortby = 'ida'
-
+        searchbar_inputs = self._get_searchbar_inputs()
+        
         order = searchbar_sortings[sortby]['order']
 
         searchbar_groupby = self._get_searchbar_groupby()
+        
         
         maids_group_by = searchbar_groupby.get(groupby, {})
         print('group by  ', maids_group_by)
         if groupby in ('jobs_id', 'state', 'country_id'):
             maids_group_by = maids_group_by.get('input')
-            # order = maids_group_by+','+order
+            order = maids_group_by+','+order
         else:
             maids_group_by = ''
 
         print('group by  ', maids_group_by)
-        searchbar_inputs = self._get_searchbar_inputs()
+        
         
         search_domain=[]
         # add value domain to dict
@@ -296,7 +298,7 @@ class maidsportal(CustomerPortal):
             } for k, g in groupbyelem(maids, itemgetter(maids_group_by))]
 
         else:
-            maids_group_list = [{'maids': maids}]
+            maids_group_list = [{maids_group_by:'','maids': maids}]
 
         print('datarecord = ', maids_group_list)
         print('datarecord = ', maids)

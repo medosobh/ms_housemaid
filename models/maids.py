@@ -346,7 +346,6 @@ class maids(models.Model):
     )
     hight = fields.Char(
         string='Hight in feet,inch',
-        digits=(2, 1),
         required=False,
         tracking=True,
     )
