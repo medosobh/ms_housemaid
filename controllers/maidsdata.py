@@ -40,7 +40,7 @@ class maidsportal(CustomerPortal):
             'all': {'label': 'All', 'input': 'all'},
             'name': {'label': 'Name', 'input': 'name'},
             'state': {'label': 'State', 'input': 'state'},
-            'job': {'label': 'Job', 'input': 'job_id'},
+            'job': {'label': 'Job', 'input': 'jobs_id'},
         }
     
     def _get_searchbar_groupby(self):
@@ -58,7 +58,7 @@ class maidsportal(CustomerPortal):
         if search_in in ('state', 'all'):
             search_domain = OR([search_domain, [('state', 'ilike', search)]])
         if search_in in ('job', 'all'):
-            search_domain = OR([search_domain, [('job_id.name', 'ilike', search)]])
+            search_domain = OR([search_domain, [('jobs_id.name', 'ilike', search)]])
         
         return search_domain
         
@@ -241,7 +241,8 @@ class maidsportal(CustomerPortal):
         order = searchbar_sortings[sortby]['order']
 
         searchbar_groupby = self._get_searchbar_groupby()
-        
+        if not groupby:
+            groupby = 'none'
         
         maids_group_by = searchbar_groupby.get(groupby, {})
         print('group by  ', maids_group_by)
@@ -290,13 +291,13 @@ class maidsportal(CustomerPortal):
             order=order,
             offset=pager_detail['offset'],
         )
-        # start groupby after maids search
+        maids_group_list = []
+        # # start groupby after maids search
         if maids_group_by:
             maids_group_list = [{
                 maids_group_by: k,
                 'maids': maids_obj.concat(*g)
             } for k, g in groupbyelem(maids, itemgetter(maids_group_by))]
-
         else:
             maids_group_list = [{maids_group_by:'','maids': maids}]
 

@@ -41,6 +41,7 @@
 	</template>
 	<template id="my_maids_portal_list_view" name="Maids">
 		<t t-call="portal.portal_layout">
+			<t t-set="breadcrumbs_searchbar" t-value="True"/>
 			<t t-call="portal.portal_searchbar">
 				<t t-set="title">Maids List</t>
 			</t>
@@ -54,28 +55,28 @@
 							<t t-if="groupby == 'jobs_id'">
 								<th class="test-left" t-if="groupby == 'jobs_id'" colspan="6">
 								Job: 
-									<span t-out="group_maids['jobs_id'].name">
+									<!-- <span t-out="group_maids.jobs_id.name"> -->
 								total: 
 										<!-- <t t-out="len(maids['maids'].ids)"/> -->
-									</span>
+									<!-- </span> -->
 								</th>
 							</t>
 							<t t-elif="groupby == 'state'">
 								<th class="test-left" t-if="groupby == 'state'" colspan="6">
 								State: 
-									<span t-out="group_maids['state']">
+									<!-- <span t-out="group_maids['state']"> -->
 								total: 
 										<!-- <t t-out="len(maids['maids'])"/> -->
-									</span>
+									<!-- </span> -->
 								</th>
 							</t>
 							<t t-elif="groupby == 'country_id'">
 								<th class="test-left" t-if="groupby == 'country_id'" colspan="6">
 								State: 
-									<span t-out="group_maids.['country_id'].name">
+									<!-- <span t-out="group_maids.['country_id'].name"> -->
 								total: 
 										<!-- <t t-out="len(maids['maids'])"/> -->
-									</span>
+									<!-- </span> -->
 								</th>
 							</t>
 							<t t-else="">
