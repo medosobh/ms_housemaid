@@ -12,6 +12,7 @@ from odoo.addons.portal.controllers.portal import CustomerPortal, pager
 from odoo.addons.web.controllers.main import serialize_exception, content_disposition
 from operator import itemgetter
 from odoo.tools import date_utils, groupby as groupbyelem
+from odoo.osv.expression import AND, OR
 import base64
 
 
@@ -260,14 +261,15 @@ class maidsportal(CustomerPortal):
         if search and search_in:
             search_domain += self._get_search_domain(search_in, search)
             
-
+        print('search_domain by  ', search_domain)
         # return domain key and value
         # search_domain = searchbar_inputs[search_in]['search_domain']
         
         #append search domain to maid domain
         if search_domain:
-            maids_domain.append(search_domain)
+            maids_domain += search_domain
 
+        print('search_domain by  ', maids_domain)
         total_maids = request.env['housemaid.maids'].sudo(
         ).search_count(maids_domain)
 
