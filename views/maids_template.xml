@@ -54,29 +54,35 @@
 						<tr t-if="not groupby =='none'" t-attf-class="{{'thead-light'}}">
 							<t t-if="groupby == 'jobs_id'">
 								<th class="test-left" t-if="groupby == 'jobs_id'" colspan="6">
+									<span>
 								Job: 
-									<span t-out="group_maids[groupby].name"/>
+									<t t-out="group_maids[groupby].name"/>
 								total: 
-									<!-- <t t-out="len(group_maids['maids'].ids)"/> -->
+									<t t-out="len(group_maids['maids'].ids)"/>
+									</span>
 								</th>
 							</t>
 							<t t-elif="groupby == 'state'">
 								<th class="test-left" t-if="groupby == 'state'" colspan="6">
+									<span>
 								State: 
-									<span t-out="group_maids[groupby].name"/>
+									<t t-out="group_maids[groupby]"/>
 								total: 
-									<!-- <t t-out="len(group_maids['maids'].ids)"/> -->
+									<t t-out="len(group_maids['maids'].ids)"/>
+									</span>
 								</th>
 							</t>
 							<t t-elif="groupby == 'country_id'">
 								<th class="test-left" t-if="groupby == 'country_id'" colspan="6">
+									<span>
 								Country: 
-									<span t-out="group_maids.[groupby].name"/>
+									<t t-out="group_maids[groupby].name"/>
 								total: 
-									<!-- <t t-out="len(group_maids['maids'].ids)"/> -->
+									<t t-out="len(group_maids['maids'].ids)"/>
+									</span>
 								</th>
 							</t>
-							<t t-else="">
+							<t t-else="" colspan="6">
 								<span>All List</span>
 							</t>
 
