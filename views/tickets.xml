@@ -226,10 +226,10 @@
                                     help="Move Maid to Action page!"
                                     attrs="{'invisible': [('state', 'in', ('draft','check','confirm'))]}" />
                                 <field name="state"/>
-                                <field name="code"/>
-                                <field name="phone"/>
-                                <field name="name"/>
-                                <field name="email"/>
+                                <field name="code" optional="hide"/>
+                                <field name="phone" optional="hide"/>
+                                <field name="name" optional="hide"/>
+                                <field name="email" optional="hide"/>
                                 <field name="jobs_id"/>
                                 <field name="monthly_salary"/>
                                 <field name="contract_period"/>
@@ -238,8 +238,8 @@
                                 <field name="gender"/>
                                 <field name="marital_status"/>
                                 <field name="country_id"/>
-                                <field name="partner_id"/>
-                                <field name="description"/>
+                                <field name="partner_id" optional="hide"/>
+                                <field name="description" optional="hide"/>
                                 <field name="active"
                                     invisible="1"/>
                                 <field name="company_id"
@@ -269,10 +269,10 @@
                                     help="Ask Operation to Proceed Recrutement!"
                                     attrs="{'invisible': [('state', 'in', ('draft','check','confirm','hiring','backout'))]}" />
                                 <field name="state"/>
-                                <field name="code"/>
-                                <field name="phone"/>
-                                <field name="name"/>
-                                <field name="email"/>
+                                <field name="code" optional="hide"/>
+                                <field name="phone" optional="hide"/>
+                                <field name="name" optional="hide"/>
+                                <field name="email" optional="hide"/>
                                 <field name="jobs_id"/>
                                 <field name="monthly_salary"/>
                                 <field name="contract_period"/>
@@ -281,8 +281,8 @@
                                 <field name="gender"/>
                                 <field name="marital_status"/>
                                 <field name="country_id"/>
-                                <field name="partner_id"/>
-                                <field name="description"/>
+                                <field name="partner_id" optional="hide"/>
+                                <field name="description" optional="hide"/>
                                 <field name="active"
                                     invisible="1"/>
                                 <field name="company_id"
