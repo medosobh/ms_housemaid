@@ -57,7 +57,7 @@
 									<span>
 								Job: 
 									<t t-out="group_maids[groupby].name"/>
-								total: 
+								Total: 
 									<t t-out="len(group_maids['maids'].ids)"/>
 									</span>
 								</th>
@@ -67,7 +67,7 @@
 									<span>
 								State: 
 									<t t-out="group_maids[groupby]"/>
-								total: 
+								Total: 
 									<t t-out="len(group_maids['maids'].ids)"/>
 									</span>
 								</th>
@@ -77,15 +77,14 @@
 									<span>
 								Country: 
 									<t t-out="group_maids[groupby].name"/>
-								total: 
+								Total: 
 									<t t-out="len(group_maids['maids'].ids)"/>
 									</span>
 								</th>
 							</t>
-							<t t-else="" colspan="6">
+							<t t-else="none" colspan="6">
 								<span>All List</span>
 							</t>
-
 						</tr>
 						<tr class="active">
 							<th class="test-center">Country:</th>
@@ -957,7 +956,8 @@
 										<div class="form-group">
 											<label class="col-sm-4 col-form-label bg-info text-white" for="image">photo upload</label>
 											<div>
-												<input type="file" id="image" name="image" accept="image/*" class="form_control"/>
+												<input type="file" id="myImage" name="image" accept="image/*" class="photo-upload"/>
+												<img id="the-picture" class="rounded-circle img-fluid" style="width: 150px;height: 150px;" />
 											</div>
 										</div>
 										<div class="form-group">

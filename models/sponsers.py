@@ -95,7 +95,7 @@ class sponsers(models.Model):
     )
     user_id = fields.Many2one(
         comodel_name='res.users',
-        string="Responsable",
+        string="Sales Man",
         required=True,
         tracking=True,
     )

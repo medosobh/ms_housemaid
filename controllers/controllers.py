@@ -19,22 +19,24 @@ import base64
 class maidsportal(CustomerPortal):
 
     def _prepare_home_portal_values(self, counters):
-        values = super(maidsportal, self)._prepare_home_portal_values(counters)
+        vals = super(maidsportal, self)._prepare_home_portal_values(counters)
+        # new code
         user_id = request.env.uid
-        curr_user = request.env['res.users'].search([
-            ('id', '=', user_id),
-        ],
-            limit=1
-        )
-        user_office = curr_user.offices_id.id
+        users = request.env['res.users'].search([
+            ('id', '=', user_id)
+        ])
+        offices_list = request.env['housemaid.offices'].search([
+            ('portal_user_id', '=', user_id)
+        ]).ids
 
-        maids_domain = [
-            ('user_id', '=', user_id),
-            ('offices_id', '=', user_office),
-        ]
-        values['maids_count'] = request.env['housemaid.maids'].search_count(
-            maids_domain)
-        return values
+        offices_domain = []
+        if offices_list:
+                offices_domain = OR([offices_domain, [('offices_id', '=', offices_list)]])
+       
+        vals['maids_count'] = request.env['housemaid.maids'].search_count(
+            offices_domain)
+    
+        return vals
 
     def _get_searchbar_inputs(self):
         return {
@@ -43,7 +45,7 @@ class maidsportal(CustomerPortal):
             'state': {'label': 'State', 'input': 'state'},
             'job': {'label': 'Job', 'input': 'jobs_id'},
         }
-    
+
     def _get_searchbar_groupby(self):
         return {
             'none': {'input': 'None', 'label': _('None'), 'order': 1},
@@ -51,7 +53,7 @@ class maidsportal(CustomerPortal):
             'state': {'input': 'state', 'label': _('State'), 'order': 1},
             'country_id': {'input': 'country_id', 'label': _('Country'), 'order': 1},
         }
-        
+
     def _get_search_domain(self, search_in, search):
         search_domain = []
         if search_in in ('name', 'all'):
@@ -59,10 +61,11 @@ class maidsportal(CustomerPortal):
         if search_in in ('state', 'all'):
             search_domain = OR([search_domain, [('state', 'ilike', search)]])
         if search_in in ('job', 'all'):
-            search_domain = OR([search_domain, [('jobs_id.name', 'ilike', search)]])
-        
+            search_domain = OR(
+                [search_domain, [('jobs_id.name', 'ilike', search)]])
+
         return search_domain
-        
+
     def _get_searchbar_sortings(self):
         return {
             'ida': {'label': 'ID Asc', 'order': 'id asc'},
@@ -71,24 +74,33 @@ class maidsportal(CustomerPortal):
             'country_id': {'label': _('Country'), 'order': 'country_id'},
             'state': {'label': _('State'), 'order': 'state'},
         }
-    
-    
+
     @http.route('/my/maid/new', website=True, auth='user', type="http", method=["POST", "GET"])
     def maid_create_form(self, **kw):
         vals = super()._prepare_portal_layout_values()
+        # prepare
         user_id = request.env.uid
-        curr_user = request.env['res.users'].search([
-            ('id', '=', user_id),
-        ],
-            limit=1
-        )
-        user_office = curr_user.offices_id.id
-        domain = [
-            ('id', '=', user_office),
-        ]
+        users = request.env['res.users'].search([
+            ('id', '=', user_id)
+        ])
+        offices_list = request.env['housemaid.offices'].search([
+            ('portal_user_id', '=', user_id)
+        ]).ids
 
+        maid_domain = []
+        offices_domain = []
+        if offices_list:
+                maid_domain = OR([maid_domain, [('offices_id', '=', offices_list)]])
+                offices_domain = OR([offices_domain, [('id', '=', offices_list)]])
+                
+       
+        vals['maids_count'] = request.env['housemaid.maids'].search_count(
+            offices_domain)
+        #
+    
+        # coding
         offices = request.env['housemaid.offices'].sudo().search(
-            domain, limit=1)
+            offices_domain)
         jobs = request.env['housemaid.jobs'].sudo().search([])
         # country = request.env['res.country'].sudo().search([])
         country = offices.country_id
@@ -109,9 +121,9 @@ class maidsportal(CustomerPortal):
 
         new_maid_url = '/my/maid/new'
 
-        vals = {
+        vals.update({
             'default_url': new_maid_url,
-            'user': curr_user,
+            'user': users,
             'offices': offices,
             'jobs': jobs,
             'country': country,
@@ -121,7 +133,7 @@ class maidsportal(CustomerPortal):
             'gender': gender_list,
             'marital_status': marital_status_list,
             'page_name': 'my_maids_portal_new_form_view',
-        }
+        })
 
         if request.httprequest.method == "POST":
             print("post....")
@@ -166,7 +178,7 @@ class maidsportal(CustomerPortal):
             else:
                 birthday = kw.get('birthday')
 
-            maid_vals = {
+            maid_vals.update({
                 'user_id': kw.get('user'),
                 'offices_id': kw.get('offices'),
                 'code': kw.get('code'),
@@ -202,7 +214,7 @@ class maidsportal(CustomerPortal):
                 'skills_ironing': kw.get('skills_ironing'),
                 'skills_googlelocation': kw.get('skills_googlelocation'),
                 'skills_driving': kw.get('skills_driving'),
-            }
+            })
             print(error_list)
             if not error_list:
                 request.env['housemaid.maids'].sudo().create(maid_vals)
@@ -221,30 +233,36 @@ class maidsportal(CustomerPortal):
     @http.route(['/my/maids', '/my/maids/page/<int:page>'], type="http", website=True, auth='user')
     def my_maids_list_view(self, page=1, sortby='ida', groupby="none", search="", search_in="all", **kw):
         vals = super()._prepare_portal_layout_values()
+        # prepare
         user_id = request.env.uid
-        curr_user = request.env['res.users'].search([
-            ('id', '=', user_id),
-        ],
-            limit=1
-        )
-        user_office = curr_user.offices_id.id
-        maids_domain = [
-            ('user_id', '=', user_id),
-            ('offices_id', '=', user_office),
-        ]
+        users = request.env['res.users'].search([
+            ('id', '=', user_id)
+        ])
+        offices_list = request.env['housemaid.offices'].search([
+            ('portal_user_id', '=', user_id)
+        ]).ids
+
+        maids_domain = []
+        if offices_list:
+                maids_domain = OR([maids_domain, [('offices_id', '=', offices_list)]])
+       
+        vals['maids_count'] = request.env['housemaid.maids'].search_count(
+            maids_domain)
+        #
+        
 
         searchbar_sortings = self._get_searchbar_sortings()
         # default sort by order
         if not sortby:
             sortby = 'ida'
         searchbar_inputs = self._get_searchbar_inputs()
-        
+
         order = searchbar_sortings[sortby]['order']
 
         searchbar_groupby = self._get_searchbar_groupby()
         if not groupby:
             groupby = 'none'
-        
+
         maids_group_by = searchbar_groupby.get(groupby, {})
         print('group by  ', maids_group_by)
         if groupby in ('jobs_id', 'state', 'country_id'):
@@ -254,18 +272,17 @@ class maidsportal(CustomerPortal):
             maids_group_by = ''
 
         print('group by  ', maids_group_by)
-        
-        
-        search_domain=[]
+
+        search_domain = []
         # add value domain to dict
         if search and search_in:
             search_domain += self._get_search_domain(search_in, search)
-            
+
         print('search_domain by  ', search_domain)
         # return domain key and value
         # search_domain = searchbar_inputs[search_in]['search_domain']
-        
-        #append search domain to maid domain
+
+        # append search domain to maid domain
         if search_domain:
             maids_domain += search_domain
 
@@ -301,7 +318,7 @@ class maidsportal(CustomerPortal):
                 'maids': maids_obj.concat(*g)
             } for k, g in groupbyelem(maids, itemgetter(maids_group_by))]
         else:
-            maids_group_list = [{maids_group_by:'','maids': maids}]
+            maids_group_list = [{maids_group_by: '', 'maids': maids}]
 
         print('datarecord = ', maids_group_list)
         print('datarecord = ', maids)
@@ -328,22 +345,27 @@ class maidsportal(CustomerPortal):
     @http.route(['/my/maids/<model("housemaid.maids"):maids_id>'], website=True, auth='user', type="http")
     def my_maids_form_view(self, maids_id, **kw):
         vals = super()._prepare_portal_layout_values()
-
+        # prepare
         user_id = request.env.uid
-        curr_user = request.env['res.users'].search([
-            ('id', '=', user_id),
-        ],
-            limit=1
-        )
-        user_office = curr_user.offices_id.id
-        maids_domain = [
-            ('user_id', '=', user_id),
-            ('offices_id', '=', user_office),
-        ]
-        vals = {
+        users = request.env['res.users'].search([
+            ('id', '=', user_id)
+        ])
+        offices_list = request.env['housemaid.offices'].search([
+            ('portal_user_id', '=', user_id)
+        ]).ids
+
+        maids_domain = []
+        if offices_list:
+                maids_domain = OR([maids_domain, [('offices_id', '=', offices_list)]])
+       
+        vals['maids_count'] = request.env['housemaid.maids'].search_count(
+            maids_domain)
+        #
+
+        vals.update({
             'maids': maids_id,
             'page_name': 'my_maids_portal_form_view'
-        }
+        })
         maids_rec = request.env['housemaid.maids'].sudo().search(maids_domain)
         maids_ids = maids_rec.ids
         maids_index = maids_ids.index(maids_id.id)

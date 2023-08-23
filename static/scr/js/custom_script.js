@@ -1,10 +1,16 @@
-odoo.define("attendance_regularization.custom_script", function (require) {
+doo.define("ms_housemaid.my_maids_portal_new_form_view", function (require) {
   "use strict";
 
-  var core = require("web.core");
-  var FieldDateTime = core.form_widget_registry.get("datetime-local");
+  var publicwidget = required(web.public.widget);
+  publicwidget.registry.my_maids_portal_new_form_view =
+    publicwidget.widget.exclude({
+      selector: "",
+      events: {
+        submit: "_onSubmitButton",
+      },
 
-  FieldDateTime.include({
-    pickerDateTimeFormat: "YYYY-MM-DD",
-  });
+      _onSubmitButton: function (evt) {
+        console.log(" Hi first odoo js");
+      },
+    });
 });

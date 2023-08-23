@@ -238,7 +238,7 @@
                                 <field name="gender"/>
                                 <field name="marital_status"/>
                                 <field name="country_id"/>
-                                <field name="partner_id" optional="hide"/>
+                                <field name="portal_user_id" optional="hide"/>
                                 <field name="description" optional="hide"/>
                                 <field name="active"
                                     invisible="1"/>
@@ -281,7 +281,7 @@
                                 <field name="gender"/>
                                 <field name="marital_status"/>
                                 <field name="country_id"/>
-                                <field name="partner_id" optional="hide"/>
+                                <field name="portal_user_id" optional="hide"/>
                                 <field name="description" optional="hide"/>
                                 <field name="active"
                                     invisible="1"/>

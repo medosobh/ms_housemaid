@@ -12,8 +12,6 @@ class offices(models.Model):
     _sql_constraints = [
         ('code_uniq', 'unique(code)', "A code can only be assigned to one office!"),
         ('name_uniq', 'unique(name)', "A name can only be assigned to one office!"),
-        ('partner_id_uniq', 'unique(partner_id)',
-         "A parnter can only be assigned to one office!"),
     ]
     _inherit = ['mail.thread', 'mail.activity.mixin']
 
@@ -86,9 +84,9 @@ class offices(models.Model):
         required=True,
         tracking=True
     )
-    partner_id = fields.Many2one(
-        comodel_name='res.partner',
-        string='Partner',
+    portal_user_id = fields.Many2one(
+        comodel_name='res.users',
+        string='Portal User',
         tracking=True
     )
     description = fields.Text(
@@ -97,7 +95,7 @@ class offices(models.Model):
     )
     user_id = fields.Many2one(
         comodel_name='res.users',
-        string="Responsable",
+        string="Operator",
         default=lambda self: self.env.user.id,
         required=True,
         tracking=True,

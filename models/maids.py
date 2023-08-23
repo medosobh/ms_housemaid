@@ -206,7 +206,6 @@ class maids(models.Model):
         string="Country",
         comodel_name='res.country',
         help="Country of Maid.",
-        default=lambda self: self.offices_id.country_id,
         required=True,
         tracking=True,
     )
@@ -390,9 +389,9 @@ class maids(models.Model):
         required=False,
         tracking=True,
     )
-    partner_id = fields.Many2one(
-        string='Partner',
-        comodel_name='res.partner',
+    portal_user_id = fields.Many2one(
+        string='Portal User',
+        comodel_name='res.users',
         required=False,
         tracking=True,
     )
@@ -402,7 +401,7 @@ class maids(models.Model):
         tracking=True,
     )
     user_id = fields.Many2one(
-        string="Operation Man",
+        string="Operator",
         comodel_name='res.users',
         required=True,
         tracking=True,
@@ -465,4 +464,3 @@ class maids(models.Model):
         required=False,
         tracking=True
     )
-    

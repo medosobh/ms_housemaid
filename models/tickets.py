@@ -302,7 +302,7 @@ class tickets(models.Model):
         tracking=True,
     )
     user_id = fields.Many2one(
-        string="Responsable",
+        string="Operator",
         comodel_name='res.users',
         required=True,
         tracking=True,

@@ -83,7 +83,7 @@
                                 <field name="active" invisible="1"/>
                             </group>
                             <group name="more" string="Addtional Information">
-                                <field name="partner_id"/>
+                                <field name="portal_user_id"/>
                                 <field name="description"/>
                                 <field name="resume" filename="resume_name"/>
                                 <field name="resume_name" invisible="1"/>
@@ -135,6 +135,7 @@
                 <field name="user_id" widget="selection"/>
                 <field name="tickets_id" widget="selection"/>
                 <field name="sponsers_id" widget="selection"/>
+                <field name="portal_user_id"/>
             </tree>
         </field>
     </record>
@@ -222,6 +223,8 @@
                 <field name="country_id" widget="selection"/>
                 <field name="offices_id" widget="selection"/>
                 <field name="user_id" widget="selection"/>
+                <field name="passport_no" widget="selection"/>
+                <field name="portal_user_id" widget="selection"/>
                 <filter name="filter_archived" string="Archived" domain="[('active', '=', False)]"/>
                 <group expand="0" string="Group by">
                     <filter string="Company" name="group_by_company_id" context="{'group_by':'company_id'}"/>
