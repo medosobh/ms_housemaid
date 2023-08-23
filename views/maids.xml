@@ -135,6 +135,7 @@
                 <field name="user_id" widget="selection"/>
                 <field name="tickets_id" widget="selection"/>
                 <field name="sponsers_id" widget="selection"/>
+                <field name="garanty_day" />
                 <field name="portal_user_id"/>
             </tree>
         </field>
