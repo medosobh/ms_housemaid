@@ -92,7 +92,7 @@
                         </group>
                     </div>
                     <notebook>
-                        <page name="housemaid_maids_maidscontracts" string="History">
+                        <page name="housemaid_maids_maidscontracts" string="Contracts">
                             <field name="maidscontracts_ids">
                             </field>
                         </page>

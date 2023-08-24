@@ -1,10 +1,10 @@
 # -*- coding: utf-8 -*-
 from . import offices
 from . import maids
-from . import maidscontracts
+from . import maids_contracts
 from . import sponsers
 from . import tickets
 from . import jobs
-from . import closereason
-from . import closedtickets
+from . import close_reason
+from . import closed_tickets
 from . import educations
