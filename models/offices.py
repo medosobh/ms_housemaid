@@ -100,6 +100,13 @@ class offices(models.Model):
         required=True,
         tracking=True,
     )
+    maids_ids = fields.One2many(
+        comodel_name='housemaid.maids',
+        inverse_name='offices_id',
+        string="Maids",
+        required=False,
+        tracking=True,
+    )
     company_id = fields.Many2one(
         comodel_name='res.company',
         string='Company',

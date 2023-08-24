@@ -56,9 +56,9 @@
 								<th class="test-left" t-if="groupby == 'jobs_id'" colspan="6">
 									<span>
 								Job: 
-									<t t-out="group_maids[groupby].name"/>
+										<t t-out="group_maids[groupby].name"/>
 								Total: 
-									<t t-out="len(group_maids['maids'].ids)"/>
+										<t t-out="len(group_maids['maids'].ids)"/>
 									</span>
 								</th>
 							</t>
@@ -66,9 +66,9 @@
 								<th class="test-left" t-if="groupby == 'state'" colspan="6">
 									<span>
 								State: 
-									<t t-out="group_maids[groupby]"/>
+										<t t-out="group_maids[groupby]"/>
 								Total: 
-									<t t-out="len(group_maids['maids'].ids)"/>
+										<t t-out="len(group_maids['maids'].ids)"/>
 									</span>
 								</th>
 							</t>
@@ -76,9 +76,9 @@
 								<th class="test-left" t-if="groupby == 'country_id'" colspan="6">
 									<span>
 								Country: 
-									<t t-out="group_maids[groupby].name"/>
+										<t t-out="group_maids[groupby].name"/>
 								Total: 
-									<t t-out="len(group_maids['maids'].ids)"/>
+										<t t-out="len(group_maids['maids'].ids)"/>
 									</span>
 								</th>
 							</t>
@@ -889,194 +889,195 @@
 						<t t-out="error"/>
 					</div>
 				</t>
-				<form method="POST" class="form-inline">
-					<div class="oe_structure"/>
-					<div class="container py-3 my-3">
-						<div class="form-group row">
-							<div class="col-sm-6">
-								<div class="card">
-									<div class="card-body">
-										<div class="bg-info text-white">Main Information</div>
-										<div class="form-group">
-											<label class="col-sm-4 col-form-label" for="user">Responsable *</label>
-											<select name="user" id="user" class="form_control">
-												<option value="">Select Responsable</option>
-												<t t-foreach="user" t-as="user">
-													<option t-att-value="user.id">
-														<t t-out="user.name" />
-													</option>
-												</t>
-											</select>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-4 col-form-label" for="offices">Office *</label>
-											<select name="offices" id="offices" class="form_control">
-												<option value="">Select Office</option>
-												<t t-foreach="offices" t-as="offices">
-													<option t-att-value="offices.id">
-														<t t-out="offices.name" />
-													</option>
-												</t>
-											</select>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-2 col-form-label" for="code">Code *</label>
-											<input type="char" name="code" id="code" class="form_control" placeholder="maid code"/>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-2 col-form-label" for="name">Name *</label>
-											<input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
-											<input type="char" name="name" id="name" class="form_control" placeholder="maid name"/>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-2 col-form-label" for="phone">Phone</label>
-											<input type="tel" name="phone" id="phone" class="form_control" placeholder="+123456789"/>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-2 col-form-label" for="email">Email</label>
-											<input type="email" name="email" id="email" class="form_control" placeholder="name@email.com"/>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-4 col-form-label" for="country">Country *</label>
-											<select name="country" id="country" class="form_control">
-												<option value="">Select Country</option>
-												<t t-foreach="country" t-as="country">
-													<option t-att-value="country.id">
-														<t t-out="country.name" />
-													</option>
-												</t>
-											</select>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-6">
-								<div class="card">
-									<div class="card-body">
-										<div class="form-group">
-											<label class="col-sm-4 col-form-label bg-info text-white" for="image">photo upload</label>
-											<div>
-												<input type="file" id="myImage" name="image" accept="image/*" class="photo-upload"/>
-												<img id="the-picture" class="rounded-circle img-fluid" style="width: 150px;height: 150px;" />
+				<div id="new_maid_create_form">
+					<form method="POST" class="form-inline">
+						<div class="oe_structure"/>
+						<div class="container py-3 my-3">
+							<div class="form-group row">
+								<div class="col-sm-6">
+									<div class="card">
+										<div class="card-body">
+											<div class="bg-info text-white">Main Information</div>
+											<div class="form-group">
+												<label class="col-sm-4 col-form-label" for="user">Responsable *</label>
+												<select name="user" id="user" class="form_control">
+													<option value="">Select Responsable</option>
+													<t t-foreach="user" t-as="user">
+														<option t-att-value="user.id">
+															<t t-out="user.name" />
+														</option>
+													</t>
+												</select>
 											</div>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-4 col-form-label bg-info text-white" for="description">Description</label>
-											<div>
-												<textarea type="text" name="description" rows="10" id="description" class="form_control col-sm-12" placeholder="write comment"/>
+											<div class="form-group">
+												<label class="col-sm-4 col-form-label" for="offices">Office *</label>
+												<select name="offices" id="offices" class="form_control">
+													<option value="">Select Office</option>
+													<t t-foreach="offices" t-as="offices">
+														<option t-att-value="offices.id">
+															<t t-out="offices.name" />
+														</option>
+													</t>
+												</select>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-2 col-form-label" for="code">Code *</label>
+												<input type="char" name="code" id="code" class="form_control" placeholder="maid code"/>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-2 col-form-label" for="name">Name *</label>
+												<input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+												<input type="char" name="name" id="name" class="form_control" placeholder="maid name"/>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-2 col-form-label" for="phone">Phone</label>
+												<input type="tel" name="phone" id="phone" class="form_control" placeholder="+123456789"/>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-2 col-form-label" for="email">Email</label>
+												<input type="email" name="email" id="email" class="form_control" placeholder="name@email.com"/>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-4 col-form-label" for="country">Country *</label>
+												<select name="country" id="country" class="form_control">
+													<option value="">Select Country</option>
+													<t t-foreach="country" t-as="country">
+														<option t-att-value="country.id">
+															<t t-out="country.name" />
+														</option>
+													</t>
+												</select>
 											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-						</div>
-						<div class="form-group row">
-							<div class="col-sm-4">
-								<div class="card sm-8">
-									<div class="card-body">
-										<div class="bg-info text-white">Job Information</div>
-										<div class="form-group">
-											<label class="col-sm-4 col-form-label" for="jobs">Job *</label>
-											<select name="jobs" id="jobs" class="form_control">
-												<option value="">Select Job</option>
-												<t t-foreach="jobs" t-as="job">
-													<option t-att-value="job.id">
-														<t t-out="job.name" />
-													</option>
-												</t>
-											</select>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-6 col-form-label" for="salary">Monthly Salary *</label>
-											<input type="number" name="salary" id="salary" class="form_control" style="width: 10ch;" placeholder="1000"/>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-4 col-form-label" for="currency">Currency *</label>
-											<select name="currency" id="currency" class="form_control">
-												<option value="">Select Currency</option>
-												<t t-foreach="currency" t-as="currency">
-													<option t-att-value="currency.id">
-														<t t-out="currency.name" />
-													</option>
-												</t>
-											</select>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-6 col-form-label" for="period">Contract Period</label>
-											<input type="char" name="period" id="period" class="form_control" style="width: 10ch;" placeholder="1,2,3"/>
+								<div class="col-sm-6">
+									<div class="card">
+										<div class="card-body">
+											<div class="form-group">
+												<label class="col-sm-4 col-form-label bg-info text-white" for="image">photo upload</label>
+												<div>
+													<input type="file" id="myImage" name="image" accept="image/*" class="photo-upload"/>
+													<img id="the-picture" class="rounded-circle img-fluid" style="width: 150px;height: 150px;" />
+												</div>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-4 col-form-label bg-info text-white" for="description">Description</label>
+												<div>
+													<textarea type="text" name="description" rows="10" id="description" class="form_control col-sm-12" placeholder="write comment"/>
+												</div>
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-							<div class="col-sm-4">
-								<div class="card sm-8">
-									<div class="card-body">
-										<div class="bg-info text-white">Language and Education</div>
-										<div class="form-group">
-											<label class="col-sm-6 col-form-label" for="arabic">Arabic Language</label>
-											<input type="checkbox" name="arabic" id="arabic" class="form_control"/>
+							<div class="form-group row">
+								<div class="col-sm-4">
+									<div class="card sm-8">
+										<div class="card-body">
+											<div class="bg-info text-white">Job Information</div>
+											<div class="form-group">
+												<label class="col-sm-4 col-form-label" for="jobs">Job *</label>
+												<select name="jobs" id="jobs" class="form_control">
+													<option value="">Select Job</option>
+													<t t-foreach="jobs" t-as="job">
+														<option t-att-value="job.id">
+															<t t-out="job.name" />
+														</option>
+													</t>
+												</select>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-6 col-form-label" for="salary">Monthly Salary *</label>
+												<input type="number" name="salary" id="salary" class="form_control" style="width: 10ch;" placeholder="1000"/>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-4 col-form-label" for="currency">Currency *</label>
+												<select name="currency" id="currency" class="form_control">
+													<option value="">Select Currency</option>
+													<t t-foreach="currency" t-as="currency">
+														<option t-att-value="currency.id">
+															<t t-out="currency.name" />
+														</option>
+													</t>
+												</select>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-6 col-form-label" for="period">Contract Period</label>
+												<input type="char" name="period" id="period" class="form_control" style="width: 10ch;" placeholder="1,2,3"/>
+											</div>
 										</div>
-										<div class="form-group">
-											<label class="col-sm-6 col-form-label" for="english">English Language</label>
-											<input type="checkbox" name="english" id="english" class="form_control" placeholder="1000"/>
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="card sm-8">
+										<div class="card-body">
+											<div class="bg-info text-white">Language and Education</div>
+											<div class="form-group">
+												<label class="col-sm-6 col-form-label" for="arabic">Arabic Language</label>
+												<input type="checkbox" name="arabic" id="arabic" class="form_control"/>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-6 col-form-label" for="english">English Language</label>
+												<input type="checkbox" name="english" id="english" class="form_control" placeholder="1000"/>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-4 col-form-label" for="education">Education</label>
+												<select name="education" id="education" class="form_control">
+													<option value="">Select Education</option>
+													<t t-foreach="education" t-as="education">
+														<option t-att-value="education.id">
+															<t t-out="education.name" />
+														</option>
+													</t>
+												</select>
+											</div>
 										</div>
-										<div class="form-group">
-											<label class="col-sm-4 col-form-label" for="education">Education</label>
-											<select name="education" id="education" class="form_control">
-												<option value="">Select Education</option>
-												<t t-foreach="education" t-as="education">
-													<option t-att-value="education.id">
-														<t t-out="education.name" />
-													</option>
-												</t>
-											</select>
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="card sm-6">
+										<div class="card-body">
+											<div class="bg-info text-white">Passport</div>
+											<div class="form-group">
+												<label class="col-sm-6 col-form-label" for="passport_no">Passport No *</label>
+												<input type="char" name="passport_no" id="passport_no" class="form_control" style="width: 15ch;" placeholder="A123456789"/>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-4 col-form-label" for="passport_place">Issue Place</label>
+												<input type="char" name="passport_place" id="passport_place" class="form_control" placeholder="City Town"/>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-4 col-form-label" for="passport_issue_date">Issue Date</label>
+												<input type="date" name="passport_issue_date" id="passport_issue_date" class="form_control o_website_form_date" />
+											</div>
+											<div class="form-group">
+												<label class="col-sm-4 col-form-label" for="passport_expire_date">Expire Date</label>
+												<input type="date" name="passport_expire_date" id="passport_expire_date" class="form_control o_website_form_date"/>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-6 col-form-label" for="identation">Identation</label>
+												<input type="char" name="identation" id="identation" class="form_control" style="width: 15ch;" placeholder="123456789012"/>
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
-							<div class="col-sm-4">
-								<div class="card sm-6">
-									<div class="card-body">
-										<div class="bg-info text-white">Passport</div>
-										<div class="form-group">
-											<label class="col-sm-6 col-form-label" for="passport_no">Passport No *</label>
-											<input type="char" name="passport_no" id="passport_no" class="form_control" style="width: 15ch;" placeholder="A123456789"/>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-4 col-form-label" for="passport_place">Issue Place</label>
-											<input type="char" name="passport_place" id="passport_place" class="form_control" placeholder="City Town"/>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-4 col-form-label" for="passport_issue_date">Issue Date</label>
-											<input type="date" name="passport_issue_date" id="passport_issue_date" class="form_control o_website_form_date" />
-										</div>
-										<div class="form-group">
-											<label class="col-sm-4 col-form-label" for="passport_expire_date">Expire Date</label>
-											<input type="date" name="passport_expire_date" id="passport_expire_date" class="form_control o_website_form_date"/>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-6 col-form-label" for="identation">Identation</label>
-											<input type="char" name="identation" id="identation" class="form_control" style="width: 15ch;" placeholder="123456789012"/>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-						<div class="form-group row">
-							<div class="col-sm-4">
-								<div class="card sm-6">
-									<div class="card-body">
-										<div class="bg-info text-white">Personal information</div>
-										<div class="form-group">
-											<label class="col-sm-4 col-form-label" for="religion">Religion</label>
-											<select name="religion" id="religion" class="form_control">
-												<option value="">Select Religion</option>
-												<t t-foreach="religion" t-as="religion">
-													<option t-att-value="religion">
-														<t t-out="religion" />
-													</option>
-												</t>
-												<!-- <option value="Baha i">Baha i</option>
+							<div class="form-group row">
+								<div class="col-sm-4">
+									<div class="card sm-6">
+										<div class="card-body">
+											<div class="bg-info text-white">Personal information</div>
+											<div class="form-group">
+												<label class="col-sm-4 col-form-label" for="religion">Religion</label>
+												<select name="religion" id="religion" class="form_control">
+													<option value="">Select Religion</option>
+													<t t-foreach="religion" t-as="religion">
+														<option t-att-value="religion">
+															<t t-out="religion" />
+														</option>
+													</t>
+													<!-- <option value="Baha i">Baha i</option>
 												<option value="Buddhism">Buddhism</option>
 												<option value="Christianity">Christianity</option>
 												<option value="Confucianism">Confucianism</option>
@@ -1089,115 +1090,116 @@
 												<option value="Taoism">Taoism</option>
 												<option value="Zoroastrianism">Zoroastrianism</option>
 												<option value="Buddhism">Buddhism</option> -->
-											</select>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-4 col-form-label" for="gender">Gender</label>
-											<select name="gender" id="gender" class="form_control">
-												<option value="">Select Gender</option>
-												<t t-foreach="gender" t-as="gender">
-													<option t-att-value="gender">
-														<t t-out="gender" />
-													</option>
-												</t>
-												<!-- <option value="male">Male</option> -->
-												<!-- <option value="femal">Femal</option> -->
-											</select>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-6 col-form-label" for="children_no">Children No</label>
-											<input type="char" name="children_no" id="children_no" class="form_control" style="width: 10ch;" placeholder="1,2,3"/>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-4 col-form-label" for="birthday">Birthday *</label>
-											<input type="date" name="birthday" id="birthday" class="form_control o_website_form_date"/>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-6 col-form-label" for="place_of_birth">Place Of Birth</label>
-											<input type="char" name="place_of_birth" id="place_of_birth" class="form_control" placeholder="City Town"/>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-6 col-form-label" for="marital_status">Marital Status</label>
-											<select name="marital_status" id="marital_status" class="form_control">
-												<option value="">Select Marital Status</option>
-												<t t-foreach="marital_status" t-as="marital_status">
-													<option t-att-value="marital_status">
-														<t t-out="marital_status" />
-													</option>
-												</t>
-												<!-- <option value="single">single</option> -->
-												<!-- <option value="married">married</option> -->
-												<!-- <option value="widowed">widowed</option> -->
-												<!-- <option value="divorced">divorced</option> -->
-											</select>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="col-sm-4">
-								<div class="card sm-8">
-									<div class="card-body">
-										<div class="bg-info text-white">Personal Attribute</div>
-										<div class="form-group">
-											<label class="col-sm-4 col-form-label" for="skin_color">Skin Color</label>
-											<input type="char" name="skin_color" id="skin_color" class="form_control" placeholder="Fair"/>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-4 col-form-label" for="hight">Hight</label>
-											<input type="char" name="hight" id="hight" class="form_control" placeholder="5.4 inch"/>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-4 col-form-label" for="weight">Weight</label>
-											<input type="char" name="weight" id="weight" class="form_control" placeholder="60 kg"/>
+												</select>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-4 col-form-label" for="gender">Gender</label>
+												<select name="gender" id="gender" class="form_control">
+													<option value="">Select Gender</option>
+													<t t-foreach="gender" t-as="gender">
+														<option t-att-value="gender">
+															<t t-out="gender" />
+														</option>
+													</t>
+													<!-- <option value="male">Male</option> -->
+													<!-- <option value="femal">Femal</option> -->
+												</select>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-6 col-form-label" for="children_no">Children No</label>
+												<input type="char" name="children_no" id="children_no" class="form_control" style="width: 10ch;" placeholder="1,2,3"/>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-4 col-form-label" for="birthday">Birthday *</label>
+												<input type="date" name="birthday" id="birthday" class="form_control o_website_form_date"/>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-6 col-form-label" for="place_of_birth">Place Of Birth</label>
+												<input type="char" name="place_of_birth" id="place_of_birth" class="form_control" placeholder="City Town"/>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-6 col-form-label" for="marital_status">Marital Status</label>
+												<select name="marital_status" id="marital_status" class="form_control">
+													<option value="">Select Marital Status</option>
+													<t t-foreach="marital_status" t-as="marital_status">
+														<option t-att-value="marital_status">
+															<t t-out="marital_status" />
+														</option>
+													</t>
+													<!-- <option value="single">single</option> -->
+													<!-- <option value="married">married</option> -->
+													<!-- <option value="widowed">widowed</option> -->
+													<!-- <option value="divorced">divorced</option> -->
+												</select>
+											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-							<div class="col-sm-4">
-								<div class="card sm-8">
-									<div class="card-body">
-										<div class="bg-info text-white">Personal Skills</div>
-										<div class="form-group">
-											<label class="col-sm-6 col-form-label" for="skills_cleaning">Cleaning</label>
-											<input type="checkbox" name="skills_cleaning" id="skills_cleaning" class="form_control"/>
+								<div class="col-sm-4">
+									<div class="card sm-8">
+										<div class="card-body">
+											<div class="bg-info text-white">Personal Attribute</div>
+											<div class="form-group">
+												<label class="col-sm-4 col-form-label" for="skin_color">Skin Color</label>
+												<input type="char" name="skin_color" id="skin_color" class="form_control" placeholder="Fair"/>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-4 col-form-label" for="hight">Hight</label>
+												<input type="char" name="hight" id="hight" class="form_control" placeholder="5.4 inch"/>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-4 col-form-label" for="weight">Weight</label>
+												<input type="char" name="weight" id="weight" class="form_control" placeholder="60 kg"/>
+											</div>
 										</div>
-										<div class="form-group">
-											<label class="col-sm-6 col-form-label" for="skills_arabic_cooking">Arabic Cooking</label>
-											<input type="checkbox" name="skills_arabic_cooking" id="skills_arabic_cooking" class="form_control" placeholder="1000"/>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-6 col-form-label" for="skills_baby_sitting">Baby Sitting</label>
-											<input type="checkbox" name="skills_baby_sitting" id="skills_baby_sitting" class="form_control" placeholder="1000"/>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-6 col-form-label" for="skills_washing">Washing</label>
-											<input type="checkbox" name="skills_washing" id="skills_washing" class="form_control" placeholder="1000"/>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-6 col-form-label" for="skills_ironing">Ironing</label>
-											<input type="checkbox" name="skills_ironing" id="skills_ironing" class="form_control" placeholder="1000"/>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-6 col-form-label" for="skills_googlelocation">Google Location</label>
-											<input type="checkbox" name="skills_googlelocation" id="skills_googlelocation" class="form_control" placeholder="1000"/>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-6 col-form-label" for="skills_driving">Drive License</label>
-											<input type="checkbox" name="skills_driving" id="skills_driving" class="form_control" placeholder="1000"/>
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="card sm-8">
+										<div class="card-body">
+											<div class="bg-info text-white">Personal Skills</div>
+											<div class="form-group">
+												<label class="col-sm-6 col-form-label" for="skills_cleaning">Cleaning</label>
+												<input type="checkbox" name="skills_cleaning" id="skills_cleaning" class="form_control"/>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-6 col-form-label" for="skills_arabic_cooking">Arabic Cooking</label>
+												<input type="checkbox" name="skills_arabic_cooking" id="skills_arabic_cooking" class="form_control" placeholder="1000"/>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-6 col-form-label" for="skills_baby_sitting">Baby Sitting</label>
+												<input type="checkbox" name="skills_baby_sitting" id="skills_baby_sitting" class="form_control" placeholder="1000"/>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-6 col-form-label" for="skills_washing">Washing</label>
+												<input type="checkbox" name="skills_washing" id="skills_washing" class="form_control" placeholder="1000"/>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-6 col-form-label" for="skills_ironing">Ironing</label>
+												<input type="checkbox" name="skills_ironing" id="skills_ironing" class="form_control" placeholder="1000"/>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-6 col-form-label" for="skills_googlelocation">Google Location</label>
+												<input type="checkbox" name="skills_googlelocation" id="skills_googlelocation" class="form_control" placeholder="1000"/>
+											</div>
+											<div class="form-group">
+												<label class="col-sm-6 col-form-label" for="skills_driving">Drive License</label>
+												<input type="checkbox" name="skills_driving" id="skills_driving" class="form_control" placeholder="1000"/>
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
 						</div>
-					</div>
-					<footer>
-						<div class="form-group row">
-							<div class="col-sm-8">
-								<button type="submit" class="btn btn-primary">Save Maid CV</button>
+						<footer>
+							<div class="form-group row">
+								<div class="col-sm-8">
+									<button type="submit" class="btn btn-primary">Save Maid CV</button>
+								</div>
 							</div>
-						</div>
-					</footer>
-				</form>
+						</footer>
+					</form>
+				</div>
 			</t>
 		</t>
 	</template>

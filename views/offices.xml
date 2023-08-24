@@ -57,8 +57,8 @@
 						</group>
 					</div>
 					<notebook>
-						<page string="Free Maids">
-
+						<page string="Maids">
+							<field name="maids_ids"/>
 						</page>
 						<page string="Statistic">
 

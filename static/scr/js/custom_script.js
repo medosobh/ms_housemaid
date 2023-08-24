@@ -1,16 +1,17 @@
 doo.define("ms_housemaid.my_maids_portal_new_form_view", function (require) {
   "use strict";
 
-  var publicwidget = required(web.public.widget);
+  var publicwidget = require('web.public.widget');
   publicwidget.registry.my_maids_portal_new_form_view =
-    publicwidget.widget.exclude({
-      selector: "",
+    publicwidget.widget.extend({
+      selector: "#new_maid_create_form",
       events: {
-        submit: "_onSubmitButton",
+        'submit': "_onSubmit",
       },
 
-      _onSubmitButton: function (evt) {
+      _onSubmi: function (event) {
         console.log(" Hi first odoo js");
+        alert("hi");
       },
     });
 });
