@@ -38,6 +38,8 @@
                                 class="oe_inline"/>
                             <field name="visa_no"
                                 class="oe_inline"/>
+                            <field name="air_ticket_no"
+                                class="oe_inline"/>
                         </group>
                         <group>
                             <field name="country_id"
@@ -78,6 +80,7 @@
                 <field name="start_contract" />
                 <field name="end_contract" />
                 <field name="visa_no" />
+                <field name="air_ticket_no" />
                 <field name="user_id" />
                 <field name="description"
                     optional="hide"/>

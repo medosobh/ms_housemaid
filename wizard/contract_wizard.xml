@@ -34,6 +34,8 @@
                                 class="oe_inline"/>
                             <field name="visa_no"
                                 class="oe_inline"/>
+                            <field name="air_ticket_no"
+                                class="oe_inline"/>
                         </group>
                         <group>
                             <field name="company_id"

@@ -58,7 +58,7 @@ class maidscontracts(models.Model):
     )
     old_sponsers_id = fields.Many2one(
         'housemaid.sponsers',
-        string='old Sponser',
+        string='Old Sponser',
         required=True,
         tracking=True,
     )
@@ -91,6 +91,11 @@ class maidscontracts(models.Model):
     )
     visa_no = fields.Char(
         string='Visa No.',
+        required=True,
+        tracking=True
+    )
+    air_ticket_no = fields.Char(
+        string='Air Ticket No.',
         required=True,
         tracking=True
     )

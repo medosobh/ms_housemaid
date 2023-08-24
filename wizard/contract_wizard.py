@@ -84,6 +84,11 @@ class contractwizard(models.TransientModel):
         required=True,
         tracking=True,
     )
+    air_ticket_no = fields.Char(
+        string='Air Ticket No.',
+        required=True,
+        tracking=True
+    )
     user_id = fields.Many2one(
         string="Responsable",
         comodel_name='res.users',
