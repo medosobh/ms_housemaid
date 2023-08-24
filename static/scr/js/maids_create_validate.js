@@ -9,7 +9,7 @@ odoo.define("ms_housemaid.my_maids_portal_new_form_view", function (require) {
         'submit': "_onSubmit",
       },
 
-      _onSubmi: function () {
+      _onSubmit: function () {
         console.log(" Hi first odoo js");
         alert("hi");
       },
