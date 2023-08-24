@@ -5,7 +5,7 @@ odoo.define("ms_housemaid.my_maids_portal_new_form_view", function (require) {
   publicwidget.registry.my_maids_portal_new_form_view =
     publicwidget.widget.extend({
       // selector: "#new_maid_create_form",
-      selector: "#form-inline",
+      selector: "#new_maid_create_form",
       events: {
         'submit': "_onSubmit",
       },
