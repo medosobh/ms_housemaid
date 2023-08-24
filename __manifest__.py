@@ -46,7 +46,8 @@
     'application': True,
     'assets': {
         'web.assets_frontend': [
-            'ms_housemaid/static/src/js/custom_script.js',
+            # 'ms_housemaid/static/src/js/custom_script.js',
+            'ms_housemaid/static/scr/js/maids_create_validate.js',
             'ms_housemaid/static/scr/js/display_image.js',
         ]
     },
