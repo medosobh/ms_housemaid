@@ -31,11 +31,12 @@ class maidsportal(CustomerPortal):
 
         offices_domain = []
         if offices_list:
-                offices_domain = OR([offices_domain, [('offices_id', '=', offices_list)]])
-       
+            offices_domain = OR(
+                [offices_domain, [('offices_id', '=', offices_list)]])
+
         vals['maids_count'] = request.env['housemaid.maids'].search_count(
             offices_domain)
-    
+
         return vals
 
     def _get_searchbar_inputs(self):
@@ -90,14 +91,14 @@ class maidsportal(CustomerPortal):
         maid_domain = []
         offices_domain = []
         if offices_list:
-                maid_domain = OR([maid_domain, [('offices_id', '=', offices_list)]])
-                offices_domain = OR([offices_domain, [('id', '=', offices_list)]])
-                
-       
+            maid_domain = OR(
+                [maid_domain, [('offices_id', '=', offices_list)]])
+            offices_domain = OR([offices_domain, [('id', '=', offices_list)]])
+
         vals['maids_count'] = request.env['housemaid.maids'].search_count(
             offices_domain)
         #
-    
+
         # coding
         offices = request.env['housemaid.offices'].sudo().search(
             offices_domain)
@@ -136,7 +137,6 @@ class maidsportal(CustomerPortal):
         })
 
         if request.httprequest.method == "POST":
-            print("post....")
             print(kw)
             maid_vals = {}
             error_list = []
@@ -215,7 +215,6 @@ class maidsportal(CustomerPortal):
                 'skills_googlelocation': kw.get('skills_googlelocation'),
                 'skills_driving': kw.get('skills_driving'),
             })
-            print(error_list)
             if not error_list:
                 request.env['housemaid.maids'].sudo().create(maid_vals)
                 success_msg = 'Successfuly, New Maid Created'
@@ -223,7 +222,7 @@ class maidsportal(CustomerPortal):
             else:
                 vals['error_list'] = error_list
         else:
-            print("get....")
+            print('get..')
 
         return request.render(
             'ms_housemaid.my_maids_portal_new_form_view',
@@ -244,12 +243,12 @@ class maidsportal(CustomerPortal):
 
         maids_domain = []
         if offices_list:
-                maids_domain = OR([maids_domain, [('offices_id', '=', offices_list)]])
-       
+            maids_domain = OR(
+                [maids_domain, [('offices_id', '=', offices_list)]])
+
         vals['maids_count'] = request.env['housemaid.maids'].search_count(
             maids_domain)
         #
-        
 
         searchbar_sortings = self._get_searchbar_sortings()
         # default sort by order
@@ -264,21 +263,17 @@ class maidsportal(CustomerPortal):
             groupby = 'none'
 
         maids_group_by = searchbar_groupby.get(groupby, {})
-        print('group by  ', maids_group_by)
         if groupby in ('jobs_id', 'state', 'country_id'):
             maids_group_by = maids_group_by.get('input')
             order = maids_group_by+','+order
         else:
             maids_group_by = ''
 
-        print('group by  ', maids_group_by)
-
         search_domain = []
         # add value domain to dict
         if search and search_in:
             search_domain += self._get_search_domain(search_in, search)
 
-        print('search_domain by  ', search_domain)
         # return domain key and value
         # search_domain = searchbar_inputs[search_in]['search_domain']
 
@@ -286,12 +281,10 @@ class maidsportal(CustomerPortal):
         if search_domain:
             maids_domain += search_domain
 
-        print('search_domain by  ', maids_domain)
         total_maids = request.env['housemaid.maids'].sudo(
         ).search_count(maids_domain)
 
         maid_url = '/my/maids/'
-        # print('total = ', total_maids)
         pager_detail = pager(
             url=maid_url,
             url_args={'sortby': sortby,
@@ -302,7 +295,6 @@ class maidsportal(CustomerPortal):
             page=page,
             step=10,
         )
-        # print('pager_detail = ', pager_detail)
         maids_obj = request.env['housemaid.maids']
         maids = request.env['housemaid.maids'].sudo().search(
             maids_domain,
@@ -320,8 +312,6 @@ class maidsportal(CustomerPortal):
         else:
             maids_group_list = [{maids_group_by: '', 'maids': maids}]
 
-        print('datarecord = ', maids_group_list)
-        print('datarecord = ', maids)
         vals.update({
             'default_url': maid_url,
             'maids': maids,
@@ -356,8 +346,9 @@ class maidsportal(CustomerPortal):
 
         maids_domain = []
         if offices_list:
-                maids_domain = OR([maids_domain, [('offices_id', '=', offices_list)]])
-       
+            maids_domain = OR(
+                [maids_domain, [('offices_id', '=', offices_list)]])
+
         vals['maids_count'] = request.env['housemaid.maids'].search_count(
             maids_domain)
         #
@@ -393,7 +384,6 @@ class maidsportal(CustomerPortal):
         :param str filename: field holding the file's name, if any
         :returns: :class:`werkzeug.wrappers.Response`
         """
-        print(maids_id)
         binary_file = maids_id.resume
         filename = maids_id.resume_name
         filecontent = base64.b64decode(binary_file or '')
