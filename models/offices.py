@@ -123,11 +123,3 @@ class offices(models.Model):
     )
 
 
-class ResUsers(models.Model):
-    _inherit = 'res.users'
-    
-    offices_id = fields.Many2one(
-        'housemaid.offices',
-        string='Offices',
-        required=False,
-    )

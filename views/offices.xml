@@ -223,19 +223,8 @@
 		parent="housemaid_menu_data"
 		sequence="31"/>
 
-	<record id="view_housemaid_users_form" model="ir.ui.view">
-        <field name="model">res.users</field>
-        <field name="inherit_id" ref="base.view_users_form"/>
-        <field name="arch" type="xml">
-          <xpath expr="//page[@name='preferences']" position="after">
-              <page string="Housemaid" name="Housemaid">
-                <group>
-                  <field name="offices_id"/>
-                </group>
-            </page>
-          </xpath>
-        </field>
-    </record>
+	
+
 
 
 </odoo>
