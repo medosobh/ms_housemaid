@@ -3,7 +3,7 @@ from odoo.exceptions import UserError
 from datetime import date, datetime, timedelta
 
 
-class tickets(models.Model):
+class Tickets(models.Model):
     _name = 'housemaid.tickets'
     _description = 'Tickets'
     _rec_name = 'code'
@@ -28,7 +28,7 @@ class tickets(models.Model):
             else:
                 raise UserError("Please select Ticket Type!")
 
-        return super(tickets, self).create(vals)
+        return super(Tickets, self).create(vals)
 
     def action_search_ticket(self):
         self.ensure_one()
