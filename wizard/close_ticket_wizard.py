@@ -3,14 +3,14 @@ from odoo.exceptions import UserError
 from datetime import date, datetime, timedelta
 
 
-class closeticketwizard(models.TransientModel):
-    _name = 'housemaid.closeticketwizard'
+class CloseTicketWizard(models.TransientModel):
+    _name = 'housemaid.close.ticket.wizard'
     _description = 'Close Ticket Wizard'
     _inherit = ['mail.thread', 'mail.activity.mixin']
     
     @api.model
     def default_get(self, fields):
-        res = super(closeticketwizard, self).default_get(fields)
+        res = super(CloseTicketWizard, self).default_get(fields)
         active_id = self._context.get('active_id')
         if active_id:
             ticket_rec = self.env['housemaid.tickets'].browse(int(active_id))
@@ -50,14 +50,14 @@ class closeticketwizard(models.TransientModel):
         tracking=True,
     )
     new_sponsers_id = fields.Many2one(
-        'housemaid.sponsers',
-        string='New Sponser',
+        comodel_name='housemaid.sponsers',
+        string='New Sponsor',
         readonly=True,
         tracking=True,
     )
     old_sponsers_id = fields.Many2one(
-        'housemaid.sponsers',
-        string='Old Sponser',
+        comodel_name='housemaid.sponsers',
+        string='Old Sponsor',
         readonly=True,
         tracking=True,
     )
@@ -68,7 +68,7 @@ class closeticketwizard(models.TransientModel):
         tracking=True,
     )
     user_id = fields.Many2one(
-        string="Responsable",
+        string="Responsible",
         comodel_name='res.users',
         readonly=True,
         tracking=True,
@@ -92,10 +92,11 @@ class closeticketwizard(models.TransientModel):
             'user_id': self.user_id.id,
             'description': self.description,
         }
-        self.env['housemaid.closedtickets'].self.create(vals)
+        self.env['housemaid.closedtickets'].create(vals)
         
         # change ticket state
-        record = self.env['housemaid.tickets'].browse(tickets_id)
+        active_id = self._context.get('tickets_id')
+        record = self.env['housemaid.tickets'].browse(active_id)
         record.state = 'closed'
         record.activity_schedule(
             'ms_housemaid.mail_act_close',
