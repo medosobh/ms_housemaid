@@ -338,6 +338,7 @@
             </t>
         </t>
     </template>
+
     <record id="action_report_action_maid_resume" model="ir.actions.report">
         <field name="name">Maid Resume</field>
         <field name="model">housemaid.maids</field>
