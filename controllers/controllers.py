@@ -3,28 +3,23 @@
 #    License, author and contributors information in:                         #
 #    __manifest__.py file at the root folder of this module.                  #
 ###############################################################################
-from odoo import fields, http, _
-from odoo.http import request
-from odoo.fields import Command
-from odoo.addons.portal.controllers.mail import _message_post_helper
-from odoo.exceptions import UserError, ValidationError
+import base64
+from operator import itemgetter
+
+from odoo import http, _
 from odoo.addons.portal.controllers.portal import CustomerPortal, pager
 from odoo.addons.web.controllers.main import serialize_exception, content_disposition
-from operator import itemgetter
-from odoo.tools import date_utils, groupby as groupbyelem
-from odoo.osv.expression import AND, OR
-import base64
+from odoo.http import request
+from odoo.osv.expression import OR
+from odoo.tools import groupby as groupbyelem
 
 
-class maidsportal(CustomerPortal):
+class MaidsPortal(CustomerPortal):
 
     def _prepare_home_portal_values(self, counters):
-        vals = super(maidsportal, self)._prepare_home_portal_values(counters)
+        vals = super(MaidsPortal, self)._prepare_home_portal_values(counters)
         # new code
         user_id = request.env.uid
-        users = request.env['res.users'].search([
-            ('id', '=', user_id)
-        ])
         offices_list = request.env['housemaid.offices'].search([
             ('portal_user_id', '=', user_id)
         ]).ids
@@ -39,6 +34,7 @@ class maidsportal(CustomerPortal):
 
         return vals
 
+    @staticmethod
     def _get_searchbar_inputs(self):
         return {
             'all': {'label': 'All', 'input': 'all'},
@@ -47,7 +43,8 @@ class maidsportal(CustomerPortal):
             'job': {'label': 'Job', 'input': 'jobs_id'},
         }
 
-    def _get_searchbar_groupby(self):
+    @staticmethod
+    def _get_searchbar_groupby():
         return {
             'none': {'input': 'None', 'label': _('None'), 'order': 1},
             'jobs_id': {'input': 'jobs_id', 'label': _('Jobs'), 'order': 1},
@@ -55,6 +52,7 @@ class maidsportal(CustomerPortal):
             'country_id': {'input': 'country_id', 'label': _('Country'), 'order': 1},
         }
 
+    @staticmethod
     def _get_search_domain(self, search_in, search):
         search_domain = []
         if search_in in ('name', 'all'):
@@ -67,6 +65,7 @@ class maidsportal(CustomerPortal):
 
         return search_domain
 
+    @staticmethod
     def _get_searchbar_sortings(self):
         return {
             'ida': {'label': 'ID Asc', 'order': 'id asc'},
@@ -76,7 +75,7 @@ class maidsportal(CustomerPortal):
             'state': {'label': _('State'), 'order': 'state'},
         }
 
-    @http.route('/my/maid/new', website=True, auth='user', type="http", method=["POST", "GET"])
+    @http.route(route='/my/maid/new', website=True, auth='user', type="http", method=["POST", "GET"])
     def maid_create_form(self, **kw):
         vals = super()._prepare_portal_layout_values()
         # prepare
@@ -229,14 +228,12 @@ class maidsportal(CustomerPortal):
             vals,
         )
 
-    @http.route(['/my/maids', '/my/maids/page/<int:page>'], type="http", website=True, auth='user')
+    @http.route(route=['/my/maids', '/my/maids/page/<int:page>'], type="http", website=True, auth='user')
     def my_maids_list_view(self, page=1, sortby='ida', groupby="none", search="", search_in="all", **kw):
         vals = super()._prepare_portal_layout_values()
         # prepare
         user_id = request.env.uid
-        users = request.env['res.users'].search([
-            ('id', '=', user_id)
-        ])
+
         offices_list = request.env['housemaid.offices'].search([
             ('portal_user_id', '=', user_id)
         ]).ids
@@ -254,7 +251,7 @@ class maidsportal(CustomerPortal):
         # default sort by order
         if not sortby:
             sortby = 'ida'
-        searchbar_inputs = self._get_searchbar_inputs()
+        searchbar_inputs = self._get_searchbar_inputs
 
         order = searchbar_sortings[sortby]['order']
 
@@ -265,7 +262,7 @@ class maidsportal(CustomerPortal):
         maids_group_by = searchbar_groupby.get(groupby, {})
         if groupby in ('jobs_id', 'state', 'country_id'):
             maids_group_by = maids_group_by.get('input')
-            order = maids_group_by+','+order
+            order = maids_group_by + ',' + order
         else:
             maids_group_by = ''
 
@@ -332,14 +329,12 @@ class maidsportal(CustomerPortal):
             vals,
         )
 
-    @http.route(['/my/maids/<model("housemaid.maids"):maids_id>'], website=True, auth='user', type="http")
+    @http.route(route=['/my/maids/<model("housemaid.maids"):maids_id>'], website=True, auth='user', type="http")
     def my_maids_form_view(self, maids_id, **kw):
         vals = super()._prepare_portal_layout_values()
         # prepare
         user_id = request.env.uid
-        users = request.env['res.users'].search([
-            ('id', '=', user_id)
-        ])
+
         offices_list = request.env['housemaid.offices'].search([
             ('portal_user_id', '=', user_id)
         ]).ids
@@ -362,19 +357,20 @@ class maidsportal(CustomerPortal):
         maids_index = maids_ids.index(maids_id.id)
         if maids_index != 0 and maids_ids[maids_index - 1]:
             vals['prev_record'] = '/my/maids/{}'.format(
-                maids_ids[maids_index-1])
+                maids_ids[maids_index - 1])
         if maids_index < len(maids_ids) - 1 and maids_ids[maids_index + 1]:
             vals['next_record'] = '/my/maids/{}'.format(
-                maids_ids[maids_index+1])
+                maids_ids[maids_index + 1])
 
         return request.render("ms_housemaid.my_maids_portal_form_view", vals)
 
-    @http.route(['/my/maids/print/<model("housemaid.maids"):maids_id>'], website=True, auth='user', type="http")
+    @http.route(route=['/my/maids/print/<model("housemaid.maids"):maids_id>'], website=True, auth='user', type="http")
     def my_maids_report_print(self, maids_id, **kw):
         return self._show_report(model=maids_id, report_type='pdf', download=True,
                                  report_ref='ms_housemaid.action_report_action_maid_resume')
 
-    @http.route('/my/maids/download_document/<model("housemaid.maids"):maids_id>', website=True, type='http', auth="user")
+    @http.route(route='/my/maids/download_document/<model("housemaid.maids"):maids_id>', website=True, type='http',
+                auth="user")
     @serialize_exception
     def download_document(self, maids_id, filename=None, **kw):
         """ Download link for files stored as binary fields.
