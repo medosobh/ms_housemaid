@@ -6,7 +6,9 @@
     'summary': '',
     'author': 'mohamed sobh',
     'website': '',
-    'license': 'LGPL-3',
+    'license': 'OPL-1',
+    'price': 49.99,
+    'currency': 'EUR',
     'category': 'Human Resources',
     'depends': [
         'base',
