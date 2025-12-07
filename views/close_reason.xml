@@ -1,48 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
-    <record id="housemaid_closereason_form"
-        model="ir.ui.view">
+    <record id="housemaid_closereason_form" model="ir.ui.view">
         <field name="name">housemaid.closereason.form</field>
         <field name="model">housemaid.closereason</field>
-        <field name="arch"
-            type="xml">
+        <field name="arch" type="xml">
             <form string="Close Reason">
-                <group name="information"
-                    string="Reason">
-                    <field name="name"
-                        class="oe_inline"/>
+                <group name="information" string="Reason">
+                    <field name="name" class="oe_inline"/>
                 </group>
             </form>
         </field>
     </record>
 
-    <record id="housemaid_closereason_tree"
-        model="ir.ui.view">
+    <record id="housemaid_closereason_tree" model="ir.ui.view">
         <field name="name">housemaid.closereason.tree</field>
         <field name="model">housemaid.closereason</field>
-        <field name="arch"
-            type="xml">
-            <tree string="Close Rreason List"
-                sample="1">
+        <field name="arch" type="xml">
+            <tree string="Close Rreason List" sample="1">
                 <field name="name"/>
             </tree>
         </field>
     </record>
 
-    <record id="housemaid_closereason_action"
-        model="ir.actions.act_window">
+    <record id="housemaid_closereason_action" model="ir.actions.act_window">
         <field name="name">Close Reason</field>
         <field name="res_model">housemaid.closereason</field>
         <field name="view_mode">tree,form</field>
-        <field name="help"
-            type="html">
+        <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">Create your first Close Reason!</p>
         </field>
     </record>
 
-    <menuitem id="housemaid_closereason_menu"
-        name="Close Reason"
-        action="housemaid_closereason_action"
-        parent="housemaid_menu_configuration"
-        sequence="52"/>
+    <menuitem id="housemaid_closereason_menu" name="Close Reason" action="housemaid_closereason_action" parent="housemaid_menu_configuration" sequence="52"/>
 </odoo>

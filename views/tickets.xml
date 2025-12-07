@@ -1,230 +1,120 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <record id="housemaid_tickets_form"
-        model="ir.ui.view">
+    <record id="housemaid_tickets_form" model="ir.ui.view">
         <field name="name">housemaid.tickets.form</field>
         <field name="model">housemaid.tickets</field>
-        <field name="arch"
-            type="xml">
+        <field name="arch" type="xml">
             <form string="Ticket">
                 <header>
-                    <field name="state"
-                        widget="statusbar"
-                        clickable="False"
-                        type="object"
-                        statusbar_visible="draft,search,check,confirm,hiring,garanty,closed"/>
-                    <button string="Searching"
-                        name="action_search_ticket"
-                        type="object"
-                        class="oe_highlight"
-                        attrs="{'invisible': [('state', 'in', ('check','search','found','confirm','garanty','hiring','closed'))]}"
-                        context="{'tickets_id': id, 'user_id': user_id}"/>
-                    <button string="Draft"
-                        name="action_draft_ticket"
-                        type="object"
-                        class="oe_highlight"
-                        attrs="{'invisible': [('state', 'in', ('draft','check','search','found','runout','confirm','garanty','hiring','closed'))]}" />
-                    <button string="Found"
-                        name="action_found_ticket"
-                        type="object"
-                        class="oe_highlight"
-                        attrs="{'invisible': [('state', 'in', ('draft','found','runout','confirm','garanty','hiring','closed'))]}" />
-                    <button string="Not Avaliable"
-                        name="action_runout_ticket"
-                        type="object"
-                        class="oe_highlight"
-                        attrs="{'invisible': [('state', 'in', ('draft','found','confirm','runout','garanty'))]}" />
-                    <button string="Sponser confirm"
-                        name="action_confirm_ticket"
-                        type="object"
-                        class="oe_highlight"
-                        attrs="{'invisible': [('state', 'in', ('draft','check','search','runout','confirm','hiring','garanty'))]}" />
-                    <button string="Contract"
-                        name="%(housemaid_contract_action_wizard)d"
-                        type="action"
-                        class="oe_highlight"
-                        attrs="{'invisible': [('state', 'in', ('draft','check','found','search','runout','confirm','garanty'))]}"
-                        context="{'tickets_id': id, 'user_id': user_id, 'sponsers_id': new_sponsers_id}" />
-                    <button string="Start 90days Garanty"
-                        name="action_garanty_ticket"
-                        type="object"
-                        class="oe_highlight"
-                        attrs="{'invisible': [('state', 'in', ('draft','check','search','found','runout','confirm','hiring','garanty'))]}" />
-                    <button string="Closed"
-                        name="%(housemaid_closeticket_action_wizard)d"
-                        type="action"
-                        class="oe_highlight"
-                        attrs="{'invisible': [('state', 'in', ('draft','check','search','closed'))]}"
-                        context="{'tickets_id': id, 'user_id': user_id, 'sponsers_id': new_sponsers_id}"/>
+                    <field name="state" widget="statusbar" clickable="False" statusbar_visible="draft,search,check,confirm,hiring,garanty,closed"/>
+                    <button string="Searching" name="action_search_ticket" type="object" class="oe_highlight" invisible="state in ('check','search','found','confirm','garanty','hiring','closed')" context="{'tickets_id': id, 'user_id': user_id}"/>
+                    <button string="Draft" name="action_draft_ticket" type="object" class="oe_highlight" invisible="state in ('draft','check','search','found','runout','confirm','garanty','hiring','closed')" />
+                    <button string="Found" name="action_found_ticket" type="object" class="oe_highlight" invisible="state in ('draft','found','runout','confirm','garanty','hiring','closed')"/>
+                    <button string="Not Avaliable" name="action_runout_ticket" type="object" class="oe_highlight" invisible="state in ('draft','found','confirm','runout','garanty')" />
+                    <button string="Sponser confirm" name="action_confirm_ticket" type="object" class="oe_highlight" invisible="state in ('draft','check','search','runout','confirm','hiring','garanty')" />
+                    <button string="Contract" name="%(housemaid_contract_action_wizard)d" type="action" class="oe_highlight" invisible="state in ('draft','check','found','search','runout','confirm','garanty')" context="{'tickets_id': id, 'user_id': user_id, 'sponsers_id': new_sponsers_id}" />
+                    <button string="Start 90days Garanty" name="action_garanty_ticket" type="object" class="oe_highlight" invisible="state in ('draft','check','search','found','runout','confirm','hiring','garanty')" />
+                    <button string="Closed" name="%(housemaid_closeticket_action_wizard)d" type="action" class="oe_highlight" invisible="state in ('draft','check','search','closed')" context="{'tickets_id': id, 'user_id': user_id, 'sponsers_id': new_sponsers_id}"/>
                 </header>
                 <sheet>
-                    <div role="alert"
-                        class="alert alert-danger text-center"
-                        attrs="{'invisible': ['|',('search_maids_ids_count', '>', 0),('action_maids_ids_count', '>', 0)]}">
+                    <div role="alert" class="alert alert-danger text-center" invisible="search_maids_ids_count != 0 or action_maids_ids_count != 0">
                         <i class="fa fa-bell"/>
-                        Thier are no maids match your requirements!
+                        There are no maids match your requirements!
                     </div>
-                    <div role="alert"
-                        class="alert alert-danger text-center"
-                        attrs="{'invisible': ['|',('search_maids_ids_count', '=', 0),('action_maids_ids_count', '=', 0),('state', 'not in', ('found'))]}">
+                    <div role="alert" class="alert alert-danger text-center" invisible="search_maids_ids_count == 0 or action_maids_ids_count == 0 or state != 'found'">
                         <i class="fa fa-bell"/>
-                        Please check search and action list below. it shows '<span t-esc="search_maids_ids_count"/>
-' in search page and '<span t-esc="search_maids_ids_count"/>
-' in action page.
+    Please check the search and action lists below. It shows '<span t-esc="search_maids_ids_count"/>
+' in the search page and '<span t-esc="action_maids_ids_count"/>
+' in the action page.
                 </div>
-                <div role="alert"
-                    class="alert alert-warning text-center"
-                    attrs="{'invisible': ['|',('new_sponsers_id', '!=', False),('state', 'in', ('draft','search','check','runout','confirm'))]}">
+                <div role="alert" class="alert alert-warning text-center" invisible="new_sponsers_id != False or state in ('draft','search','check','runout','confirm')">
                     <i class="fa fa-link"/>
-                        Enter a Sponser before confirm.
+    Enter a Sponsor before confirming.
                 </div>
-                <div role="alert"
-                    class="alert alert-info text-center"
-                    attrs="{'invisible': ['|',('maids_id', '!=', False),('state', 'in', ('draft','search','runout'))]}">
+                <div role="alert" class="alert alert-info text-center" invisible="maids_id != False or state in ('draft','search','runout')">
                     <i class="fa fa-life-ring"/>
-                        At action page below; pick a maid and click on hire link icon to attache the maid to ticket.
+    On the action page below, pick a maid and click the hire link icon to attach the maid to this ticket.
                 </div>
-                <div role="alert"
-                    class="alert alert-info text-center"
-                    attrs="{'invisible': ['|',('garanty_day', '!=', False),('state', 'in', ('draft','search','found','runout','confirm'))]}">
+                <div role="alert" class="alert alert-info text-center" invisible="garanty_day != False or state in ('draft','search','found','runout','confirm')">
                     <i class="fa fa-life-ring"/>
-                        Enter Garanty Date to change the state.
+    Enter a Guarantee date to change the state.
                 </div>
-
                 <div class="oe_title">
-                    <group name="tickets_ticket"
-                        string="Ticket">
-                        <field name="code"
-                            class="oe_inline"/>
-                        <field name="type"
-                            class="oe_inline"/>
+                    <group name="tickets_ticket" string="Ticket">
+                        <field name="code" class="oe_inline"/>
+                        <field name="type" class="oe_inline"/>
                     </group>
                 </div>
                 <div>
                     <group>
-                        <group name="tickets_sponser"
-                            string="Sponser information">
-                            <field name="new_sponser_name"
-                                class="oe_inline"/>
-                            <field name="new_sponser_phone"
-                                widget="phone"
-                                class="oe_inline"/>
-                            <field name="new_sponser_email"
-                                widget="email"
-                                class="oe_inline"/>
-                            <field name="new_sponsers_id"
-                                class="oe_inline"/>
+                        <group name="tickets_sponser" string="Sponser information">
+                            <field name="new_sponser_name" class="oe_inline"/>
+                            <field name="new_sponser_phone" widget="phone" class="oe_inline"/>
+                            <field name="new_sponser_email" widget="email" class="oe_inline"/>
+                            <field name="new_sponsers_id" class="oe_inline"/>
                         </group>
-                        <group name="tickets_old_sponser"
-                            string="Old Sponser information"
-                            attrs="{'invisible':[('type','=','sales')]}">
-                            <field name="old_sponser_name"
-                                class="oe_inline"/>
-                            <field name="old_sponser_phone"
-                                widget="phone"
-                                class="oe_inline"/>
-                            <field name="old_sponser_email"
-                                widget="email"
-                                class="oe_inline"/>
-                            <field name="old_sponsers_id"
-                                class="oe_inline"/>
+                        <group name="tickets_old_sponser" string="Old Sponser information" invisible="type == 'sales'">
+                            <field name="old_sponser_name" class="oe_inline"/>
+                            <field name="old_sponser_phone" widget="phone" class="oe_inline"/>
+                            <field name="old_sponser_email" widget="email" class="oe_inline"/>
+                            <field name="old_sponsers_id" class="oe_inline"/>
                         </group>
                     </group>
                 </div>
                 <div>
-                    <group name="tickets_maid"
-                        string="Maid Requirements">
-                        <group name="maids_basic"
-                            string="Salary and Contract">
-                            <field name="jobs_id"
-                                class="oe_inline"/>
-                            <field name="monthly_salary"
-                                class="oe_inline"/>
-                            <field name="currency_id"
-                                groups="base.group_multi_currency"
-                                class="oe_inline"/>
-                            <field name="contract_period"
-                                class="oe_inline"/>
+                    <group name="tickets_maid" string="Maid Requirements">
+                        <group name="maids_basic" string="Salary and Contract">
+                            <field name="jobs_id" class="oe_inline"/>
+                            <field name="monthly_salary" class="oe_inline"/>
+                            <field name="currency_id" groups="base.group_multi_currency" class="oe_inline"/>
+                            <field name="contract_period" class="oe_inline"/>
                         </group>
-                        <group name="education"
-                            string="Language and Education">
-                            <field name="arabic_lang"
-                                widget="boolean_toggle"/>
-                            <field name="english_lang"
-                                widget="boolean_toggle"/>
+                        <group name="education" string="Language and Education">
+                            <field name="arabic_lang" widget="boolean"/>
+                            <field name="english_lang" widget="boolean"/>
                             <field name="educations_id"/>
                         </group>
-                        <group name="personal"
-                            string="Information">
+                        <group name="personal" string="Information">
                             <field name="country_id"/>
                             <field name="religion"/>
                             <field name="gender"/>
                             <field name="children_no"/>
                             <field name="marital_status"/>
                         </group>
-                        <group name="attribute"
-                            string="Attribute">
+                        <group name="attribute" string="Attribute">
                             <field name="skin_color"/>
                             <field name="age"/>
                             <field name="hight"/>
                             <field name="weight"/>
                         </group>
-                        <group name="skills"
-                            string="Skills">
-                            <field name="skills_cleaning"
-                                widget="boolean_toggle"/>
-                            <field name="skills_arabic_cooking"
-                                widget="boolean_toggle"/>
-                            <field name="skills_baby_sitting"
-                                widget="boolean_toggle"/>
-                            <field name="skills_washing"
-                                widget="boolean_toggle"/>
-                            <field name="skills_ironing"
-                                widget="boolean_toggle"/>
-                            <field name="skills_googlelocation"
-                                widget="boolean_toggle"/>
-                            <field name="skills_driving"
-                                widget="boolean_toggle"/>
+                        <group name="skills" string="Skills">
+                            <field name="skills_cleaning" widget="boolean"/>
+                            <field name="skills_arabic_cooking" widget="boolean"/>
+                            <field name="skills_baby_sitting" widget="boolean"/>
+                            <field name="skills_washing" widget="boolean"/>
+                            <field name="skills_ironing" widget="boolean"/>
+                            <field name="skills_googlelocation" widget="boolean"/>
+                            <field name="skills_driving" widget="boolean"/>
                         </group>
-                        <group name="responsable"
-                            string="Ticket Responsable">
-                            <field name="company_id"
-                                groups="base.group_multi_company"/>
-                            <field name="user_id"
-                                widget="selection"/>
-                            <field name="maids_id"
-                                widget="selection"/>
+                        <group name="responsable" string="Ticket Responsable">
+                            <field name="company_id" groups="base.group_multi_company"/>
+                            <field name="user_id" widget="many2one"/>
+                            <field name="maids_id" widget="many2one"/>
                             <field name="garanty_day" />
                             <field name="close_ticket_day" />
-                            <field name="active"
-                                invisible="1"/>
-                            <field name="search_maids_ids_count"
-                                invisible="1"/>
-                            <field name="action_maids_ids_count"
-                                invisible="1"/>
+                            <field name="active" invisible="1"/>
+                            <field name="search_maids_ids_count" invisible="1"/>
+                            <field name="action_maids_ids_count" invisible="1"/>
                         </group>
                     </group>
                 </div>
                 <notebook>
-                    <page name="search"
-                        string="Search">
+                    <page name="search" string="Search">
                         <field name="search_maids_ids">
                             <tree editable="none">
-                                <button name="action_check_maid"
-                                    string="Check"
-                                    class="oe_inline oe_stat_button"
-                                    icon="fa-question-circle"
-                                    type="object"
-                                    help="Ask Operation to Check Avaliability!"
-                                    attrs="{'invisible': [('state', 'in', ('open', 'ready'))]}" />
-                                <button name="action_hiring_maid"
-                                    string="Hire"
-                                    class="oe_inline oe_stat_button"
-                                    icon="fa-link"
-                                    type="object"
-                                    help="Move Maid to Action page!"
-                                    attrs="{'invisible': [('state', 'in', ('draft','check','confirm'))]}" />
+                                <button name="action_check_maid" string="Check" class="oe_inline oe_stat_button" icon="fa-question-circle" type="object" help="Ask Operation to Check Avaliability!" invisible="state in ('open', 'ready')"/>
+                                <button name="action_hiring_maid" string="Hire" class="oe_inline oe_stat_button" icon="fa-link" type="object" help="Move Maid to Action page!" invisible="state in ('draft','check','confirm')"/>
                                 <field name="state"/>
                                 <field name="code" optional="hide"/>
                                 <field name="phone" optional="hide"/>
@@ -240,34 +130,18 @@
                                 <field name="country_id"/>
                                 <field name="portal_user_id" optional="hide"/>
                                 <field name="description" optional="hide"/>
-                                <field name="active"
-                                    invisible="1"/>
-                                <field name="company_id"
-                                    groups="base.group_multi_company"/>
-                                <field name="user_id"
-                                    widget="selection"/>
-                                <field name="currency_id"
-                                    groups="base.group_multi_currency"/>
+                                <field name="active" invisible="1"/>
+                                <field name="company_id" groups="base.group_multi_company"/>
+                                <field name="user_id" widget="many2one"/>
+                                <field name="currency_id" groups="base.group_multi_currency"/>
                             </tree>
                         </field>
                     </page>
-                    <page name="action"
-                        string="Actions">
+                    <page name="action" string="Actions">
                         <field name="action_maids_ids">
                             <tree create="0">
-                                <button name="action_draft_maid"
-                                    string="Remove"
-                                    class="oe_inline oe_stat_button"
-                                    icon="fa-unlink"
-                                    type="object"
-                                    help="Reset Maid to Draft and keep ticket state!"
-                                    attrs="{'invisible': [('state', 'in', ('draft', 'check'))]}" />
-                                <button name="action_hiring_maid"
-                                    string="Hire"
-                                    icon="fa-link"
-                                    type="object"
-                                    help="Ask Operation to Proceed Recrutement!"
-                                    attrs="{'invisible': [('state', 'in', ('draft','check','confirm','hiring','backout'))]}" />
+                                <button name="action_draft_maid" string="Remove" class="oe_inline oe_stat_button" icon="fa-unlink" type="object" help="Reset Maid to Draft and keep ticket state!" invisible="state in ('draft','check')"/>
+                                <button name="action_hiring_maid" string="Hire" icon="fa-link" type="object" help="Ask Operation to Proceed Recrutement!" invisible="state in ('draft','check','confirm','hiring','backout')"/>
                                 <field name="state"/>
                                 <field name="code" optional="hide"/>
                                 <field name="phone" optional="hide"/>
@@ -283,14 +157,10 @@
                                 <field name="country_id"/>
                                 <field name="portal_user_id" optional="hide"/>
                                 <field name="description" optional="hide"/>
-                                <field name="active"
-                                    invisible="1"/>
-                                <field name="company_id"
-                                    groups="base.group_multi_company"/>
-                                <field name="user_id"
-                                    widget="selection"/>
-                                <field name="currency_id"
-                                    groups="base.group_multi_currency"/>
+                                <field name="active" invisible="1"/>
+                                <field name="company_id" groups="base.group_multi_company"/>
+                                <field name="user_id" />
+                                <field name="currency_id" groups="base.group_multi_currency"/>
                             </tree>
                         </field>
                     </page>
@@ -305,55 +175,40 @@
     </field>
 </record>
 
-<record id="housemaid_tickets_tree"
-    model="ir.ui.view">
+<record id="housemaid_tickets_tree" model="ir.ui.view">
     <field name="name">housemaid.tickets.tree</field>
     <field name="model">housemaid.tickets</field>
-    <field name="arch"
-        type="xml">
-        <tree string="Tickets List"
-            sample="1">
+    <field name="arch" type="xml">
+        <tree string="Tickets List" sample="1">
             <field name="code"/>
             <field name="state"/>
             <field name="new_sponser_name"/>
             <field name="new_sponser_phone"/>
             <field name="new_sponser_email"/>
             <field name="new_sponsers_id"/>
-            <field name="activity_ids"
-                widget="list_activity"/>
+            <field name="activity_ids" widget="list_activity"/>
             <field name="monthly_salary"/>
-            <field name="currency_id"
-                groups="base.group_multi_currency"/>
-            <field name="contract_period"
-                optional="hide"/>
+            <field name="currency_id" groups="base.group_multi_currency"/>
+            <field name="contract_period" optional="hide"/>
             <field name="country_id"/>
-            <field name="religion"
-                optional="hide"/>
-            <field name="gender"
-                optional="hide"/>
-            <field name="children_no"
-                optional="hide"/>
-            <field name="marital_status"
-                optional="hide"/>
+            <field name="religion" optional="hide"/>
+            <field name="gender" optional="hide"/>
+            <field name="children_no" optional="hide"/>
+            <field name="marital_status" optional="hide"/>
             <field name="garanty_day" />
-            <field name="close_ticket_day"
-                widget="remaining_days"/>
+            <field name="close_ticket_day" widget="date"/>
             <field name="maids_id"/>
             <field name="old_sponsers_id"/>
-            <field name="company_id"
-                groups="base.group_multi_company"/>
+            <field name="company_id" groups="base.group_multi_company"/>
         </tree>
     </field>
 </record>
 
-<record id="housemaid_offices_kanban"
-    model="ir.ui.view">
+<record id="housemaid_offices_kanban" model="ir.ui.view">
     <field name="name">housemaid.tickets.kanban</field>
     <field name="model">housemaid.tickets</field>
-    <field name="arch"
-        type="xml">
-        <kanban default_group_by="state"
-            class="o_kanban_mobile">
+    <field name="arch" type="xml">
+        <kanban default_group_by="state" class="o_kanban_mobile">
             <field name="id"/>
             <field name="code"/>
             <field name="type"/>
@@ -388,8 +243,7 @@
                                 <div class="oe_kanban_bottom_left"/>
                                 <div class="oe_kanban_bottom_right float-right">
                                     <div class="hr_activity_container">
-                                        <field name="activity_ids"
-                                            widget="kanban_activity"/>
+                                        <field name="activity_ids" widget="kanban_activity"/>
                                     </div>
                                 </div>
                             </div>
@@ -401,70 +255,39 @@
     </field>
 </record>
 
-<record id="housemaid_tickets_search"
-    model="ir.ui.view">
+<record id="housemaid_tickets_search" model="ir.ui.view">
     <field name="name">housemaid.tickets.search</field>
     <field name="model">housemaid.tickets</field>
-    <field name="arch"
-        type="xml">
+    <field name="arch" type="xml">
         <search string="Tickets List">
-            <field name="company_id"
-                widget="selection"/>
-            <field name="user_id"
-                widget="selection"/>
-            <field name="country_id"
-                widget="selection"/>
-            <filter name="filter_archived"
-                string="Archived"
-                domain="[('active', '=', False)]"/>
-            <group expand="0"
-                string="Group by">
-                <filter string="State"
-                    name="group_by_state"
-                    context="{'group_by':'state'}"/>
-                <filter string="Company"
-                    name="group_by_company_id"
-                    context="{'group_by':'company_id'}"/>
-                <filter string="Sales Man"
-                    name="group_by_user"
-                    context="{'group_by':'user_id'}"/>
-                <filter string="Country"
-                    name="group_by_country_id"
-                    context="{'group_by':'country_id'}"/>
+            <field name="company_id" widget="many2one"/>
+            <field name="user_id" widget="many2one"/>
+            <field name="country_id" widget="many2one"/>
+            <filter name="filter_archived" string="Archived" domain="[('active', '=', False)]"/>
+            <group expand="0" string="Group by">
+                <filter string="State" name="group_by_state" context="{'group_by':'state'}"/>
+                <filter string="Company" name="group_by_company_id" context="{'group_by':'company_id'}"/>
+                <filter string="Sales Man" name="group_by_user" context="{'group_by':'user_id'}"/>
+                <filter string="Country" name="group_by_country_id" context="{'group_by':'country_id'}"/>
             </group>
             <searchpanel>
-                <field name="company_id"
-                    select="multi"
-                    string="Company"
-                    enable_counters="1"/>
-                <field name="country_id"
-                    select="multi"
-                    string="Country"
-                    enable_counters="1"/>
-                <field name="jobs_id"
-                    select="multi"
-                    string="Job"
-                    enable_counters="1"/>
+                <field name="company_id" select="multi" string="Company" enable_counters="1"/>
+                <field name="country_id" select="multi" string="Country" enable_counters="1"/>
+                <field name="jobs_id" select="multi" string="Job" enable_counters="1"/>
             </searchpanel>
         </search>
     </field>
 </record>
 
-<record id="housemaid_tickets_action"
-    model="ir.actions.act_window">
+<record id="housemaid_tickets_action" model="ir.actions.act_window">
     <field name="name">Tickets</field>
     <field name="type">ir.actions.act_window</field>
     <field name="res_model">housemaid.tickets</field>
     <field name="view_mode">tree,kanban,form</field>
-    <field name="help"
-        type="html">
+    <field name="help" type="html">
         <p class="o_view_nocontent_smiling_face">Create your first ticket!</p>
     </field>
 </record>
 
-<menuitem id="housemaid_tickets_menu"
-    name="Tickets"
-    action="housemaid_tickets_action"
-    parent="housemaid_menu_tickets"
-    sequence="11"/>
+<menuitem id="housemaid_tickets_menu" name="Tickets" action="housemaid_tickets_action" parent="housemaid_menu_tickets" sequence="11"/>
 </odoo>

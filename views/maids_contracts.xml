@@ -1,51 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <record id="housemaid_maidscontracts_form"
-        model="ir.ui.view">
+    <record id="housemaid_maidscontracts_form" model="ir.ui.view">
         <field name="name">housemaid.maidscontracts.form</field>
         <field name="model">housemaid.maidscontracts</field>
-        <field name="arch"
-            type="xml">
-            <form name="contract"
-                string="Contract">
+        <field name="arch" type="xml">
+            <form name="contract" string="Contract">
                 <sheet>
-                    <group name="contract"
-                        string="Contract">
+                    <group name="contract" string="Contract">
                         <group>
-                            <field name="name"
-                                class="oe_inline"/>
-                            <field name="tickets_id"
-                                class="oe_inline"/>
-                            <field name="old_sponsers_id"
-                                class="oe_inline"/>
-                            <field name="new_sponsers_id"
-                                class="oe_inline"
-                                invisible="1"/>
-                            <field name="maids_id"
-                                class="oe_inline"/>
-                            <field name="offices_id"
-                                class="oe_inline"/>
-                            <field name="user_id"
-                                class="oe_inline"/>
+                            <field name="name" class="oe_inline"/>
+                            <field name="tickets_id" class="oe_inline"/>
+                            <field name="old_sponsers_id" class="oe_inline"/>
+                            <field name="new_sponsers_id" class="oe_inline" invisible="1"/>
+                            <field name="maids_id" class="oe_inline"/>
+                            <field name="offices_id" class="oe_inline"/>
+                            <field name="user_id" class="oe_inline"/>
                         </group>
                         <group>
-                            <field name="contract_no"
-                                class="oe_inline"/>
-                            <field name="start_contract"
-                                class="oe_inline"/>
-                            <field name="end_contract"
-                                class="oe_inline"/>
-                            <field name="visa_no"
-                                class="oe_inline"/>
-                            <field name="air_ticket_no"
-                                class="oe_inline"/>
+                            <field name="contract_no" class="oe_inline"/>
+                            <field name="start_contract" class="oe_inline"/>
+                            <field name="end_contract" class="oe_inline"/>
+                            <field name="visa_no" class="oe_inline"/>
+                            <field name="air_ticket_no" class="oe_inline"/>
                         </group>
                         <group>
-                            <field name="country_id"
-                                class="oe_inline"/>
-                            <field name="company_id"
-                                class="oe_inline"/>
+                            <field name="country_id" class="oe_inline"/>
+                            <field name="company_id" class="oe_inline"/>
                             <field name="description" />
                         </group>
                     </group>
@@ -59,15 +40,11 @@
         </field>
     </record>
 
-    <record id="housemaid_maidscontracts_tree"
-        model="ir.ui.view">
+    <record id="housemaid_maidscontracts_tree" model="ir.ui.view">
         <field name="name">housemaid.maidscontracts.tree</field>
         <field name="model">housemaid.maidscontracts</field>
-        <field name="arch"
-            type="xml">
-            <tree name="contracts"
-                string="Contracts"
-                sample="1">
+        <field name="arch" type="xml">
+            <tree name="contracts" string="Contracts" sample="1">
                 <field name="name" />
                 <field name="issue_date" />
                 <field name="tickets_id" />
@@ -82,76 +59,45 @@
                 <field name="visa_no" />
                 <field name="air_ticket_no" />
                 <field name="user_id" />
-                <field name="description"
-                    optional="hide"/>
-                <field name="company_id"
-                    groups="base.group_multi_company"/>
+                <field name="description" optional="hide"/>
+                <field name="company_id" groups="base.group_multi_company"/>
             </tree>
         </field>
     </record>
 
-    <record id="housemaid_maidscontracts_search"
-        model="ir.ui.view">
+    <record id="housemaid_maidscontracts_search" model="ir.ui.view">
         <field name="name">housemaid.maidscontracts.search</field>
         <field name="model">housemaid.maidscontracts</field>
-        <field name="arch"
-            type="xml">
+        <field name="arch" type="xml">
             <search string="Contracts">
-                <field name="company_id"
-                    widget="selection"/>
-                <field name="user_id"
-                    widget="selection"/>
-                <field name="country_id"
-                    widget="selection"/>
-                <filter name="filter_archived"
-                    string="Archived"
-                    domain="[('active', '=', False)]"/>
-                <group expand="0"
-                    string="Group by">
-                    <filter string="Company"
-                        name="group_by_company_id"
-                        context="{'group_by':'company_id'}"/>
-                    <filter string="Operator"
-                        name="group_by_user"
-                        context="{'group_by':'user_id'}"/>
-                    <filter string="Country"
-                        name="group_by_country_id"
-                        context="{'group_by':'country_id'}"/>
+                <field name="company_id" widget="many2one"/>
+                <field name="user_id" widget="many2one"/>
+                <field name="country_id" widget="many2one"/>
+                <filter name="filter_archived" string="Archived" domain="[('active', '=', False)]"/>
+                <group expand="0" string="Group by">
+                    <filter string="Company" name="group_by_company_id" context="{'group_by':'company_id'}"/>
+                    <filter string="Operator" name="group_by_user" context="{'group_by':'user_id'}"/>
+                    <filter string="Country" name="group_by_country_id" context="{'group_by':'country_id'}"/>
                 </group>
                 <searchpanel>
-                    <field name="company_id"
-                        select="multi"
-                        string="Office"
-                        enable_counters="1"/>
-                    <field name="country_id"
-                        select="multi"
-                        string="Country"
-                        enable_counters="1"/>
-                    <field name="offices_id"
-                        select="multi"
-                        string="Office"
-                        enable_counters="1"/>
+                    <field name="company_id" select="multi" string="Office" enable_counters="1"/>
+                    <field name="country_id" select="multi" string="Country" enable_counters="1"/>
+                    <field name="offices_id" select="multi" string="Office" enable_counters="1"/>
 
                 </searchpanel>
             </search>
         </field>
     </record>
 
-    <record id="housemaid_maidscontracts_action"
-        model="ir.actions.act_window">
+    <record id="housemaid_maidscontracts_action" model="ir.actions.act_window">
         <field name="name">Contracts</field>
         <field name="res_model">housemaid.maidscontracts</field>
         <field name="view_mode">tree,form</field>
-        <field name="help"
-            type="html">
+        <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">Create your first Contract!</p>
         </field>
     </record>
 
-    <menuitem id="housemaid_maidscontracts_menu"
-        name="Contracts"
-        action="housemaid_maidscontracts_action"
-        parent="housemaid_menu_maid"
-        sequence="22"/>
+    <menuitem id="housemaid_maidscontracts_menu" name="Contracts" action="housemaid_maidscontracts_action" parent="housemaid_menu_maid" sequence="22"/>
 
 </odoo>

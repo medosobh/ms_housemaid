@@ -8,14 +8,13 @@ from operator import itemgetter
 
 from odoo import http, _
 from odoo.addons.portal.controllers.portal import CustomerPortal, pager
-from odoo.addons.web.controllers.main import serialize_exception, content_disposition
-from odoo.http import request
+from odoo.http import content_disposition, request
 from odoo.osv.expression import OR
 from odoo.tools import groupby as groupbyelem
+from odoo.exceptions import UserError
 
 
 class MaidsPortal(CustomerPortal):
-
     def _prepare_home_portal_values(self, counters):
         vals = super(MaidsPortal, self)._prepare_home_portal_values(counters)
         # new code
@@ -369,9 +368,7 @@ class MaidsPortal(CustomerPortal):
         return self._show_report(model=maids_id, report_type='pdf', download=True,
                                  report_ref='ms_housemaid.action_report_action_maid_resume')
 
-    @http.route(route='/my/maids/download_document/<model("housemaid.maids"):maids_id>', website=True, type='http',
-                auth="user")
-    @serialize_exception
+    @http.route(route='/my/maids/download_document/<model("housemaid.maids"):maids_id>', website=True, type='http', auth="user")
     def download_document(self, maids_id, filename=None, **kw):
         """ Download link for files stored as binary fields.
         :param str model: name of the model to fetch the binary from
@@ -395,8 +392,13 @@ class MaidsPortal(CustomerPortal):
             disposition_content = ('Content-Disposition',
                                    content_disposition(filename))
 
-        return request.make_response(filecontent, [content_type,
-                                                   disposition_content])
+            return request.make_response(
+                filecontent,
+                headers=[
+                    content_type,
+                    disposition_content
+                    ]
+                )
 
     # Este es la funcion que debes agregar a tu clase
     def download(self):

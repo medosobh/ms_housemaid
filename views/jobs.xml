@@ -4,13 +4,10 @@
         model="ir.ui.view">
         <field name="name">housemaid.jobs.form</field>
         <field name="model">housemaid.jobs</field>
-        <field name="arch"
-            type="xml">
+        <field name="arch" type="xml">
             <form string="Jobs">
-                <group name="information"
-                    string="Jobs">
-                    <field name="name"
-                        class="oe_inline"/>
+                <group name="information" string="Jobs">
+                    <field name="name" class="oe_inline"/>
                 </group>
             </form>
         </field>
@@ -20,10 +17,8 @@
         model="ir.ui.view">
         <field name="name">housemaid.jobs.tree</field>
         <field name="model">housemaid.jobs</field>
-        <field name="arch"
-            type="xml">
-            <tree string="Jobs List"
-                sample="1">
+        <field name="arch" type="xml">
+            <tree string="Jobs List" sample="1">
                 <field name="name"/>
             </tree>
         </field>
@@ -34,8 +29,7 @@
         <field name="name">Jobs</field>
         <field name="res_model">housemaid.jobs</field>
         <field name="view_mode">tree,form</field>
-        <field name="help"
-            type="html">
+        <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">Create your first Job!</p>
         </field>
     </record>
