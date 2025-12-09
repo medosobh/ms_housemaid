@@ -10,7 +10,7 @@
                     <group name="contract" string="Contract">
                         <group>
                             <field name="name" class="oe_inline"/>
-                            <field name="tickets_id" class="oe_inline"/>
+                            <field name="housemaid_ticket_id" class="oe_inline"/>
                             <field name="old_sponsers_id" class="oe_inline"/>
                             <field name="new_sponsers_id" class="oe_inline" invisible="1"/>
                             <field name="maids_id" class="oe_inline"/>
@@ -47,7 +47,7 @@
             <tree name="contracts" string="Contracts" sample="1">
                 <field name="name" />
                 <field name="issue_date" />
-                <field name="tickets_id" />
+                <field name="housemaid_ticket_id" />
                 <field name="type" />
                 <field name="old_sponsers_id" />
                 <field name="new_sponsers_id"/>

@@ -10,7 +10,7 @@
                         <group>
                             <field name="issue_date" class="oe_inline"/>
                             <field name="closereason_id" class="oe_inline"/>
-                            <field name="tickets_id" class="oe_inline"/>
+                            <field name="housemaid_ticket_id" class="oe_inline"/>
                             <field name="sponsers_id" class="oe_inline"/>
                             <field name="maids_id" class="oe_inline"/>
                             <field name="user_id" class="oe_inline"/>
@@ -33,7 +33,7 @@
             <tree name="closedtickets" string="Closed Tickets" sample="1">
                 <field name="issue_date" />
                 <field name="closereason_id" />
-                <field name="tickets_id" />
+                <field name="housemaid_ticket_id" />
                 <field name="sponsers_id" />
                 <field name="maids_id" />
                 <field name="user_id" />

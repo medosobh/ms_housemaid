@@ -14,7 +14,7 @@ class CloseTicketWizard(models.TransientModel):
         active_id = self._context.get('active_id')
         if active_id:
             ticket_rec = self.env['housemaid.tickets'].browse(int(active_id))
-            res['tickets_id'] = ticket_rec.id
+            res['housemaid_ticket_id'] = ticket_rec.id
             res['type'] = ticket_rec.type
             res['new_sponsers_id'] = ticket_rec.new_sponsers_id
             res['old_sponsers_id'] = ticket_rec.old_sponsers_id
@@ -33,7 +33,7 @@ class CloseTicketWizard(models.TransientModel):
         required=True,
         tracking=True,
     )
-    tickets_id = fields.Many2one(
+    housemaid_ticket_id = fields.Many2one(
         comodel_name='housemaid.tickets',
         string='Ticket no.',
         readonly=True,
@@ -84,7 +84,7 @@ class CloseTicketWizard(models.TransientModel):
         vals = {
             'issue_date': date.today(),
             'closereason_id': self.closereason_id.id,
-            'tickets_id': self.tickets_id.id,
+            'housemaid_ticket_id': self.housemaid_ticket_id.id,
             'type': self.type,
             'new_sponsers_id': self.new_sponsers_id.id,
             'old_sponsers_id': self.old_sponsers_id.id,
@@ -95,7 +95,7 @@ class CloseTicketWizard(models.TransientModel):
         self.env['housemaid.closedtickets'].create(vals)
         
         # change ticket state
-        active_id = self._context.get('tickets_id')
+        active_id = self._context.get('housemaid_ticket_id')
         record = self.env['housemaid.tickets'].browse(active_id)
         record.state = 'closed'
         record.activity_schedule(

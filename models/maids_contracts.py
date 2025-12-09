@@ -15,7 +15,7 @@ class maidscontracts(models.Model):
     def name_get(self):
         result = []
         for record in self:
-            if record.tickets_id:
+            if record.housemaid_ticket_id:
                 name = '[' + record.contract_no + '] ' + record.maids_id
             else:
                 name = record.name
@@ -34,7 +34,7 @@ class maidscontracts(models.Model):
         default=datetime.today(),
         tracking=True
     )
-    tickets_id = fields.Many2one(
+    housemaid_ticket_id = fields.Many2one(
         comodel_name='housemaid.tickets',
         string='Ticket no.',
         required=True,

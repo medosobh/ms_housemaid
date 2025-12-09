@@ -52,7 +52,7 @@ class maids(models.Model):
         self.ensure_one()
         # maid state to draft
         self.state = 'draft'
-        self.tickets_id = False
+        self.housemaid_tickets_id = False
         self.sponsers_id = False
 
     def action_open_maid(self):
@@ -60,8 +60,8 @@ class maids(models.Model):
         # maid state to open
         self.state = 'open'
         # update ticket state
-        self.tickets_id.state = 'found'
-        self.tickets_id.garanty_day = False
+        self.housemaid_tickets_id.state = 'found'
+        self.housemaid_tickets_id.garanty_day = False
         self.garanty_day = False
         # create activity to user to check on maid
 
@@ -70,23 +70,23 @@ class maids(models.Model):
         # maid state to ready
         self.state = 'ready'
         # update ticket state
-        self.tickets_id.state = 'found'
-        self.tickets_id.garanty_day = False
+        self.housemaid_tickets_id.state = 'found'
+        self.housemaid_tickets_id.garanty_day = False
         self.garanty_day = False
         # create activity to user to check on maid
 
     def action_backout_maid(self):
         self.ensure_one()
         # check maid if linked break link
-        if self.tickets_id.id == False:
+        if self.housemaid_tickets_id.id == False:
             self.state = 'backout'
             self.garanty_day = False
         else:
             # maid state to backout
             self.state = 'backout'
             # change ticket state
-            self.tickets_id.state = 'runout'
-            self.tickets_id = False
+            self.housemaid_tickets_id.state = 'runout'
+            self.housemaid_tickets_id = False
             self.sponsers_id = False
             self.garanty_day = False
 
@@ -94,7 +94,7 @@ class maids(models.Model):
     def action_check_maid(self):
         self.ensure_one()
         # test maids_tickets_id exist or not?
-        if self.tickets_id.id == False:
+        if self.housemaid_tickets_id.id == False:
             active_id = self._context.get('active_id')
             if active_id:
                 ticket_rec = self.env['housemaid.tickets'].browse(
@@ -121,7 +121,7 @@ class maids(models.Model):
     def action_hiring_maid(self):
         self.ensure_one()
         # test maids_tickets_id exist or not?
-        if self.tickets_id.id == False:
+        if self.housemaid_tickets_id.id == False:
             active_id = self._context.get('active_id')
             if active_id:
                 ticket_rec = self.env['housemaid.tickets'].browse(
@@ -225,6 +225,7 @@ class maids(models.Model):
         string='Currency',
         comodel_name='res.currency',
         help="Used to display the currency when tracking monetary values",
+        default=lambda self: self.env.company.currency_id,
         required=True,
         tracking=True,
     )
@@ -414,7 +415,7 @@ class maids(models.Model):
         required=False,
         tracking=True,
     )
-    tickets_id = fields.Many2one(
+    housemaid_tickets_id = fields.Many2one(
         comodel_name='housemaid.tickets',
         string='Ticket no.',
         required=False,

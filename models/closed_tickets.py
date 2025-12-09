@@ -10,12 +10,12 @@ class closedtickets(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
     
     
-    @api.depends('name', 'closereason_id', 'tickets_id')
+    @api.depends('name', 'closereason_id', 'housemaid_ticket_id')
     def name_get(self):
         result = []
         for record in self:
-            if record.tickets_id:
-                name = '[' + record.tickets_id + '] ' + record.closereason_id
+            if record.housemaid_ticket_id:
+                name = '[' + record.housemaid_ticket_id + '] ' + record.closereason_id
             else:
                 name = record.name
             result.append((record.id, name))
@@ -39,7 +39,7 @@ class closedtickets(models.Model):
         required=True,
         tracking=True,
     )
-    tickets_id = fields.Many2one(
+    housemaid_ticket_id = fields.Many2one(
         comodel_name='housemaid.tickets',
         string='Ticket no.',
         required=True,

@@ -78,7 +78,7 @@
                                 <field name="garanty_day"/>
                                 <field name="company_id" groups="base.group_multi_company"/>
                                 <field name="user_id" widget="many2one"/>
-                                <field name="tickets_id" widget="many2one"/>
+                                <field name="housemaid_ticket_id" widget="many2one"/>
                                 <field name="sponsers_id" widget="many2one"/>
                                 <field name="active" invisible="1"/>
                             </group>
@@ -133,7 +133,7 @@
                 <field name="activity_ids" widget="list_activity"/>
                 <field name="active" invisible="1"/>
                 <field name="user_id"/>
-                <field name="tickets_id"/>
+                <field name="housemaid_ticket_id"/>
                 <field name="sponsers_id"/>
                 <field name="garanty_day"/>
                 <field name="portal_user_id"/>
@@ -191,7 +191,7 @@
                                         <field name="offices_id"/>
                                     </li>
                                     <li>Ticket:
-                                        <field name="tickets_id"/>
+                                        <field name="housemaid_ticket_id"/>
                                     </li>
                                     <li>Sponser:
                                         <field name="sponsers_id"/>

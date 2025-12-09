@@ -15,7 +15,7 @@ class contractwizard(models.TransientModel):
         active_id = self._context.get('active_id')
         if active_id:
             ticket_rec = self.env['housemaid.tickets'].browse(int(active_id))
-            res['tickets_id'] = ticket_rec.id
+            res['housemaid_ticket_id'] = ticket_rec.id
             res['old_sponsers_id'] = ticket_rec.old_sponsers_id
             res['new_sponsers_id'] = ticket_rec.new_sponsers_id
             res['maids_id'] = ticket_rec.maids_id
@@ -24,7 +24,7 @@ class contractwizard(models.TransientModel):
         return res
 
     
-    tickets_id = fields.Many2one(
+    housemaid_ticket_id = fields.Many2one(
         comodel_name='housemaid.tickets',
         required=True,
         string='Ticket no.',
@@ -119,7 +119,7 @@ class contractwizard(models.TransientModel):
         self.ensure_one()
         vals = {
             'issue_date': date.today(),
-            'tickets_id': self.tickets_id.id,
+            'housemaid_ticket_id': self.housemaid_ticket_id.id,
             'type': self.type,
             'old_sponsers_id': self.old_sponsers_id.id,
             'new_sponsers_id': self.new_sponsers_id.id,
@@ -136,7 +136,7 @@ class contractwizard(models.TransientModel):
         }
         self.env['housemaid.maidscontracts'].self.create(vals)
         # change ticket state
-        record = self.env['housemaid.tickets'].browse(tickets_id)
+        record = self.env['housemaid.tickets'].browse(housemaid_ticket_id)
         record.activity_schedule(
             'ms_housemaid.mail_act_hiring',
             user_id=self.user_id.id,

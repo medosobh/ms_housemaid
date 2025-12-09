@@ -3,9 +3,9 @@ from odoo.exceptions import UserError
 from datetime import date, datetime, timedelta
 
 
-class Tickets(models.Model):
+class HousemaidTickets(models.Model):
     _name = 'housemaid.tickets'
-    _description = 'Tickets'
+    _description = 'Housemaid Tickets'
     _rec_name = 'code'
     _check_company_auto = True
     _sql_constraints = [
@@ -28,7 +28,7 @@ class Tickets(models.Model):
             else:
                 raise UserError("Please select Ticket Type!")
 
-        return super(Tickets, self).create(vals)
+        return super(HousemaidTickets, self).create(vals)
 
     def action_search_ticket(self):
         self.ensure_one()
@@ -103,7 +103,7 @@ class Tickets(models.Model):
             ('transfer', 'Transfer'),
             ('temp', 'Temporary'),
         ],
-        required=True,
+        # required=True,
         tracking=True,
     )
     new_sponser_name = fields.Char(
@@ -353,7 +353,7 @@ class Tickets(models.Model):
     )
     action_maids_ids = fields.One2many(
         comodel_name='housemaid.maids',
-        inverse_name='tickets_id',
+        inverse_name='housemaid_tickets_id',
         string='Maids Actions',
     )
     search_maids_ids_count = fields.Integer(
@@ -373,166 +373,166 @@ class Tickets(models.Model):
     def _compute_action_count(self):
         self.action_maids_ids_count = len(self.action_maids_ids)
 
-    @api.depends('jobs_id', 'country_id', 'monthly_salary', 'arabic_lang',
-                 'english_lang', 'religion', 'gender', 'marital_status', 'skin_color',
-                 'age', 'hight', 'weight', 'skills_cleaning', 'skills_arabic_cooking',
-                 'skills_baby_sitting', 'skills_washing', 'skills_ironing',
-                 'skills_googlelocation', 'skills_driving')
-    def _search_maids(self):
-        self.ensure_one()
-        # test list
-        # jobs_id  ==
-        # country_id ==
-        # 2 condition with id
-        # monthly_salary ==
-        # arabic_lang ==
-        # english_lang ==
-        # religion ==
-        # gender ==
-        # marital_status ==
-        # skin_color ==
-        # skills_cleaning ==
-        # skills_arabic_cooking ==
-        # skills_baby_sitting ==
-        # skills_washing ==
-        # skills_ironing ==
-        # skills_googlelocation ==
-        # skills_driving ==
-        # 16 condition ==
-        # age +- 2
-        # hight +- 1 feet
-        # weight +- 5 kg
-        # 3 condition with range
-        id_fields = ('jobs_id', 'country_id')
-        fields = ('monthly_salary', 'arabic_lang',
-                  'english_lang', 'religion', 'gender', 'marital_status', 'skin_color',
-                  'skills_cleaning', 'skills_arabic_cooking',
-                  'skills_baby_sitting', 'skills_washing', 'skills_ironing',
-                  'skills_googlelocation', 'skills_driving'
-                  )
-        range_fields = ('age', 'hight', 'weight')
+    # @api.depends('jobs_id', 'country_id', 'monthly_salary', 'arabic_lang',
+    #              'english_lang', 'religion', 'gender', 'marital_status', 'skin_color',
+    #              'age', 'hight', 'weight', 'skills_cleaning', 'skills_arabic_cooking',
+    #              'skills_baby_sitting', 'skills_washing', 'skills_ironing',
+    #              'skills_googlelocation', 'skills_driving')
+    # def _search_maids(self):
+    #     self.ensure_one()
+    #     # test list
+    #     # jobs_id  ==
+    #     # country_id ==
+    #     # 2 condition with id
+    #     # monthly_salary ==
+    #     # arabic_lang ==
+    #     # english_lang ==
+    #     # religion ==
+    #     # gender ==
+    #     # marital_status ==
+    #     # skin_color ==
+    #     # skills_cleaning ==
+    #     # skills_arabic_cooking ==
+    #     # skills_baby_sitting ==
+    #     # skills_washing ==
+    #     # skills_ironing ==
+    #     # skills_googlelocation ==
+    #     # skills_driving ==
+    #     # 16 condition ==
+    #     # age +- 2
+    #     # hight +- 1 feet
+    #     # weight +- 5 kg
+    #     # 3 condition with range
+    #     id_fields = ('jobs_id', 'country_id')
+    #     fields = ('monthly_salary', 'arabic_lang',
+    #               'english_lang', 'religion', 'gender', 'marital_status', 'skin_color',
+    #               'skills_cleaning', 'skills_arabic_cooking',
+    #               'skills_baby_sitting', 'skills_washing', 'skills_ironing',
+    #               'skills_googlelocation', 'skills_driving'
+    #               )
+    #     range_fields = ('age', 'hight', 'weight')
 
-        self.search_maids_ids = []
-        if self.type == 'sales':
-            domain = [
-                ('state', 'in', ('draft', 'check', 'open', 'ready')),
-                ('active', '=', True),
-                ('tickets_id', '=', False)
-            ]
+    #     self.search_maids_ids = []
+    #     if self.type == 'sales':
+    #         domain = [
+    #             ('state', 'in', ('draft', 'check', 'open', 'ready')),
+    #             ('active', '=', True),
+    #             ('housemaid_tickets_id', '=', False)
+    #         ]
 
-            for field in id_fields:
-                if self[field].id != False:
-                    print('test1')
-                    conditions = (field+'.id', '=', self[field].id)
-                    domain.append(conditions)
-                print(domain)
+    #         for field in id_fields:
+    #             if self[field].id != False:
+    #                 print('test1')
+    #                 conditions = (field+'.id', '=', self[field].id)
+    #                 domain.append(conditions)
+    #             print(domain)
 
-            for field in fields:
-                if self[field] != False:
-                    print('test2')
-                    conditions = (field, '=', self[field])
-                    domain.append(conditions)
-                print(domain)
+    #         for field in fields:
+    #             if self[field] != False:
+    #                 print('test2')
+    #                 conditions = (field, '=', self[field])
+    #                 domain.append(conditions)
+    #             print(domain)
 
-            for field in range_fields:
-                if self[field] != False:
-                    print('test3')
-                    min_value = self[field] * 0.9
-                    max_value = self[field] * 1.1
-                    conditions = ([
-                        '&',
-                        (field, '<', max_value),
-                        (field, '>', min_value)
-                    ])
-                    domain.append(conditions)
-                print(domain)
+    #         for field in range_fields:
+    #             if self[field] != False:
+    #                 print('test3')
+    #                 min_value = self[field] * 0.9
+    #                 max_value = self[field] * 1.1
+    #                 conditions = ([
+    #                     '&',
+    #                     (field, '<', max_value),
+    #                     (field, '>', min_value)
+    #                 ])
+    #                 domain.append(conditions)
+    #             print(domain)
 
-            maids_ids = self.env['housemaid.maids'].search(domain)
-            print(maids_ids)
+    #         maids_ids = self.env['housemaid.maids'].search(domain)
+    #         print(maids_ids)
 
-            self.search_maids_ids = [(6, 0, maids_ids.ids)]
-        elif self.type == 'transfer':
-            domain = [
-                ('state', 'in', ('ready', 'transfer')),
-                ('active', '=', True),
-            ]
+    #         self.search_maids_ids = [(6, 0, maids_ids.ids)]
+    #     elif self.type == 'transfer':
+    #         domain = [
+    #             ('state', 'in', ('ready', 'transfer')),
+    #             ('active', '=', True),
+    #         ]
 
-            for field in id_fields:
-                if self[field].id != False:
-                    print('test1')
-                    conditions = (field+'.id', '=', self[field].id)
-                    domain.append(conditions)
-                print(domain)
+    #         for field in id_fields:
+    #             if self[field].id != False:
+    #                 print('test1')
+    #                 conditions = (field+'.id', '=', self[field].id)
+    #                 domain.append(conditions)
+    #             print(domain)
 
-            for field in fields:
-                if self[field] != False:
-                    print('test2')
-                    conditions = (field, '=', self[field])
-                    domain.append(conditions)
-                print(domain)
+    #         for field in fields:
+    #             if self[field] != False:
+    #                 print('test2')
+    #                 conditions = (field, '=', self[field])
+    #                 domain.append(conditions)
+    #             print(domain)
 
-            for field in range_fields:
-                if self[field] != False:
-                    print('test3')
-                    min_value = self[field] * 0.9
-                    max_value = self[field] * 1.1
-                    conditions = ([
-                        '&',
-                        (field, '<', max_value),
-                        (field, '>', min_value)
-                    ])
-                    domain.append(conditions)
-                print(domain)
+    #         for field in range_fields:
+    #             if self[field] != False:
+    #                 print('test3')
+    #                 min_value = self[field] * 0.9
+    #                 max_value = self[field] * 1.1
+    #                 conditions = ([
+    #                     '&',
+    #                     (field, '<', max_value),
+    #                     (field, '>', min_value)
+    #                 ])
+    #                 domain.append(conditions)
+    #             print(domain)
 
-            maids_ids = self.env['housemaid.maids'].search(
-                [domain]
-            )
-            print(maids_ids)
+    #         maids_ids = self.env['housemaid.maids'].search(
+    #             [domain]
+    #         )
+    #         print(maids_ids)
 
-            self.search_maids_ids = [(6, 0, maids_ids.ids)]
+    #         self.search_maids_ids = [(6, 0, maids_ids.ids)]
 
-        elif self.type == 'temp':
-            domain = [
-                ('state', 'in', ('ready', 'transfer')),
-                ('active', '=', True),
-            ]
+    #     elif self.type == 'temp':
+    #         domain = [
+    #             ('state', 'in', ('ready', 'transfer')),
+    #             ('active', '=', True),
+    #         ]
 
-            for field in id_fields:
-                if self[field].id != False:
-                    print('test1')
-                    conditions = (field+'.id', '=', self[field].id)
-                    domain.append(conditions)
-                print(domain)
+    #         for field in id_fields:
+    #             if self[field].id != False:
+    #                 print('test1')
+    #                 conditions = (field+'.id', '=', self[field].id)
+    #                 domain.append(conditions)
+    #             print(domain)
 
-            for field in fields:
-                if self[field] != False:
-                    print('test2')
-                    conditions = (field, '=', self[field])
-                    domain.append(conditions)
-                print(domain)
+    #         for field in fields:
+    #             if self[field] != False:
+    #                 print('test2')
+    #                 conditions = (field, '=', self[field])
+    #                 domain.append(conditions)
+    #             print(domain)
 
-            for field in range_fields:
-                if self[field] != False:
-                    print('test3')
-                    min_value = self[field] * 0.9
-                    max_value = self[field] * 1.1
-                    conditions = ([
-                        '&',
-                        (field, '<', max_value),
-                        (field, '>', min_value)
-                    ])
-                    domain.append(conditions)
-                print(domain)
+    #         for field in range_fields:
+    #             if self[field] != False:
+    #                 print('test3')
+    #                 min_value = self[field] * 0.9
+    #                 max_value = self[field] * 1.1
+    #                 conditions = ([
+    #                     '&',
+    #                     (field, '<', max_value),
+    #                     (field, '>', min_value)
+    #                 ])
+    #                 domain.append(conditions)
+    #             print(domain)
 
-            maids_ids = self.env['housemaid.maids'].search(
-                [domain]
-            )
-            print(maids_ids)
+    #         maids_ids = self.env['housemaid.maids'].search(
+    #             [domain]
+    #         )
+    #         print(maids_ids)
 
-            self.search_maids_ids = [(6, 0, maids_ids.ids)]
+    #         self.search_maids_ids = [(6, 0, maids_ids.ids)]
 
-            maids_ids = self.env['housemaid.maids'].search(
-                [domain]
-            )
-        else:
-            self.search_maids_ids = []
+    #         maids_ids = self.env['housemaid.maids'].search(
+    #             [domain]
+    #         )
+    #     else:
+    #         self.search_maids_ids = []

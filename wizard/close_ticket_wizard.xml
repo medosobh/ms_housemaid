@@ -8,7 +8,7 @@
                             <form>
                                    <group name="closeticket" string="Close Ticket">
                                           <field name="closereason_id" class="oe_inline"/>
-                                          <field name="tickets_id" class="oe_inline"/>
+                                          <field name="housemaid_ticket_id" class="oe_inline"/>
                                           <field name="new_sponsers_id" class="oe_inline"/>
                                           <field name="old_sponsers_id" class="oe_inline"/>
                                           <field name="maids_id" class="oe_inline"/>
@@ -17,7 +17,7 @@
                                    </group>
 
                                    <footer>
-                                          <button string="Close Ticket" name="action_closed_ticket" context="{'tickets_id': id}" type="object" class="oe_highlight" data-hotkey="q"/>
+                                          <button string="Close Ticket" name="action_closed_ticket" context="{'housemaid_ticket_id': id}" type="object" class="oe_highlight" data-hotkey="q"/>
                                           <button string="Cancel" class="btn btn-secondary" special="cancel" data-hotkey="z"/>
                                    </footer>
                             </form>

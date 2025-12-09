@@ -10,7 +10,7 @@
                         statusbar_visible="draft,search,check,confirm,hiring,garanty,closed"/>
                     <button string="Searching" name="action_search_ticket" type="object" class="oe_highlight" 
                         invisible="state in ('check','search','found','confirm','garanty','hiring','closed')" 
-                        context="{'tourism_tickets_id': id, 'user_id': user_id}"/>
+                        context="{'housemaid_ticket_id': id, 'user_id': user_id}"/>
                     <button string="Draft" name="action_draft_ticket" type="object" class="oe_highlight" 
                         invisible="state in ('draft','check','search','found','runout','confirm','garanty','hiring','closed')" />
                     <button string="Found" name="action_found_ticket" type="object" class="oe_highlight" 
@@ -21,12 +21,12 @@
                         invisible="state in ('draft','check','search','runout','confirm','hiring','garanty')" />
                     <button string="Contract" name="%(housemaid_contract_action_wizard)d" type="action" class="oe_highlight" 
                         invisible="state in ('draft','check','found','search','runout','confirm','garanty')" 
-                        context="{'tourism_tickets_id': id, 'user_id': user_id, 'sponsers_id': new_sponsers_id}" />
+                        context="{'housemaid_ticket_id': id, 'user_id': user_id, 'sponsers_id': new_sponsers_id}" />
                     <button string="Start 90days Garanty" name="action_garanty_ticket" type="object" class="oe_highlight" 
                         invisible="state in ('draft','check','search','found','runout','confirm','hiring','garanty')" />
                     <button string="Closed" name="%(housemaid_close_ticket_action_wizard)d" type="action" class="oe_highlight" 
                         invisible="state in ('draft','check','search','closed')" 
-                        context="{'tourism_tickets_id': id, 'user_id': user_id, 'sponsers_id': new_sponsers_id}"/>
+                        context="{'housemaid_ticket_id': id, 'user_id': user_id, 'sponsers_id': new_sponsers_id}"/>
                 </header>
                 <sheet>
                     <div role="alert" class="alert alert-danger text-center" invisible="search_maids_ids_count != 0 or action_maids_ids_count != 0">
